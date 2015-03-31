@@ -19,14 +19,6 @@ public class LocalizationManager
 		}
 	}
 
-	public static void setupLocalizationInfo()
-	{
-		for (Locale l : Locale.values())
-		{
-			LanguageRegistry.instance().loadLocalization(CommonProxy.TCBEES_LOCDIR + l.locale + ".xml", l.locale, true);
-		}
-	}
-
 	public static String getLocalizedString(String key)
 	{
 		String result = LanguageRegistry.instance().getStringLocalization(key);
