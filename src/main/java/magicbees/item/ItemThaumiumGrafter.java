@@ -23,8 +23,7 @@ import forestry.api.arboriculture.IToolGrafter;
 
 @Optional.InterfaceList(
 		{
-				@Optional.Interface(iface = "thaumcraft.api.IRepairableExtended", modid = CommonProxy.ThaumcraftID, striprefs = true),
-				@Optional.Interface(iface = "forestry.api.arboriculture.IToolGrafter", modid = CommonProxy.ForestryID, striprefs = true)
+				@Optional.Interface(iface = "thaumcraft.api.IRepairableExtended", modid = CommonProxy.ThaumcraftID, striprefs = true)
 		}
 )
 public class ItemThaumiumGrafter extends Item implements IRepairableExtended, IToolGrafter

@@ -20,8 +20,7 @@ import forestry.api.core.IToolScoop;
 
 @Optional.InterfaceList(
 		{
-				@Optional.Interface(iface = "thaumcraft.api.IRepairable", modid = CommonProxy.ThaumcraftID, striprefs = true),
-				@Optional.Interface(iface = "forestry.api.core.IToolScoop", modid = CommonProxy.ForestryID, striprefs = true)
+				@Optional.Interface(iface = "thaumcraft.api.IRepairable", modid = CommonProxy.ThaumcraftID, striprefs = true)
 		}
 )
 public class ItemThaumiumScoop extends Item implements IRepairable, IToolScoop
