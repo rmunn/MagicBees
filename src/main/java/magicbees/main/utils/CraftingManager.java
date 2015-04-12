@@ -1,6 +1,5 @@
 package magicbees.main.utils;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import magicbees.item.ItemCapsule;
 import magicbees.item.types.CombType;
 import magicbees.item.types.DropType;
@@ -23,6 +22,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import cpw.mods.fml.common.registry.GameRegistry;
 import forestry.api.recipes.RecipeManagers;
 
 public class CraftingManager
@@ -351,38 +351,16 @@ public class CraftingManager
 					'S', Config.miscResources.getStackForType(ResourceType.DIMENSIONAL_SINGULARITY)
 			}));
 		}
-
+		
+		// TODO: Finalize recipe.
+		output = new ItemStack(Config.magicApiary);
+		GameRegistry.addShapelessRecipe(output, new Object[] {
+				Config.pollen.getStackForType(PollenType.UNUSUAL, 2),
+				new ItemStack(Config.fApicultureBlock, 1, ForestryHelper.ApicultureBlock.APIARY.ordinal())
+		});
 
 		if (ThaumcraftHelper.isActive())
 		{
-			// Slabs
-			/*for (int i = 0; i < PlankType.values().length; ++i)
-			{
-				input = new ItemStack(Config.planksWood, 1, i);
-				output = new ItemStack(Config.slabWoodHalf, 6, i);
-				GameRegistry.addRecipe(output, new Object[] {
-					"PPP",
-					'P', input
-				});
-			}*/
-
-			// Essentia bottles
-			/*output = new ItemStack(Config.tcEssentiaBottle);
-			output.stackSize = 8;
-			GameRegistry.addRecipe(output, new Object[] {
-					" C ", "GPG", "PGP",
-					'G', Config.wax,
-					'C', Item.clay,
-					'P', Block.thinGlass
-			});
-
-			output = new ItemStack(Config.tcEssentiaBottle);
-			output.stackSize = 4;
-			GameRegistry.addRecipe(output, new Object[] {
-					" W ", "W W", " W ",
-					'W', Config.wax
-			});*/
-
 			input = Config.miscResources.getStackForType(ResourceType.LORE_FRAGMENT);
 			output = new ItemStack(Config.tcMiscResource, 1, ThaumcraftHelper.MiscResource.KNOWLEDGE_FRAGMENT.ordinal());
 			GameRegistry.addShapelessRecipe(output, new Object[] {
@@ -400,20 +378,6 @@ public class CraftingManager
 						'C', Blocks.chest
 				});
 			}
-
-			// "bottling" Crystal aspects.
-			/*for (EnumTag tag : EnumTag.values())
-			{
-				if (tag != EnumTag.UNKNOWN)
-				{
-					output = new ItemStack(Config.tcEssentiaBottle, 1, tag.id + 1);
-					GameRegistry.addRecipe(output, new Object[] {
-							"ccc", "cxc", "ccc",
-							'c', new ItemStack(Config.solidFlux, 1, tag.id),
-							'x', Config.tcEssentiaBottle
-					});
-				}
-			}*/
 		}
 
 		if (ArsMagicaHelper.isActive())

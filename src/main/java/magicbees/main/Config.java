@@ -3,11 +3,12 @@ package magicbees.main;
 import java.io.File;
 import java.lang.reflect.Field;
 
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import magicbees.block.*;
+import magicbees.block.BlockEffectJar;
+import magicbees.block.BlockHive;
+import magicbees.block.BlockMagicApiary;
+import magicbees.block.BlockPlanks;
+import magicbees.block.BlockVisAuraProvider;
+import magicbees.block.BlockWoodSlab;
 import magicbees.block.types.HiveType;
 import magicbees.item.ItemCapsule;
 import magicbees.item.ItemComb;
@@ -35,7 +36,8 @@ import magicbees.main.utils.VersionInfo;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import magicbees.storage.BackpackDefinition;
 import magicbees.tileentity.TileEntityEffectJar;
-import magicbees.tileentity.TileEntityThaumicApiary;
+import magicbees.tileentity.TileEntityMagicApiary;
+import magicbees.tileentity.TileEntityVisAuraProvider;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -47,6 +49,10 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import forestry.api.apiculture.BeeManager;
 import forestry.api.storage.BackpackManager;
 import forestry.api.storage.EnumBackpackType;
@@ -92,7 +98,8 @@ public class Config
 	public static BlockWoodSlab slabWoodFull;
 	public static BlockEffectJar effectJar;
 	public static BlockHive hive;
-    public static BlockThaumicApiary thaumicApiary;
+    public static BlockMagicApiary magicApiary;
+    public static BlockVisAuraProvider visAuraProvider;
 	
 	public static ItemComb combs;
 	public static ItemWax wax;
@@ -129,6 +136,7 @@ public class Config
 	//----- Forestry Blocks ------------------------------------
 	public static Block fHiveBlock;
 	public static Block fAlvearyBlock;
+	public static Block fApicultureBlock;
 	//----- Forestry Items -------------------------------------
 	public static Item fBeeComb;
 	public static Item fHoneydew;
@@ -144,6 +152,8 @@ public class Config
 	public static Block tcLog;
 	public static Block tcLeaf;
 	public static Block tcWarded;
+	public static Block tcWooden;
+	public static Block tcMetal;
 	//----- Thaumcraft Items -----------------------------------
 	public static Item tcFilledJar;
 	public static Item tcMiscResource;
@@ -240,6 +250,9 @@ public class Config
 	{
 		setupEffectJar();
 		setupHives();
+		setupApiary();
+		
+		setupThaumcraftBlocks();
 	}
 	
 	public void setupItems()
@@ -258,8 +271,7 @@ public class Config
 		setupThaumcraftItems();		
 		setupFrames();
 		setupJellyBaby();		
-		voidCapsule = new ItemCapsule(CapsuleType.VOID, capsuleStackSizeMax);
-		setupThaumcraftTools();		
+		voidCapsule = new ItemCapsule(CapsuleType.VOID, capsuleStackSizeMax);	
 		moonDial = new ItemMoonDial();
 		
 		setupNuggets();
@@ -388,6 +400,12 @@ public class Config
 		GameRegistry.registerBlock(effectJar, "effectJar");
 		GameRegistry.registerTileEntity(TileEntityEffectJar.class, TileEntityEffectJar.tileEntityName);
 	}
+	
+	private void setupApiary() {
+        magicApiary = new BlockMagicApiary();
+        GameRegistry.registerBlock(magicApiary, "magicApiary");
+        GameRegistry.registerTileEntity(TileEntityMagicApiary.class, TileEntityMagicApiary.tileEntityName);
+	}
 
 	private void setupFrames() {
 		hiveFrameMagic = new ItemMagicHiveFrame(HiveFrameType.MAGIC);
@@ -488,36 +506,24 @@ public class Config
 			}
 		}
 	}
+	
+	private void setupThaumcraftBlocks() {
+		if (ThaumcraftHelper.isActive()) {
+			visAuraProvider = new BlockVisAuraProvider();
+			GameRegistry.registerBlock(visAuraProvider, "visAuraProvider");
+			GameRegistry.registerTileEntity(TileEntityVisAuraProvider.class, "visAuraProvider");
+		}
+	}
 
 	private void setupThaumcraftItems() {
 		if (ThaumcraftHelper.isActive())
 		{
             // Items
-			solidFlux = new ItemCrystalAspect();
-
-            // Blocks
-            thaumicApiary = new BlockThaumicApiary();
-            GameRegistry.registerBlock(thaumicApiary, "thaumicApiary");
-            GameRegistry.registerTileEntity(TileEntityThaumicApiary.class, TileEntityThaumicApiary.tileEntityName);
-		}
-	}
-
-	private void setupThaumcraftTools() {
-		if (ThaumcraftHelper.isActive())
-		{
-			try
-			{
-				thaumiumScoop = new ItemThaumiumScoop();
-				GameRegistry.registerItem(thaumiumScoop, thaumiumScoop.getUnlocalizedName(), CommonProxy.DOMAIN);
-				
-				thaumiumGrafter = new ItemThaumiumGrafter();
-				GameRegistry.registerItem(thaumiumGrafter, thaumiumGrafter.getUnlocalizedName(), CommonProxy.DOMAIN);
-			}
-			catch (Exception e)
-			{
-				LogHelper.warn("Couldn't register Thaumium tools!");
-				LogHelper.debug(e);
-			}
+			thaumiumScoop = new ItemThaumiumScoop();
+			GameRegistry.registerItem(thaumiumScoop, thaumiumScoop.getUnlocalizedName(), CommonProxy.DOMAIN);
+			
+			thaumiumGrafter = new ItemThaumiumGrafter();
+			GameRegistry.registerItem(thaumiumGrafter, thaumiumGrafter.getUnlocalizedName(), CommonProxy.DOMAIN);
 		}
 	}
 

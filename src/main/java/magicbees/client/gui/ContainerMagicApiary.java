@@ -3,16 +3,16 @@ package magicbees.client.gui;
 import forestry.api.apiculture.IHiveFrame;
 import forestry.plugins.PluginApiculture;
 import magicbees.main.utils.ItemInterface;
-import magicbees.tileentity.TileEntityThaumicApiary;
+import magicbees.tileentity.TileEntityMagicApiary;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerThaumicApiary extends ContainerMB {
+public class ContainerMagicApiary extends ContainerMB {
 
-    private TileEntityThaumicApiary thaumicApiary;
+    public TileEntityMagicApiary apiary;
     public int maxSlot = 0;
 
     // Constants
@@ -23,13 +23,13 @@ public class ContainerThaumicApiary extends ContainerMB {
     private static final int SLOT_FRAME_COUNT = 3;
     private static final int SLOT_INVENTORY_COUNT = 7;
 
-    public ContainerThaumicApiary(InventoryPlayer inventoryPlayer, TileEntityThaumicApiary thaumicApiary){
-        this.thaumicApiary = thaumicApiary;
+    public ContainerMagicApiary(InventoryPlayer inventoryPlayer, TileEntityMagicApiary thaumicApiary){
+        this.apiary = thaumicApiary;
 
         // Queen/Princess slot
-        addSlotToContainer(new SlotCustomItems(this.thaumicApiary, 0, 29, 39, ItemInterface.getItemStack("Forestry", "beeQueenGE", 1), ItemInterface.getItemStack("Forestry", "beePrincessGE", 1)));
+        addSlotToContainer(new SlotCustomItems(this.apiary, 0, 29, 39, ItemInterface.getItemStack("Forestry", "beeQueenGE", 1), ItemInterface.getItemStack("Forestry", "beePrincessGE", 1)));
         // Drone slot
-        addSlotToContainer(new SlotCustomItems(this.thaumicApiary, 1, 29, 65, ItemInterface.getItemStack("Forestry", "beeDroneGE", 64)));
+        addSlotToContainer(new SlotCustomItems(this.apiary, 1, 29, 65, ItemInterface.getItemStack("Forestry", "beeDroneGE", 64)));
 
         int currentSlot = 1;
 
@@ -56,7 +56,7 @@ public class ContainerThaumicApiary extends ContainerMB {
             j++;
         }
 
-        addPlayerInventory(inventoryPlayer, 0, 108);
+        addPlayerInventory(inventoryPlayer, 0, 110);
 
         maxSlot = currentSlot;
 
@@ -105,13 +105,13 @@ public class ContainerThaumicApiary extends ContainerMB {
 
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        return thaumicApiary.isUseableByPlayer(entityPlayer);
+        return apiary.isUseableByPlayer(entityPlayer);
     }
 
 
     @Override
     public void updateProgressBar(int i, int j) {
-        thaumicApiary.getGUINetworkData(i, j);
+        apiary.getGUINetworkData(i, j);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class ContainerThaumicApiary extends ContainerMB {
         super.detectAndSendChanges();
 
         for (Object crafter : crafters) {
-            thaumicApiary.sendGUINetworkData(this, (ICrafting) crafter);
+            apiary.sendGUINetworkData(this, (ICrafting) crafter);
         }
     }
 }
