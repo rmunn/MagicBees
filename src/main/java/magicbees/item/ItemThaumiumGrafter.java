@@ -3,11 +3,9 @@ package magicbees.item;
 import java.util.HashSet;
 import java.util.Set;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.main.CommonProxy;
 import magicbees.main.Config;
+import magicbees.main.utils.compat.ThaumcraftHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,11 +17,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import thaumcraft.api.IRepairableExtended;
 import thaumcraft.api.ThaumcraftApi;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import forestry.api.arboriculture.IToolGrafter;
 
 @Optional.InterfaceList(
 		{
-				@Optional.Interface(iface = "thaumcraft.api.IRepairableExtended", modid = CommonProxy.ThaumcraftID, striprefs = true)
+				@Optional.Interface(iface = "thaumcraft.api.IRepairableExtended", modid = ThaumcraftHelper.Name, striprefs = true)
 		}
 )
 public class ItemThaumiumGrafter extends Item implements IRepairableExtended, IToolGrafter
@@ -107,7 +108,7 @@ public class ItemThaumiumGrafter extends Item implements IRepairableExtended, IT
 	/**
 	 * Return the enchantability factor of the item, most of the time is based on material.
 	 */
-	@Optional.Method(modid = CommonProxy.ThaumcraftID)
+	@Optional.Method(modid = ThaumcraftHelper.Name)
 	public int getItemEnchantability()
 	{
 		return ThaumcraftApi.toolMatThaumium.getEnchantability();
@@ -116,7 +117,7 @@ public class ItemThaumiumGrafter extends Item implements IRepairableExtended, IT
 	/**
 	 * Return the name for this tool's material.
 	 */
-	@Optional.Method(modid = CommonProxy.ThaumcraftID)
+	@Optional.Method(modid = ThaumcraftHelper.Name)
 	public String getToolMaterialName()
 	{
 		return ThaumcraftApi.toolMatThaumium.toString();
@@ -125,7 +126,7 @@ public class ItemThaumiumGrafter extends Item implements IRepairableExtended, IT
 	/**
 	 * Return whether this item is repairable in an anvil.
 	 */
-	@Optional.Method(modid = CommonProxy.ThaumcraftID)
+	@Optional.Method(modid = ThaumcraftHelper.Name)
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
 		return ThaumcraftApi.toolMatThaumium.customCraftingMaterial == par2ItemStack.getItem() || super.getIsRepairable(par1ItemStack, par2ItemStack);

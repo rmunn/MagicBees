@@ -7,6 +7,7 @@ import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.main.CommonProxy;
+import magicbees.main.utils.compat.ThaumcraftHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,7 +21,7 @@ import forestry.api.core.IToolScoop;
 
 @Optional.InterfaceList(
 		{
-				@Optional.Interface(iface = "thaumcraft.api.IRepairable", modid = CommonProxy.ThaumcraftID, striprefs = true)
+				@Optional.Interface(iface = "thaumcraft.api.IRepairable", modid = ThaumcraftHelper.Name, striprefs = true)
 		}
 )
 public class ItemThaumiumScoop extends Item implements IRepairable, IToolScoop
@@ -71,7 +72,7 @@ public class ItemThaumiumScoop extends Item implements IRepairable, IToolScoop
 	/**
 	 * Return the enchantability factor of the item, most of the time is based on material.
 	 */
-	@Optional.Method(modid = CommonProxy.ThaumcraftID)
+	@Optional.Method(modid = ThaumcraftHelper.Name)
 	public int getItemEnchantability()
 	{
 		return ThaumcraftApi.toolMatThaumium.getEnchantability();
@@ -80,7 +81,7 @@ public class ItemThaumiumScoop extends Item implements IRepairable, IToolScoop
 	/**
 	 * Return the name for this tool's material.
 	 */
-	@Optional.Method(modid = CommonProxy.ThaumcraftID)
+	@Optional.Method(modid = ThaumcraftHelper.Name)
 	public String getToolMaterialName()
 	{
 		return ThaumcraftApi.toolMatThaumium.toString();
@@ -89,7 +90,7 @@ public class ItemThaumiumScoop extends Item implements IRepairable, IToolScoop
 	/**
 	 * Return whether this item is repairable in an anvil.
 	 */
-	@Optional.Method(modid = CommonProxy.ThaumcraftID)
+	@Optional.Method(modid = ThaumcraftHelper.Name)
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
 		return ThaumcraftApi.toolMatThaumium.customCraftingMaterial == par2ItemStack.getItem() || super.getIsRepairable(par1ItemStack, par2ItemStack);
