@@ -1,8 +1,5 @@
 package magicbees.item;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import magicbees.main.CommonProxy;
 import magicbees.main.Config;
 import magicbees.main.utils.compat.ThaumcraftHelper;
@@ -36,26 +33,13 @@ public class ItemThaumiumGrafter extends Item implements IRepairableExtended, IT
 		this.setMaxDamage(15);
 		this.setCreativeTab(forestry.api.core.Tabs.tabArboriculture);
 		this.setUnlocalizedName("thaumiumGrafter");
+		this.setHarvestLevel("grafter", 3);
 	}
 
 	@Override
 	public float getSaplingModifier(ItemStack stack, World world, EntityPlayer player, int x, int y, int z)
 	{
 		return 100f;
-	}
-
-	@Override
-	public Set<String> getToolClasses(ItemStack itemStack)
-	{
-		HashSet<String> classes = new HashSet<String>(1);
-		classes.add("grafter");
-		return classes;
-	}
-
-	@Override
-	public int getHarvestLevel(ItemStack itemStack, String toolClass)
-	{
-		return toolClass.equals("grafter") ? 3 : 0;
 	}
 	
 	@Override

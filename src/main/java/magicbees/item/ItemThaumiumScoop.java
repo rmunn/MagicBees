@@ -1,11 +1,5 @@
 package magicbees.item;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.main.CommonProxy;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import net.minecraft.block.Block;
@@ -17,6 +11,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import thaumcraft.api.IRepairable;
 import thaumcraft.api.ThaumcraftApi;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import forestry.api.core.IToolScoop;
 
 @Optional.InterfaceList(
@@ -33,20 +30,7 @@ public class ItemThaumiumScoop extends Item implements IRepairable, IToolScoop
 		this.setMaxDamage(30);
 		this.setCreativeTab(forestry.api.core.Tabs.tabApiculture);
 		this.setUnlocalizedName("thaumiumScoop");
-	}
-
-	@Override
-	public Set<String> getToolClasses(ItemStack itemStack)
-	{
-		HashSet<String> classes = new HashSet<String>(1);
-		classes.add("scoop");
-		return classes;
-	}
-
-	@Override
-	public int getHarvestLevel(ItemStack itemStack, String toolClass)
-	{
-		return toolClass.equals("scoop") ? 3 : 0;
+		this.setHarvestLevel("scoop", 3);
 	}
 
 	@Override
