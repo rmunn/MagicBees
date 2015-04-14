@@ -43,22 +43,15 @@ public class RedstoneArsenalHelper
 	{
 		if (isActive())
 		{
-
+			getBlocks();
+			getItems();
+			setupCrafting();
 		}
 	}
 
 	public static void postInit()
 	{
-		if (isActive())
-		{
-			// Apparently the Game Registry isn't populated until now. ):
-			getBlocks();
-			getItems();
-
-			//addItemsToBackpack();
-			setupCrafting();
-
-		}
+		// if (isActive()) { }
 	}
 
 

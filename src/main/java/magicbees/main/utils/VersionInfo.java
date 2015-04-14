@@ -38,7 +38,6 @@ public class VersionInfo
 	String modName;
 	String modVersion;
 	String releaseURL;
-	//Logger modLogger = FMLLog.getLogger();
 
 	public static int[] parseVersion(String rawVersion)
 	{

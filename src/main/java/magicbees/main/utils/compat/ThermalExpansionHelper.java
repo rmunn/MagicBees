@@ -63,6 +63,8 @@ public class ThermalExpansionHelper
 	{
 		if (isActive())
 		{
+			getBlocks();
+			getItems();
 			getFluids();
 			setupCrafting();
 		}
@@ -133,12 +135,7 @@ public class ThermalExpansionHelper
 
 	public static void postInit()
 	{
-		if (isActive())
-		{
-			// Apparently the Game Registry isn't populated until now. ):
-			getBlocks();
-			getItems();
-		}
+		// if (isActive()) { }
 	}
 
 	private static void getBlocks()

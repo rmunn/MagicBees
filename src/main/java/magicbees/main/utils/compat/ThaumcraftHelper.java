@@ -168,21 +168,19 @@ public class ThaumcraftHelper {
 	}
 
 	public static void init() {
-		// if (isActive()) { }
+		if (isActive()) {
+			getBlocks();
+			getItems();
+		}
 	}
 
 	public static void postInit() {
 		if (isActive()) {
-			// Apparently the Game Registry isn't populated until now. ):
-			getBlocks();
-			getItems();
-
 			aspectTime = new Aspect("tempus", 0xB68CFF, new Aspect[] {
 					Aspect.VOID, Aspect.ORDER }, new ResourceLocation(
 					CommonProxy.DOMAIN, CommonProxy.TEXTURE
 							+ "aspects/tempus.png"), 1);
 
-			// addItemsToBackpack();
 			setupItemAspects();
 			setupCrafting();
 			setupResearch();
@@ -356,7 +354,7 @@ public class ThaumcraftHelper {
 				CommonProxy.DOMAIN, CommonProxy.ITEM_TEXTURE + "beeInfusion.png"),
 				new ResourceLocation("thaumcraft", "textures/gui/gui_researchback.png"));
 
-		ResearchItem rootNodeR = new ResearchItem("MB_Root", category,
+		new ResearchItem("MB_Root", category,
 				new AspectList(),
 				0, 0, 0,
 				Config.miscResources.getStackForType(ResourceType.RESEARCH_BEEINFUSION))
@@ -373,28 +371,28 @@ public class ThaumcraftHelper {
 		recipe = new ShapelessRecipes(new ItemStack(Config.tcMiscResource, 1,
 				MiscResource.KNOWLEDGE_FRAGMENT.ordinal()), list);
 
-		ResearchItem researchFragment = new ResearchItem("MB_LoreFragment", category,
+		new ResearchItem("MB_LoreFragment", category,
 				new AspectList(),
 				0, -3, 1,
 				Config.miscResources.getStackForType(ResourceType.LORE_FRAGMENT))
 		.setPages(getResearchPage("MB_LoreFragment.1"), new ResearchPage(recipe)).setParents("MB_Root")
 		.setStub().setAutoUnlock().setRound().registerResearchItem();
 
-		ResearchItem thaumiumScoopR = new ResearchItem("MB_Scoop", category,
+		new ResearchItem("MB_Scoop", category,
 				new AspectList().add(Aspect.TOOL, 1).add(Aspect.MAGIC, 1).add(Aspect.AIR, 1),
 				-2, -3, 1,
 				new ItemStack(Config.thaumiumScoop))
 		.setPages(getResearchPage("MB_Scoop.1"), new ResearchPage((IArcaneRecipe) thaumScoop))
 		.setParentsHidden("THAUMIUM").registerResearchItem();
 
-		ResearchItem thaumiumGrafterR = new ResearchItem("MB_Grafter", category,
+		new ResearchItem("MB_Grafter", category,
 				new AspectList().add(Aspect.TOOL, 1).add(Aspect.TREE, 1).add(Aspect.GREED, 1),
 				-2, -1, 2,
 				new ItemStack(Config.thaumiumGrafter))
 		.setPages(getResearchPage("MB_Grafter.1"), new ResearchPage((IArcaneRecipe) thaumGrafter))
 		.setParents("MB_Scoop").registerResearchItem();
 
-		ResearchItem frameMagicR = new ResearchItem("MB_FrameMagic", category,
+		new ResearchItem("MB_FrameMagic", category,
 				new AspectList().add(Aspect.TOOL, 1).add(Aspect.ARMOR, 1),
 				-2, 1, 1,
 				new ItemStack(Config.hiveFrameMagic))
@@ -407,7 +405,7 @@ public class ThaumcraftHelper {
 		list.add(input);
 		recipe = new ShapelessRecipes(new ItemStack(Config.hiveFrameGentle), list);
 
-		ResearchItem essenceFalseLifeR = new ResearchItem("MB_EssenceLife", category,
+		new ResearchItem("MB_EssenceLife", category,
 				new AspectList().add(Aspect.LIFE, 1).add(Aspect.MAGIC, 1),
 				2, -1, 1,
 				Config.miscResources.getStackForType(ResourceType.ESSENCE_FALSE_LIFE))
@@ -421,7 +419,7 @@ public class ThaumcraftHelper {
 		list.add(input);
 		recipe = new ShapelessRecipes(new ItemStack(Config.hiveFrameResilient), list);
 
-		ResearchItem essenceDurabilityR = new ResearchItem("MB_EssenceArmor", category,
+		new ResearchItem("MB_EssenceArmor", category,
 				new AspectList().add(Aspect.ARMOR, 1).add(Aspect.MAGIC, 1),
 				5, 0, 2,
 				Config.miscResources.getStackForType(ResourceType.ESSENCE_EVERLASTING_DURABILITY))
@@ -435,7 +433,7 @@ public class ThaumcraftHelper {
 		list.add(input);
 		recipe = new ShapelessRecipes(new ItemStack(Config.hiveFrameMetabolic), list);
 
-		ResearchItem essenceUnstableR = new ResearchItem( "MB_EssenceUnstable", category,
+		new ResearchItem( "MB_EssenceUnstable", category,
 				new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.ORDER, 1),
 				3, 1, 2,
 				Config.miscResources.getStackForType(ResourceType.ESSENCE_FICKLE_PERMANENCE))
@@ -452,7 +450,7 @@ public class ThaumcraftHelper {
 		list.add(input);
 		recipe = new ShapelessRecipes(new ItemStack(Config.hiveFrameNecrotic), list);
 
-		ResearchItem essenceShallowGraveR = new ResearchItem("MB_EssenceDeath", category,
+		new ResearchItem("MB_EssenceDeath", category,
 				new AspectList().add(Aspect.DEATH, 1).add(Aspect.MAGIC, 1),
 				2, 3, 1,
 				Config.miscResources .getStackForType(ResourceType.ESSENCE_SHALLOW_GRAVE))
@@ -468,7 +466,7 @@ public class ThaumcraftHelper {
 		list.add(input);
 		recipe = new ShapelessRecipes(new ItemStack(Config.hiveFrameTemporal), list);
 
-		ResearchItem essenceTimeR = new ResearchItem("MB_EssenceTime", category,
+		new ResearchItem("MB_EssenceTime", category,
 				new AspectList().add((Aspect) aspectTime, 1).add(Aspect.MAGIC, 1),
 				0, 2, 2,
 				Config.miscResources.getStackForType(ResourceType.ESSENCE_LOST_TIME))
@@ -479,7 +477,7 @@ public class ThaumcraftHelper {
 		.setConcealed()
 		.registerResearchItem();
 
-		ResearchItem singularityR = new ResearchItem("MB_DimensionalSingularity", category,
+		new ResearchItem("MB_DimensionalSingularity", category,
 				new AspectList().add(Aspect.ELDRITCH, 1).add((Aspect) aspectTime, 1).add(Aspect.VOID, 1),
 				-1, 4, 3,
 				Config.miscResources.getStackForType(ResourceType.DIMENSIONAL_SINGULARITY))
@@ -496,7 +494,7 @@ public class ThaumcraftHelper {
 		list.add(ItemInterface.getItemStack("frameProven"));
 		recipe = new ShapelessRecipes(new ItemStack(Config.hiveFrameOblivion), list);
 
-		ResearchItem essenceOblivionR = new ResearchItem("MB_EssenceOblivion", category,
+		new ResearchItem("MB_EssenceOblivion", category,
 				new AspectList().add(Aspect.VOID, 1).add(Aspect.HUNGER, 1).add((Aspect) aspectTime, 1),
 				-3, 3, 3,
 				Config.miscResources.getStackForType(ResourceType.ESSENCE_SCORNFUL_OBLIVION))
@@ -506,7 +504,7 @@ public class ThaumcraftHelper {
 		.setParents("MB_DimensionalSingularity").setConcealed()
 		.registerResearchItem();
 		
-		ResearchItem visAuraProviderR = new ResearchItem("MB_VisAuraProvider", category,
+		new ResearchItem("MB_VisAuraProvider", category,
 				new AspectList().add(Aspect.MAGIC, 1).add(Aspect.ENERGY, 1).add(Aspect.AURA, 1),
 				-5, 5, 3,
 				new ItemStack(Config.visAuraProvider))

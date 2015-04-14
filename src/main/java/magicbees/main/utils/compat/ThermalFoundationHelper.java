@@ -26,17 +26,14 @@ public class ThermalFoundationHelper
 	{
 		if (isActive())
 		{
-
+			getBlocks();
+			getItems();
 		}
 	}
 
 	public static void postInit()
 	{
-		if (isActive())
-		{
-			getBlocks();
-			getItems();
-		}
+		//if (isActive()) { }
 	}
 
 

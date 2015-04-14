@@ -301,8 +301,6 @@ public class BeeMutation implements IBeeMutation
 	private MoonPhase moonPhaseStart;
 	private MoonPhase moonPhaseEnd;
 	private float moonPhaseMutationBonus;
-	private boolean nodeRequired;
-	private double nodeRange;
 	private boolean requiresBlock;
 	private Block requiredBlock;
 	private int requiredBlockMeta;
@@ -500,13 +498,13 @@ public class BeeMutation implements IBeeMutation
 			}
 			else
 			{
-				int meta = 0;
+				int meta = OreDictionary.WILDCARD_VALUE;
 				if (this.requiredBlockMeta != OreDictionary.WILDCARD_VALUE)
 				{
 					meta = this.requiredBlockMeta;
 				}
 				conditions.add(String.format(LocalizationManager.getLocalizedString("research.requiresBlock"),
-						new ItemStack(this.requiredBlock, 1, this.requiredBlockMeta).getDisplayName()));
+						new ItemStack(this.requiredBlock, 1, meta).getDisplayName()));
 			}
 		}
 		
