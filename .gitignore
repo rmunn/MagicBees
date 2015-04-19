@@ -16,8 +16,7 @@ eclipse/
 gradle/
 build/
 debug/
-libs/
-/bin/
+bin/
 config/
 crash-reports/
 logs/
