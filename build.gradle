@@ -31,19 +31,10 @@ archivesBaseName = "magicbees"
 
 minecraft {
     version = project.version_mc + "-" + project.version_forge
-    assetDir = "eclipse/assets"
 	runDir = "."
 	
 	replace '@VERSION@', project.version_mod
 	replace '@MCVERSION@', project.version_mc
-}
-
-sourceSets {
-	main {
-		java {
-			srcDir "./api"
-		}
-	}
 }
     
 dependencies {
