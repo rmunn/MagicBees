@@ -17,6 +17,7 @@ import magicbees.main.utils.LocalizationManager;
 import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.compat.ArsMagicaHelper;
 import magicbees.main.utils.compat.BloodMagicHelper;
+import magicbees.main.utils.compat.BotaniaHelper;
 import magicbees.main.utils.compat.EquivalentExchangeHelper;
 import magicbees.main.utils.compat.ForestryHelper;
 import magicbees.main.utils.compat.RedstoneArsenalHelper;
@@ -294,6 +295,19 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 
 	BM_BOUND("BMBound", "obligatus",
 			BeeClassification.BLOODY, 0xb7102f, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
+			
+
+	//----------------------Botania Bees---------------------------------------
+	BOT_BOTANIC("BotBotanic", "botanica",
+			BeeClassification.BOTANICAL, 0xffffff, 0x6666ff, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+	BOT_BLOSSOM("BotBlossom", "viridis",
+			BeeClassification.BOTANICAL, 0x00ffff, 0x6666ff, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
+	BOT_FLORAL("BotFloral", "florens",
+			BeeClassification.BOTANICAL, 0x0000ff, 0x6666ff, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+			
+	BOT_VAZBEE("BotVazbee", "vazbii",
+			BeeClassification.BOTANICAL, 0x00ff00, 0x6666ff, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, false),
+	
 	;
 	
 	public static void setupBeeSpecies()
@@ -421,11 +435,25 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 
 		if (BloodMagicHelper.isActive())
 		{
+			BloodMagicHelper.addAltarRecipeBee(MYSTICAL, BM_BLOODY, 1, 1000, 100, 100);
 
+			BloodMagicHelper.addBindingRecipeBee(BM_BLOODY, BM_BOUND);
 		}
 		else
 		{
 			BM_BLOODY.setInactive();
+		}
+		
+		if (BotaniaHelper.isActive())
+		{
+			
+		}
+		else
+		{
+			BOT_BLOSSOM.setInactive();
+			BOT_BOTANIC.setInactive();
+			BOT_FLORAL.setInactive();
+			BOT_VAZBEE.setInactive();
 		}
 		
 
@@ -969,14 +997,6 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		BM_BOUND.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10)
 				.setGenome(BeeGenomeManager.getTemplateBMBound())
 				.register();
-
-
-		if (BloodMagicHelper.isActive())
-		{
-			BloodMagicHelper.addAltarRecipeBee(MYSTICAL, BM_BLOODY, 1, 1000, 100, 100);
-
-			BloodMagicHelper.addBindingRecipeBee(BM_BLOODY, BM_BOUND);
-		}
 
 	}
 

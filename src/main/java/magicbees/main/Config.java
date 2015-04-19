@@ -216,6 +216,10 @@ public class Config
 	public static ItemStack bmAquasalus;
 	public static ItemStack bmTennebrae;
 
+	public static Block botLivingRock;
+	public static Block botLivingWood;
+	
+	public static Item botManaResource;
 
 	//----- Config State info ----------------------------------
 	public static Configuration configuration;

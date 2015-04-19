@@ -15,11 +15,9 @@ import forestry.api.genetics.IAllele;
  *
  * @author MysteriousAges
  */
-public class BeeGenomeManager
-{
+public class BeeGenomeManager {
 	// Basic genome for All thaumic bees.
-	private static IAllele[] getTemplateModBase()
-	{
+	private static IAllele[] getTemplateModBase() {
 		IAllele[] genome = new IAllele[EnumBeeChromosome.values().length];
 
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.MYSTICAL;
@@ -39,15 +37,13 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] addRainResist(IAllele[] genome)
-	{
+	public static IAllele[] addRainResist(IAllele[] genome) {
 		genome[EnumBeeChromosome.TOLERANT_FLYER.ordinal()] = Allele.getBaseAllele("boolTrue");
 		
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateMystical()
-	{
+	public static IAllele[] getTemplateMystical() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.MYSTICAL;
@@ -55,8 +51,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateSorcerous()
-	{
+	public static IAllele[] getTemplateSorcerous() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.SORCEROUS;
@@ -67,8 +62,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateUnusual()
-	{
+	public static IAllele[] getTemplateUnusual() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.UNUSUAL;
@@ -77,8 +71,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateAttuned()
-	{
+	public static IAllele[] getTemplateAttuned() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.ATTUNED;
@@ -87,8 +80,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateEldritch()
-	{
+	public static IAllele[] getTemplateEldritch() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.ELDRITCH;
@@ -98,8 +90,7 @@ public class BeeGenomeManager
 	}
 	
 	// Basic genome for Arcane branch bees.
-	private static IAllele[] getTemplateBaseArcane()
-	{
+	private static IAllele[] getTemplateBaseArcane() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.TEMPERATURE_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceBoth1");
@@ -110,8 +101,7 @@ public class BeeGenomeManager
 	}
 
 	// Specialization genome for Esoteric bees.
-	public static IAllele[] getTemplateEsoteric()
-	{
+	public static IAllele[] getTemplateEsoteric() {
 		IAllele[] genome = getTemplateBaseArcane();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.ESOTERIC;
@@ -119,8 +109,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateMysterious()
-	{
+	public static IAllele[] getTemplateMysterious() {
 		IAllele[] genome = getTemplateBaseArcane();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.MYSTERIOUS;
@@ -129,8 +118,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateArcane()
-	{
+	public static IAllele[] getTemplateArcane() {
 		IAllele[] genome = getTemplateBaseArcane();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.ARCANE;
@@ -141,8 +129,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	private static IAllele[] getTemplateBaseSupernatural()
-	{
+	private static IAllele[] getTemplateBaseSupernatural() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.NOCTURNAL.ordinal()] = Allele.getBaseAllele("boolTrue");
@@ -152,8 +139,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateCharmed()
-	{
+	public static IAllele[] getTemplateCharmed() {
 		IAllele[] genome = getTemplateBaseSupernatural();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.CHARMED;
@@ -161,8 +147,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateEnchanted()
-	{
+	public static IAllele[] getTemplateEnchanted() {
 		IAllele[] genome = getTemplateBaseSupernatural();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.ENCHANTED;
@@ -171,8 +156,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateSupernatural()
-	{
+	public static IAllele[] getTemplateSupernatural() {
 		IAllele[] genome = getTemplateBaseSupernatural();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.SUPERNATURAL;
@@ -182,8 +166,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateEthereal()
-	{
+	public static IAllele[] getTemplateEthereal() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.ETHEREAL;
@@ -194,8 +177,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	private static IAllele[] getTemplateBaseElemental()
-	{
+	private static IAllele[] getTemplateBaseElemental() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedNorm");
@@ -204,8 +186,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateWatery()
-	{
+	public static IAllele[] getTemplateWatery() {
 		IAllele[] genome = getTemplateBaseElemental();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.WATERY;
@@ -216,8 +197,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateFirey()
-	{
+	public static IAllele[] getTemplateFirey() {
 		IAllele[] genome = getTemplateBaseElemental();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.FIREY;
@@ -228,8 +208,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateEarthy()
-	{
+	public static IAllele[] getTemplateEarthy() {
 		IAllele[] genome = getTemplateBaseElemental();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.EARTHY;
@@ -239,8 +218,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateWindy()
-	{
+	public static IAllele[] getTemplateWindy() {
 		IAllele[] genome = getTemplateBaseElemental();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.WINDY;
@@ -251,8 +229,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	private static IAllele[] getTemplateBaseScholarly()
-	{
+	private static IAllele[] getTemplateBaseScholarly() {
 		IAllele[] genome = getTemplateModBase();
 
 		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedSlow");
@@ -265,8 +242,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplatePupil()
-	{
+	public static IAllele[] getTemplatePupil() {
 		IAllele[] genome = getTemplateBaseScholarly();
 
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.PUPIL;
@@ -275,8 +251,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateScholarly()
-	{
+	public static IAllele[] getTemplateScholarly() {
 		IAllele[] genome = getTemplateBaseScholarly();
 
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.SCHOLARLY;
@@ -285,8 +260,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateSavant()
-	{
+	public static IAllele[] getTemplateSavant() {
 		IAllele[] genome = getTemplateBaseScholarly();
 
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.SAVANT;
@@ -296,8 +270,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	private static IAllele[] getTemplateBaseSoul()
-	{
+	private static IAllele[] getTemplateBaseSoul() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.HUMIDITY_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceBoth1");
@@ -306,8 +279,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateAware()
-	{
+	public static IAllele[] getTemplateAware() {
 		IAllele[] genome = getTemplateBaseSoul();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.AWARE;
@@ -315,8 +287,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateSpirit()
-	{
+	public static IAllele[] getTemplateSpirit() {
 		IAllele[] genome = getTemplateBaseSoul();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.SPIRIT;
@@ -325,8 +296,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateSoul()
-	{
+	public static IAllele[] getTemplateSoul() {
 		IAllele[] genome = getTemplateBaseSoul();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.SOUL;
@@ -336,8 +306,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	private static IAllele[] getTemplateBaseMalevolent()
-	{
+	private static IAllele[] getTemplateBaseMalevolent() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedFast");
@@ -348,8 +317,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateSkulking()
-	{
+	public static IAllele[] getTemplateSkulking() {
 		IAllele[] genome = getTemplateBaseMalevolent();
 
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.SKULKING;
@@ -358,8 +326,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateGhastly()
-	{
+	public static IAllele[] getTemplateGhastly() {
 		IAllele[] genome = getTemplateBaseMalevolent();
 
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.GHASTLY;
@@ -373,8 +340,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateSpidery()
-	{
+	public static IAllele[] getTemplateSpidery() {
 		IAllele[] genome = getTemplateBaseMalevolent();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.SPIDERY;
@@ -386,8 +352,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateSmouldering()
-	{
+	public static IAllele[] getTemplateSmouldering() {
 		IAllele[] genome = getTemplateBaseMalevolent();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.SMOULDERING;
@@ -398,8 +363,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	private static IAllele[] getTemplateBaseTemporal()
-	{
+	private static IAllele[] getTemplateBaseTemporal() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.HUMIDITY_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceBoth1");
@@ -410,8 +374,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTimely()
-	{
+	public static IAllele[] getTemplateTimely() {
 		IAllele[] genome = getTemplateBaseTemporal();
 
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TIMELY;
@@ -421,8 +384,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateLordly()
-	{
+	public static IAllele[] getTemplateLordly() {
 		IAllele[] genome = getTemplateBaseTemporal();
 
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.LORDLY;
@@ -434,8 +396,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateDoctoral()
-	{
+	public static IAllele[] getTemplateDoctoral() {
 		IAllele[] genome = getTemplateBaseTemporal();
 
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.DOCTORAL;
@@ -449,8 +410,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	private static IAllele[] getTemplateAbominableBase()
-	{
+	private static IAllele[] getTemplateAbominableBase() {
 		IAllele[] genome = getTemplateModBase();
 
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.INFERNAL;
@@ -464,8 +424,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateInfernal()
-	{
+	public static IAllele[] getTemplateInfernal() {
 		IAllele[] genome = getTemplateAbominableBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.INFERNAL;
@@ -474,8 +433,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateHateful()
-	{
+	public static IAllele[] getTemplateHateful() {
 		IAllele[] genome = getTemplateAbominableBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.HATEFUL;
@@ -487,8 +445,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateSpiteful()
-	{
+	public static IAllele[] getTemplateSpiteful() {
 		IAllele[] genome = getTemplateAbominableBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.SPITEFUL;
@@ -500,8 +457,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateWithering()
-	{
+	public static IAllele[] getTemplateWithering() {
 		IAllele[] genome = getTemplateAbominableBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.WITHERING;
@@ -512,8 +468,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	private static IAllele[] getTemplateBaseExtrinsic()
-	{
+	private static IAllele[] getTemplateBaseExtrinsic() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.TEMPERATURE_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceUp2");
@@ -525,8 +480,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateOblivion()
-	{
+	public static IAllele[] getTemplateOblivion() {
 		IAllele[] genome = getTemplateBaseExtrinsic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.OBLIVION;
@@ -535,8 +489,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateNameless()
-	{
+	public static IAllele[] getTemplateNameless() {
 		IAllele[] genome = getTemplateBaseExtrinsic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.NAMELESS;
@@ -546,8 +499,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateAbandoned()
-	{
+	public static IAllele[] getTemplateAbandoned() {
 		IAllele[] genome = getTemplateBaseExtrinsic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.ABANDONED;
@@ -560,8 +512,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateForlorn()
-	{
+	public static IAllele[] getTemplateForlorn() {
 		IAllele[] genome = getTemplateBaseExtrinsic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.FORLORN;
@@ -574,8 +525,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateDraconic()
-	{
+	public static IAllele[] getTemplateDraconic() {
 		IAllele[] genome = getTemplateBaseExtrinsic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.DRACONIC;
@@ -587,8 +537,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	private static IAllele[] getTemplateBaseMetallic()
-	{
+	private static IAllele[] getTemplateBaseMetallic() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedSlowest");
@@ -599,8 +548,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateIron()
-	{
+	public static IAllele[] getTemplateIron() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.IRON;
@@ -608,8 +556,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateGold()
-	{
+	public static IAllele[] getTemplateGold() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.GOLD;
@@ -617,8 +564,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateCopper()
-	{
+	public static IAllele[] getTemplateCopper() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.COPPER;
@@ -626,8 +572,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTin()
-	{
+	public static IAllele[] getTemplateTin() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TIN;
@@ -635,8 +580,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateSilver()
-	{
+	public static IAllele[] getTemplateSilver() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.SILVER;
@@ -644,8 +588,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateLead()
-	{
+	public static IAllele[] getTemplateLead() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.LEAD;
@@ -653,8 +596,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateAluminum()
-	{
+	public static IAllele[] getTemplateAluminum() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.ALUMINUM;
@@ -662,8 +604,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateArdite()
-	{
+	public static IAllele[] getTemplateArdite() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.ARDITE;
@@ -671,8 +612,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateCobalt()
-	{
+	public static IAllele[] getTemplateCobalt() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.COBALT;
@@ -680,8 +620,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateManyullyn()
-	{
+	public static IAllele[] getTemplateManyullyn() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.MANYULLYN;
@@ -689,8 +628,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateDiamond()
-	{
+	public static IAllele[] getTemplateDiamond() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.DIAMOND;
@@ -698,8 +636,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateEmerald()
-	{
+	public static IAllele[] getTemplateEmerald() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.EMERALD;
@@ -707,8 +644,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateApatite()
-	{
+	public static IAllele[] getTemplateApatite() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.APATITE;
@@ -718,8 +654,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateMutableBase()
-	{
+	public static IAllele[] getTemplateMutableBase() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.LIFESPAN.ordinal()] = Allele.getBaseAllele("lifespanShortest");
@@ -729,8 +664,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateMutable()
-	{
+	public static IAllele[] getTemplateMutable() {
 		IAllele[] genome = getTemplateMutableBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.MUTABLE;
@@ -738,8 +672,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTransmuting()
-	{
+	public static IAllele[] getTemplateTransmuting() {
 		IAllele[] genome = getTemplateMutableBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TRANSMUTING;
@@ -748,8 +681,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateCrumbling()
-	{
+	public static IAllele[] getTemplateCrumbling() {
 		IAllele[] genome = getTemplateMutableBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.CRUMBLING;
@@ -758,8 +690,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateInvisible()
-	{
+	public static IAllele[] getTemplateInvisible() {
 		IAllele[] genome = getTemplateMutableBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.INVISIBLE;
@@ -768,8 +699,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	private static IAllele[] getTemplateTCBase()
-	{
+	private static IAllele[] getTemplateTCBase() {
 		IAllele[] genome = getTemplateModBase();
 
 		genome[EnumBeeChromosome.FLOWER_PROVIDER.ordinal()] = AlleleFlower.flowerThaumcraft;
@@ -778,8 +708,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateTCStark()
-	{
+	public static IAllele[] getTemplateTCStark() {
 		IAllele[] genome = getTemplateTCBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_CHAOS;
@@ -788,8 +717,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateTCAir()
-	{
+	public static IAllele[] getTemplateTCAir() {
 		IAllele[] genome = getTemplateTCBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_AIR;
@@ -803,8 +731,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateTCFire()
-	{
+	public static IAllele[] getTemplateTCFire() {
 		IAllele[] genome = getTemplateTCBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_FIRE;
@@ -818,8 +745,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateTCWater()
-	{
+	public static IAllele[] getTemplateTCWater() {
 		IAllele[] genome = getTemplateTCBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_WATER;
@@ -833,8 +759,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateTCEarth()
-	{
+	public static IAllele[] getTemplateTCEarth() {
 		IAllele[] genome = getTemplateTCBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_EARTH;
@@ -849,8 +774,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCMagic()
-	{
+	public static IAllele[] getTemplateTCMagic() {
 		IAllele[] genome = getTemplateTCBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_ORDER;
@@ -860,8 +784,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	private static IAllele[] getTemplateTCBaseVis()
-	{
+	private static IAllele[] getTemplateTCBaseVis() {
 		IAllele[] genome = getTemplateTCBase();
 
 		genome[EnumBeeChromosome.FERTILITY.ordinal()] = Allele.getBaseAllele("fertilityLow");
@@ -871,8 +794,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCVis()
-	{
+	public static IAllele[] getTemplateTCVis() {
 		IAllele[] genome = getTemplateTCBaseVis();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_VIS;
@@ -883,8 +805,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCFlux()
-	{
+	public static IAllele[] getTemplateTCFlux() {
 		IAllele[] genome = getTemplateTCBaseVis();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_TAINT;
@@ -896,8 +817,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCAttract()
-	{
+	public static IAllele[] getTemplateTCAttract() {
 		IAllele[] genome = getTemplateTCBaseVis();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_ATTRACT;
@@ -907,8 +827,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCPure()
-	{
+	public static IAllele[] getTemplateTCPure() {
 		IAllele[] genome = getTemplateTCBaseVis();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_PURE;
@@ -921,8 +840,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCRejuvinating()
-	{
+	public static IAllele[] getTemplateTCRejuvinating() {
 		IAllele[] genome = getTemplateTCBaseVis();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_REJUVENATING;
@@ -933,8 +851,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCBrainy()
-	{
+	public static IAllele[] getTemplateTCBrainy() {
 		IAllele[] genome = getTemplateBaseMalevolent();
 
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_BRAINY;
@@ -944,8 +861,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCWispy()
-	{
+	public static IAllele[] getTemplateTCWispy() {
 		IAllele[] genome = getTemplateBaseMalevolent();
 
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_WISPY;
@@ -957,8 +873,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCBatty()
-	{
+	public static IAllele[] getTemplateTCBatty() {
 		IAllele[] genome = getTemplateBaseMalevolent();
 
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_BATTY;
@@ -968,8 +883,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCChicken()
-	{
+	public static IAllele[] getTemplateTCChicken() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_CHICKEN;
@@ -977,8 +891,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCBeef()
-	{
+	public static IAllele[] getTemplateTCBeef() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_BEEF;
@@ -986,8 +899,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCPork()
-	{
+	public static IAllele[] getTemplateTCPork() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_PORK;
@@ -995,8 +907,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	private static IAllele[] getTemplateEEBase()
-	{
+	private static IAllele[] getTemplateEEBase() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.TERRITORY.ordinal()] = Allele.getBaseAllele("territoryLarge");
@@ -1005,8 +916,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateEEMinium()
-	{
+	public static IAllele[] getTemplateEEMinium() {
 		IAllele[] genome = getTemplateEEBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.EE_MINIUM;
@@ -1014,8 +924,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	private static IAllele[] getTemplateAMBase()
-	{
+	private static IAllele[] getTemplateAMBase() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.FLOWER_PROVIDER.ordinal()] = Allele.flowerArsMagica;
@@ -1023,8 +932,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateAMEssence()
-	{
+	public static IAllele[] getTemplateAMEssence() {
 		IAllele[] genome = getTemplateAMBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.AM_ESSENCE;
@@ -1036,8 +944,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateAMQuintessence()
-	{
+	public static IAllele[] getTemplateAMQuintessence() {
 		IAllele[] genome = getTemplateAMEssence();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.AM_QUINTESSENCE;
@@ -1049,8 +956,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateAMEarth()
-	{
+	public static IAllele[] getTemplateAMEarth() {
 		IAllele[] genome = getTemplateAMBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.AM_EARTH;
@@ -1062,8 +968,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateAMAir()
-	{
+	public static IAllele[] getTemplateAMAir() {
 		IAllele[] genome = getTemplateAMBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.AM_AIR;
@@ -1075,8 +980,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateAMFire()
-	{
+	public static IAllele[] getTemplateAMFire() {
 		IAllele[] genome = getTemplateAMBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.AM_FIRE;
@@ -1089,8 +993,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateAMWater()
-	{
+	public static IAllele[] getTemplateAMWater() {
 		IAllele[] genome = getTemplateAMBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.AM_WATER;
@@ -1102,8 +1005,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateAMLightning()
-	{
+	public static IAllele[] getTemplateAMLightning() {
 		IAllele[] genome = getTemplateAMBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.AM_LIGHTNING;
@@ -1120,8 +1022,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateAMPlant()
-	{
+	public static IAllele[] getTemplateAMPlant() {
 		IAllele[] genome = getTemplateAMBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.AM_PLANT;
@@ -1133,8 +1034,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateAMIce()
-	{
+	public static IAllele[] getTemplateAMIce() {
 		IAllele[] genome = getTemplateAMBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.AM_ICE;
@@ -1148,8 +1048,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateAMArcane()
-	{
+	public static IAllele[] getTemplateAMArcane() {
 		IAllele[] genome = getTemplateAMBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.AM_ARCANE;
@@ -1161,8 +1060,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateAMVortex()
-	{
+	public static IAllele[] getTemplateAMVortex() {
 		IAllele[] genome = getTemplateAMBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.AM_VORTEX;
@@ -1175,8 +1073,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateAMWight()
-	{
+	public static IAllele[] getTemplateAMWight() {
 		IAllele[] genome = getTemplateAMBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.AM_WIGHT;
@@ -1188,8 +1085,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	private static IAllele[] getTemplateTEBase()
-	{
+	private static IAllele[] getTemplateTEBase() {
 		IAllele[] genome = getTemplateModBase();
 		
 		genome[EnumBeeChromosome.TEMPERATURE_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceBoth2");
@@ -1204,8 +1100,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	private static IAllele[] getTemplateTEBaseNether()
-	{
+	private static IAllele[] getTemplateTEBaseNether() {
 		IAllele[] genome = getTemplateTEBase();
 		
 		genome[EnumBeeChromosome.NOCTURNAL.ordinal()] = Allele.getBaseAllele("boolTrue");
@@ -1219,8 +1114,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	private static IAllele[] getTemplateTEEnd()
-	{
+	private static IAllele[] getTemplateTEEnd() {
 		IAllele[] genome = getTemplateTEBase();
 		
 		genome[EnumBeeChromosome.NOCTURNAL.ordinal()] = Allele.getBaseAllele("boolTrue");
@@ -1234,8 +1128,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTEElectrum()
-	{
+	public static IAllele[] getTemplateTEElectrum() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_ELECTRUM;
@@ -1243,8 +1136,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateTEPlatinum()
-	{
+	public static IAllele[] getTemplateTEPlatinum() {
 		IAllele[] genome = getTemplateTEBaseNether();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_PLATINUM;
@@ -1252,8 +1144,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTENickel()
-	{
+	public static IAllele[] getTemplateTENickel() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_NICKEL;
@@ -1261,8 +1152,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTEInvar()
-	{
+	public static IAllele[] getTemplateTEInvar() {
 		IAllele[] genome = getTemplateTEBaseNether();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_INVAR;
@@ -1270,8 +1160,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTEBronze()
-	{
+	public static IAllele[] getTemplateTEBronze() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_BRONZE;
@@ -1279,8 +1168,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateRSAFluxed()
-	{
+	public static IAllele[] getTemplateRSAFluxed() {
 		IAllele[] genome = getTemplateTEBaseNether();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.RSA_FLUXED;
@@ -1288,8 +1176,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateTEDante()
-	{
+	public static IAllele[] getTemplateTEDante() {
 		IAllele[] genome = getTemplateTEBaseNether();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_DANTE;
@@ -1297,8 +1184,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTEPyro()
-	{
+	public static IAllele[] getTemplateTEPyro() {
 		IAllele[] genome = getTemplateTEEnd();
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_PYRO;
 		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.getBaseAllele("effectIgnition");
@@ -1307,8 +1193,7 @@ public class BeeGenomeManager
 	}
 	
 	
-	public static IAllele[] getTemplateTEDestabilized()
-	{
+	public static IAllele[] getTemplateTEDestabilized() {
 		IAllele[] genome = getTemplateTEBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_DESTABILIZED;
@@ -1316,8 +1201,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTELux()
-	{
+	public static IAllele[] getTemplateTELux() {
 		IAllele[] genome = getTemplateTEBaseNether();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_LUX;
@@ -1325,8 +1209,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateTEWinsome()
-	{
+	public static IAllele[] getTemplateTEWinsome() {
 		IAllele[] genome = getTemplateTEBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_WINSOME;
@@ -1334,8 +1217,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTEEndearing()
-	{
+	public static IAllele[] getTemplateTEEndearing() {
 		IAllele[] genome = getTemplateTEEnd();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_ENDEARING;
@@ -1343,8 +1225,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTEBlizzy()
-	{
+	public static IAllele[] getTemplateTEBlizzy() {
 		IAllele[] genome = getTemplateTEEnd();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_BLIZZY;
@@ -1354,8 +1235,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTEGelid()
-	{
+	public static IAllele[] getTemplateTEGelid() {
 		IAllele[] genome = getTemplateTEBlizzy();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_GELID;
@@ -1364,8 +1244,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTECoal()
-	{
+	public static IAllele[] getTemplateTECoal() {
 		IAllele[] genome = getTemplateTEBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_COAL;
@@ -1373,8 +1252,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	private static IAllele[] getTemplateBMBase()
-	{
+	private static IAllele[] getTemplateBMBase() {
 		IAllele[] genome = getTemplateModBase();
 
 		genome[EnumBeeChromosome.TEMPERATURE_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceBoth2");
@@ -1389,8 +1267,7 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateBMBloody()
-	{
+	public static IAllele[] getTemplateBMBloody() {
 		IAllele[] genome = getTemplateBMBase();
 
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BM_BLOODY;
@@ -1398,22 +1275,61 @@ public class BeeGenomeManager
 		return genome;
 	}
 
-	public static IAllele[] getTemplateBMBound()
-	{
+	public static IAllele[] getTemplateBMBound() {
 		IAllele[] genome = getTemplateBMBase();
 
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BM_BOUND;
 
 		return genome;
 	}
+	
+	public static IAllele[] getTemplateBotaniaBase() {
+		IAllele[] genome = getTemplateModBase();
+		
+		genome[EnumBeeChromosome.TEMPERATURE_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceBoth1");
+		genome[EnumBeeChromosome.HUMIDITY_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceBoth1");
+		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedSlower");
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateBotBotanic() {
+		IAllele[] genome = getTemplateBotaniaBase();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BOT_BOTANIC;
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateBotBlossom() {
+		IAllele[] genome = getTemplateBotBotanic();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BOT_BLOSSOM;
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateBotFloral() {
+		IAllele[] genome = getTemplateBotBlossom();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BOT_FLORAL;
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateBotVazbee() {
+		IAllele[] genome = getTemplateBotaniaBase();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BOT_VAZBEE;
+		
+		return genome;
+	}
 
 	/*--------------------- Other Stuff ---------------------------------- */
 	
-	public static ItemStack getBeeNBTForSpecies(BeeSpecies species, EnumBeeType beeType)
-	{
+	public static ItemStack getBeeNBTForSpecies(BeeSpecies species, EnumBeeType beeType) {
 		ItemStack taggedBee;
-		switch (beeType)
-		{
+		switch (beeType) {
 			case PRINCESS:
 				taggedBee = ItemInterface.getItemStack("beePrincessGE");
 				break;
@@ -1435,8 +1351,7 @@ public class BeeGenomeManager
 		return taggedBee;
 	}
 	
-	private static void addGeneToCompound(EnumBeeChromosome gene, IAllele allele, NBTTagCompound compound)
-	{
+	private static void addGeneToCompound(EnumBeeChromosome gene, IAllele allele, NBTTagCompound compound) {
 		NBTTagCompound geneRoot = new NBTTagCompound();
 		compound.setTag("Genome", geneRoot);
 		NBTTagList chromosomes = new NBTTagList();
