@@ -6,7 +6,7 @@ Magic Bees depends on Forestry, which is required. You may [download Forestry he
 
 Minecraft Forge is also needed to run Forestry. Magic Bees will usually work with whichever version of Forge Forestry requires.
 
-To install, simply download the mod and place in the mods folder of your Minecraft instance.
+To install, simply download the mod from [CurseForge](http://minecraft.curseforge.com/mc-mods/65764-magic-bees) and place in the mods folder of your Minecraft instance.
 
 ## Compatability
 Adding the following mods will result in additional features being unlocked:
@@ -21,3 +21,5 @@ Adding the following mods will result in additional features being unlocked:
 MagicBees is licesed under the WTFPL ( http://www.wtfpl.net/ )
 
 Seriously, do whatever. Just don't ask us to support it if we didn't distribute it. =D
+
+We didn't distribute it if you downloaded it from a site other than CurseForge, or from a modpack that does not use CurseForge as their source.
