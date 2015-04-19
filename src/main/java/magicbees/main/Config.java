@@ -86,6 +86,7 @@ public class Config
 	public static boolean redstoneArsenalActive;
 	public static boolean thaumcraftActive;
 	public static boolean thermalExpansionActive;
+	public static boolean botaniaActive;
 
 	public static float magnetBaseRange;
 	public static float magnetLevelMultiplier;
@@ -331,6 +332,9 @@ public class Config
 
 		p = configuration.get("modules", "ThermalExpansion", true);
 		thermalExpansionActive = p.getBoolean();
+		
+		p = configuration.get("modules", "Botania", true);
+		botaniaActive = p.getBoolean();
 	}
 
 	private void doGeneralConfigs() {

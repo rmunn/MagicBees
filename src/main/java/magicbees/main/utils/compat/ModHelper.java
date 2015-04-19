@@ -13,6 +13,7 @@ public class ModHelper
 		ThermalExpansionHelper.preInit();
 		RedstoneArsenalHelper.preInit();
 		BloodMagicHelper.preInit();
+		BotaniaHelper.preInit();
 	}
 
 	public static void init()
@@ -26,6 +27,7 @@ public class ModHelper
 		ThermalExpansionHelper.init();
 		RedstoneArsenalHelper.init();
 		BloodMagicHelper.init();
+		BotaniaHelper.init();
 	}
 
 	public static void postInit()
@@ -39,5 +41,6 @@ public class ModHelper
 		ThermalExpansionHelper.postInit();
 		RedstoneArsenalHelper.postInit();
 		BloodMagicHelper.postInit();
+		BotaniaHelper.postInit();
 	}
 }
