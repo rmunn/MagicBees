@@ -2,6 +2,12 @@ language.name=English
 language.region=US
 language.code=en_US
 
+# Miscellaneous strings
+# -- Updater strings. Please try to keep these to one line if possible.
+magicbees.versioning.newVersion=A new version of Magic Bees is available: %s
+magicbees.versioning.critical=Magic Bees has a critical update ready: %s - Please update!
+magicbees.versioning.clickDownload=Click to open the Download page. Hover for update info.
+
 #Items
 item.magicbees:jellyBabies.name=Handful of Jelly Babies
 item.thaumiumScoop.name=Thaumium Scoop

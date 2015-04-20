@@ -1,59 +1,99 @@
-/*package magicbees.main.utils;
+package magicbees.main.utils;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-
-import magicbees.main.MagicBees;
+import magicbees.main.Config;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatMessageComponent;
-import cpw.mods.fml.common.IScheduledTickHandler;
-import cpw.mods.fml.common.TickType;
+import net.minecraft.event.ClickEvent;
+import net.minecraft.event.HoverEvent;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
-public class TickHandlerVersion implements IScheduledTickHandler
-{
+public class TickHandlerVersion {
+	
+	private static int TICK_POLL_INTERVAL = 250;
 
-    public static TickHandlerVersion instance = new TickHandlerVersion();
+	private static class LazyHolder {
+		private static final TickHandlerVersion instance = new TickHandlerVersion();
+	}
 
-    private static ArrayList<VersionInfo> modVersionInfo = new ArrayList();
-    private static boolean initialized;
-    private static boolean sent;
-    private static int modIndex = 0;
+    private int ticksToPoll;
+    private VersionInfo versionInfo;
 
-    public static boolean initialize()
-    {
-        if (initialized)
-        {
-            return false;
-        }
-        initialized = true;
-        return true;
+    private final ChatStyle newVersion = new ChatStyle().setColor(EnumChatFormatting.GOLD).setBold(true);
+    private final ChatStyle description = new ChatStyle().setColor(EnumChatFormatting.GRAY);
+    private final ChatStyle alert = new ChatStyle().setColor(EnumChatFormatting.RED);
+    
+    private TickHandlerVersion() {
+    	ticksToPoll = TICK_POLL_INTERVAL;
+    }
+    
+    private void setVersionInfo(VersionInfo vInfo) {
+    	versionInfo = vInfo;
+    }
+    
+    @SubscribeEvent
+    public void tickStart(PlayerTickEvent evt) {
+    	if (evt.phase != Phase.START) {
+    		return;
+    	}
+    	if (ticksToPoll > 0) {
+    		ticksToPoll--;
+    		return;
+    	}
+    	ticksToPoll = TICK_POLL_INTERVAL;
+    	
+    	if (versionInfo.versionCheckComplete) {
+    		unsubscribeFromBus();
+    		
+    		if (updateNotificationsEnabledOrCriticalUpdate()) {
+    			sendNotificationToPlayer(evt.player);
+    		}
+    	}
+    }
+    
+    private void sendNotificationToPlayer(EntityPlayer player) {
+    	if (versionInfo.isCriticalUpdate()) {
+    		player.addChatMessage(new ChatComponentTranslation("magicbees.versioning.critical", versionInfo.getLatestVersion()).setChatStyle(alert));
+    	}
+    	else {
+    		player.addChatMessage(new ChatComponentTranslation("magicbees.versioning.newVersion", versionInfo.getLatestVersion()).setChatStyle(newVersion));
+    	}
+    	ChatStyle thisDescription = description.createShallowCopy();
+    	thisDescription.setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, VersionInfo.DownloadURL));
+    	thisDescription.setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(versionInfo.getVersionDescription())));
+    	player.addChatMessage(new ChatComponentTranslation("magicbees.versioning.clickDownload").setChatStyle(thisDescription));
+	}
+
+	private boolean updateNotificationsEnabledOrCriticalUpdate() {
+		return (!Config.disableUpdateNotification || versionInfo.isCriticalUpdate()) && versionInfo.isNewVersionAvailable();
+	}
+
+	private void subscribeToBus() {
+    	FMLCommonHandler.instance().bus().register(this);
+    }
+    
+    private void unsubscribeFromBus() {
+    	FMLCommonHandler.instance().bus().unregister(this);
     }
 
-    public static boolean isInitialized()
-    {
-        return initialized;
-    }
-
-    public static boolean registerModVersionInfo(VersionInfo info)
-    {
-        if (modVersionInfo.contains(info))
-        {
-            return false;
-        }
-        modVersionInfo.add(info);
-        return true;
-    }
-
-    @Override
+	public static void go(VersionInfo vInfo) {
+		LazyHolder.instance.setVersionInfo(vInfo);
+		LazyHolder.instance.subscribeToBus();
+	}
+    
+    /*@Override
     public void tickStart(EnumSet<TickType> type, Object... tickData)
     {
-        if (sent)
-        {
+        if (sent) {
             return;
         }
 
-        if (modIndex < modVersionInfo.size())
-        {
+        if (modIndex < modVersionInfo.size()) {
             VersionInfo anInfo = modVersionInfo.get(modIndex);
 
             if ((!Config.DisableUpdateNotification || anInfo.isCriticalUpdate()) && anInfo.isNewVersionAvailable())
@@ -64,41 +104,9 @@ public class TickHandlerVersion implements IScheduledTickHandler
             }
             modIndex += 1;
         }
-        else
-        {
+        else {
             sent = true;
         }
     }
-
-    @Override
-    public void tickEnd(EnumSet<TickType> type, Object... tickData)
-    {
-
-    }
-
-    @Override
-    public EnumSet<TickType> ticks()
-    {
-        if (TickHandlerVersion.sent)
-        {
-            return EnumSet.noneOf(TickType.class);
-        }
-        return EnumSet.of(TickType.PLAYER);
-    }
-
-    @Override
-    public String getLabel()
-    {
-        return "thaumicbees.version";
-    }
-
-    @Override
-    public int nextTickSpacing()
-    {
-        if (!sent)
-        {
-            return 200;
-        }
-        return 72000;
-    }
-}*/
+    */
+}

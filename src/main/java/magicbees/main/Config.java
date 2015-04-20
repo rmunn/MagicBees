@@ -364,7 +364,7 @@ public class Config
 		capsuleStackSizeMax = p.getInt();
 		
 		p = configuration.get(section, "disableVersionNotification", false);
-		p.comment = "Set to true to stop ThaumicBees from notifying you when new updates are available. (Does not supress critical updates)";
+		p.comment = "Set to true to stop Magic Bees from notifying you when new updates are available. (Does not supress critical updates)";
 		disableUpdateNotification = p.getBoolean(false);
 		
 		p = configuration.get(section, "areMagicPlanksFlammable", false);

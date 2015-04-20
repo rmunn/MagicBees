@@ -19,7 +19,8 @@ public class VersionInfo
 	public static final String ModName = "MagicBees";
 	public static final String Version = "@VERSION@";
 	public static final String MCVersion = "@MCVERSION@";
-	public static final String VersionURL = "http://bit.ly/magicbeesVersionInfo";
+	public static final String VersionURL = "https://raw.githubusercontent.com/MagicBees/MagicBees/master/etc/version-1.7.txt";
+	public static final String DownloadURL = "http://minecraft.curseforge.com/mc-mods/65764-magic-bees/files";
 	public static final String GUI_FACTORY_CLASS = "magicbees.client.gui.GuiFactory";
 
 	public static final String Logo = "/gfx/magicbees/logo.png";
@@ -28,11 +29,9 @@ public class VersionInfo
 
 	boolean criticalUpdate;
 	boolean newVersion;
-	boolean newMinecraftVersion;
 	boolean versionCheckComplete;
 
 	String latestModVersion;
-	String latestMCVersion = MCVersion;
 	String description = "";
 
 	String modName;
@@ -68,7 +67,6 @@ public class VersionInfo
 		return value;
 	}
 
-	/* VERSION COMPARISON */
 	public static boolean beforeTargetVersion(String version, String target)
 	{
 		boolean result = false;
@@ -129,7 +127,6 @@ public class VersionInfo
 		modName = name;
 		modVersion = latestModVersion = version;
 		releaseURL = url;
-		//modLogger = logger;
 	}
 
 	public void checkForNewVersion()
@@ -148,11 +145,6 @@ public class VersionInfo
 		return latestModVersion;
 	}
 
-	public String getLatestMCVersion()
-	{
-		return latestMCVersion;
-	}
-
 	public String getVersionDescription()
 	{
 		return description;
@@ -168,17 +160,11 @@ public class VersionInfo
 		return newVersion;
 	}
 
-	public boolean isMinecraftOutdated()
-	{
-		return newMinecraftVersion;
-	}
-
 	public boolean isVersionCheckComplete()
 	{
 		return versionCheckComplete;
 	}
 
-	/* VERSION CHECK THREAD CLASS */
 	private class VersionCheckThread extends Thread
 	{
 		@Override
@@ -204,36 +190,25 @@ public class VersionInfo
 				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 				latestModVersion = reader.readLine();
 				criticalUpdate = Boolean.parseBoolean(reader.readLine());
-				latestMCVersion = reader.readLine();
-				description = reader.readLine();
+				while (reader.ready()) {
+					description = description + reader.readLine();
+				}
 				reader.close();
 
 				if (beforeTargetVersion(modVersion, latestModVersion))
 				{
-					FMLLog.info("An updated version of " + modName + " is available: " + latestModVersion + ".");
-					//modLogger.log(Level.INFO, "An updated version of " + modName + " is available: " +
-					//	latestModVersion + ".");
+					FMLLog.info("An updated version of " + modName + " is available: " + latestModVersion + ". You are currently using " + Version);
 					newVersion = true;
 					if (criticalUpdate)
 					{
-						FMLLog.info("This update has been marked as CRITICAL and will ignore notification suppression" +
-								".");
-						//modLogger.log(Level.INFO, "This update has been marked as CRITICAL and will ignore " +
-						//	"notification suppression.");
-					}
-					if (beforeTargetVersion(MCVersion, latestMCVersion))
-					{
-						newMinecraftVersion = true;
-						//modLogger.log(Level.INFO, "This update is for Minecraft " + latestMCVersion + ".");
-						FMLLog.info("This update is for Minecraft " + latestMCVersion + ".");
+						LogHelper.info("This update has been marked as CRITICAL and will ignore notification suppression.");
 					}
 				}
 
 			}
 			catch (Exception e)
 			{
-				//modLogger.log(Level.WARNING, "Version Check Failed: " + e.getMessage());
-				FMLLog.warning("Version check Failed: " + e.getMessage());
+				LogHelper.warn("Version check Failed: " + e.getMessage());
 			}
 			versionCheckComplete = true;
 		}
@@ -241,12 +216,10 @@ public class VersionInfo
 
 	public static void doVersionCheck()
 	{
-		VersionInfo main = new VersionInfo(ModName, Version, VersionURL);
-		/*TickHandlerVersion.registerModVersionInfo(main);
-		TickHandlerVersion.initialize();*/
-		//TickRegistry.registerScheduledTickHandler(TickHandlerVersion.instance, Side.CLIENT);
+		VersionInfo versionInfo = new VersionInfo(ModName, Version, VersionURL);
+		TickHandlerVersion.go(versionInfo);
 
-		VersionCheckThread thread = main.new VersionCheckThread();
+		VersionCheckThread thread = versionInfo.new VersionCheckThread();
 		thread.start();
 	}
 }

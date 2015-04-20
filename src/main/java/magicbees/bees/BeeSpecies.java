@@ -435,9 +435,6 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 
 		if (BloodMagicHelper.isActive())
 		{
-			BloodMagicHelper.addAltarRecipeBee(MYSTICAL, BM_BLOODY, 1, 1000, 100, 100);
-
-			BloodMagicHelper.addBindingRecipeBee(BM_BLOODY, BM_BOUND);
 		}
 		else
 		{
