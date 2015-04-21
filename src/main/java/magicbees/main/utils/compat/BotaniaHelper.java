@@ -48,6 +48,13 @@ public class BotaniaHelper {
 		MANA_STRING,
 		;
 	}
+	
+	public enum PastureSeed {
+		GRASS,
+		PODZOL,
+		MYCELIUM,
+		;
+	}
 
 	public static Block blockMysticalFlower;
 	public static Block blockLivingRock;
@@ -56,6 +63,7 @@ public class BotaniaHelper {
 	public static Item itemPetal;
 	public static Item itemManaPetal;
 	public static Item itemManaResource;
+	public static Item itemPastureSeed;
 	
 	public static ItemStack[] mysticalFlowerVariants;
 	
@@ -130,6 +138,7 @@ public class BotaniaHelper {
 		itemPetal = ItemInterface.getItem(Name, "petal");
 		itemManaPetal = ItemInterface.getItem(Name, "manaPetal");
 		itemManaResource = ItemInterface.getItem(Name, "manaResource");
+		itemPastureSeed = ItemInterface.getItem(Name, "grassSeeds");
 	}
 	
 	public static void doBotaniaModuleConfigs(Configuration configuration) {

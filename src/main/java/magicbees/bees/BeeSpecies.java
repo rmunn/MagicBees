@@ -18,6 +18,7 @@ import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.compat.ArsMagicaHelper;
 import magicbees.main.utils.compat.BloodMagicHelper;
 import magicbees.main.utils.compat.BotaniaHelper;
+import magicbees.main.utils.compat.BotaniaHelper.PastureSeed;
 import magicbees.main.utils.compat.EquivalentExchangeHelper;
 import magicbees.main.utils.compat.ForestryHelper;
 import magicbees.main.utils.compat.RedstoneArsenalHelper;
@@ -837,20 +838,6 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 				.setGenome(BeeGenomeManager.getTemplateAMWight())
 				.register();
 		
-		BOT_BOTANIC
-			.setGenome(BeeGenomeManager.getTemplateBotBotanic())
-			.register();
-		
-		BOT_BLOSSOM
-			.setGenome(BeeGenomeManager.getTemplateBotBlossom())
-			.register();
-		
-		BOT_FLORAL.setGenome(BeeGenomeManager.getTemplateBotFloral())
-			.register();
-		
-		BOT_VAZBEE.setGenome(BeeGenomeManager.getTemplateBotVazbee())
-			.register();
-		
 		if (OreDictionary.getOres("ingotBronze").size() <= 0)
 		{
 			TE_BRONZE.setInactive();
@@ -1006,6 +993,34 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		BM_BOUND.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10)
 				.setGenome(BeeGenomeManager.getTemplateBMBound())
 				.register();
+		
+		BOT_BOTANIC.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 10)
+			.setGenome(BeeGenomeManager.getTemplateBotBotanic())
+			.register();
+		
+		BOT_BLOSSOM.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 20)
+			.setGenome(BeeGenomeManager.getTemplateBotBlossom())
+			.register();
+		
+		BOT_FLORAL.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 25)
+			.setGenome(BeeGenomeManager.getTemplateBotFloral())
+			.register();
+		
+		for (int i = 0; i < 16; ++i) {
+			ItemStack petal = new ItemStack(BotaniaHelper.itemPetal, 1, i);
+			BOT_BOTANIC.addSpecialty(petal, 1);
+			BOT_BLOSSOM.addSpecialty(petal, 1);
+			BOT_FLORAL.addSpecialty(petal, 1);
+		}
+		
+		BOT_VAZBEE.addProduct(Config.combs.getStackForType(CombType.SOUL), 5)
+			.addProduct(Config.combs.getStackForType(CombType.TRANSMUTED), 15)
+			.setGenome(BeeGenomeManager.getTemplateBotVazbee())
+			.register();
+		
+		for (PastureSeed type : PastureSeed.values()) {
+			BOT_VAZBEE.addSpecialty(new ItemStack(BotaniaHelper.itemPastureSeed, 1, type.ordinal()), 4);
+		}
 
 	}
 
