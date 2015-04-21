@@ -6,6 +6,7 @@ import magicbees.main.utils.compat.BotaniaHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import java.util.Random;
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.subtile.SubTileFunctional;
 import cpw.mods.fml.relauncher.Side;
@@ -19,6 +20,7 @@ import forestry.api.genetics.IAllele;
 public class SubTileHiveacynth extends SubTileFunctional {
 	
 	public static final String NAME = "hiveacynth";
+	private static final int RANGE = 3;
 	private static final int COST = 15000;
 	
 	
@@ -39,7 +41,12 @@ public class SubTileHiveacynth extends SubTileFunctional {
 			
 			ItemStack stack = BeeManager.beeRoot.getMemberStack(getRandomBee(), beeType.ordinal());
 			
-			EntityItem entity = new EntityItem(supertile.getWorldObj(), supertile.xCoord, supertile.yCoord, supertile.zCoord, stack);
+			Random r = supertile.getWorldObj().rand;
+			EntityItem entity = new EntityItem(supertile.getWorldObj(),
+					supertile.xCoord - RANGE + r.nextInt(RANGE * 2 + 1), supertile.yCoord + 1, supertile.zCoord - RANGE + r.nextInt(RANGE * 2 + 1), stack);
+			entity.motionX = 0;
+			entity.motionY = 0;
+			entity.motionZ = 0;
 			supertile.getWorldObj().spawnEntityInWorld(entity);
 		}
 	}
@@ -57,7 +64,7 @@ public class SubTileHiveacynth extends SubTileFunctional {
 	}
 
 	private boolean readyToProduceProduct() {
-		return redstoneSignal == 0 && ticksExisted % 20==0;//0 == 0 && mana >= getFinalCost();
+		return redstoneSignal == 0 && ticksExisted % 200 == 0 && mana >= getFinalCost();
 	}
 	
 	private int getFinalCost() {
