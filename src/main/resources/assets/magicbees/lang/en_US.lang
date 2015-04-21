@@ -15,7 +15,9 @@ misc.magnetInactive=%s - Inactive
 
 #Items
 item.magicbees:jellyBabies.name=Handful of Jelly Babies
+item.manasteelScoop.name=Manasteel Scoop
 item.thaumiumScoop.name=Thaumium Scoop
+item.manasteelGrafter.name=Manasteel Grafter
 item.thaumiumGrafter.name=Thaumium Grafter
 item.magicbees:mysteriousMagnet.name=Mysterious Magnet
 item.moonDial.name=Jade Moon Dial

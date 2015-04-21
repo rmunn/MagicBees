@@ -16,6 +16,8 @@ import magicbees.item.ItemCrystalAspect;
 import magicbees.item.ItemDrop;
 import magicbees.item.ItemMagicHive;
 import magicbees.item.ItemMagicHiveFrame;
+import magicbees.item.ItemManasteelGrafter;
+import magicbees.item.ItemManasteelScoop;
 import magicbees.item.ItemMiscResources;
 import magicbees.item.ItemMoonDial;
 import magicbees.item.ItemMysteriousMagnet;
@@ -111,7 +113,9 @@ public class Config
 	public static ItemCrystalAspect solidFlux;
 	public static ItemMiscResources miscResources;
 	public static ItemFood jellyBaby;
+	public static Item manasteelScoop;
 	public static Item thaumiumScoop;
+	public static Item manasteelGrafter;
 	public static Item thaumiumGrafter;
 	public static ItemNugget nuggets;
 	public static ItemMoonDial moonDial;
@@ -270,7 +274,8 @@ public class Config
 		magicCapsule = new ItemCapsule(CapsuleType.MAGIC, capsuleStackSizeMax);
 		pollen = new ItemPollen();
 		
-		setupThaumcraftItems();		
+		setupThaumcraftItems();	
+		setupBotaniaItems();
 		setupFrames();
 		setupJellyBaby();		
 		voidCapsule = new ItemCapsule(CapsuleType.VOID, capsuleStackSizeMax);	
@@ -486,6 +491,16 @@ public class Config
 		OreDictionary.registerOre("shardDiamond", nuggets.getStackForType(NuggetType.DIAMOND));
 		OreDictionary.registerOre("shardEmerald", nuggets.getStackForType(NuggetType.EMERALD));
 		OreDictionary.registerOre("shardApatite", nuggets.getStackForType(NuggetType.APATITE));
+	}
+	
+	private void setupBotaniaItems() {
+		if (BotaniaHelper.isActive()) {
+			manasteelScoop = new ItemManasteelScoop();
+			GameRegistry.registerItem(manasteelScoop, manasteelScoop.getUnlocalizedName(), CommonProxy.DOMAIN);
+			
+			manasteelGrafter = new ItemManasteelGrafter();
+			GameRegistry.registerItem(manasteelGrafter, manasteelGrafter.getUnlocalizedName(), CommonProxy.DOMAIN);
+		}
 	}
 	
 	private void setupThaumcraftBackpacks() {

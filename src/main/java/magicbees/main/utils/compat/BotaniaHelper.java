@@ -1,12 +1,15 @@
 package magicbees.main.utils.compat;
 
+import vazkii.botania.api.mana.ManaItemHandler;
 import magicbees.bees.BeeManager;
 import magicbees.main.Config;
 import magicbees.main.utils.BlockInterface;
 import magicbees.main.utils.ItemInterface;
 import magicbees.main.utils.compat.botania.BotaniaAPIDistanceHelper;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
@@ -113,5 +116,9 @@ public class BotaniaHelper {
 		p = configuration.get(section, "hiveacynthPrincessSpawnRate", 0.09);
 		p.comment = "Rate at which the Hiveacynth will spawn a Princess instead of a Drone. Default: 0.09. Setting to 0 will disable.";
 		hiveacynthPrincessSpawnRate = p.getDouble();
+	}
+
+	public static boolean requestMana(ItemStack stack, EntityPlayer player, int manaPerDamage, int charges) {
+		return ManaItemHandler.requestManaExactForTool(stack, player, manaPerDamage * charges, true);
 	}
 }

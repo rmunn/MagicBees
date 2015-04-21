@@ -1,47 +1,30 @@
 package magicbees.item;
 
 import magicbees.main.CommonProxy;
-import magicbees.main.Config;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import thaumcraft.api.IRepairableExtended;
 import thaumcraft.api.ThaumcraftApi;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import forestry.api.arboriculture.IToolGrafter;
 
-@Optional.InterfaceList(
-		{
+@Optional.InterfaceList({
 				@Optional.Interface(iface = "thaumcraft.api.IRepairableExtended", modid = ThaumcraftHelper.Name, striprefs = true)
-		}
-)
-public class ItemThaumiumGrafter extends Item implements IRepairableExtended, IToolGrafter
+})
+public class ItemThaumiumGrafter extends ItemGrafter implements IRepairableExtended
 {
 	public ItemThaumiumGrafter()
 	{
 		super();
-		this.setMaxStackSize(1);
 		this.setMaxDamage(15);
-		this.setCreativeTab(forestry.api.core.Tabs.tabArboriculture);
 		this.setUnlocalizedName("thaumiumGrafter");
-		this.setHarvestLevel("grafter", 3);
 	}
 
-	@Override
-	public float getSaplingModifier(ItemStack stack, World world, EntityPlayer player, int x, int y, int z)
-	{
-		return 100f;
-	}
-	
 	@Override
 	public float func_150893_a(ItemStack itemStack, Block block)
 	{
@@ -52,41 +35,6 @@ public class ItemThaumiumGrafter extends Item implements IRepairableExtended, IT
 	public float getDigSpeed(ItemStack itemStack, Block block, int metadata)
 	{
 		return ForgeHooks.isToolEffective(itemStack, block, metadata) ? 4.8f : func_150893_a(itemStack, block);
-	}
-
-	@Override
-	public boolean onBlockDestroyed(ItemStack itemstack, World world, Block block, int x, int y, int z,
-									EntityLivingBase entityLiving)
-	{
-		int damage = 1;
-		if (block == Config.tcLeaf)
-		{
-			int meta = world.getBlockMetadata(x, y, z) & 1;
-			if (meta == 0 || meta == 1)
-			{
-				double chance = Math.random();
-				if (chance <= Config.thaumcraftSaplingDroprate)
-				{
-					this.dropItem(world, x, y, z, new ItemStack(Config.tcPlant, 1, meta));
-				}
-			}
-		}
-		itemstack.damageItem(damage, entityLiving);
-		return true;
-	}
-	
-	private void dropItem(World world, int x, int y, int z, ItemStack item)
-	{
-		if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops"))
-		{
-			float f = 0.7F;
-			double d0 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-			double d1 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-			double d2 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-			EntityItem entityitem = new EntityItem(world, (double)x + d0, (double)y + d1, (double)z + d2, item);
-			entityitem.delayBeforeCanPickup = 10;
-			world.spawnEntityInWorld(entityitem);
-		}
 	}
 	
 	/**
