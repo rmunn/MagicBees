@@ -33,6 +33,7 @@ import magicbees.item.types.WaxType;
 import magicbees.main.utils.LocalizationManager;
 import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.VersionInfo;
+import magicbees.main.utils.compat.BotaniaHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import magicbees.storage.BackpackDefinition;
 import magicbees.tileentity.TileEntityEffectJar;
@@ -339,6 +340,7 @@ public class Config
 		
 		p = configuration.get("modules", "Botania", true);
 		botaniaActive = p.getBoolean();
+		BotaniaHelper.doBotaniaModuleConfigs(configuration);
 	}
 
 	private void doGeneralConfigs() {

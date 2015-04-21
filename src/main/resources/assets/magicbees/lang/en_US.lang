@@ -8,6 +8,11 @@ magicbees.versioning.newVersion=A new version of Magic Bees is available: %s
 magicbees.versioning.critical=Magic Bees has a critical update ready: %s - Please update!
 magicbees.versioning.clickDownload=Click to open the Download page. Hover for update info.
 
+# -- Mysterious Magnet levels
+misc.level=Level %s
+misc.magnetActive=%s - Active
+misc.magnetInactive=%s - Inactive
+
 #Items
 item.magicbees:jellyBabies.name=Handful of Jelly Babies
 item.thaumiumScoop.name=Thaumium Scoop
@@ -165,10 +170,10 @@ backpack.thaumaturge=Thaumaturge's Backpack
 #Itemgroups
 itemGroup.magicBees=Magic Bees
 
-#Misc
-misc.level=Level %s
-misc.magnetActive=%s - Active
-misc.magnetInactive=%s - Inactive
+#Botania stuff
+tile.botania:flower.beegonia.name=Beegonia
+tile.botania:flower.beegonia.lore=We won't bee seeing you any more...
+
 
 #Research
 research.requiresBlock=Requires a foundation of %s
