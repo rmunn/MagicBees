@@ -170,10 +170,11 @@ backpack.thaumaturge=Thaumaturge's Backpack
 #Itemgroups
 itemGroup.magicBees=Magic Bees
 
-#Botania stuff
+#Botania flowers; Lexicon entries nearer the end.
 tile.botania:flower.beegonia.name=Beegonia
 tile.botania:flower.beegonia.lore=We won't bee seeing you any more...
-
+tile.botania:flower.hiveacynth.name=Hiveacynth
+tile.botania:flower.hiveacynth.lore=In a Morvelaira's Garden
 
 #Research
 research.requiresBlock=Requires a foundation of %s

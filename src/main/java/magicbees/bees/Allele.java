@@ -219,7 +219,7 @@ public class Allele implements IAllele
 	
 	public static IAlleleBeeSpecies getExtraSpecies(String name)
 	{
-		return (IAlleleBeeSpecies)AlleleManager.alleleRegistry.getAllele((new StringBuilder()).append("extrabees.species.").append(name).toString());
+		return (IAlleleBeeSpecies)AlleleManager.alleleRegistry.getAllele((new StringBuilder()).append("extrabees.species.").append(name.toLowerCase()).toString());
 	}
 	
 	public static IAllele getBaseAllele(String name)

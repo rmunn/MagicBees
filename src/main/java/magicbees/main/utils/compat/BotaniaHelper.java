@@ -1,10 +1,12 @@
 package magicbees.main.utils.compat;
 
+import magicbees.bees.BeeManager;
 import magicbees.main.Config;
 import magicbees.main.utils.BlockInterface;
 import magicbees.main.utils.ItemInterface;
 import magicbees.main.utils.compat.botania.BotaniaSignature;
 import magicbees.main.utils.compat.botania.SubTileBeegonia;
+import magicbees.main.utils.compat.botania.SubTileHiveacynth;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
@@ -43,6 +45,9 @@ public class BotaniaHelper {
 	public static final String Name = "Botania";
 
 	public static double beegoniaManaMultiplier;
+	public static double hiveacynthManaMultiplier;
+	public static double hiveacynthRainResistRate;
+	public static double hiveacynthPrincessSpawnRate;
 	
 	public static boolean isActive() {
 		return isBotaniaActive;
@@ -68,6 +73,12 @@ public class BotaniaHelper {
 			BotaniaAPI.registerSubTile(SubTileBeegonia.NAME, SubTileBeegonia.class);
 			BotaniaAPI.registerSubTileSignature(SubTileBeegonia.class, new BotaniaSignature(SubTileBeegonia.NAME));
 			BotaniaAPI.addSubTileToCreativeMenu(SubTileBeegonia.NAME);
+			
+			// Hiveacynth would appreciate it if this list existed.
+			BeeManager.populateSpeciesListRarity();
+			BotaniaAPI.registerSubTile(SubTileHiveacynth.NAME, SubTileHiveacynth.class);
+			BotaniaAPI.registerSubTileSignature(SubTileHiveacynth.class, new BotaniaSignature(SubTileHiveacynth.NAME));
+			BotaniaAPI.addSubTileToCreativeMenu(SubTileHiveacynth.NAME);
 		}
 	}
 
@@ -88,8 +99,20 @@ public class BotaniaHelper {
 		Property p;
 		String section = "botaniaPlugin";
 		
-		p = configuration.get(section, "beegoniaManaMultiplier", 1);
-		p.comment = "Multiplyer for the Beegonia's mana generation. Default: 1.0 (Affects duration, not throughput)";
+		p = configuration.get(section, "beegoniaManaMultiplier", 1.0);
+		p.comment = "Multiplier for the Beegonia's mana generation. Default: 1.0 (Affects duration, not throughput)";
 		beegoniaManaMultiplier = p.getDouble();
+		
+		p = configuration.get(section, "hiveacynthManaMultiplier", 1.0);
+		p.comment = "Multiplier for the Hiveacynth's mana consumption. Default: 1.0";
+		hiveacynthManaMultiplier = p.getDouble();
+		
+		p = configuration.get(section, "hiveacynthRainResistRate", 0.1);
+		p.comment = "Rate at which the hiveacynth applies rain resist to spawned bees. Default: 0.1 Setting to 0 will disable.";
+		hiveacynthRainResistRate = p.getDouble();
+		
+		p = configuration.get(section, "hiveacynthPrincessSpawnRate", 0.09);
+		p.comment = "Rate at which the Hiveacynth will spawn a Princess instead of a Drone. Default: 0.09. Setting to 0 will disable.";
+		hiveacynthPrincessSpawnRate = p.getDouble();
 	}
 }

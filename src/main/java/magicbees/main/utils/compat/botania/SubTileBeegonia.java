@@ -61,7 +61,7 @@ public class SubTileBeegonia extends SubTileGenerating {
 		}
 	}
 	
-	public int getSpeciesScaledComplexity(IAlleleBeeSpecies species) {
+	private int getSpeciesScaledComplexity(IAlleleBeeSpecies species) {
 		if (species == null) {
 			return 0;
 		}

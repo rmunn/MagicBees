@@ -2,6 +2,8 @@ package magicbees.main;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import magicbees.block.BlockEffectJar;
 import magicbees.block.BlockHive;
@@ -32,6 +34,7 @@ import magicbees.item.types.ResourceType;
 import magicbees.item.types.WaxType;
 import magicbees.main.utils.LocalizationManager;
 import magicbees.main.utils.LogHelper;
+import magicbees.main.utils.Tuple;
 import magicbees.main.utils.VersionInfo;
 import magicbees.main.utils.compat.BotaniaHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
@@ -55,6 +58,7 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import forestry.api.apiculture.BeeManager;
+import forestry.api.apiculture.IAlleleBeeSpecies;
 import forestry.api.storage.BackpackManager;
 import forestry.api.storage.EnumBackpackType;
 
@@ -221,6 +225,7 @@ public class Config
 	public static Block botLivingWood;
 	
 	public static Item botManaResource;
+
 
 	//----- Config State info ----------------------------------
 	public static Configuration configuration;
