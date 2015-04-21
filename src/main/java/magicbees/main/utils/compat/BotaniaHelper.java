@@ -4,21 +4,12 @@ import magicbees.bees.BeeManager;
 import magicbees.main.Config;
 import magicbees.main.utils.BlockInterface;
 import magicbees.main.utils.ItemInterface;
-import magicbees.main.utils.compat.botania.BotaniaLexiconEntry;
-import magicbees.main.utils.compat.botania.BotaniaSignature;
-import magicbees.main.utils.compat.botania.LexiconEntries;
-import magicbees.main.utils.compat.botania.SubTileBeegonia;
-import magicbees.main.utils.compat.botania.SubTileHiveacynth;
+import magicbees.main.utils.compat.botania.BotaniaAPIDistanceHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
-import vazkii.botania.api.BotaniaAPI;
-import vazkii.botania.api.lexicon.LexiconPage;
-import vazkii.botania.api.recipe.RecipePetals;
-import vazkii.botania.api.subtile.SubTileEntity;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -79,8 +70,7 @@ public class BotaniaHelper {
 			getBlocks();
 			getItems();
 			
-			registerSubtile(SubTileBeegonia.NAME, SubTileBeegonia.class);
-			registerSubtile(SubTileHiveacynth.NAME, SubTileHiveacynth.class);
+			BotaniaAPIDistanceHelper.registerSubtiles();
 		}
 	}
 
@@ -88,37 +78,9 @@ public class BotaniaHelper {
 		if (isActive()) {
 			// Hiveacynth would appreciate it if this list existed.
 			BeeManager.populateSpeciesListRarity();
-
-			RecipePetals beegoniaRecipe = BotaniaAPI.registerPetalRecipe(BotaniaAPI.internalHandler.getSubTileAsStack(SubTileBeegonia.NAME), new Object[] {
-					new ItemStack(itemPetal), new ItemStack(itemManaPetal), new ItemStack(itemPetal, 1, 4), new ItemStack(itemPetal, 1, 4),
-					new ItemStack(itemPetal, 1, 4), new ItemStack(itemManaPetal, 1, 4), new ItemStack(itemManaPetal, 1, 15)
-				});
-			LexiconEntries.entryBeegonia = new BotaniaLexiconEntry(SubTileBeegonia.NAME, BotaniaAPI.categoryGenerationFlowers);
-			LexiconEntries.entryBeegonia.setLexiconPages(new LexiconPage[] {
-					BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.beegonia.0"),
-					BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.beegonia.1"),
-					BotaniaAPI.internalHandler.petalRecipePage("magicbees.botania.lexicon.beegonia.crafting", beegoniaRecipe),
-					BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.beegonia.2")
-				});
 			
-			RecipePetals hiveacynthRecipe = BotaniaAPI.registerPetalRecipe(BotaniaAPI.internalHandler.getSubTileAsStack(SubTileHiveacynth.NAME), new Object[] {
-					new ItemStack(itemPetal, 1, 3), new ItemStack(itemPetal, 1, 9), new ItemStack(itemPetal, 1, 9), new ItemStack(itemPetal, 1, 11),
-					new ItemStack(itemManaPetal, 1, 3), new ItemStack(itemManaPetal, 1, 9), new ItemStack(itemManaPetal, 1, 11),
-					new ItemStack(itemManaPetal, 1, 11), new ItemStack(itemManaResource, 1, ManaResource.REDSTONE_ROOT.ordinal())
-				});
-			LexiconEntries.entryHiveacynth = new BotaniaLexiconEntry(SubTileHiveacynth.NAME, BotaniaAPI.categoryFunctionalFlowers);
-			LexiconEntries.entryHiveacynth.setLexiconPages(new LexiconPage[] {
-					BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.hiveacynth.0"),
-					BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.hiveacynth.1"),
-					BotaniaAPI.internalHandler.petalRecipePage("magicbees.botania.lexicon.hiveacynth.crafting", hiveacynthRecipe)
-				});
+			BotaniaAPIDistanceHelper.setupCraftingAndLexicon();
 		}
-	}
-
-	private static void registerSubtile(String subtileName, Class<? extends SubTileEntity> tileClass) {
-		BotaniaAPI.registerSubTile(subtileName, tileClass);
-		BotaniaAPI.registerSubTileSignature(tileClass, new BotaniaSignature(subtileName));
-		BotaniaAPI.addSubTileToCreativeMenu(subtileName);
 	}
 
 	public static void getBlocks() {

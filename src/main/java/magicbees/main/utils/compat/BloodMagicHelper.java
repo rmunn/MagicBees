@@ -40,9 +40,11 @@ public class BloodMagicHelper
 
 	public static void postInit()
 	{
-		BloodMagicHelper.addAltarRecipeBee(BeeSpecies.MYSTICAL, BeeSpecies.BM_BLOODY, 1, 1000, 100, 100);
-
-		BloodMagicHelper.addBindingRecipeBee(BeeSpecies.BM_BLOODY, BeeSpecies.BM_BOUND);
+		if (isActive()) {
+			BloodMagicHelper.addAltarRecipeBee(BeeSpecies.MYSTICAL, BeeSpecies.BM_BLOODY, 1, 1000, 100, 100);
+	
+			BloodMagicHelper.addBindingRecipeBee(BeeSpecies.BM_BLOODY, BeeSpecies.BM_BOUND);
+		}
 	}
 
 	public static void getBlocks()
