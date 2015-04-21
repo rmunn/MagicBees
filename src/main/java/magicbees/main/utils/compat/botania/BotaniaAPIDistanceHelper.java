@@ -28,6 +28,9 @@ public class BotaniaAPIDistanceHelper {
 	}
 
 	public static void setupCraftingAndLexicon() {
+		LexiconEntry manasteelEntry = getLexiconEntryForName(BotaniaHelper.LEXICON_ENTRY_MANA_GEAR);
+		manasteelEntry.addPage(BotaniaAPI.internalHandler.craftingRecipePage("magicbees.botania.lexicon.manasteelScoop", BotaniaHelper.manasteelScoopRecipe));
+		manasteelEntry.addPage(BotaniaAPI.internalHandler.craftingRecipePage("magicbees.botania.lexicon.manasteelGrafter", BotaniaHelper.manasteelGrafterRecipe));
 
 		RecipePetals beegoniaRecipe = BotaniaAPI.registerPetalRecipe(BotaniaAPI.internalHandler.getSubTileAsStack(SubTileBeegonia.NAME), new Object[] {
 				new ItemStack(BotaniaHelper.itemPetal), new ItemStack(BotaniaHelper.itemManaPetal),
@@ -56,5 +59,14 @@ public class BotaniaAPIDistanceHelper {
 				BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.hiveacynth.1"),
 				BotaniaAPI.internalHandler.petalRecipePage("magicbees.botania.lexicon.hiveacynth.crafting", hiveacynthRecipe)
 			});
+	}
+	
+	public static LexiconEntry getLexiconEntryForName(String name) {
+		for (LexiconEntry entry : BotaniaAPI.getAllEntries()) {
+			if (entry.unlocalizedName.equals(name)) {
+				return entry;
+			}
+		}
+		return null;
 	}
 }

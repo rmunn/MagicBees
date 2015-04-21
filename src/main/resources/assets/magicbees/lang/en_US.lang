@@ -536,6 +536,9 @@ tc.research_page.MB_VisAuraProvider.1=Blah blah blah.
 #Botania Lexicon entries
 magicbees.botania.lexicon.subtitle=[Magic Bees]
 
+magicbees.botania.lexicon.manasteelScoop=The &1Manasteel Scoop&0
+magicbees.botania.lexicon.manasteelGrafter=The &1Manasteel Grafter&0
+
 magicbees.botania.lexicon.beegonia.0=Drones are the foundation of a healthy colony's future, but really, they can start just piling up to the point where you don't know what to do with them anymore. <br>The &1Beegonia&0 is a solution to the problem of overcrowding! Simply toss your spare drones in their vicinity, and they will reclaim the life force within the drone and convert it into mana! They aren't terribly picky, and will
 magicbees.botania.lexicon.beegonia.1=produce a constant amount of mana while they work, though it does seem more "complex" bees provide more mana than mundane bees, whatever that means.
 magicbees.botania.lexicon.beegonia.crafting=Syncrostrike's Elegant Solution

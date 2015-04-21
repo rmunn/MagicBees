@@ -1,6 +1,5 @@
 package magicbees.main.utils.compat;
 
-import vazkii.botania.api.mana.ManaItemHandler;
 import magicbees.bees.BeeManager;
 import magicbees.main.Config;
 import magicbees.main.utils.BlockInterface;
@@ -8,12 +7,17 @@ import magicbees.main.utils.ItemInterface;
 import magicbees.main.utils.compat.botania.BotaniaAPIDistanceHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import vazkii.botania.api.mana.ManaItemHandler;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -21,6 +25,8 @@ public class BotaniaHelper {
 	
 	@SideOnly(Side.CLIENT)
 	public static IIcon subtileIcons[];
+
+	public static final String LEXICON_ENTRY_MANA_GEAR = "manaGear";
 	
 	public enum ManaResource {
 		MANASTEEL,
@@ -49,6 +55,9 @@ public class BotaniaHelper {
 	public static Item itemPetal;
 	public static Item itemManaPetal;
 	public static Item itemManaResource;
+	
+	public static IRecipe manasteelGrafterRecipe;
+	public static IRecipe manasteelScoopRecipe;
 	
 	private static boolean isBotaniaActive = false;
 	public static final String Name = "Botania";
@@ -81,6 +90,21 @@ public class BotaniaHelper {
 		if (isActive()) {
 			// Hiveacynth would appreciate it if this list existed.
 			BeeManager.populateSpeciesListRarity();
+			
+			GameRegistry.addRecipe(new ItemStack(Config.manasteelScoop), new Object[] {
+					"twt", "tmt", " t ",
+					'm', new ItemStack(itemManaResource, 1, ManaResource.MANASTEEL.ordinal()),
+					'w', Blocks.wool,
+					't', new ItemStack(itemManaResource, 1, ManaResource.LIVINGWOOD_TWIG.ordinal())
+			});
+			manasteelScoopRecipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(CraftingManager.getInstance().getRecipeList().size() - 1);
+			
+			GameRegistry.addRecipe(new ItemStack(Config.manasteelGrafter), new Object[] {
+				"  m", " t ", "t  ",
+				'm', new ItemStack(itemManaResource, 1, ManaResource.MANASTEEL.ordinal()),
+				't', new ItemStack(itemManaResource, 1, ManaResource.LIVINGWOOD_TWIG.ordinal())
+			});
+			manasteelGrafterRecipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(CraftingManager.getInstance().getRecipeList().size() - 1);
 			
 			BotaniaAPIDistanceHelper.setupCraftingAndLexicon();
 		}
