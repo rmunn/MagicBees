@@ -49,12 +49,15 @@ public class BotaniaHelper {
 		;
 	}
 
+	public static Block blockMysticalFlower;
 	public static Block blockLivingRock;
 	public static Block blockLivingWood;
 	
 	public static Item itemPetal;
 	public static Item itemManaPetal;
 	public static Item itemManaResource;
+	
+	public static ItemStack[] mysticalFlowerVariants;
 	
 	public static IRecipe manasteelGrafterRecipe;
 	public static IRecipe manasteelScoopRecipe;
@@ -111,8 +114,15 @@ public class BotaniaHelper {
 	}
 
 	public static void getBlocks() {
+		blockMysticalFlower = BlockInterface.getBlock(Name, "flower");
 		blockLivingRock = BlockInterface.getBlock(Name, "livingrock");
 		blockLivingWood = BlockInterface.getBlock(Name, "livingwood");
+		
+		// Generate 16-colour flowers.
+		mysticalFlowerVariants = new ItemStack[16];
+		for (int i = 0; i < 16; i++) {
+			mysticalFlowerVariants[i] = new ItemStack(blockMysticalFlower, 1, i);
+		}
 	}
 
 	public static void getItems() {

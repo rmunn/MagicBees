@@ -3,7 +3,7 @@ package magicbees.main.utils;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
-import magicbees.bees.AlleleEffectCrumbling;
+import magicbees.bees.allele.effect.AlleleEffectCrumbling;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;

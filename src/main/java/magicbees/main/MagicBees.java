@@ -1,7 +1,7 @@
 package magicbees.main;
 
 import magicbees.bees.BeeManager;
-import magicbees.bees.TransmutationEffectController;
+import magicbees.bees.allele.effect.TransmutationEffectController;
 import magicbees.client.gui.GUIHandler;
 import magicbees.main.utils.CraftingManager;
 import magicbees.main.utils.IMCManager;

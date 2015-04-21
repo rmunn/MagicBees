@@ -1297,6 +1297,7 @@ public class BeeGenomeManager {
 		IAllele[] genome = getTemplateBotaniaBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BOT_BOTANIC;
+		genome[EnumBeeChromosome.FLOWER_PROVIDER.ordinal()] = Allele.flowerBotania;
 		
 		return genome;
 	}
@@ -1305,6 +1306,8 @@ public class BeeGenomeManager {
 		IAllele[] genome = getTemplateBotBotanic();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BOT_BLOSSOM;
+		genome[EnumBeeChromosome.FERTILITY.ordinal()] = Allele.getBaseAllele("fertilityMaximum");
+		genome[EnumBeeChromosome.FLOWERING.ordinal()] = Allele.getBaseAllele("floweringFaster");
 		
 		return genome;
 	}
@@ -1313,6 +1316,8 @@ public class BeeGenomeManager {
 		IAllele[] genome = getTemplateBotBlossom();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BOT_FLORAL;
+		genome[EnumBeeChromosome.FERTILITY.ordinal()] = Allele.getBaseAllele("fertilityHigh");
+		genome[EnumBeeChromosome.FLOWERING.ordinal()] = Allele.getBaseAllele("floweringMaximum");
 		
 		return genome;
 	}

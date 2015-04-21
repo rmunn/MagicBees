@@ -1,4 +1,4 @@
-package magicbees.bees;
+package magicbees.bees.allele.effect;
 
 import java.util.ArrayList;
 
@@ -10,39 +10,32 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class TransmutationEffectController implements ITransmutationEffectController
-{
+public class TransmutationEffectController implements ITransmutationEffectController {
 	private ArrayList<ITransmutationEffectLogic> logicObjects;
 	static TransmutationEffectController instance;
-	
-	public TransmutationEffectController()
-	{
+
+	public TransmutationEffectController() {
 		logicObjects = new ArrayList<ITransmutationEffectLogic>();
 		logicObjects.add(new TransmutationEffectRailcraft());
 		logicObjects.add(new TransmutationEffectVanilla());
 		MagicBeesAPI.transmutationEffectController = instance = this;
 	}
-	
-	public void attemptTransmutations(World world, BiomeGenBase biome, ItemStack sourceBlock, int x, int y, int z)
-	{
+
+	public void attemptTransmutations(World world, BiomeGenBase biome, ItemStack sourceBlock, int x, int y, int z) {
 		boolean done;
 		ITransmutationEffectLogic logic;
-		for (int i = 0; i < logicObjects.size(); i++)
-		{
+		for (int i = 0; i < logicObjects.size(); i++) {
 			logic = logicObjects.get(i);
-			try
-			{
+			try {
 				done = logic.tryTransmutation(world, biome, sourceBlock, x, y, z);
-			}
-			catch (Exception e)
-			{
+			} catch (Exception e) {
 				done = false;
-				FMLLog.warning("Magic Bees encountered an issue with an ITransmutationEffectLogic provider %s. Debug information follows.", logic.getClass().getName());
+				FMLLog.warning("Magic Bees encountered an issue with an ITransmutationEffectLogic provider %s. Debug information follows.", logic.getClass()
+						.getName());
 				FMLLog.info(e.getMessage());
 			}
-			
-			if (done)
-			{
+
+			if (done) {
 				logicObjects.remove(i);
 				logicObjects.add(logic);
 				break;
@@ -51,10 +44,8 @@ public class TransmutationEffectController implements ITransmutationEffectContro
 	}
 
 	@Override
-	public void addEffectLogic(ITransmutationEffectLogic logic)
-	{
-		if (logic != null && !logicObjects.contains(logic))
-		{
+	public void addEffectLogic(ITransmutationEffectLogic logic) {
+		if (logic != null && !logicObjects.contains(logic)) {
 			logicObjects.add(logic);
 		}
 	}

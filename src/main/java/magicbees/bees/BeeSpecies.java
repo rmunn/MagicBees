@@ -453,8 +453,6 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			BOT_VAZBEE.setInactive();
 		}
 		
-
-		AlleleManager.alleleRegistry.registerDeprecatedAlleleReplacement("thaumicbees.speciesBlitz", AM_LIGHTNING);
 		
 		// Oredict bees
 		if (OreDictionary.getOres("ingotCopper").size() <= 0)
@@ -838,6 +836,20 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 				.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 10)
 				.setGenome(BeeGenomeManager.getTemplateAMWight())
 				.register();
+		
+		BOT_BOTANIC
+			.setGenome(BeeGenomeManager.getTemplateBotBotanic())
+			.register();
+		
+		BOT_BLOSSOM
+			.setGenome(BeeGenomeManager.getTemplateBotBlossom())
+			.register();
+		
+		BOT_FLORAL.setGenome(BeeGenomeManager.getTemplateBotFloral())
+			.register();
+		
+		BOT_VAZBEE.setGenome(BeeGenomeManager.getTemplateBotVazbee())
+			.register();
 		
 		if (OreDictionary.getOres("ingotBronze").size() <= 0)
 		{
