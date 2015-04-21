@@ -66,8 +66,8 @@ public class BeeManager
 		
 		if (ExtraBeesHelper.isActive()) {
 			worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(Allele.getExtraSpecies("Water"), 12.0));
-			worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(Allele.getExtraSpecies("Rocky"), 16.0));
-			worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(Allele.getExtraSpecies("Embittered"), 10.0));
+			worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(Allele.getExtraSpecies("Rock"), 16.0));
+			worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(Allele.getExtraSpecies("Basalt"), 10.0));
 		}
 
 		worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(BeeSpecies.MYSTICAL, 20.0));
