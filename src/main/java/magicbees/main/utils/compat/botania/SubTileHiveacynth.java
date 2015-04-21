@@ -33,15 +33,21 @@ public class SubTileHiveacynth extends SubTileFunctional {
 		}
 		
 		if (readyToProduceProduct()) {
+			Random r = supertile.getWorldObj().rand;
 			EnumBeeType beeType = EnumBeeType.DRONE;
 			
-			if (supertile.getWorldObj().rand.nextDouble() < BotaniaHelper.hiveacynthPrincessSpawnRate) {
+			IBee bee = getRandomBee(r);
+			
+			if (r.nextDouble() < BotaniaHelper.hiveacynthPrincessSpawnRate) {
 				beeType = EnumBeeType.PRINCESS;
+				
+				if (BotaniaHelper.hiveacynthPristineRate < r.nextDouble()) {
+					bee.setIsNatural(false);
+				}
 			}
+
+			ItemStack stack = BeeManager.beeRoot.getMemberStack(bee, beeType.ordinal());
 			
-			ItemStack stack = BeeManager.beeRoot.getMemberStack(getRandomBee(), beeType.ordinal());
-			
-			Random r = supertile.getWorldObj().rand;
 			EntityItem entity = new EntityItem(supertile.getWorldObj(),
 					supertile.xCoord - RANGE + r.nextInt(RANGE * 2 + 1), supertile.yCoord + 1, supertile.zCoord - RANGE + r.nextInt(RANGE * 2 + 1), stack);
 			entity.motionX = 0;
@@ -51,11 +57,11 @@ public class SubTileHiveacynth extends SubTileFunctional {
 		}
 	}
 	
-	private IBee getRandomBee() {
-		IAlleleBeeSpecies dropSpecies = BeeManager.getRandomWorldgenSpecies(supertile.getWorldObj().rand);
+	private IBee getRandomBee(Random random) {
+		IAlleleBeeSpecies dropSpecies = BeeManager.getRandomWorldgenSpecies(random);
 		IAllele[] speciesTemplate = BeeManager.beeRoot.getTemplate(dropSpecies.getUID());
 		
-		if (supertile.getWorldObj().rand.nextDouble() < BotaniaHelper.hiveacynthRainResistRate) {
+		if (random.nextDouble() < BotaniaHelper.hiveacynthRainResistRate) {
 			speciesTemplate = BeeGenomeManager.addRainResist(speciesTemplate);
 		}
 		

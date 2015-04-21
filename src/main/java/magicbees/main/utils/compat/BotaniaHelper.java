@@ -69,6 +69,7 @@ public class BotaniaHelper {
 	public static double hiveacynthManaMultiplier;
 	public static double hiveacynthRainResistRate;
 	public static double hiveacynthPrincessSpawnRate;
+	public static double hiveacynthPristineRate;
 	
 	public static boolean isActive() {
 		return isBotaniaActive;
@@ -144,12 +145,16 @@ public class BotaniaHelper {
 		hiveacynthManaMultiplier = p.getDouble();
 		
 		p = configuration.get(section, "hiveacynthRainResistRate", 0.1);
-		p.comment = "Rate at which the hiveacynth applies rain resist to spawned bees. Default: 0.1 Setting to 0 will disable.";
+		p.comment = "Rate at which the Hiveacynth applies rain resist to spawned bees. Default: 0.1 Setting to 0 will disable.";
 		hiveacynthRainResistRate = p.getDouble();
 		
 		p = configuration.get(section, "hiveacynthPrincessSpawnRate", 0.09);
 		p.comment = "Rate at which the Hiveacynth will spawn a Princess instead of a Drone. Default: 0.09. Setting to 0 will disable.";
 		hiveacynthPrincessSpawnRate = p.getDouble();
+		
+		p = configuration.get(section, "hiveacynthPristineRate", 0.15);
+		p.comment = "Rate at which the Hiveacynth will produce a Pristine Princess, when it produces a princess. Default: 0.15. Setting to 0 will disable.";
+		hiveacynthPristineRate = p.getDouble();
 	}
 
 	public static boolean requestMana(ItemStack stack, EntityPlayer player, int manaPerDamage, int charges) {
