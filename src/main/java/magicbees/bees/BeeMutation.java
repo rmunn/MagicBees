@@ -82,7 +82,7 @@ public class BeeMutation implements IBeeMutation
 				.setBlockRequired(Blocks.leaves);
 		new BeeMutation(BeeSpecies.SUPERNATURAL, BeeSpecies.ETHEREAL, BeeSpecies.WATERY, 14)
 				.setBlockRequired(Blocks.water);
-		new BeeMutation(BeeSpecies.SUPERNATURAL, BeeSpecies.ETHEREAL, BeeSpecies.EARTHY, 100)//14)
+		new BeeMutation(BeeSpecies.SUPERNATURAL, BeeSpecies.ETHEREAL, BeeSpecies.EARTHY, 14)
 				.setBlockRequired(Blocks.brick_block);
 		new BeeMutation(BeeSpecies.SUPERNATURAL, BeeSpecies.ETHEREAL, BeeSpecies.FIREY, 14)
 				.setBlockRequired(Blocks.lava);
