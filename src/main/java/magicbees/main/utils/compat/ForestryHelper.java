@@ -4,17 +4,18 @@ import java.util.Locale;
 
 import magicbees.bees.BeeManager;
 import magicbees.bees.HiveDescription;
-import magicbees.block.types.HiveType;
 import magicbees.main.Config;
 import magicbees.main.utils.BlockInterface;
 import magicbees.main.utils.ItemInterface;
 import magicbees.main.utils.VersionInfo;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import forestry.api.apiculture.IAlleleBeeSpecies;
 import forestry.api.apiculture.hives.HiveManager;
 import forestry.api.apiculture.hives.IHiveRegistry;
 import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
-import forestry.api.genetics.AlleleManager;
-import forestry.api.genetics.EnumTolerance;
 import forestry.api.genetics.IAllele;
 
 public class ForestryHelper
@@ -139,17 +140,9 @@ public class ForestryHelper
 
 	private static void getBlocks()
 	{
-		try
-		{
-			Class c = Class.forName("forestry.core.config.ForestryBlock");
-			Config.fAlvearyBlock = BlockInterface.getBlock("alveary");
-			Config.fHiveBlock = BlockInterface.getBlock("beehives");
-			Config.fApicultureBlock = BlockInterface.getBlock("apiculture");
-		}
-		catch (Exception e)
-		{
-
-		}
+		Config.fAlvearyBlock = BlockInterface.getBlock("alveary");
+		Config.fHiveBlock = BlockInterface.getBlock("beehives");
+		Config.fApicultureBlock = BlockInterface.getBlock("apiculture");
 	}
 
 	private static void getItems()
@@ -176,8 +169,15 @@ public class ForestryHelper
 		return EnumHumidity.getFromValue(rawHumidity);
 	}
 
-	public static boolean isHumidityWithinTolerance(EnumHumidity humid, EnumHumidity beeHumidityBase, EnumTolerance value) {
-		// TODO Auto-generated method stub
-		return false;
+	public static ItemStack replaceSpecies(ItemStack stack, IAlleleBeeSpecies outputSpecies) {
+		ItemStack copyStack = stack.copy();
+		NBTTagCompound compound = (NBTTagCompound) copyStack.getTagCompound();
+		NBTTagCompound genomeCompound = compound.getCompoundTag("Genome");
+		NBTTagList chromosomeCompoundList = (NBTTagList)genomeCompound.getTag("Chromosomes");
+		NBTTagCompound speciesCompound = chromosomeCompoundList.getCompoundTagAt(0);
+		speciesCompound.setString("UID0", outputSpecies.getUID());
+		speciesCompound.setString("UID1", outputSpecies.getUID());
+		
+		return copyStack;
 	}
 }

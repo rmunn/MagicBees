@@ -115,6 +115,8 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			BeeClassification.SKULKING, 0x0888888, 0x222222, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
 	SMOULDERING("Smouldering", "flagrantia",
 			BeeClassification.SKULKING, 0xFFC747, 0xEA8344, EnumTemperature.HELLISH, EnumHumidity.NORMAL, false, false),
+	BIGBAD("BigBad", "magnumalum",
+			BeeClassification.SKULKING, 0x000000, 0x000000, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
 
 	TIMELY("Timely", "gallifreis",
 			BeeClassification.TIME, 0xC6AF86, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
@@ -299,15 +301,26 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			
 
 	//----------------------Botania Bees---------------------------------------
+	BOT_ROOTED("BotRooted", "truncus",
+			BeeClassification.BOTANICAL, 0x00A800, 0xFFB2BB, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+			
 	BOT_BOTANIC("BotBotanic", "botanica",
-			BeeClassification.BOTANICAL, 0xffffff, 0x6666ff, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+			BeeClassification.BOTANICAL, 0x94C661, 0xFFB2BB, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
 	BOT_BLOSSOM("BotBlossom", "viridis",
-			BeeClassification.BOTANICAL, 0x00ffff, 0x6666ff, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
+			BeeClassification.BOTANICAL, 0xA4C193, 0xFFB2BB, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
 	BOT_FLORAL("BotFloral", "florens",
-			BeeClassification.BOTANICAL, 0x0000ff, 0x6666ff, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+			BeeClassification.BOTANICAL, 0x29D81A, 0xFFB2BB, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
 			
 	BOT_VAZBEE("BotVazbee", "vazbii",
-			BeeClassification.BOTANICAL, 0x00ff00, 0x6666ff, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, false),
+			BeeClassification.BOTANICAL, 0xff6b9c, 0xFFB2BB, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
+			
+	BOT_SOMNOLENT("BotSomnolent", "soporatus",
+			BeeClassification.BOTANICAL, 0x2978C6, 0xFFB2BB, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+	BOT_DREAMING("BotDreaming", "somnior",
+			BeeClassification.BOTANICAL, 0x123456, 0xFFB2BB, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, true),
+			
+	BOT_AELFHEIM("BotAelfheim", "aelfheimis",
+			BeeClassification.BOTANICAL, 0x987654, 0xFFB2BB, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, false),
 	
 	;
 	
@@ -351,7 +364,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			TC_BEEF.setInactive();
 			TC_PORK.setInactive();
 		}
-		// TODO: Temporary always off. Maybe.
+
 		TC_WISPY.setInactive();
 		TC_TAINT.setInactive();
 		TC_ATTRACT.setInactive();
@@ -444,7 +457,16 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		
 		if (BotaniaHelper.isActive())
 		{
+			for (int i = 0; i < 16; ++i) {
+				ItemStack petal = new ItemStack(BotaniaHelper.itemPetal, 1, i);
+				BOT_BOTANIC.addSpecialty(petal, 1);
+				BOT_BLOSSOM.addSpecialty(petal, 1);
+				BOT_FLORAL.addSpecialty(petal, 1);
+			}
 			
+			for (PastureSeed type : PastureSeed.values()) {
+				BOT_VAZBEE.addSpecialty(new ItemStack(BotaniaHelper.itemPastureSeed, 1, type.ordinal()), 4);
+			}
 		}
 		else
 		{
@@ -994,34 +1016,43 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 				.setGenome(BeeGenomeManager.getTemplateBMBound())
 				.register();
 		
+		BOT_ROOTED.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 10)
+			.setGenome(BeeGenomeManager.getTemplateBotRooted())
+			.register();
+		
 		BOT_BOTANIC.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 10)
+			.addProduct(Config.combs.getStackForType(CombType.TRANSMUTED), 5)
 			.setGenome(BeeGenomeManager.getTemplateBotBotanic())
 			.register();
 		
 		BOT_BLOSSOM.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 20)
+			.addProduct(Config.combs.getStackForType(CombType.TRANSMUTED), 5)
 			.setGenome(BeeGenomeManager.getTemplateBotBlossom())
 			.register();
 		
 		BOT_FLORAL.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 25)
+			.addProduct(Config.combs.getStackForType(CombType.TRANSMUTED), 5)
 			.setGenome(BeeGenomeManager.getTemplateBotFloral())
 			.register();
-		
-		for (int i = 0; i < 16; ++i) {
-			ItemStack petal = new ItemStack(BotaniaHelper.itemPetal, 1, i);
-			BOT_BOTANIC.addSpecialty(petal, 1);
-			BOT_BLOSSOM.addSpecialty(petal, 1);
-			BOT_FLORAL.addSpecialty(petal, 1);
-		}
-		
+
 		BOT_VAZBEE.addProduct(Config.combs.getStackForType(CombType.SOUL), 5)
+			.addProduct(new ItemStack(Items.dye, 1, 9), 20)
+			.addProduct(new ItemStack(Blocks.wool, 1, 9), 2)
+			.addProduct(new ItemStack(Blocks.red_flower, 1, 7), 6)
 			.addProduct(Config.combs.getStackForType(CombType.TRANSMUTED), 15)
 			.setGenome(BeeGenomeManager.getTemplateBotVazbee())
 			.register();
 		
-		for (PastureSeed type : PastureSeed.values()) {
-			BOT_VAZBEE.addSpecialty(new ItemStack(BotaniaHelper.itemPastureSeed, 1, type.ordinal()), 4);
-		}
+		BOT_SOMNOLENT.addProduct(Config.combs.getStackForType(CombType.WATERY), 8)
+			.addProduct(Config.combs.getStackForType(CombType.SOUL), 15)
+			.setGenome(BeeGenomeManager.getTemplateBotSomnolent())
+			.register();
 
+		BOT_DREAMING.addProduct(Config.combs.getStackForType(CombType.WATERY), 16)
+			.addProduct(Config.combs.getStackForType(CombType.SOUL), 33)
+			.setGenome(BeeGenomeManager.getTemplateBotDreaming())
+			.register();
+		
 	}
 
 	
@@ -1042,7 +1073,6 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 	private IAllele genomeTemplate[];
 	private String uid;
 	private boolean dominant;
-	private int complexity;
 	
 	@SideOnly(Side.CLIENT)
 	private IIcon[][] icons;
@@ -1092,8 +1122,8 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		hasEffect = hasGlowEffect;
 		isSecret = isSpeciesSecret;
 		isCounted = isSpeciesCounted;
-		products = new HashMap();
-		specialties = new HashMap();
+		products = new HashMap<ItemStack, Integer>();
+		specialties = new HashMap<ItemStack, Integer>();
 		this.branch = classification;
 		this.branch.addMemberSpecies(this);
 		this.isActive = true;
@@ -1206,13 +1236,13 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 	}
 
 	@Override
-	public HashMap getProducts()
+	public HashMap<ItemStack, Integer> getProducts()
 	{
 		return products;
 	}
 
 	@Override
-	public HashMap getSpecialty()
+	public HashMap<ItemStack, Integer> getSpecialty()
 	{
 		return specialties;
 	}

@@ -1,11 +1,14 @@
 package magicbees.main.utils.compat.botania;
 
+import forestry.api.apiculture.EnumBeeType;
+import magicbees.bees.BeeSpecies;
 import magicbees.main.utils.compat.BotaniaHelper;
 import magicbees.main.utils.compat.BotaniaHelper.ManaResource;
 import net.minecraft.item.ItemStack;
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.lexicon.LexiconEntry;
 import vazkii.botania.api.lexicon.LexiconPage;
+import vazkii.botania.api.recipe.RecipeManaInfusion;
 import vazkii.botania.api.recipe.RecipePetals;
 
 /**
@@ -16,6 +19,9 @@ public class BotaniaAPIDistanceHelper {
 	
 	public static LexiconEntry entryBeegonia;
 	public static LexiconEntry entryHiveacynth;
+	
+	public static RecipeManaInfusion infusionBeeBotanical;
+	public static RecipeManaInfusion infusionBeeVazbee;
 	
 	public static void registerSubtiles() {
 		BotaniaAPI.registerSubTile(SubTileBeegonia.NAME, SubTileBeegonia.class);
@@ -28,6 +34,12 @@ public class BotaniaAPIDistanceHelper {
 	}
 
 	public static void setupCraftingAndLexicon() {
+		infusionBeeBotanical = new SpeciesRecipeManaInfusion(BeeSpecies.BOT_BOTANIC, BeeSpecies.BOT_ROOTED, 55000, EnumBeeType.DRONE);
+		BotaniaAPI.manaInfusionRecipes.add(infusionBeeBotanical);
+		
+		infusionBeeVazbee = new SpeciesRecipeManaInfusion(BeeSpecies.BOT_VAZBEE, BeeSpecies.BOT_VAZBEE, 167392, EnumBeeType.PRINCESS);
+		BotaniaAPI.manaInfusionRecipes.add(infusionBeeVazbee);
+		
 		LexiconEntry manasteelEntry = getLexiconEntryForName(BotaniaHelper.LEXICON_ENTRY_MANA_GEAR);
 		manasteelEntry.addPage(BotaniaAPI.internalHandler.craftingRecipePage("magicbees.botania.lexicon.manasteelScoop", BotaniaHelper.manasteelScoopRecipe));
 		manasteelEntry.addPage(BotaniaAPI.internalHandler.craftingRecipePage("magicbees.botania.lexicon.manasteelGrafter", BotaniaHelper.manasteelGrafterRecipe));

@@ -1,21 +1,18 @@
 package magicbees.main.utils.compat.botania;
 
-import magicbees.bees.BeeGenomeManager;
+import java.util.Random;
+
 import magicbees.bees.BeeManager;
 import magicbees.main.utils.compat.BotaniaHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import java.util.Random;
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.subtile.SubTileFunctional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import forestry.api.apiculture.EnumBeeType;
-import forestry.api.apiculture.IAlleleBeeSpecies;
 import forestry.api.apiculture.IBee;
-import forestry.api.apiculture.IBeeGenome;
-import forestry.api.genetics.IAllele;
 
 public class SubTileHiveacynth extends SubTileFunctional {
 	
@@ -36,7 +33,7 @@ public class SubTileHiveacynth extends SubTileFunctional {
 			Random r = supertile.getWorldObj().rand;
 			EnumBeeType beeType = EnumBeeType.DRONE;
 			
-			IBee bee = getRandomBee(r);
+			IBee bee = BeeManager.getBeeFromSpecies(BeeManager.getRandomWorldgenSpecies(r), r.nextDouble() < BotaniaHelper.hiveacynthRainResistRate);
 			
 			if (r.nextDouble() < BotaniaHelper.hiveacynthPrincessSpawnRate) {
 				beeType = EnumBeeType.PRINCESS;
@@ -55,18 +52,6 @@ public class SubTileHiveacynth extends SubTileFunctional {
 			entity.motionZ = 0;
 			supertile.getWorldObj().spawnEntityInWorld(entity);
 		}
-	}
-	
-	private IBee getRandomBee(Random random) {
-		IAlleleBeeSpecies dropSpecies = BeeManager.getRandomWorldgenSpecies(random);
-		IAllele[] speciesTemplate = BeeManager.beeRoot.getTemplate(dropSpecies.getUID());
-		
-		if (random.nextDouble() < BotaniaHelper.hiveacynthRainResistRate) {
-			speciesTemplate = BeeGenomeManager.addRainResist(speciesTemplate);
-		}
-		
-		IBeeGenome genome = BeeManager.beeRoot.templateAsGenome(speciesTemplate);
-		return BeeManager.beeRoot.getBee(supertile.getWorldObj(), genome);
 	}
 
 	private boolean readyToProduceProduct() {

@@ -10,9 +10,15 @@ import magicbees.item.types.DropType;
 import magicbees.main.Config;
 import magicbees.main.utils.Tuple;
 import magicbees.main.utils.compat.ExtraBeesHelper;
+import net.minecraft.item.ItemStack;
+import forestry.api.apiculture.EnumBeeChromosome;
+import forestry.api.apiculture.EnumBeeType;
 import forestry.api.apiculture.IAlleleBeeSpecies;
+import forestry.api.apiculture.IBee;
+import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeRoot;
 import forestry.api.genetics.AlleleManager;
+import forestry.api.genetics.IAllele;
 
 public class BeeManager
 {
@@ -33,6 +39,22 @@ public class BeeManager
 		HiveType.initHiveData();
 		
 		beeRoot.setResearchSuitability(Config.drops.getStackForType(DropType.INTELLECT), 0.5f);
+	}
+	
+	public static ItemStack getDefaultItemStackForSpecies(IAlleleBeeSpecies species, EnumBeeType type) {
+		IBee bee = getBeeFromSpecies(species, false);
+		return BeeManager.beeRoot.getMemberStack(bee, type.ordinal());
+	}
+	
+	public static IBee getBeeFromSpecies(IAlleleBeeSpecies species, boolean applyRainResist) {
+		IAllele[] speciesTemplate = BeeManager.beeRoot.getTemplate(species.getUID());
+		
+		if (applyRainResist) {
+			speciesTemplate = BeeGenomeManager.addRainResist(speciesTemplate);
+		}
+		
+		IBeeGenome genome = BeeManager.beeRoot.templateAsGenome(speciesTemplate);
+		return BeeManager.beeRoot.getBee(null, genome);
 	}
 	
 	public static IAlleleBeeSpecies getRandomWorldgenSpecies(Random r) {

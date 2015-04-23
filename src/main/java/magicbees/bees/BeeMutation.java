@@ -8,6 +8,7 @@ import magicbees.main.utils.LocalizationManager;
 import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.MoonPhase;
 import magicbees.main.utils.compat.ArsMagicaHelper;
+import magicbees.main.utils.compat.BotaniaHelper;
 import magicbees.main.utils.compat.EquivalentExchangeHelper;
 import magicbees.main.utils.compat.ExtraBeesHelper;
 import magicbees.main.utils.compat.ForestryHelper;
@@ -290,8 +291,21 @@ public class BeeMutation implements IBeeMutation
 			new BeeMutation(BeeSpecies.TE_WINSOME, BeeSpecies.TE_COAL, BeeSpecies.TE_ENDEARING, 8)
 					.setBlockRequired("blockEnderium");
 		}
+		
+		if (BotaniaHelper.isActive()) {
+			new BeeMutation(BeeSpecies.ELDRITCH, Allele.getBaseSpecies("Forest"), BeeSpecies.BOT_ROOTED, 15)
+				.setBlockRequired(BotaniaHelper.blockLivingWood);
+			
+			new BeeMutation(BeeSpecies.BOT_ROOTED, BeeSpecies.WATERY, BeeSpecies.BOT_SOMNOLENT, 16)
+				.setRequiresNight();
+			new BeeMutation(BeeSpecies.BOT_ROOTED, BeeSpecies.BOT_SOMNOLENT, BeeSpecies.BOT_DREAMING, 8)
+				.setRequiresNight();
+			
+			new BeeMutation(BeeSpecies.BOT_BOTANIC, BeeSpecies.EARTHY, BeeSpecies.BOT_BLOSSOM, 12);
+			new BeeMutation(BeeSpecies.BOT_BOTANIC, BeeSpecies.BOT_BLOSSOM, BeeSpecies.BOT_FLORAL, 8);
+		}
 	}
-	
+
 	private IAllele parent1;
 	private IAllele parent2;
 	private IAllele mutationTemplate[];
@@ -301,6 +315,7 @@ public class BeeMutation implements IBeeMutation
 	private MoonPhase moonPhaseStart;
 	private MoonPhase moonPhaseEnd;
 	private float moonPhaseMutationBonus;
+	private boolean requiresNight;
 	private boolean requiresBlock;
 	private Block requiredBlock;
 	private int requiredBlockMeta;
@@ -322,7 +337,7 @@ public class BeeMutation implements IBeeMutation
 		this.isSecret = false;
 		this.isMoonRestricted = false;
 		this.moonPhaseMutationBonus = -1f;
-		//this.nodeType = null;
+		this.requiresNight = false;
 		this.requiresBlock = false;
 		this.requiredBlockMeta = OreDictionary.WILDCARD_VALUE;
 		this.requiredBlockOreDictEntry = null;
@@ -408,6 +423,12 @@ public class BeeMutation implements IBeeMutation
 				}
 				if (!found)
 				{
+					chance = 0;
+				}
+			}
+			
+			if (this.requiresNight) {
+				if (!housing.getWorld().isDaytime()) {
 					chance = 0;
 				}
 			}
@@ -594,6 +615,12 @@ public class BeeMutation implements IBeeMutation
 	public BeeMutation setBiomeRequired(BiomeDictionary.Type biomeType)
 	{
 		this.requiredBiomeType = biomeType;
+		
+		return this;
+	}
+	
+	public BeeMutation setRequiresNight() {
+		this.requiresNight = true;
 		
 		return this;
 	}
