@@ -1,44 +1,37 @@
 package magicbees.bees.allele.effect;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import cpw.mods.fml.common.FMLLog;
-import magicbees.api.MagicBeesAPI;
 import magicbees.api.bees.ITransmutationEffectController;
 import magicbees.api.bees.ITransmutationEffectLogic;
+import magicbees.main.utils.LogHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class TransmutationEffectController implements ITransmutationEffectController {
-	private ArrayList<ITransmutationEffectLogic> logicObjects;
-	static TransmutationEffectController instance;
+	private List<ITransmutationEffectLogic> logicObjects;
 
-	public TransmutationEffectController() {
+	public TransmutationEffectController(ITransmutationEffectLogic[] effectLogic) {
 		logicObjects = new ArrayList<ITransmutationEffectLogic>();
-		logicObjects.add(new TransmutationEffectRailcraft());
-		logicObjects.add(new TransmutationEffectVanilla());
-		MagicBeesAPI.transmutationEffectController = instance = this;
+		for (ITransmutationEffectLogic logic : effectLogic) {
+			logicObjects.add(logic);
+		}
 	}
 
 	public void attemptTransmutations(World world, BiomeGenBase biome, ItemStack sourceBlock, int x, int y, int z) {
-		boolean done;
-		ITransmutationEffectLogic logic;
-		for (int i = 0; i < logicObjects.size(); i++) {
-			logic = logicObjects.get(i);
+		Collections.shuffle(logicObjects);
+		for (ITransmutationEffectLogic logic : logicObjects) {
 			try {
-				done = logic.tryTransmutation(world, biome, sourceBlock, x, y, z);
+				if (logic.tryTransmutation(world, biome, sourceBlock, x, y, z)) {
+					break;
+				}
 			} catch (Exception e) {
-				done = false;
-				FMLLog.warning("Magic Bees encountered an issue with an ITransmutationEffectLogic provider %s. Debug information follows.", logic.getClass()
-						.getName());
-				FMLLog.info(e.getMessage());
-			}
-
-			if (done) {
-				logicObjects.remove(i);
-				logicObjects.add(logic);
-				break;
+				LogHelper.warn(String.format("Magic Bees encountered an issue with an ITransmutationEffectLogic provider %s. Debug information follows.",
+						logic.getClass().getName()));
+				LogHelper.info(e.getMessage());
 			}
 		}
 	}

@@ -1348,6 +1348,7 @@ public class BeeGenomeManager {
 		genome[EnumBeeChromosome.NOCTURNAL.ordinal()] = Allele.getBaseAllele("boolTrue");
 		genome[EnumBeeChromosome.CAVE_DWELLING.ordinal()] = Allele.getBaseAllele("boolTrue");
 		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedSlowest");
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectSlowSpeed;
 		
 		return genome;
 	}

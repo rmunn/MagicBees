@@ -52,8 +52,7 @@ public class MagicBees
 		this.modConfig.setupItems();
 		
 		// LocalizationManager.setupLocalizationInfo();
-		
-		new TransmutationEffectController();
+
 		LogHelper.info("Preinit completed");
 	}
 

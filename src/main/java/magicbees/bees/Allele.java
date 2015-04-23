@@ -1,5 +1,7 @@
 package magicbees.bees;
 
+import magicbees.api.MagicBeesAPI;
+import magicbees.api.bees.ITransmutationEffectLogic;
 import magicbees.bees.allele.effect.AlleleEffectCrumbling;
 import magicbees.bees.allele.effect.AlleleEffectCure;
 import magicbees.bees.allele.effect.AlleleEffectPotion;
@@ -7,6 +9,9 @@ import magicbees.bees.allele.effect.AlleleEffectSpawnMob;
 import magicbees.bees.allele.effect.AlleleEffectSpawnMobWeighted;
 import magicbees.bees.allele.effect.AlleleEffectSpawnWisp;
 import magicbees.bees.allele.effect.AlleleEffectTransmuting;
+import magicbees.bees.allele.effect.TransmutationEffectController;
+import magicbees.bees.allele.effect.TransmutationEffectRailcraft;
+import magicbees.bees.allele.effect.TransmutationEffectVanilla;
 import magicbees.bees.allele.flowerProvider.FlowerProviderArsMagicaFlower;
 import magicbees.bees.allele.flowerProvider.FlowerProviderAuraNode;
 import magicbees.bees.allele.flowerProvider.FlowerProviderBookshelf;
@@ -122,7 +127,12 @@ public class Allele implements IAllele {
 		Allele.effectSlowSpeed = new AlleleEffectPotion("SlowSpeed", Potion.moveSlowdown, 3, false).setMalicious();
 		Allele.effectWithering = new AlleleEffectPotion("Withering", Potion.wither, 10, false).setMalicious();
 
-		Allele.effectTransmuting = new AlleleEffectTransmuting("Transmuting", true);
+		TransmutationEffectController controller = new TransmutationEffectController(new ITransmutationEffectLogic[] {
+				new TransmutationEffectRailcraft(),
+				new TransmutationEffectVanilla()
+		});
+		MagicBeesAPI.transmutationEffectController = controller;
+		Allele.effectTransmuting = new AlleleEffectTransmuting("Transmuting", true, controller);
 		Allele.effectCrumbling = new AlleleEffectCrumbling("Crumbling", true);
 
 		Allele.effectInvisibility = new AlleleEffectPotion("Invisibility", Potion.invisibility, 10, false);

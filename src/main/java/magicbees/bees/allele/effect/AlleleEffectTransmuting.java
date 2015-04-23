@@ -9,8 +9,12 @@ import forestry.api.apiculture.IBeeHousing;
 import forestry.api.genetics.IEffectData;
 
 public class AlleleEffectTransmuting extends AlleleEffect {
-	public AlleleEffectTransmuting(String id, boolean isDominant) {
+	
+	private TransmutationEffectController transmutationController;
+	
+	public AlleleEffectTransmuting(String id, boolean isDominant, TransmutationEffectController effectController) {
 		super(id, isDominant, 200);
+		this.transmutationController = effectController;
 	}
 
 	@Override
@@ -34,7 +38,7 @@ public class AlleleEffectTransmuting extends AlleleEffect {
 		int zCoord = housing.getZCoord() + world.rand.nextInt(zRange) - zRange / 2;
 
 		BiomeGenBase biome = world.getBiomeGenForCoords(xCoord, zCoord);
-		TransmutationEffectController.instance.attemptTransmutations(world, biome,
+		transmutationController.attemptTransmutations(world, biome, 
 				new ItemStack(world.getBlock(xCoord, yCoord, zCoord), 1, world.getBlockMetadata(xCoord, yCoord, zCoord)), xCoord, yCoord, zCoord);
 
 		storedData.setInteger(0, 0);
