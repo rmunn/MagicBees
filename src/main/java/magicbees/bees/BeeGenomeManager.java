@@ -1362,6 +1362,14 @@ public class BeeGenomeManager {
 		return genome;
 	}
 
+	public static IAllele[] getTemplateBotAelfheim() {
+		IAllele[] genome = getTemplateBotDreaming();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BOT_AELFHEIM;
+		
+		return genome;
+	}
+	
 	/*--------------------- Other Stuff ---------------------------------- */
 	
 	public static ItemStack getBeeNBTForSpecies(BeeSpecies species, EnumBeeType beeType) {

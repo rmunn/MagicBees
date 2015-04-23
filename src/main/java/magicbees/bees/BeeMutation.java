@@ -298,7 +298,7 @@ public class BeeMutation implements IBeeMutation
 			
 			new BeeMutation(BeeSpecies.BOT_ROOTED, BeeSpecies.WATERY, BeeSpecies.BOT_SOMNOLENT, 16)
 				.setRequiresNight();
-			new BeeMutation(BeeSpecies.BOT_ROOTED, BeeSpecies.BOT_SOMNOLENT, BeeSpecies.BOT_DREAMING, 8)
+			new BeeMutation(BeeSpecies.WINDY, BeeSpecies.BOT_SOMNOLENT, BeeSpecies.BOT_DREAMING, 8)
 				.setRequiresNight();
 			
 			new BeeMutation(BeeSpecies.BOT_BOTANIC, BeeSpecies.EARTHY, BeeSpecies.BOT_BLOSSOM, 12);
@@ -533,6 +533,10 @@ public class BeeMutation implements IBeeMutation
 		{
 			String biomeName = this.requiredBiomeType.name().substring(0, 1) + this.requiredBiomeType.name().substring(1).toLowerCase();
 			conditions.add(String.format(LocalizationManager.getLocalizedString("research.requiresBiome"), biomeName));
+		}
+		
+		if (this.requiresNight) {
+			conditions.add(LocalizationManager.getLocalizedString("research.requiresNight"));
 		}
 		
 		return conditions;

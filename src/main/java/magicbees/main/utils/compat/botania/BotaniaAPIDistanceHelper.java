@@ -1,6 +1,5 @@
 package magicbees.main.utils.compat.botania;
 
-import forestry.api.apiculture.EnumBeeType;
 import magicbees.bees.BeeSpecies;
 import magicbees.main.utils.compat.BotaniaHelper;
 import magicbees.main.utils.compat.BotaniaHelper.ManaResource;
@@ -8,8 +7,10 @@ import net.minecraft.item.ItemStack;
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.lexicon.LexiconEntry;
 import vazkii.botania.api.lexicon.LexiconPage;
+import vazkii.botania.api.recipe.RecipeElvenTrade;
 import vazkii.botania.api.recipe.RecipeManaInfusion;
 import vazkii.botania.api.recipe.RecipePetals;
+import forestry.api.apiculture.EnumBeeType;
 
 /**
  * Subordinate helper to the Botania Helper that has references to Botania API stuff that will cause
@@ -22,6 +23,8 @@ public class BotaniaAPIDistanceHelper {
 	
 	public static RecipeManaInfusion infusionBeeBotanical;
 	public static RecipeManaInfusion infusionBeeVazbee;
+	
+	public static RecipeElvenTrade tradeBeeAelfheim;
 	
 	public static void registerSubtiles() {
 		BotaniaAPI.registerSubTile(SubTileBeegonia.NAME, SubTileBeegonia.class);
@@ -38,7 +41,10 @@ public class BotaniaAPIDistanceHelper {
 		BotaniaAPI.manaInfusionRecipes.add(infusionBeeBotanical);
 		
 		infusionBeeVazbee = new SpeciesRecipeManaInfusion(BeeSpecies.BOT_VAZBEE, BeeSpecies.BOT_VAZBEE, 167392, EnumBeeType.PRINCESS);
+		infusionBeeVazbee.setAlchemy(true);
 		BotaniaAPI.manaInfusionRecipes.add(infusionBeeVazbee);
+		
+		tradeBeeAelfheim = new SpeciesRecipeElvenTrade(BeeSpecies.BOT_DREAMING, BeeSpecies.BOT_AELFHEIM);
 		
 		LexiconEntry manasteelEntry = getLexiconEntryForName(BotaniaHelper.LEXICON_ENTRY_MANA_GEAR);
 		manasteelEntry.addPage(BotaniaAPI.internalHandler.craftingRecipePage("magicbees.botania.lexicon.manasteelScoop", BotaniaHelper.manasteelScoopRecipe));

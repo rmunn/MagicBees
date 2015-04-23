@@ -1,5 +1,6 @@
 package magicbees.bees;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -320,7 +321,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			BeeClassification.BOTANICAL, 0x123456, 0xFFB2BB, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, true),
 			
 	BOT_AELFHEIM("BotAelfheim", "aelfheimis",
-			BeeClassification.BOTANICAL, 0x987654, 0xFFB2BB, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, false),
+			BeeClassification.BOTANICAL, -1/*0x987654*/, -1/*0xFFB2BB*/, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
 	
 	;
 	
@@ -1053,6 +1054,10 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			.setGenome(BeeGenomeManager.getTemplateBotDreaming())
 			.register();
 		
+		BOT_AELFHEIM
+			.setGenome(BeeGenomeManager.getTemplateBotAelfheim())
+			.register();
+		
 	}
 
 	
@@ -1293,11 +1298,25 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		int value = 0xffffff;
 		if (renderPass == 0)
 		{
-			value = this.primaryColour;
+			if (this.primaryColour == -1) {
+				int hue = (int)(System.currentTimeMillis() >> 2) % 360;
+				value = Color.getHSBColor(hue / 360f, 0.75f, 0.80f).getRGB();
+			}
+			else {
+				value = this.primaryColour;
+			}
 		}
 		else if (renderPass == 1)
 		{
-			value = this.secondaryColour;
+			if (this.secondaryColour == -1) {
+				int hue = (int)(System.currentTimeMillis() >> 3) % 360;
+				hue += 60;
+				hue = hue % 360;
+				value = Color.getHSBColor(hue / 360f, 0.5f, 0.6f).getRGB();
+			}
+			else {
+				value = this.secondaryColour;
+			}
 		}
 		return value;
 	}
