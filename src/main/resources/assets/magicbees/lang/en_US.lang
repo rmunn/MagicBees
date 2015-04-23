@@ -185,6 +185,7 @@ research.requiresPhaseSingle=During the %s
 research.requiresNode=Only occurs when a node is near
 research.requiresNodeSpecific=Only occurs within influence of a %s node
 research.requiresBiome=Occurs within a %s biome
+research.requiresNight=Only occurs after sundown
 research.node.pure=Pure
 research.node.dark=Dark
 research.node.chaotic=Chaotic
