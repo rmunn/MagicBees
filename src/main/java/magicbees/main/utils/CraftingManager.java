@@ -356,6 +356,7 @@ public class CraftingManager
 		output = new ItemStack(Config.magicApiary);
 		GameRegistry.addShapelessRecipe(output, new Object[] {
 				Config.pollen.getStackForType(PollenType.UNUSUAL, 2),
+				Config.drops.getStackForType(DropType.ENCHANTED, 2),
 				new ItemStack(Config.fApicultureBlock, 1, ForestryHelper.ApicultureBlock.APIARY.ordinal())
 		});
 

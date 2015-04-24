@@ -318,10 +318,10 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 	BOT_SOMNOLENT("BotSomnolent", "soporatus",
 			BeeClassification.BOTANICAL, 0x2978C6, 0xFFB2BB, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
 	BOT_DREAMING("BotDreaming", "somnior",
-			BeeClassification.BOTANICAL, 0x123456, 0xFFB2BB, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, true),
+			BeeClassification.BOTANICAL, 0x123456, 0xFFB2BB, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
 			
-	BOT_AELFHEIM("BotAelfheim", "aelfheimis",
-			BeeClassification.BOTANICAL, -1/*0x987654*/, -1/*0xFFB2BB*/, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
+	BOT_ALFHEIM("BotAlfheim", "alfheimis",
+			BeeClassification.BOTANICAL, -1, -1, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
 	
 	;
 	
@@ -1054,7 +1054,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			.setGenome(BeeGenomeManager.getTemplateBotDreaming())
 			.register();
 		
-		BOT_AELFHEIM
+		BOT_ALFHEIM
 			.setGenome(BeeGenomeManager.getTemplateBotAelfheim())
 			.register();
 		

@@ -6,33 +6,33 @@ import java.util.Map;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import magicbees.bees.AuraChargeType;
+import magicbees.bees.AuraCharge;
 
 public class AuraCharges {
 	private static final String auraChargesTagName = "AuraCharges";
 
-	private final Map<AuraChargeType, Long> charges = new HashMap<AuraChargeType, Long>(AuraChargeType.values().length);
+	private final Map<AuraCharge, Long> charges = new HashMap<AuraCharge, Long>(AuraCharge.values().length);
 
-	public void start(AuraChargeType auraChargeType, World worldObj) {
+	public void start(AuraCharge auraChargeType, World worldObj) {
 		charges.put(auraChargeType, worldObj.getTotalWorldTime());
 	}
 
-	public boolean isActive(AuraChargeType auraChargeType) {
+	public boolean isActive(AuraCharge auraChargeType) {
 		return charges.keySet().contains(auraChargeType);
 	}
 
-	public boolean isExpired(AuraChargeType auraChargeType, World worldObj) {
+	public boolean isExpired(AuraCharge auraChargeType, World worldObj) {
 		Long chargeStart = charges.get(auraChargeType);
 		return chargeStart == null || chargeStart + auraChargeType.duration <= worldObj.getTotalWorldTime();
 	}
 
-	public void stop(AuraChargeType AuraChargeType) {
+	public void stop(AuraCharge AuraChargeType) {
 		charges.remove(AuraChargeType);
 	}
 
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		NBTTagCompound auraChargeTags = new NBTTagCompound();
-		for (Map.Entry<AuraChargeType, Long> chargeEntry : charges.entrySet()) {
+		for (Map.Entry<AuraCharge, Long> chargeEntry : charges.entrySet()) {
 			String chargeName = chargeEntry.getKey().toString();
 			Long chargeStart = chargeEntry.getValue();
 			auraChargeTags.setLong(chargeName, chargeStart);
@@ -42,7 +42,7 @@ public class AuraCharges {
 
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		NBTTagCompound auraChargeTags = nbtTagCompound.getCompoundTag(auraChargesTagName);
-		for (AuraChargeType auraCharge : AuraChargeType.values()) {
+		for (AuraCharge auraCharge : AuraCharge.values()) {
 			String chargeName = auraCharge.toString();
 			Long chargeStart = auraChargeTags.getLong(chargeName);
 			if (chargeStart > 0) {
@@ -53,7 +53,7 @@ public class AuraCharges {
 
 	public int writeToFlags() {
 		int flags = 0;
-		for (AuraChargeType auraChargeType : charges.keySet()) {
+		for (AuraCharge auraChargeType : charges.keySet()) {
 			flags |= auraChargeType.flag;
 		}
 		return flags;
@@ -61,7 +61,7 @@ public class AuraCharges {
 
 	public void readFromFlags(int flags) {
 		charges.clear();
-		for (AuraChargeType auraCharge : AuraChargeType.values()) {
+		for (AuraCharge auraCharge : AuraCharge.values()) {
 			if ((flags & auraCharge.flag) > 0) {
 				charges.put(auraCharge, 0L);
 			}

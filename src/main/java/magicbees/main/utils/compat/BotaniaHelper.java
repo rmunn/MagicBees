@@ -1,6 +1,7 @@
 package magicbees.main.utils.compat;
 
 import magicbees.bees.BeeManager;
+import magicbees.item.types.PollenType;
 import magicbees.main.Config;
 import magicbees.main.utils.BlockInterface;
 import magicbees.main.utils.ItemInterface;
@@ -15,6 +16,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import net.minecraftforge.oredict.OreDictionary;
 import vazkii.botania.api.mana.ManaItemHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -27,6 +29,7 @@ public class BotaniaHelper {
 	public static IIcon subtileIcons[];
 
 	public static final String LEXICON_ENTRY_MANA_GEAR = "manaGear";
+	public static final String LEXICON_ENTRY_ELF_RESOURCES = "elfResources";
 	
 	public enum ManaResource {
 		MANASTEEL,
@@ -70,6 +73,7 @@ public class BotaniaHelper {
 	
 	public static IRecipe manasteelGrafterRecipe;
 	public static IRecipe manasteelScoopRecipe;
+	public static IRecipe manaBoosterRecipe;
 	
 	private static boolean isBotaniaActive = false;
 	public static final String Name = "Botania";
@@ -118,6 +122,15 @@ public class BotaniaHelper {
 				't', new ItemStack(itemManaResource, 1, ManaResource.LIVINGWOOD_TWIG.ordinal())
 			});
 			manasteelGrafterRecipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(CraftingManager.getInstance().getRecipeList().size() - 1);
+			
+			GameRegistry.addRecipe(new ItemStack(Config.manaAuraProvider), new Object[] {
+					"lsl", "pmp", "sss",
+					's', blockLivingRock,
+					'm', new ItemStack(itemManaResource, 1, ManaResource.MANASTEEL.ordinal()),
+					'p', Config.pollen.getStackForType(PollenType.UNUSUAL),
+					'l', new ItemStack(itemManaPetal, 1, OreDictionary.WILDCARD_VALUE)
+			});
+			manaBoosterRecipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(CraftingManager.getInstance().getRecipeList().size() - 1);
 			
 			BotaniaAPIDistanceHelper.setupCraftingAndLexicon();
 		}

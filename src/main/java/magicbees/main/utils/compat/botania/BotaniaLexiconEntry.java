@@ -20,7 +20,7 @@ public class BotaniaLexiconEntry extends LexiconEntry implements IAddonEntry {
 
 	@Override
 	public String getUnlocalizedName() {
-		return "tile.botania:flower." + unlocalizedName + ".name";
+		return unlocalizedName;
 	}
 
 }

@@ -1366,7 +1366,7 @@ public class BeeGenomeManager {
 	public static IAllele[] getTemplateBotAelfheim() {
 		IAllele[] genome = getTemplateBotDreaming();
 		
-		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BOT_AELFHEIM;
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BOT_ALFHEIM;
 		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectDreaming;
 		
 		return genome;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import magicbees.bees.AuraChargeType;
+import magicbees.bees.AuraCharge;
 import magicbees.api.bees.IMagicApiaryAuraProvider;
 import magicbees.bees.BeeManager;
 import magicbees.main.CommonProxy;
@@ -632,15 +632,15 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
     
     public boolean isProductionBoosted() {
-        return auraCharges.isActive(AuraChargeType.PRODUCTION);
+        return auraCharges.isActive(AuraCharge.PRODUCTION);
     }
     
     public boolean isDeathRateBoosted() {
-        return auraCharges.isActive(AuraChargeType.DEATH);
+        return auraCharges.isActive(AuraCharge.DEATH);
     }
     
     public boolean isMutationBoosted() {
-        return auraCharges.isActive(AuraChargeType.MUTATION);
+        return auraCharges.isActive(AuraCharge.MUTATION);
     }
     
     private void updateAuraProvider() {
@@ -654,9 +654,9 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     	}
     	
     	boolean auraChargesChanged = false;
-        for (AuraChargeType chargeType : AuraChargeType.values()) {
-            if (!auraCharges.isActive(chargeType) && auraProvider.getCharge(chargeType)) {
-                auraCharges.start(chargeType, worldObj);
+        for (AuraCharge charge : AuraCharge.values()) {
+            if (!auraCharges.isActive(charge) && auraProvider.getCharge(charge.type)) {
+                auraCharges.start(charge, worldObj);
                 auraChargesChanged = true;
             }
         }
@@ -669,9 +669,9 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     private void tickCharges() {
         boolean auraChargesChanged = false;
 
-        for (AuraChargeType chargeType : AuraChargeType.values()) {
-            if (auraCharges.isActive(chargeType) && auraCharges.isExpired(chargeType, worldObj) && (auraProvider == null || !auraProvider.getCharge(chargeType))) {
-                auraCharges.stop(chargeType);
+        for (AuraCharge charge : AuraCharge.values()) {
+            if (auraCharges.isActive(charge) && auraCharges.isExpired(charge, worldObj) && (auraProvider == null || !auraProvider.getCharge(charge.type))) {
+                auraCharges.stop(charge);
                 auraChargesChanged = true;
             }
         }

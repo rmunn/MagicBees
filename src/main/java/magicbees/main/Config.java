@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import magicbees.block.BlockEffectJar;
 import magicbees.block.BlockHive;
 import magicbees.block.BlockMagicApiary;
+import magicbees.block.BlockManaAuraProvider;
 import magicbees.block.BlockPlanks;
 import magicbees.block.BlockVisAuraProvider;
 import magicbees.block.BlockWoodSlab;
@@ -40,6 +41,7 @@ import magicbees.main.utils.compat.ThaumcraftHelper;
 import magicbees.storage.BackpackDefinition;
 import magicbees.tileentity.TileEntityEffectJar;
 import magicbees.tileentity.TileEntityMagicApiary;
+import magicbees.tileentity.TileEntityManaAuraProvider;
 import magicbees.tileentity.TileEntityVisAuraProvider;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -103,6 +105,7 @@ public class Config
 	public static BlockEffectJar effectJar;
 	public static BlockHive hive;
     public static BlockMagicApiary magicApiary;
+    public static BlockManaAuraProvider manaAuraProvider;
     public static BlockVisAuraProvider visAuraProvider;
 	
 	public static ItemComb combs;
@@ -258,6 +261,7 @@ public class Config
 		setupHives();
 		setupApiary();
 		
+		setupBotaniaBlocks();
 		setupThaumcraftBlocks();
 	}
 	
@@ -500,6 +504,14 @@ public class Config
 			
 			manasteelGrafter = new ItemManasteelGrafter();
 			GameRegistry.registerItem(manasteelGrafter, manasteelGrafter.getUnlocalizedName(), CommonProxy.DOMAIN);
+		}
+	}
+	
+	private void setupBotaniaBlocks() {
+		if (BotaniaHelper.isActive()) {
+			manaAuraProvider = new BlockManaAuraProvider();
+			GameRegistry.registerBlock(manaAuraProvider, "manaAuraProvider");
+			GameRegistry.registerTileEntity(TileEntityManaAuraProvider.class, "manaAuraProvider");
 		}
 	}
 	

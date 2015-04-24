@@ -42,5 +42,5 @@ public interface IMagicApiaryAuraProvider {
 	 *
 	 * @return True if a charge is given; false otherwise.
 	 */
-	boolean getCharge(IAuraChargeType auraChargeType);
+	boolean getCharge(AuraChargeType auraChargeType);
 }

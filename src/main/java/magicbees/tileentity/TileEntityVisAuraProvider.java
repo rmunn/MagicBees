@@ -3,8 +3,8 @@ package magicbees.tileentity;
 import java.util.HashMap;
 import java.util.Map;
 
-import magicbees.api.bees.IAuraChargeType;
-import magicbees.bees.AuraChargeType;
+import magicbees.api.bees.AuraChargeType;
+import magicbees.bees.AuraCharge;
 import magicbees.api.bees.IMagicApiaryAuraProvider;
 import magicbees.main.CommonProxy;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,8 +18,16 @@ public class TileEntityVisAuraProvider extends TileEntity implements IMagicApiar
 	
 	private static final int MAX_CHARGES = 10;
 	private static final int VIS_PER_CHARGE = 8;
+	private static Map<AuraChargeType, Aspect> aspectMap;
+	
+	static {
+		aspectMap = new HashMap<AuraChargeType, Aspect>(AuraChargeType.values().length);
+		aspectMap.put(AuraChargeType.MUTATION, Aspect.WATER);
+		aspectMap.put(AuraChargeType.DEATH, Aspect.ENTROPY);
+		aspectMap.put(AuraChargeType.PRODUCTION, Aspect.AIR);
+	}
 
-	private static class AuraCharge {
+	private static class VisAuraCharge {
 		int charges;
 		int vis;
 
@@ -35,15 +43,15 @@ public class TileEntityVisAuraProvider extends TileEntity implements IMagicApiar
 		}
 	}
 
-	private final Map<AuraChargeType, AuraCharge> currentCharges;
+	private final Map<AuraCharge, VisAuraCharge> currentCharges;
 
 	public TileEntityVisAuraProvider() {
 		super();
 
-		AuraChargeType[] auraChargeTypes = AuraChargeType.values();
-		currentCharges = new HashMap<AuraChargeType, AuraCharge>(auraChargeTypes.length);
-		for (AuraChargeType auraChargeType : auraChargeTypes) {
-			currentCharges.put(auraChargeType, new AuraCharge());
+		AuraCharge[] auraChargeTypes = AuraCharge.values();
+		currentCharges = new HashMap<AuraCharge, VisAuraCharge>(auraChargeTypes.length);
+		for (AuraCharge auraChargeType : auraChargeTypes) {
+			currentCharges.put(auraChargeType, new VisAuraCharge());
 		}
 	}
 	
@@ -52,12 +60,12 @@ public class TileEntityVisAuraProvider extends TileEntity implements IMagicApiar
 		
 		long tick = worldObj.getTotalWorldTime();
 
-		for (Map.Entry<AuraChargeType, AuraCharge> currentCharge : currentCharges.entrySet()) {
-			AuraChargeType type = currentCharge.getKey();
-			AuraCharge auraCharge = currentCharge.getValue();
+		for (Map.Entry<AuraCharge, VisAuraCharge> currentCharge : currentCharges.entrySet()) {
+			AuraCharge type = currentCharge.getKey();
+			VisAuraCharge auraCharge = currentCharge.getValue();
 
 			if (auraCharge.charges < MAX_CHARGES && (tick % type.tickRate) == 0) {
-				auraCharge.vis += getVisFromNet(type.aspect);
+				auraCharge.vis += getVisFromNet(aspectMap.get(type));
 				if (auraCharge.vis >= VIS_PER_CHARGE) {
 					auraCharge.vis -= VIS_PER_CHARGE;
 					auraCharge.charges++;
@@ -86,8 +94,8 @@ public class TileEntityVisAuraProvider extends TileEntity implements IMagicApiar
 	}
 
 	@Override
-	public boolean getCharge(IAuraChargeType auraChargeType) {
-		AuraCharge auraCharge = currentCharges.get(auraChargeType);
+	public boolean getCharge(AuraChargeType auraChargeType) {
+		VisAuraCharge auraCharge = currentCharges.get(AuraCharge.fromChargeType(auraChargeType));
 		if (auraCharge == null) {
 			return false;
 		}
@@ -103,10 +111,10 @@ public class TileEntityVisAuraProvider extends TileEntity implements IMagicApiar
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 
-		for (Map.Entry<AuraChargeType, AuraCharge> charge : currentCharges.entrySet()) {
+		for (Map.Entry<AuraCharge, VisAuraCharge> charge : currentCharges.entrySet()) {
 			String auraName = charge.getKey().toString();
 			int[] array = tag.getIntArray(auraName);
-			AuraCharge auraCharge = charge.getValue();
+			VisAuraCharge auraCharge = charge.getValue();
 			auraCharge.fromArray(array);
 		}
 	}
@@ -115,9 +123,9 @@ public class TileEntityVisAuraProvider extends TileEntity implements IMagicApiar
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 
-		for (Map.Entry<AuraChargeType, AuraCharge> charge : currentCharges.entrySet()) {
+		for (Map.Entry<AuraCharge, VisAuraCharge> charge : currentCharges.entrySet()) {
 			String auraName = charge.getKey().toString();
-			AuraCharge auraCharge = charge.getValue();
+			VisAuraCharge auraCharge = charge.getValue();
 			int[] array = auraCharge.toArray();
 			tag.setIntArray(auraName, array);
 		}
