@@ -45,6 +45,7 @@ public class BotaniaAPIDistanceHelper {
 		BotaniaAPI.manaInfusionRecipes.add(infusionBeeVazbee);
 		
 		tradeBeeAelfheim = new SpeciesRecipeElvenTrade(BeeSpecies.BOT_DREAMING, BeeSpecies.BOT_AELFHEIM);
+		BotaniaAPI.elvenTradeRecipes.add(tradeBeeAelfheim);
 		
 		LexiconEntry manasteelEntry = getLexiconEntryForName(BotaniaHelper.LEXICON_ENTRY_MANA_GEAR);
 		manasteelEntry.addPage(BotaniaAPI.internalHandler.craftingRecipePage("magicbees.botania.lexicon.manasteelScoop", BotaniaHelper.manasteelScoopRecipe));

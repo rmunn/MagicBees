@@ -14,7 +14,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 public class TransmutationEffectController implements ITransmutationEffectController {
 	private List<ITransmutationEffectLogic> logicObjects;
 
-	public TransmutationEffectController(ITransmutationEffectLogic[] effectLogic) {
+	public TransmutationEffectController(ITransmutationEffectLogic... effectLogic) {
 		logicObjects = new ArrayList<ITransmutationEffectLogic>();
 		for (ITransmutationEffectLogic logic : effectLogic) {
 			logicObjects.add(logic);

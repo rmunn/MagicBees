@@ -12,8 +12,8 @@ public class AlleleEffectTransmuting extends AlleleEffect {
 	
 	private TransmutationEffectController transmutationController;
 	
-	public AlleleEffectTransmuting(String id, boolean isDominant, TransmutationEffectController effectController) {
-		super(id, isDominant, 200);
+	public AlleleEffectTransmuting(String id, boolean isDominant, TransmutationEffectController effectController, int timeoutBeeTicks) {
+		super(id, isDominant, timeoutBeeTicks);
 		this.transmutationController = effectController;
 	}
 

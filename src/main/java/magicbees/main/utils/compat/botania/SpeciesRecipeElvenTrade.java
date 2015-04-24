@@ -15,8 +15,8 @@ public class SpeciesRecipeElvenTrade extends RecipeElvenTrade {
 	private IAlleleBeeSpecies inputSpecies;
 	
 	public SpeciesRecipeElvenTrade(IAlleleBeeSpecies inSpecies, IAlleleBeeSpecies outSpecies) {
-		super(BeeManager.getDefaultItemStackForSpecies(inSpecies, EnumBeeType.DRONE),
-				BeeManager.getDefaultItemStackForSpecies(outSpecies, EnumBeeType.DRONE));
+		super(BeeManager.getDefaultItemStackForSpecies(outSpecies, EnumBeeType.DRONE),
+				BeeManager.getDefaultItemStackForSpecies(inSpecies, EnumBeeType.DRONE));
 		inputSpecies = inSpecies;
 	}
 
@@ -33,6 +33,7 @@ public class SpeciesRecipeElvenTrade extends RecipeElvenTrade {
 			if (BeeManager.beeRoot.isMember(inStack, EnumBeeType.DRONE.ordinal())) {
 				IBee bee = BeeManager.beeRoot.getMember(inStack);
 				if (bee.getGenome().getPrimary().equals(inputSpecies)) {
+					matchedStacks.add(inStack);
 					found = true;
 					break;
 				}

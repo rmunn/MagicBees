@@ -23,4 +23,9 @@ public class AlleleFlower extends Allele implements IAlleleFlowers
 		return this.provider;
 	}
 
+	@Override
+	public String getName() {
+		return this.provider.getDescription();
+	}
+
 }

@@ -10,6 +10,7 @@ import magicbees.bees.allele.effect.AlleleEffectSpawnMobWeighted;
 import magicbees.bees.allele.effect.AlleleEffectSpawnWisp;
 import magicbees.bees.allele.effect.AlleleEffectTransmuting;
 import magicbees.bees.allele.effect.TransmutationEffectController;
+import magicbees.bees.allele.effect.TransmutationEffectLBotaniaLiving;
 import magicbees.bees.allele.effect.TransmutationEffectRailcraft;
 import magicbees.bees.allele.effect.TransmutationEffectVanilla;
 import magicbees.bees.allele.flowerProvider.FlowerProviderArsMagicaFlower;
@@ -50,6 +51,7 @@ public class Allele implements IAllele {
 	public static IAlleleEffect effectTransmuting;
 	public static IAlleleEffect effectCrumbling;
 	public static IAlleleEffect effectInvisibility;
+	public static IAlleleEffect effectDreaming;
 
 	public static IAlleleEffect spawnBrainyZombie;
 	public static IAlleleEffect spawnWisp;
@@ -120,6 +122,11 @@ public class Allele implements IAllele {
 		} else {
 			Allele.spawnBlizz = (IAlleleEffect) Allele.getBaseAllele("effectNone");
 		}
+		
+		if (BotaniaHelper.isActive()) {
+			Allele.effectDreaming = new AlleleEffectTransmuting("Dreaming", false,
+					new TransmutationEffectController(new TransmutationEffectLBotaniaLiving()), 100);
+		}
 
 		Allele.effectCleansing = new AlleleEffectCure("Curative", false);
 		Allele.effectDigSpeed = new AlleleEffectPotion("DigSpeed", Potion.digSpeed, 15, false);
@@ -127,12 +134,12 @@ public class Allele implements IAllele {
 		Allele.effectSlowSpeed = new AlleleEffectPotion("SlowSpeed", Potion.moveSlowdown, 3, false).setMalicious();
 		Allele.effectWithering = new AlleleEffectPotion("Withering", Potion.wither, 10, false).setMalicious();
 
-		TransmutationEffectController controller = new TransmutationEffectController(new ITransmutationEffectLogic[] {
+		TransmutationEffectController controller = new TransmutationEffectController(
 				new TransmutationEffectRailcraft(),
 				new TransmutationEffectVanilla()
-		});
+		);
 		MagicBeesAPI.transmutationEffectController = controller;
-		Allele.effectTransmuting = new AlleleEffectTransmuting("Transmuting", true, controller);
+		Allele.effectTransmuting = new AlleleEffectTransmuting("Transmuting", true, controller, 200);
 		Allele.effectCrumbling = new AlleleEffectCrumbling("Crumbling", true);
 
 		Allele.effectInvisibility = new AlleleEffectPotion("Invisibility", Potion.invisibility, 10, false);

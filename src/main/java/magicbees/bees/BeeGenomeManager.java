@@ -1357,7 +1357,7 @@ public class BeeGenomeManager {
 		IAllele[] genome = getTemplateBotSomnolent();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BOT_DREAMING;
-		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedNormal");
+		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedNorm");
 		genome[EnumBeeChromosome.TERRITORY.ordinal()] = Allele.getBaseAllele("territoryLarger");
 		
 		return genome;
@@ -1367,6 +1367,7 @@ public class BeeGenomeManager {
 		IAllele[] genome = getTemplateBotDreaming();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BOT_AELFHEIM;
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectDreaming;
 		
 		return genome;
 	}
