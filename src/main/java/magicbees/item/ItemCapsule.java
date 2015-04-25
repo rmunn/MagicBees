@@ -8,6 +8,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.item.types.CapsuleType;
 import magicbees.item.types.FluidType;
 import magicbees.main.CommonProxy;
+import magicbees.main.Config;
+import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.TabMagicBees;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -67,15 +69,15 @@ public class ItemCapsule extends Item
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister)
+	public void registerIcons(IIconRegister iconRegister)
 	{
-		this.itemIcon = par1IconRegister.registerIcon(CommonProxy.DOMAIN + ":capsule" + this.capsuleType.getName().substring(0, 1).toUpperCase()
+		this.itemIcon = iconRegister.registerIcon(CommonProxy.DOMAIN + ":capsule" + this.capsuleType.getName().substring(0, 1).toUpperCase()
 				+ this.capsuleType.getName().substring(1));
 		for (FluidType t : FluidType.values())
 		{
-			if (t != FluidType.EMPTY && t.liquidIcon == null)
+			if (t != FluidType.EMPTY)
 			{
-				t.liquidIcon = par1IconRegister.registerIcon(CommonProxy.DOMAIN + ":liquids/" + t.liquidID.toLowerCase());
+				t.liquidIcon = iconRegister.registerIcon(CommonProxy.DOMAIN + ":liquids/" + t.liquidID);
 			}
 		}
 	}
@@ -87,7 +89,7 @@ public class ItemCapsule extends Item
 		IIcon i = this.itemIcon;
 		if (metadata != 0 && pass == 0)
 		{
-			i = FluidType.values()[Math.max(0, Math.min(metadata, FluidType.values().length - 1))].liquidIcon;
+			i = FluidType.values()[metadata % FluidType.values().length].liquidIcon;
 		}
 		return i;
 	}

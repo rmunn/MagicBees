@@ -9,22 +9,8 @@ public class CommonProxy
 	public static final String MODEL = "model/";
 	public static final String LANGS = "lang/";
 	
-	@Deprecated
-	public static final String RESOURCE_PATH = "/assets/magicbees/";
-	@Deprecated
-	public static final String TEXTURE_PATH = RESOURCE_PATH + "textures/";
-	@Deprecated
-	public static final String MODEL_PATH = RESOURCE_PATH + "model/";
-	@Deprecated
-	public static final String TCBEES_RESEARCH = RESOURCE_PATH + "research/";
-	@Deprecated
-	public static final String TCBEES_LOCDIR = RESOURCE_PATH + "lang/";
-	
 	public static String FORESTRY_GFX_ITEMS;
 	public static String FORESTRY_GFX_BEEEFFECTS;
-	
-	@Deprecated
-	public static final String GUI_PATH = TEXTURE_PATH + "gui/";
 	
 	public static int RenderIdEffectJar;
 	public static int RenderIdVisAuraProvider;
