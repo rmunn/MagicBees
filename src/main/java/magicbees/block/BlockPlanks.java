@@ -39,6 +39,7 @@ public class BlockPlanks extends Block
 		return meta;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void getSubBlocks(Item item, CreativeTabs tab, List itemsList)

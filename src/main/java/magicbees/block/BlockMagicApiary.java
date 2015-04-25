@@ -1,7 +1,5 @@
 package magicbees.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.client.gui.UIScreens;
 import magicbees.main.CommonProxy;
 import magicbees.main.MagicBees;
@@ -18,8 +16,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import javax.swing.*;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockMagicApiary extends BlockContainer
 {

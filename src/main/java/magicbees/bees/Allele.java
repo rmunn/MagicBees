@@ -157,7 +157,7 @@ public class Allele implements IAllele {
 				.setChanceToSpawn(60)
 				.setMaxMobsInSpawnZone(2);
 		Allele.spawnWolf = new AlleleEffectSpawnMob("Canine", false , "Wolf", "mob.wolf.panting")
-				.setThrottle(950)
+				.setThrottle(650)
 				.setChanceToSpawn(40)
 				.setMaxMobsInSpawnZone(2);
 	}

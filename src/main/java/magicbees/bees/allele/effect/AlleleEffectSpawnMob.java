@@ -49,80 +49,97 @@ public class AlleleEffectSpawnMob extends AlleleEffect {
 	@Override
 	public IEffectData doEffectThrottled(IBeeGenome genome, IEffectData storedData, IBeeHousing housing) {
 		// Check if we're ready to spawn the mob.
+		boolean didSpawn = false;
 		if (storedData.getBoolean(0)) {
 			World w = housing.getWorld();
-
+	
 			int roll = w.rand.nextInt(100);
-
-			if (roll <= this.chanceToSpawn) {
-				if (this.spawnsWhilePlayerNear) {
-					List<Entity> entities = this.getEntitiesWithinRange(genome, housing);
-					EntityPlayer target = null;
-					for (Entity e : entities) {
-						if (e instanceof EntityPlayer) {
-							target = (EntityPlayer) e;
-							// Check for wearing armor & cancel
-							if (ItemArmorApiarist.getNumberPiecesWorn(target) >= 4) {
-								// Full armor suit is treated as "invisible."
-								target = null;
-							} else {
-								break;
-							}
-						}
-					}
-
+	
+			if (roll <= chanceToSpawn) {
+				if (spawnsWhilePlayerNear) {
+					EntityPlayer target = findPlayerTarget(genome, housing);
+	
 					// Let's spawn a mob. =D
 					if (target != null) {
-						storedData.setBoolean(0, !this.spawnMob(genome, target, w, housing, false));
-					} else if (this.alternateMob != null) {
-						storedData.setBoolean(0, !this.spawnMob(genome, null, w, housing, true));
+						didSpawn = spawnMob(genome, target, w, housing, false);
+					} else if (alternateMob != null) {
+						didSpawn = spawnMob(genome, null, w, housing, true);
 					}
 				} else {
 					storedData.setBoolean(0, !this.spawnMob(genome, null, w, housing, true));
 				}
 			} else {
-				if (this.mobSound != null && w.rand.nextInt(100) < 35) {
-					int range = genome.getTerritory()[0];
-					double x = housing.getXCoord() + w.rand.nextDouble() * (range * 2) - range;
-					range = genome.getTerritory()[1];
-					double y = housing.getYCoord() + w.rand.nextDouble() * (range * 2) - range;
-					range = genome.getTerritory()[2];
-					double z = housing.getZCoord() + w.rand.nextDouble() * (range * 2) - range;
-					w.playSoundEffect(x, y, z, this.mobSound, 0.5f, (w.rand.nextFloat() - w.rand.nextFloat()) * 0.2f + 1.0f);
-				}
-				storedData.setBoolean(0, true);
+				playMobLiveSound(genome, housing, w);
+				didSpawn = true;
 			}
+		
+			if (didSpawn) {
+				storedData.setBoolean(0, !didSpawn);
+				storedData.setInteger(0, storedData.getInteger(0) - throttle);
+			}
+		}
+		else {
+			storedData.setBoolean(0, true);
 		}
 
 		return storedData;
+	}
+
+	private void playMobLiveSound(IBeeGenome genome, IBeeHousing housing, World w) {
+		if (mobSound != null && w.rand.nextInt(100) < 35) {
+			int range = genome.getTerritory()[0];
+			double x = housing.getXCoord() + w.rand.nextDouble() * (range * 2) - range;
+			range = genome.getTerritory()[1];
+			double y = housing.getYCoord() + w.rand.nextDouble() * (range * 2) - range;
+			range = genome.getTerritory()[2];
+			double z = housing.getZCoord() + w.rand.nextDouble() * (range * 2) - range;
+			w.playSoundEffect(x, y, z, this.mobSound, 0.5f, (w.rand.nextFloat() - w.rand.nextFloat()) * 0.2f + 1.0f);
+		}
+	}
+
+	private EntityPlayer findPlayerTarget(IBeeGenome genome, IBeeHousing housing) {
+		List<Entity> entities = getEntitiesWithinRange(genome, housing);
+		EntityPlayer target = null;
+		for (Entity e : entities) {
+			if (e instanceof EntityPlayer) {
+				target = (EntityPlayer) e;
+				// Check for wearing armor & cancel
+				if (ItemArmorApiarist.getNumberPiecesWorn(target) >= 4) {
+					// Full armor suit is treated as "invisible."
+					target = null;
+				} else {
+					break;
+				}
+			}
+		}
+		return target;
 	}
 
 	protected boolean spawnMob(IBeeGenome bee, EntityPlayer player, World world, IBeeHousing housing, boolean spawnAlternate) {
 		boolean spawnedFlag = false;
 
 		EntityLiving mob;
-		if (spawnAlternate && this.alternateMob != null) {
-			mob = (EntityLiving) EntityList.createEntityByName(this.alternateMob, world);
+		if (spawnAlternate && alternateMob != null) {
+			mob = (EntityLiving) EntityList.createEntityByName(alternateMob, world);
 		} else {
-			mob = (EntityLiving) EntityList.createEntityByName(this.mobName, world);
+			mob = (EntityLiving) EntityList.createEntityByName(mobName, world);
 		}
 
 		if (mob != null) {
 			double pos[] = this.randomMobSpawnCoords(world, bee, housing);
 
-			int entitiesCount = world.getEntitiesWithinAABB(
-					mob.getClass(),
-					AxisAlignedBB.getBoundingBox((int) pos[0], (int) pos[1], (int) pos[2], (int) pos[0] + 1, (int) pos[1] + 1, (int) pos[2] + 1).expand(8.0D,
-							4.0D, 8.0D)).size();
+			int entitiesCount = world.getEntitiesWithinAABB(mob.getClass(), 
+					AxisAlignedBB.getBoundingBox((int) pos[0], (int) pos[1], (int) pos[2],
+							(int) pos[0] + 1, (int) pos[1] + 1, (int) pos[2] + 1)
+						.expand(8.0D,4.0D, 8.0D)).size();
 
 			mob.setPositionAndRotation(pos[0], pos[1], pos[2], world.rand.nextFloat() * 360f, 0f);
 
-			if (entitiesCount < this.maxMobsInArea && mob.getCanSpawnHere()) {
+			if (entitiesCount < maxMobsInArea && mob.getCanSpawnHere()) {
 				spawnedFlag = world.spawnEntityInWorld(mob);
-				if (this.aggosOnPlayer && player != null) {
+				if (aggosOnPlayer && player != null) {
 					if (ItemArmorApiarist.getNumberPiecesWorn(player) < 4) {
-						// Protect fully suited player from initial murder
-						// intent.
+						// Protect fully suited player from initial murder intent.
 						mob.setAttackTarget(player);
 					}
 				}
@@ -133,33 +150,28 @@ public class AlleleEffectSpawnMob extends AlleleEffect {
 	}
 
 	public AlleleEffectSpawnMob setSpawnsOnPlayerNear(String alternateMobToSpawn) {
-		this.spawnsWhilePlayerNear = true;
-		this.alternateMob = alternateMobToSpawn;
-
+		spawnsWhilePlayerNear = true;
+		alternateMob = alternateMobToSpawn;
 		return this;
 	}
 
 	public AlleleEffectSpawnMob setAggrosPlayerOnSpawn() {
-		this.aggosOnPlayer = true;
-
+		aggosOnPlayer = true;
 		return this;
 	}
 
 	public AlleleEffectSpawnMob setThrottle(int val) {
-		this.throttle = val;
-
+		throttle = val;
 		return this;
 	}
 
 	public AlleleEffectSpawnMob setChanceToSpawn(int value) {
-		this.chanceToSpawn = value;
-
+		chanceToSpawn = value;
 		return this;
 	}
 
 	public AlleleEffectSpawnMob setMaxMobsInSpawnZone(int value) {
-		this.maxMobsInArea = value;
-
+		maxMobsInArea = value;
 		return this;
 	}
 

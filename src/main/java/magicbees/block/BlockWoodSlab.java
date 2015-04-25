@@ -8,7 +8,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.block.types.PlankType;
 import magicbees.main.CommonProxy;
 import magicbees.main.Config;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
@@ -57,6 +56,7 @@ public class BlockWoodSlab extends BlockSlab
 		return this.getUnlocalizedName() + "." + PlankType.getType(meta).name;
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void getSubBlocks(Item item, CreativeTabs tab, List itemsList)
