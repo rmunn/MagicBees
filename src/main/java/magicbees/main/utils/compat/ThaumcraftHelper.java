@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
+import magicbees.api.MagicBeesAPI;
 import magicbees.item.types.PollenType;
 import magicbees.item.types.PropolisType;
 import magicbees.item.types.ResourceType;
@@ -155,6 +156,11 @@ public class ThaumcraftHelper {
 	public static void preInit() {
 		if (Loader.isModLoaded(Name) && Config.thaumcraftActive) {
 			isThaumcraftPresent = true;
+			aspectTime = new Aspect("tempus", 0xB68CFF, new Aspect[] {
+					Aspect.VOID, Aspect.ORDER }, new ResourceLocation(
+					CommonProxy.DOMAIN, CommonProxy.TEXTURE
+							+ "aspects/tempus.png"), 1);
+			MagicBeesAPI.thaumcraftAspectTempus = aspectTime;
 		} else {
 			// Switch off TC-dependant items.
 			ResourceType.LORE_FRAGMENT.setHidden();
@@ -176,11 +182,6 @@ public class ThaumcraftHelper {
 
 	public static void postInit() {
 		if (isActive()) {
-			aspectTime = new Aspect("tempus", 0xB68CFF, new Aspect[] {
-					Aspect.VOID, Aspect.ORDER }, new ResourceLocation(
-					CommonProxy.DOMAIN, CommonProxy.TEXTURE
-							+ "aspects/tempus.png"), 1);
-
 			setupItemAspects();
 			setupCrafting();
 			setupResearch();
