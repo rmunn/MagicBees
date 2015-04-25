@@ -7,27 +7,18 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import magicbees.item.types.CombType;
-import magicbees.item.types.DropType;
-import magicbees.item.types.NuggetType;
-import magicbees.item.types.PollenType;
-import magicbees.item.types.ResourceType;
 import magicbees.main.CommonProxy;
 import magicbees.main.Config;
 import magicbees.main.utils.LocalizationManager;
-import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.compat.ArsMagicaHelper;
 import magicbees.main.utils.compat.BloodMagicHelper;
 import magicbees.main.utils.compat.BotaniaHelper;
-import magicbees.main.utils.compat.BotaniaHelper.PastureSeed;
 import magicbees.main.utils.compat.EquivalentExchangeHelper;
 import magicbees.main.utils.compat.ForestryHelper;
 import magicbees.main.utils.compat.RedstoneArsenalHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import magicbees.main.utils.compat.ThermalExpansionHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -333,26 +324,12 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 	}
 
 	public static void setupBeeSpecies() {
-		System.out.println("# bees: " + BeeSpecies.values().length);
-		// Species must be set inactive prior to registration.
-		if (ThaumcraftHelper.isActive()) {
-			SCHOLARLY.addSpecialty(Config.miscResources.getStackForType(ResourceType.LORE_FRAGMENT), 2);
-			SAVANT.addSpecialty(Config.miscResources.getStackForType(ResourceType.LORE_FRAGMENT), 5);
-
-			TC_AIR.addSpecialty(new ItemStack(Config.tcShard, 1, ThaumcraftHelper.ShardType.AIR.ordinal()), 5);
-			TC_FIRE.addSpecialty(new ItemStack(Config.tcShard, 1, ThaumcraftHelper.ShardType.FIRE.ordinal()), 5);
-			TC_WATER.addSpecialty(new ItemStack(Config.tcShard, 1, ThaumcraftHelper.ShardType.WATER.ordinal()), 5);
-			TC_EARTH.addSpecialty(new ItemStack(Config.tcShard, 1, ThaumcraftHelper.ShardType.EARTH.ordinal()), 5);
-			TC_ORDER.addSpecialty(new ItemStack(Config.tcShard, 1, ThaumcraftHelper.ShardType.ORDER.ordinal()), 5);
-			TC_CHAOS.addSpecialty(new ItemStack(Config.tcShard, 1, ThaumcraftHelper.ShardType.CHAOS.ordinal()), 5);
-
-			// TC_PURE.addSpecialty(new ItemStack(Config.));
-
-			TC_BRAINY.addSpecialty(new ItemStack(Config.tcMiscResource, 1, ThaumcraftHelper.MiscResource.ZOMBIE_BRAIN.ordinal()), 2);
-			TC_CHICKEN.addSpecialty(new ItemStack(Config.tcNuggetChicken, 1), 9);
-			TC_BEEF.addSpecialty(new ItemStack(Config.tcNuggetBeef, 1), 9);
-			TC_PORK.addSpecialty(new ItemStack(Config.tcNuggetPork, 1), 9);
-		} else {
+		BeeProductHelper.initBaseProducts();
+		
+		BeeProductHelper.initOreDictSProducts();
+		
+		BeeProductHelper.initThaumcraftProducts();
+		if (!ThaumcraftHelper.isActive()) {
 			TC_CHAOS.setInactive();
 			TC_AIR.setInactive();
 			TC_FIRE.setInactive();
@@ -368,32 +345,21 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			TC_CHICKEN.setInactive();
 			TC_BEEF.setInactive();
 			TC_PORK.setInactive();
+			
+			TC_WISPY.setInactive();
 		}
-
-		TC_WISPY.setInactive();
+		// These species should be fixed. ¯\_(ツ)_/¯
 		TC_TAINT.setInactive();
 		TC_ATTRACT.setInactive();
 		TC_REJUVENATING.setInactive();
 
-		if (EquivalentExchangeHelper.isActive()) {
-			EE_MINIUM.addSpecialty(new ItemStack(Config.eeMinuimShard), 6);
-		} else {
+		BeeProductHelper.initEquivalentExchange3Species();
+		if (!EquivalentExchangeHelper.isActive()) {
 			EE_MINIUM.setInactive();
 		}
 
-		if (ArsMagicaHelper.isActive()) {
-			AM_QUINTESSENCE.addSpecialty(new ItemStack(Config.amItemResource, 1, ArsMagicaHelper.ResourceType.ARCANE_COMPOUND.ordinal()), 5);
-			AM_EARTH.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.EARTH.ordinal()), 7);
-			AM_AIR.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.AIR.ordinal()), 7);
-			AM_FIRE.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.FIRE.ordinal()), 7);
-			AM_WATER.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.WATER.ordinal()), 7);
-			AM_LIGHTNING.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.LIGHTNING.ordinal()), 7);
-			AM_PLANT.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.PLANT.ordinal()), 7);
-			AM_ICE.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.ICE.ordinal()), 7);
-			AM_ARCANE.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.ARCANE.ordinal()), 11);
-			AM_VORTEX.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.EARTH.ordinal()), 15);
-			AM_WIGHT.addSpecialty(new ItemStack(Config.amItemResource, 1, ArsMagicaHelper.ResourceType.ARCANE_COMPOUND.ordinal()), 11);
-		} else {
+		BeeProductHelper.initArsMagicaSpecies();
+		if (!ArsMagicaHelper.isActive()) {
 			AM_ESSENCE.setInactive();
 			AM_QUINTESSENCE.setInactive();
 			AM_EARTH.setInactive();
@@ -408,17 +374,8 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			AM_WIGHT.setInactive();
 		}
 
-		// Thermal Expansion Bees
-
-		if (ThermalExpansionHelper.isActive()) {
-			LogHelper.info("Thermal Expansion bees active");
-			TE_BLIZZY.addSpecialty(Config.teDustBlizz, 9);
-			TE_GELID.addSpecialty(Config.teDustCryotheum, 9);
-			TE_DANTE.addSpecialty(Config.teDustSulfur, 9);
-			TE_PYRO.addSpecialty(Config.teDustPyrotheum, 9);
-			TE_WINSOME.addSpecialty(Config.teDustPlatinum, 9);
-			TE_ENDEARING.addSpecialty(Config.teEnderiumNugget, 9);
-		} else {
+		BeeProductHelper.initThermalExpansionProducts();
+		if (!ThermalExpansionHelper.isActive()) {
 			TE_BLIZZY.setInactive();
 			TE_GELID.setInactive();
 			TE_DANTE.setInactive();
@@ -430,333 +387,24 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			TE_ENDEARING.setInactive();
 		}
 
-		// Redstone Arsenal Bees
-
-		if (RedstoneArsenalHelper.isActive()) {
-			RSA_FLUXED.addSpecialty(Config.rsaFluxNugget, 9);
-		} else {
+		BeeProductHelper.initRedstoneArsenelProducts();
+		if (!RedstoneArsenalHelper.isActive()) {
 			RSA_FLUXED.setInactive();
 		}
 
-		// Bloodmagic Bees
-
-		if (BloodMagicHelper.isActive()) {
-		} else {
+		BeeProductHelper.initBloodMagicProducts();
+		if (!BloodMagicHelper.isActive()) {
 			BM_BLOODY.setInactive();
+			BM_BOUND.setInactive();
 		}
 
-		if (BotaniaHelper.isActive()) {
-			for (int i = 0; i < 16; ++i) {
-				ItemStack petal = new ItemStack(BotaniaHelper.itemPetal, 1, i);
-				BOT_BOTANIC.addSpecialty(petal, 1);
-				BOT_BLOSSOM.addSpecialty(petal, 1);
-				BOT_FLORAL.addSpecialty(petal, 1);
-			}
-
-			for (PastureSeed type : PastureSeed.values()) {
-				BOT_VAZBEE.addSpecialty(new ItemStack(BotaniaHelper.itemPastureSeed, 1, type.ordinal()), 4);
-			}
-		} else {
+		BeeProductHelper.initBotaniaProducts();
+		if (!BotaniaHelper.isActive()) {
 			BOT_BLOSSOM.setInactive();
 			BOT_BOTANIC.setInactive();
 			BOT_FLORAL.setInactive();
 			BOT_VAZBEE.setInactive();
 		}
-
-		// Oredict bees
-		if (OreDictionary.getOres("ingotCopper").size() <= 0) {
-			COPPER.setInactive();
-		}
-		if (OreDictionary.getOres("ingotTin").size() <= 0) {
-			TIN.setInactive();
-		}
-		if (OreDictionary.getOres("ingotSilver").size() <= 0) {
-			SILVER.setInactive();
-		}
-		if (OreDictionary.getOres("ingotLead").size() <= 0) {
-			LEAD.setInactive();
-		}
-		if (OreDictionary.getOres("ingotNaturalAluminum").size() <= 0 && OreDictionary.getOres("ingotAluminum").size() <= 0
-				&& OreDictionary.getOres("ingotAluminium").size() <= 0) {
-			LogHelper.info("Aluminum bees inactive!");
-			ALUMINUM.setInactive();
-		}
-		if (OreDictionary.getOres("ingotArdite").size() <= 0) {
-			ARDITE.setInactive();
-		}
-		if (OreDictionary.getOres("ingotCobalt").size() <= 0) {
-			COBALT.setInactive();
-		}
-		if (OreDictionary.getOres("ingotManyullyn").size() <= 0) {
-			MANYULLYN.setInactive();
-		}
-
-		MYSTICAL.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 15).register();
-		SORCEROUS.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 15).register();
-		UNUSUAL.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 15).register();
-		ATTUNED.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 15).register();
-		ELDRITCH.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 15).register();
-
-		ESOTERIC.addProduct(Config.combs.getStackForType(CombType.OCCULT), 18).register();
-		MYSTERIOUS.addProduct(Config.combs.getStackForType(CombType.OCCULT), 20).register();
-		ARCANE.addProduct(Config.combs.getStackForType(CombType.OCCULT), 25).addSpecialty(Config.drops.getStackForType(DropType.ENCHANTED, 1), 9).register();
-
-		CHARMED.addProduct(Config.combs.getStackForType(CombType.OTHERWORLDLY), 18).register();
-		ENCHANTED.addProduct(Config.combs.getStackForType(CombType.OTHERWORLDLY), 20).register();
-		SUPERNATURAL.addProduct(Config.combs.getStackForType(CombType.OTHERWORLDLY), 25).addSpecialty(Config.pollen.getStackForType(PollenType.UNUSUAL), 8)
-				.register();
-
-		ETHEREAL.addProduct(Config.combs.getStackForType(CombType.OCCULT), 10).addProduct(Config.combs.getStackForType(CombType.OTHERWORLDLY), 10).register();
-
-		WINDY.addProduct(Config.combs.getStackForType(CombType.AIRY), 25).register();
-		FIREY.addProduct(Config.combs.getStackForType(CombType.FIREY), 25).register();
-		EARTHY.addProduct(Config.combs.getStackForType(CombType.EARTHY), 25).register();
-		WATERY.addProduct(Config.combs.getStackForType(CombType.WATERY), 25).addSpecialty(new ItemStack(Blocks.ice), 2).register();
-
-		PUPIL.addProduct(Config.combs.getStackForType(CombType.PAPERY), 20).register();
-		SCHOLARLY.addProduct(Config.combs.getStackForType(CombType.PAPERY), 25).register();
-		SAVANT.addProduct(Config.combs.getStackForType(CombType.PAPERY), 40).register();
-
-		AWARE.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 18).register();
-		SPIRIT.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 22).addSpecialty(Config.combs.getStackForType(CombType.SOUL), 16).register();
-		SOUL.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 28).addSpecialty(Config.combs.getStackForType(CombType.SOUL), 20).register();
-
-		SKULKING.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 10).register();
-		GHASTLY.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 8).addSpecialty(new ItemStack(Items.ghast_tear), 2).register();
-		SPIDERY.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 13).addProduct(new ItemStack(Items.string), 8)
-				.addSpecialty(new ItemStack(Items.spider_eye), 8).register();
-		SMOULDERING.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 10).addProduct(Config.combs.getStackForType(CombType.MOLTEN), 10)
-				.addSpecialty(new ItemStack(Items.blaze_rod), 5).register();
-
-		TIMELY.addProduct(Config.combs.getStackForType(CombType.TEMPORAL), 16).register();
-		LORDLY.addProduct(Config.combs.getStackForType(CombType.TEMPORAL), 19).register();
-		DOCTORAL.addProduct(Config.combs.getStackForType(CombType.TEMPORAL), 24).addSpecialty(new ItemStack(Config.jellyBaby), 7).register();
-
-		INFERNAL.addProduct(Config.combs.getStackForType(CombType.MOLTEN), 12).register();
-		HATEFUL.addProduct(Config.combs.getStackForType(CombType.MOLTEN), 18).register();
-		SPITEFUL.addProduct(Config.combs.getStackForType(CombType.MOLTEN), 24).register();
-		WITHERING.addSpecialty(Config.miscResources.getStackForType(ResourceType.SKULL_CHIP), 15).register();
-
-		OBLIVION.addProduct(Config.combs.getStackForType(CombType.FORGOTTEN), 14).register();
-		NAMELESS.addProduct(Config.combs.getStackForType(CombType.FORGOTTEN), 19).register();
-		ABANDONED.addProduct(Config.combs.getStackForType(CombType.FORGOTTEN), 24).register();
-		FORLORN.addProduct(Config.combs.getStackForType(CombType.FORGOTTEN), 30).register();
-		DRACONIC.addSpecialty(Config.miscResources.getStackForType(ResourceType.DRAGON_DUST), 15).register();
-
-		IRON.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10)
-				.addSpecialty(Config.nuggets.getStackForType(NuggetType.IRON), 18).register();
-		GOLD.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10).addSpecialty(new ItemStack(Items.gold_nugget, 1), 16)
-				.register();
-		COPPER.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10)
-				.addSpecialty(Config.nuggets.getStackForType(NuggetType.COPPER), 20).register();
-		TIN.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10)
-				.addSpecialty(Config.nuggets.getStackForType(NuggetType.TIN), 20).register();
-		SILVER.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10)
-				.addSpecialty(Config.nuggets.getStackForType(NuggetType.SILVER), 16).register();
-		LEAD.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10)
-				.addSpecialty(Config.nuggets.getStackForType(NuggetType.LEAD), 17).register();
-
-		ALUMINUM.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10);
-		if (OreDictionary.getOres("nuggetAluminum").size() > 0) {
-			LogHelper.info("Aluminum bees active!");
-			ALUMINUM.addSpecialty(OreDictionary.getOres("nuggetAluminum").get(0), 20);
-		} else {
-			LogHelper.info("Aluminum bees inactive!");
-			ALUMINUM.setInactive();
-		}
-		ALUMINUM.register();
-
-		ARDITE.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10);
-		if (OreDictionary.getOres("nuggetArdite").size() > 0) {
-			ARDITE.addSpecialty(OreDictionary.getOres("nuggetArdite").get(0), 18);
-		} else {
-			ARDITE.setInactive();
-		}
-		ARDITE.register();
-
-		COBALT.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10);
-		if (OreDictionary.getOres("nuggetCobalt").size() > 0) {
-			COBALT.addSpecialty(OreDictionary.getOres("nuggetCobalt").get(0), 18);
-		} else {
-			COBALT.setInactive();
-		}
-		COBALT.register();
-
-		MANYULLYN.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10);
-		if (OreDictionary.getOres("nuggetManyullyn").size() > 0) {
-			MANYULLYN.addSpecialty(OreDictionary.getOres("nuggetManyullyn").get(0), 16);
-		} else {
-			MANYULLYN.setInactive();
-		}
-		MANYULLYN.register();
-
-		DIAMOND.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10)
-				.addSpecialty(Config.nuggets.getStackForType(NuggetType.DIAMOND), 6).register();
-		EMERALD.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10)
-				.addSpecialty(Config.nuggets.getStackForType(NuggetType.EMERALD), 4).register();
-		APATITE.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10)
-				.addSpecialty(Config.nuggets.getStackForType(NuggetType.APATITE), 10).register();
-
-		MUTABLE.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.PARCHED.ordinal()), 30)
-				.addProduct(Config.combs.getStackForType(CombType.TRANSMUTED), 10).register();
-		TRANSMUTING.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.PARCHED.ordinal()), 10)
-				.addProduct(Config.combs.getStackForType(CombType.TRANSMUTED), 30)
-				.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.SILKY.ordinal()), 5)
-				.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.SIMMERING.ordinal()), 5).register();
-		CRUMBLING.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.PARCHED.ordinal()), 10)
-				.addProduct(Config.combs.getStackForType(CombType.TRANSMUTED), 30)
-				.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.POWDERY.ordinal()), 10)
-				.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.COCOA.ordinal()), 15).register();
-
-		INVISIBLE.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 35).register();
-
-		TC_AIR.addProduct(Config.combs.getStackForType(CombType.AIRY), 20).register();
-		TC_FIRE.addProduct(Config.combs.getStackForType(CombType.FIREY), 20).register();
-		TC_WATER.addProduct(Config.combs.getStackForType(CombType.WATERY), 20).register();
-		TC_EARTH.addProduct(Config.combs.getStackForType(CombType.EARTHY), 20).register();
-		TC_ORDER.addProduct(Config.combs.getStackForType(CombType.TC_ORDER), 20).register();
-		TC_CHAOS.addProduct(Config.combs.getStackForType(CombType.TC_CHAOS), 20).register();
-
-		TC_VIS.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 10).register();
-		TC_TAINT.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 18).register();
-		TC_ATTRACT.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 14).register();
-		TC_PURE.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 16).register();
-		TC_REJUVENATING.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 18).register();
-
-		TC_BRAINY.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 10).addProduct(new ItemStack(Items.rotten_flesh), 6).register();
-		TC_BATTY.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 10).addSpecialty(new ItemStack(Items.gunpowder), 4).register();
-		TC_WISPY.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.SILKY.ordinal()), 22)
-				.addSpecialty(new ItemStack(Config.fCraftingResource, 1, ForestryHelper.CraftingMaterial.SILK_WISP.ordinal()), 4).register();
-		TC_CHICKEN.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10).register();
-		TC_BEEF.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10).register();
-		TC_PORK.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10).register();
-
-		EE_MINIUM.addProduct(Config.combs.getStackForType(CombType.OCCULT), 16).register();
-
-		AM_ESSENCE.addProduct(Config.combs.getStackForType(CombType.AM_ESSENCE), 12).register();
-		AM_QUINTESSENCE.addProduct(Config.combs.getStackForType(CombType.AM_ESSENCE), 23).register();
-		AM_EARTH.addProduct(Config.combs.getStackForType(CombType.AM_POTENT), 12).register();
-		AM_AIR.addProduct(Config.combs.getStackForType(CombType.AM_POTENT), 12).register();
-		AM_FIRE.addProduct(Config.combs.getStackForType(CombType.AM_POTENT), 12).register();
-		AM_WATER.addProduct(Config.combs.getStackForType(CombType.AM_POTENT), 12).register();
-		AM_LIGHTNING.addProduct(Config.combs.getStackForType(CombType.AM_POTENT), 12).register();
-		AM_PLANT.addProduct(Config.combs.getStackForType(CombType.AM_POTENT), 12).register();
-		AM_ICE.addProduct(Config.combs.getStackForType(CombType.AM_POTENT), 12).register();
-		AM_ARCANE.addProduct(Config.combs.getStackForType(CombType.AM_POTENT), 19).register();
-		AM_VORTEX.addProduct(Config.combs.getStackForType(CombType.AM_ESSENCE), 10).register();
-		AM_WIGHT.addProduct(Config.combs.getStackForType(CombType.SOUL), 30).addProduct(Config.combs.getStackForType(CombType.FURTIVE), 10).register();
-
-		if (OreDictionary.getOres("ingotBronze").size() <= 0) {
-			TE_BRONZE.setInactive();
-		}
-		if (OreDictionary.getOres("ingotElectrum").size() <= 0) {
-			TE_ELECTRUM.setInactive();
-		}
-		if (OreDictionary.getOres("ingotPlatinum").size() <= 0) {
-			TE_PLATINUM.setInactive();
-		}
-		if (OreDictionary.getOres("ingotNickel").size() <= 0) {
-			TE_NICKEL.setInactive();
-		}
-		if (OreDictionary.getOres("ingotInvar").size() <= 0) {
-			TE_INVAR.setInactive();
-		}
-
-		TE_ELECTRUM.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10);
-		if (OreDictionary.getOres("nuggetElectrum").size() > 0) {
-			TE_ELECTRUM.addSpecialty(OreDictionary.getOres("nuggetElectrum").get(0), 18);
-		} else {
-			TE_ELECTRUM.setInactive();
-		}
-		TE_ELECTRUM.register();
-
-		TE_PLATINUM.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10);
-		if (OreDictionary.getOres("nuggetPlatinum").size() > 0) {
-			TE_PLATINUM.addSpecialty(OreDictionary.getOres("nuggetPlatinum").get(0), 18);
-		} else {
-			TE_PLATINUM.setInactive();
-		}
-		TE_PLATINUM.register();
-
-		TE_NICKEL.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10);
-		if (OreDictionary.getOres("nuggetNickel").size() > 0) {
-			TE_NICKEL.addSpecialty(OreDictionary.getOres("nuggetNickel").get(0), 18);
-		} else {
-			TE_NICKEL.setInactive();
-		}
-		TE_NICKEL.register();
-
-		TE_INVAR.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10);
-		if (OreDictionary.getOres("nuggetInvar").size() > 0) {
-			TE_INVAR.addSpecialty(OreDictionary.getOres("nuggetInvar").get(0), 18);
-		} else {
-			TE_INVAR.setInactive();
-		}
-		TE_INVAR.register();
-
-		TE_BRONZE.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10);
-		if (OreDictionary.getOres("nuggetBronze").size() > 0) {
-			TE_BRONZE.addSpecialty(OreDictionary.getOres("nuggetBronze").get(0), 18);
-		} else {
-			TE_BRONZE.setInactive();
-		}
-		TE_BRONZE.register();
-
-		RSA_FLUXED.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10);
-		if (OreDictionary.getOres("nuggetElectrumFlux").size() > 0) {
-			RSA_FLUXED.addSpecialty(OreDictionary.getOres("nuggetElectrumFlux").get(0), 18);
-		} else {
-			RSA_FLUXED.setInactive();
-		}
-		RSA_FLUXED.register();
-
-		TE_DANTE.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 10).addProduct(Config.combs.getStackForType(CombType.MOLTEN), 10)
-				.addSpecialty(new ItemStack(Items.blaze_powder), 5).register();
-
-		TE_PYRO.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 10).addProduct(Config.combs.getStackForType(CombType.MOLTEN), 10)
-				.addSpecialty(new ItemStack(Items.blaze_powder), 5).register();
-
-		TE_DESTABILIZED.addProduct(Config.combs.getStackForType(CombType.TE_DESTABILIZED), 10).addProduct(Config.combs.getStackForType(CombType.OCCULT), 10)
-				.addSpecialty(new ItemStack(Items.redstone), 5).register();
-
-		TE_LUX.addProduct(Config.combs.getStackForType(CombType.TE_LUX), 10).addProduct(Config.combs.getStackForType(CombType.OCCULT), 10)
-				.addSpecialty(new ItemStack(Items.glowstone_dust), 5).register();
-
-		TE_WINSOME.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 10).addProduct(Config.combs.getStackForType(CombType.TE_ENDEARING), 5)
-				.addSpecialty(new ItemStack(Items.ender_pearl), 5).register();
-
-		TE_ENDEARING.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.MYSTERIOUS.ordinal()), 10)
-				.addProduct(Config.combs.getStackForType(CombType.TE_ENDEARING), 5).register();
-
-		TE_COAL.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10)
-				.addProduct(Config.combs.getStackForType(CombType.TE_CARBON), 5).addSpecialty(new ItemStack(Items.coal), 5).register();
-
-		TE_BLIZZY.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.FROZEN.ordinal()), 10).register();
-
-		TE_GELID.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.FROZEN.ordinal()), 10).register();
-
-		BM_BLOODY.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10).register();
-
-		BM_BOUND.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal()), 10).register();
-
-		BOT_ROOTED.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 10).register();
-
-		BOT_BOTANIC.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 10).addProduct(Config.combs.getStackForType(CombType.TRANSMUTED), 5).register();
-
-		BOT_BLOSSOM.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 20).addProduct(Config.combs.getStackForType(CombType.TRANSMUTED), 5).register();
-
-		BOT_FLORAL.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 25).addProduct(Config.combs.getStackForType(CombType.TRANSMUTED), 5).register();
-
-		BOT_VAZBEE.addProduct(Config.combs.getStackForType(CombType.SOUL), 5).addProduct(new ItemStack(Items.dye, 1, 9), 20)
-				.addProduct(new ItemStack(Blocks.wool, 1, 9), 2).addProduct(new ItemStack(Blocks.red_flower, 1, 7), 6)
-				.addProduct(Config.combs.getStackForType(CombType.TRANSMUTED), 15).register();
-
-		BOT_SOMNOLENT.addProduct(Config.combs.getStackForType(CombType.WATERY), 8).addProduct(Config.combs.getStackForType(CombType.SOUL), 15).register();
-
-		BOT_DREAMING.addProduct(Config.combs.getStackForType(CombType.WATERY), 16).addProduct(Config.combs.getStackForType(CombType.SOUL), 33).register();
-
-		BOT_ALFHEIM.addProduct(Config.combs.getStackForType(CombType.OTHERWORLDLY), 28).register();
-
 	}
 
 	private String binomial;
@@ -826,8 +474,9 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		specialties = new HashMap<ItemStack, Integer>();
 		this.branch = classification;
 		this.branch.addMemberSpecies(this);
-		this.isActive = true;
 		this.isNocturnal = false;
+		this.isActive = true;
+		BeeManager.beeRoot.registerTemplate(this.getGenome());
 	}
 
 	public IAllele[] getGenome() {
@@ -880,6 +529,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 
 	public BeeSpecies setInactive() {
 		this.isActive = false;
+		AlleleManager.alleleRegistry.blacklistAllele(this.getUID());
 		return this;
 	}
 
@@ -945,14 +595,6 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 	@Override
 	public boolean isJubilant(IBeeGenome genome, IBeeHousing housing) {
 		return true;
-	}
-
-	private BeeSpecies register() {
-		BeeManager.beeRoot.registerTemplate(this.getGenome());
-		if (!this.isActive) {
-			AlleleManager.alleleRegistry.blacklistAllele(this.getUID());
-		}
-		return this;
 	}
 
 	@Override
@@ -1115,6 +757,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		case GHASTLY:
 		case SPIDERY:
 		case SMOULDERING:
+		case BIGBAD:
 		case TC_BRAINY:
 		case TC_WISPY:
 		case TC_BATTY:
@@ -1147,8 +790,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 				tolerance.getValue());
 	}
 
-	// / --------- Unused Functions
-	// ---------------------------------------------
+	// --------- Unused Functions ---------------------------------------------
 
 	@Override
 	@SideOnly(Side.CLIENT)

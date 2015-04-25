@@ -102,6 +102,8 @@ public class ForestryHelper
 	}
 
 	public static final String Name = "Forestry";
+	
+	public static ItemStack itemHoneycomb;
 
 	public static void preInit()
 	{
@@ -152,6 +154,8 @@ public class ForestryHelper
 		Config.fCraftingResource = ItemInterface.getItem("craftingMaterial");
 		Config.fHoneyDrop = ItemInterface.getItem("honeyDrop");
 		Config.fHoneydew = ItemInterface.getItem("honeydew");
+		// Caching a single item stack. Turns out it's used a LOT.
+		itemHoneycomb = new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal());
 	}
 
 	public static IAllele[] getTemplateForestryForSpecies(String speciesName)
