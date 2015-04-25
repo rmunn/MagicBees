@@ -325,6 +325,15 @@ public class BeeGenomeManager {
 		
 		return genome;
 	}
+
+	public static IAllele[] getTemplateBigbad() {
+		IAllele[] genome = getTemplateBaseMalevolent();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BIGBAD;
+		genome[EnumBeeChromosome.CAVE_DWELLING.ordinal()] = Allele.getBaseAllele("boolTrue");
+		
+		return genome;
+	}
 	
 	public static IAllele[] getTemplateGhastly() {
 		IAllele[] genome = getTemplateBaseMalevolent();
@@ -708,7 +717,7 @@ public class BeeGenomeManager {
 		return genome;
 	}
 
-	public static IAllele[] getTemplateTCStark() {
+	public static IAllele[] getTemplateTCChaos() {
 		IAllele[] genome = getTemplateTCBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_CHAOS;
@@ -774,7 +783,7 @@ public class BeeGenomeManager {
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCMagic() {
+	public static IAllele[] getTemplateTCOrder() {
 		IAllele[] genome = getTemplateTCBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_ORDER;
@@ -805,7 +814,7 @@ public class BeeGenomeManager {
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCFlux() {
+	public static IAllele[] getTemplateTCTaint() {
 		IAllele[] genome = getTemplateTCBaseVis();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_TAINT;
