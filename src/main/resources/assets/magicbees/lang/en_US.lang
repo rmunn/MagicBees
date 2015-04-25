@@ -156,6 +156,13 @@ liquid.liquidnitrogen=Liquid Nitrogen
 liquid.liquiddna=Liquid DNA
 liquid.creosote=Creosote Oil
 liquid.steam=Steam
+liquid.redstone=Destabilized Redstone
+liquid.glowstone=Energized Glowstone
+liquid.ender=Resonant Ender
+liquid.pyrotheum=Blazing Pyrotheum
+liquid.cryotheum=Gelid Cryotheum
+liquid.mana=Primal Mana
+liquid.coal=Liquifacted Coal
 
 #Moondial
 moon.full=Full Moon

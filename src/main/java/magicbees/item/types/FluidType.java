@@ -38,6 +38,15 @@ public enum FluidType
 	// Railcraft
 	CREOSOTEOIL("creosote"),
 	STEAM("steam"),
+	
+	// Thermal Foundation
+	REDSTONE("redstone"),
+	GLOWSTONE("glowstone"),
+	ENDER("ender"),
+	PYROTHEUM("pyrotheum"),
+	CRYOTHEUM("cryotheum"),
+	MANA("mana"),
+	COAL("coal"),
 	;
 	public String liquidID;
 	public int iconIdx;
