@@ -19,8 +19,6 @@ public class SubTileHiveacynth extends SubTileFunctional {
 	public static final String NAME = "hiveacynth";
 	private static final int RANGE = 3;
 	private static final int COST = 15000;
-	
-	
 
 	@Override
 	public void onUpdate() {
@@ -30,6 +28,7 @@ public class SubTileHiveacynth extends SubTileFunctional {
 		}
 		
 		if (readyToProduceProduct()) {
+			mana -= getFinalCost();
 			Random r = supertile.getWorldObj().rand;
 			EnumBeeType beeType = EnumBeeType.DRONE;
 			
