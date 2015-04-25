@@ -6,6 +6,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.main.CommonProxy;
+import magicbees.main.Config;
 import magicbees.main.utils.LocalizationManager;
 import magicbees.main.utils.TabMagicBees;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -26,41 +27,15 @@ public class ItemMysteriousMagnet extends Item
 	@SideOnly(Side.CLIENT)
 	private IIcon activeIcon;
 	
-	private float rangeBase;
-	private float multiplier;
-	private int maxLevel;
-	private final float fudgeFactor = 0.2f;
+	private final float FUDGE_FACTOR = 0.2f;
 	
 	public ItemMysteriousMagnet()
 	{
 		super();
 		this.setNoRepair();
 		this.setHasSubtypes(true);
-		this.rangeBase = 3f;
-		this.multiplier = 0.75f;
-		this.maxLevel = 8;
 		this.setUnlocalizedName(CommonProxy.DOMAIN + ":mysteriousMagnet");
 		this.setCreativeTab(TabMagicBees.tabMagicBees);
-	}
-	
-	public void setBaseRange(float value)
-	{
-		this.rangeBase = value;
-	}
-	
-	public void setLevelMultiplier(float value)
-	{
-		this.multiplier = value;
-	}
-	
-	public void setMaximumLevel(int value)
-	{
-		this.maxLevel = value;
-	}
-	
-	public int getMaximumLevel()
-	{
-		return this.maxLevel;
 	}
 
 	@Override
@@ -84,7 +59,7 @@ public class ItemMysteriousMagnet extends Item
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
-		for (int i = 0; i <= this.maxLevel; i++)
+		for (int i = 0; i <= getMaximumLevel(); i++)
 		{
 			list.add(new ItemStack(this, 1, i * 2));
 		}
@@ -129,12 +104,12 @@ public class ItemMysteriousMagnet extends Item
 		if (isMagnetActive(itemStack) && entity instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer)entity;
-			float radius = getRadius(itemStack.getItemDamage()) - fudgeFactor;
+			float radius = getRadius(itemStack.getItemDamage()) - FUDGE_FACTOR;
 			AxisAlignedBB bounds = player.boundingBox.expand(radius, radius, radius);
 			
 			if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER)
 			{
-				bounds.expand(fudgeFactor, fudgeFactor, fudgeFactor);
+				bounds.expand(FUDGE_FACTOR, FUDGE_FACTOR, FUDGE_FACTOR);
 				
 				if ((itemStack.getItemDamage() >> 1) >= 7)
 				{
@@ -198,10 +173,15 @@ public class ItemMysteriousMagnet extends Item
 	{
 		return (damage & 0x01) == 1;
 	}
+	
+	public int getMaximumLevel()
+	{
+		return Config.magnetMaxLevel;
+	}
 
 	private float getRadius(int damageValue)
 	{
-		return this.rangeBase + (multiplier * (damageValue >> 1));
+		return Config.magnetBaseRange + (Config.magnetLevelMultiplier * (damageValue >> 1));
 	}
 
 }

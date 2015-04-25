@@ -68,6 +68,11 @@ import forestry.api.storage.EnumBackpackType;
  */
 public class Config
 {
+	public static final String CATEGORY_GENERAL = "general";
+	public static final String CATEGORY_DEBUG = "debug";
+	public static final String CATEGORY_MODULES = "modules";
+	public static final String CATEGORY_BOTANIA = "botaniaPlugin";
+	
 	public static boolean drawParticleEffects;
 	public static boolean beeInfusionsAdded;
 	public static boolean thaumaturgeBackpackActive;
@@ -245,6 +250,7 @@ public class Config
 			{
 				configuration.save();
 			}
+			syncConfigs();
 		}
 	}
 
@@ -302,6 +308,10 @@ public class Config
 			LogHelper.debug(e);
 		}
 
+		syncConfigs();
+	}
+	
+	private void syncConfigs() {
 		doGeneralConfigs();
 		doModuleConfigs();
 		doDebugConfigs();
@@ -309,7 +319,7 @@ public class Config
 
 	private void doDebugConfigs() {
 		Property p;
-		p = configuration.get("debug", "logHiveSpawns", false);
+		p = configuration.get(CATEGORY_DEBUG, "logHiveSpawns", false);
 		p.comment = "Enable to see exact locations of MagicBees hive spawns.";
 		logHiveSpawns = p.getBoolean();
 	}
@@ -317,90 +327,89 @@ public class Config
 	private void doModuleConfigs() {
 		Property p;
 		//Modules
-		p = configuration.get("modules", "ArsMagica", true);
+		p = configuration.get(CATEGORY_MODULES, "ArsMagica", true);
 		arsMagicaActive = p.getBoolean();
 
-		p = configuration.get("modules", "BloodMagic", true);
+		p = configuration.get(CATEGORY_MODULES, "BloodMagic", true);
 		bloodMagicActive = p.getBoolean();
 
-		p = configuration.get("modules", "EquivalentExchange", true);
+		p = configuration.get(CATEGORY_MODULES, "EquivalentExchange", true);
 		equivalentExchangeActive = p.getBoolean();
 
-		p = configuration.get("modules", "ExtraBees", true);
+		p = configuration.get(CATEGORY_MODULES, "ExtraBees", true);
 		extraBeesActive = p.getBoolean();
 
-		p = configuration.get("modules", "RedstoneArsenal", true);
+		p = configuration.get(CATEGORY_MODULES, "RedstoneArsenal", true);
 		redstoneArsenalActive = p.getBoolean();
 
-		p = configuration.get("modules", "Thaumcraft", true);
+		p = configuration.get(CATEGORY_MODULES, "Thaumcraft", true);
 		thaumcraftActive = p.getBoolean();
 
-		p = configuration.get("modules", "ThermalExpansion", true);
+		p = configuration.get(CATEGORY_MODULES, "ThermalExpansion", true);
 		thermalExpansionActive = p.getBoolean();
 		
-		p = configuration.get("modules", "Botania", true);
+		p = configuration.get(CATEGORY_MODULES, "Botania", true);
 		botaniaActive = p.getBoolean();
 		BotaniaHelper.doBotaniaModuleConfigs(configuration);
 	}
 
 	private void doGeneralConfigs() {
 		Property p;
-		final String section = "general"; 
-		p = configuration.get(section, "backpack.thaumaturge.active", true);
+		p = configuration.get(CATEGORY_GENERAL, "backpack.thaumaturge.active", true);
 		p.comment = "Set to false to disable the Thaumaturge backpack";
 		thaumaturgeBackpackActive = p.getBoolean(true);
 
-		p = configuration.get(section, "backpack.thaumaturge.additionalItems", "");
+		p = configuration.get(CATEGORY_GENERAL, "backpack.thaumaturge.additionalItems", "");
 		p.comment = "Add additional items to the Thaumaturge's Backpack." +
 				"\n Format is the same as Forestry's: id:meta;id;id:meta (etc)";
 		thaumaturgeExtraItems = p.getString();
 		
-		p = configuration.get(section, "backpack.forestry.addThaumcraftItems", true);
+		p = configuration.get(CATEGORY_GENERAL, "backpack.forestry.addThaumcraftItems", true);
 		p.comment = "Set to true if you want MagicBees to add several Thaumcraft blocks & items to Forestry backpacks." +
 				"\n Set to false to disable.";
 		addThaumcraftItemsToBackpacks = p.getBoolean(true);
 		
-		p = configuration.get(section, "capsuleStackSize", 64);
+		p = configuration.get(CATEGORY_GENERAL, "capsuleStackSize", 64);
 		p.comment = "Allows you to edit the stack size of the capsules in MagicBees if using GregTech, \n" +
 				"or the reduced capsule size in Forestry & Railcraft. Default: 64";
 		capsuleStackSizeMax = p.getInt();
 		
-		p = configuration.get(section, "disableVersionNotification", false);
+		p = configuration.get(CATEGORY_GENERAL, "disableVersionNotification", false);
 		p.comment = "Set to true to stop Magic Bees from notifying you when new updates are available. (Does not supress critical updates)";
 		disableUpdateNotification = p.getBoolean(false);
 		
-		p = configuration.get(section, "areMagicPlanksFlammable", false);
+		p = configuration.get(CATEGORY_GENERAL, "areMagicPlanksFlammable", false);
 		p.comment = "Set to true to allow Greatwood & Silverwood planks to burn in a fire.";
 		areMagicPlanksFlammable = p.getBoolean(false);
 		
-		p = configuration.get(section, "useImpregnatedStickInTools", false);
+		p = configuration.get(CATEGORY_GENERAL, "useImpregnatedStickInTools", false);
 		p.comment = "Set to true to make Thaumium Grafter & Scoop require impregnated sticks in the recipe.";
 		useImpregnatedStickInTools = p.getBoolean(false);
 
-		p = configuration.get(section, "thaumCraftSaplingDroprate", 0.1, "The chance for thaumcraft saplings using the thaumium grafter", 0.0, 1.0);
+		p = configuration.get(CATEGORY_GENERAL, "thaumCraftSaplingDroprate", 0.1, "The chance for thaumcraft saplings using the thaumium grafter", 0.0, 1.0);
 		thaumcraftSaplingDroprate = p.getDouble(0.1);
 
-		p = configuration.get(section, "moonDialShowText", false);
+		p = configuration.get(CATEGORY_GENERAL, "moonDialShowText", false);
 		p.comment = "set to true to show the current moon phase in mouse-over text.";
 		moonDialShowsPhaseInText = p.getBoolean(false);
 		
-		p = configuration.get(section, "doSpecialHiveGen", true);
+		p = configuration.get(CATEGORY_GENERAL, "doSpecialHiveGen", true);
 		p.comment = "Set to false if you hate fun and do not want special hives generating in Magic biomes.";
 		doSpecialHiveGen = p.getBoolean(true);
 
-		p = configuration.get(section, "magnetRangeBase", 3.0);
+		p = configuration.get(CATEGORY_GENERAL, "magnetRangeBase", 3.0);
 		p.comment = "Base range (in blocks) of the Mysterious Magnet";
 		magnetBaseRange = (float)p.getDouble(3.0);
 		
-		p = configuration.get(section, "magnetRangeMultiplier", 0.75);
+		p = configuration.get(CATEGORY_GENERAL, "magnetRangeMultiplier", 0.75);
 		p.comment = "Range multiplier per level of the Mysterious Magnet. Total range = base range + level * multiplier";
 		magnetLevelMultiplier = (float)p.getDouble(0.75);
 		
-		p = configuration.get(section, "magnetMaximumLevel", 8);
+		p = configuration.get(CATEGORY_GENERAL, "magnetMaximumLevel", 8);
 		p.comment = "Maximum level of the magnets.";
 		magnetMaxLevel = p.getInt();
 		
-		p = configuration.get(section, "aromaticLumpSwarmerRate", 95);
+		p = configuration.get(CATEGORY_GENERAL, "aromaticLumpSwarmerRate", 95);
 		p.comment = "Aromatic lump swarmer rate. Final value is X/1000. 0 will disable, values outside of [0,1000] will be clamped to range. Default: 95";
 		aromaticLumpSwarmerRate = p.getInt();
 	}
@@ -442,15 +451,11 @@ public class Config
 
 	private void setupMysteriousMagnet() {
 		magnet = new ItemMysteriousMagnet();
-		magnet.setBaseRange(magnetBaseRange);
-		magnet.setLevelMultiplier(magnetLevelMultiplier);
-		magnet.setMaximumLevel(magnetMaxLevel);
 		GameRegistry.registerItem(magnet, "magnet", CommonProxy.DOMAIN);
 	}
 
 	private void setupJellyBaby() {
-		jellyBaby = new ItemFood(1, false).setAlwaysEdible()
-				.setPotionEffect(Potion.moveSpeed.id, 5, 1, 1f);
+		jellyBaby = new ItemFood(1, false).setAlwaysEdible().setPotionEffect(Potion.moveSpeed.id, 5, 1, 1f);
 		jellyBaby.setUnlocalizedName(CommonProxy.DOMAIN + ":jellyBabies").setTextureName(CommonProxy.DOMAIN + ":jellyBabies");
 		GameRegistry.registerItem(jellyBaby, "jellyBabies");
 	}

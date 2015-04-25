@@ -158,25 +158,24 @@ public class BotaniaHelper {
 	
 	public static void doBotaniaModuleConfigs(Configuration configuration) {
 		Property p;
-		String section = "botaniaPlugin";
-		
-		p = configuration.get(section, "beegoniaManaMultiplier", 1.0);
+
+		p = configuration.get(Config.CATEGORY_BOTANIA, "beegoniaManaMultiplier", 1.0);
 		p.comment = "Multiplier for the Beegonia's mana generation. Default: 1.0 (Affects duration, not throughput)";
 		beegoniaManaMultiplier = p.getDouble();
 		
-		p = configuration.get(section, "hiveacynthManaMultiplier", 1.0);
+		p = configuration.get(Config.CATEGORY_BOTANIA, "hiveacynthManaMultiplier", 1.0);
 		p.comment = "Multiplier for the Hiveacynth's mana consumption. Default: 1.0";
 		hiveacynthManaMultiplier = p.getDouble();
 		
-		p = configuration.get(section, "hiveacynthRainResistRate", 0.1);
+		p = configuration.get(Config.CATEGORY_BOTANIA, "hiveacynthRainResistRate", 0.1);
 		p.comment = "Rate at which the Hiveacynth applies rain resist to spawned bees. Default: 0.1 Setting to 0 will disable.";
 		hiveacynthRainResistRate = p.getDouble();
 		
-		p = configuration.get(section, "hiveacynthPrincessSpawnRate", 0.09);
+		p = configuration.get(Config.CATEGORY_BOTANIA, "hiveacynthPrincessSpawnRate", 0.09);
 		p.comment = "Rate at which the Hiveacynth will spawn a Princess instead of a Drone. Default: 0.09. Setting to 0 will disable.";
 		hiveacynthPrincessSpawnRate = p.getDouble();
 		
-		p = configuration.get(section, "hiveacynthPristineRate", 0.15);
+		p = configuration.get(Config.CATEGORY_BOTANIA, "hiveacynthPristineRate", 0.15);
 		p.comment = "Rate at which the Hiveacynth will produce a Pristine Princess, when it produces a princess. Default: 0.15. Setting to 0 will disable.";
 		hiveacynthPristineRate = p.getDouble();
 	}
