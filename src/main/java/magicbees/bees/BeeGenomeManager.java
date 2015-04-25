@@ -331,6 +331,7 @@ public class BeeGenomeManager {
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BIGBAD;
 		genome[EnumBeeChromosome.CAVE_DWELLING.ordinal()] = Allele.getBaseAllele("boolTrue");
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnWisp;
 		
 		return genome;
 	}

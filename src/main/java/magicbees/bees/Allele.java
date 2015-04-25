@@ -53,12 +53,13 @@ public class Allele implements IAllele {
 	public static IAlleleEffect effectInvisibility;
 	public static IAlleleEffect effectDreaming;
 
-	public static IAlleleEffect spawnBrainyZombie;
-	public static IAlleleEffect spawnWisp;
-	public static IAlleleEffect spawnBats;
 	public static IAlleleEffect spawnGhast;
 	public static IAlleleEffect spawnSpider;
 	public static IAlleleEffect spawnBlaze;
+	public static IAlleleEffect spawnWolf;
+	public static IAlleleEffect spawnBrainyZombie;
+	public static IAlleleEffect spawnWisp;
+	public static IAlleleEffect spawnBats;
 	public static IAlleleEffect spawnBlizz;
 	public static IAlleleEffect spawnManaDrainer;
 	public static IAlleleEffect spawnWispOrHecate;
@@ -144,13 +145,21 @@ public class Allele implements IAllele {
 
 		Allele.effectInvisibility = new AlleleEffectPotion("Invisibility", Potion.invisibility, 10, false);
 
-		Allele.spawnGhast = new AlleleEffectSpawnMob("Ghastly", false, "Ghast", "mob.ghast.moan").setThrottle(2060).setChanceToSpawn(10)
+		Allele.spawnGhast = new AlleleEffectSpawnMob("Ghastly", false, "Ghast", "mob.ghast.moan")
+				.setThrottle(2060)
+				.setChanceToSpawn(10)
 				.setMaxMobsInSpawnZone(1);
-
-		Allele.spawnSpider = new AlleleEffectSpawnMob("Spidery", false, "Spider", "mob.spider.step").setThrottle(400).setChanceToSpawn(70)
+		Allele.spawnSpider = new AlleleEffectSpawnMob("Spidery", false, "Spider", "mob.spider.step")
+				.setThrottle(400)
+				.setChanceToSpawn(70)
 				.setMaxMobsInSpawnZone(4);
-
-		Allele.spawnBlaze = new AlleleEffectSpawnMob("Ablaze", false, "Blaze", "mob.blaze.breathe").setThrottle(800).setChanceToSpawn(60)
+		Allele.spawnBlaze = new AlleleEffectSpawnMob("Ablaze", false, "Blaze", "mob.blaze.breathe")
+				.setThrottle(800)
+				.setChanceToSpawn(60)
+				.setMaxMobsInSpawnZone(2);
+		Allele.spawnWolf = new AlleleEffectSpawnMob("Canine", false , "Wolf", "mob.wolf.panting")
+				.setThrottle(950)
+				.setChanceToSpawn(40)
 				.setMaxMobsInSpawnZone(2);
 	}
 
