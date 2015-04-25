@@ -39,6 +39,7 @@ public class ItemMiscResources extends Item
 	
 	@Override
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
 		for (ResourceType type : ResourceType.values())

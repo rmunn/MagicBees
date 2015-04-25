@@ -13,7 +13,6 @@ import magicbees.block.BlockWoodSlab;
 import magicbees.block.types.HiveType;
 import magicbees.item.ItemCapsule;
 import magicbees.item.ItemComb;
-import magicbees.item.ItemCrystalAspect;
 import magicbees.item.ItemDrop;
 import magicbees.item.ItemMagicHive;
 import magicbees.item.ItemMagicHiveFrame;
@@ -113,7 +112,6 @@ public class Config
 	public static ItemPropolis propolis;
 	public static ItemDrop drops;
 	public static ItemPollen pollen;
-	public static ItemCrystalAspect solidFlux;
 	public static ItemMiscResources miscResources;
 	public static ItemFood jellyBaby;
 	public static Item manasteelScoop;
@@ -257,8 +255,9 @@ public class Config
 
 	public void setupBlocks()
 	{
-		setupEffectJar();
 		setupHives();
+		
+		setupEffectJar();
 		setupApiary();
 		
 		setupBotaniaBlocks();
@@ -272,23 +271,19 @@ public class Config
 		propolis = new ItemPropolis();
 		drops = new ItemDrop();
 		miscResources = new ItemMiscResources();
-		
-		setupThaumcraftBackpacks();
-
-		magicCapsule = new ItemCapsule(CapsuleType.MAGIC, capsuleStackSizeMax);
 		pollen = new ItemPollen();
-		
-		setupThaumcraftItems();	
-		setupBotaniaItems();
-		setupFrames();
-		setupJellyBaby();		
-		voidCapsule = new ItemCapsule(CapsuleType.VOID, capsuleStackSizeMax);	
 		moonDial = new ItemMoonDial();
-		
+		setupJellyBaby();
 		setupNuggets();
 		setupMysteriousMagnet();
-		setupOreDictionaryEntries();
+		setupFrames();
+		magicCapsule = new ItemCapsule(CapsuleType.MAGIC, capsuleStackSizeMax);
+		voidCapsule = new ItemCapsule(CapsuleType.VOID, capsuleStackSizeMax);
 		
+		setupThaumcraftItems();
+		setupBotaniaItems();
+		
+		setupOreDictionaryEntries();
 		setupMiscForestryItemHooks();
 	}
 
@@ -515,31 +510,6 @@ public class Config
 		}
 	}
 	
-	private void setupThaumcraftBackpacks() {
-		if (ThaumcraftHelper.isActive() && thaumaturgeBackpackActive) {
-			try {
-				// 0x8700C6 is a purple-y colour, which is associated with Thaumcraft.
-				String backpackName = LocalizationManager.getLocalizedString("backpack.thaumaturge");
-				BackpackDefinition def = new BackpackDefinition("thaumaturge", backpackName, 0x8700C6);
-				thaumaturgeBackpackT1 = BackpackManager.backpackInterface.addBackpack(def, EnumBackpackType.T1);
-				thaumaturgeBackpackT1.setUnlocalizedName("backpack.thaumaturgeT1");
-				GameRegistry.registerItem(thaumaturgeBackpackT1, "backpack.thaumaturgeT1");
-				thaumaturgeBackpackT2 = BackpackManager.backpackInterface.addBackpack(def, EnumBackpackType.T2);
-				thaumaturgeBackpackT2.setUnlocalizedName("backpack.thaumaturgeT2");
-				GameRegistry.registerItem(thaumaturgeBackpackT2, "backpack.thaumaturgeT2");
-				// Add additional items from configs to backpack.
-				if (thaumaturgeExtraItems.length() > 0) {
-					LogHelper.info("Attempting to add extra items to Thaumaturge's backpack. If you get an error, check your MagicBees.conf.");
-					FMLInterModComms.sendMessage("Forestry", "add-backpack-items", "thaumaturge@" + thaumaturgeExtraItems);
-				}
-			}
-			catch (Exception e) {
-				LogHelper.error("MagicBees encountered a problem during loading!");
-				LogHelper.error("Could not register backpacks via Forestry. Check your FML Client log and see if Forestry crashed silently.");
-			}
-		}
-	}
-	
 	private void setupThaumcraftBlocks() {
 		if (ThaumcraftHelper.isActive()) {
 			visAuraProvider = new BlockVisAuraProvider();
@@ -551,12 +521,37 @@ public class Config
 	private void setupThaumcraftItems() {
 		if (ThaumcraftHelper.isActive())
 		{
+			setupThaumcraftBackpacks();
+			
             // Items
 			thaumiumScoop = new ItemThaumiumScoop();
 			GameRegistry.registerItem(thaumiumScoop, thaumiumScoop.getUnlocalizedName(), CommonProxy.DOMAIN);
 			
 			thaumiumGrafter = new ItemThaumiumGrafter();
 			GameRegistry.registerItem(thaumiumGrafter, thaumiumGrafter.getUnlocalizedName(), CommonProxy.DOMAIN);
+		}
+	}
+	
+	private void setupThaumcraftBackpacks() {
+		try {
+			// 0x8700C6 is a purple-y colour, which is associated with Thaumcraft.
+			String backpackName = LocalizationManager.getLocalizedString("backpack.thaumaturge");
+			BackpackDefinition def = new BackpackDefinition("thaumaturge", backpackName, 0x8700C6);
+			thaumaturgeBackpackT1 = BackpackManager.backpackInterface.addBackpack(def, EnumBackpackType.T1);
+			thaumaturgeBackpackT1.setUnlocalizedName("backpack.thaumaturgeT1");
+			GameRegistry.registerItem(thaumaturgeBackpackT1, "backpack.thaumaturgeT1");
+			thaumaturgeBackpackT2 = BackpackManager.backpackInterface.addBackpack(def, EnumBackpackType.T2);
+			thaumaturgeBackpackT2.setUnlocalizedName("backpack.thaumaturgeT2");
+			GameRegistry.registerItem(thaumaturgeBackpackT2, "backpack.thaumaturgeT2");
+			// Add additional items from configs to backpack.
+			if (thaumaturgeExtraItems.length() > 0) {
+				LogHelper.info("Attempting to add extra items to Thaumaturge's backpack. If you get an error, check your MagicBees.conf.");
+				FMLInterModComms.sendMessage("Forestry", "add-backpack-items", "thaumaturge@" + thaumaturgeExtraItems);
+			}
+		}
+		catch (Exception e) {
+			LogHelper.error("MagicBees encountered a problem during loading!");
+			LogHelper.error("Could not register backpacks via Forestry. Check your FML Client log and see if Forestry crashed silently.");
 		}
 	}
 

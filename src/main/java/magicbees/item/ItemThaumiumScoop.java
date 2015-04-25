@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.IRepairable;
 import thaumcraft.api.ThaumcraftApi;
 import cpw.mods.fml.common.Optional;
@@ -77,7 +78,8 @@ public class ItemThaumiumScoop extends Item implements IRepairable, IToolScoop
 	@Optional.Method(modid = ThaumcraftHelper.Name)
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
-		return ThaumcraftApi.toolMatThaumium.customCraftingMaterial == par2ItemStack.getItem() || super.getIsRepairable(par1ItemStack, par2ItemStack);
+		return OreDictionary.itemMatches(ThaumcraftApi.toolMatThaumium.getRepairItemStack(), par2ItemStack, true)
+				|| super.getIsRepairable(par1ItemStack, par2ItemStack);
 	}
 
 	@Override

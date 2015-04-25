@@ -1,16 +1,11 @@
 package magicbees.main.utils.compat;
 
-import java.lang.reflect.Field;
-
-import cpw.mods.fml.common.Loader;
 import magicbees.main.Config;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import cpw.mods.fml.common.Loader;
 
-public class ExtraBeesHelper
-{
-	public enum CombType
-	{
+public class ExtraBeesHelper {
+	
+	public enum CombType {
 		BARREN,
 		ROTTEN,
 		BONE,
@@ -91,46 +86,26 @@ public class ExtraBeesHelper
 		PULP,
 		MULCH,
 		COMPOST,
-		SAWDUST,;
+		SAWDUST,
+		;
 	}
 
 	private static boolean isEBPresent = false;
 
-	public static boolean isActive()
-	{
+	public static boolean isActive() {
 		return isEBPresent;
 	}
 
-	public static void preInit()
-	{
+	public static void preInit() {
 		if (Loader.isModLoaded("ExtraBees") && Config.extraBeesActive)
 		{
 			isEBPresent = true;
 		}
 	}
 
-	public static void init()
-	{
+	public static void init() {
 	}
 
-	public static void postInit()
-	{
-	}
-
-	public static ItemStack getExtraBeeItem(String field)
-	{
-		ItemStack value = null;
-		try
-		{
-			Class src = Class.forName("binnie.extrabees.core.ExtraBeeItem");
-			Field f = src.getDeclaredField(field);
-
-			Item i = (Item)f.get(null);
-			value = new ItemStack(i);
-		}
-		catch (Exception e)
-		{
-		}
-		return value;
+	public static void postInit() {
 	}
 }

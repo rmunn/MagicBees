@@ -48,6 +48,7 @@ public class ItemMoonDial extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List infoList, boolean par4)
 	{
 		if (Config.moonDialShowsPhaseInText &&

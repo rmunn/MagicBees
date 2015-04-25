@@ -2,20 +2,18 @@ package magicbees.item;
 
 import java.util.List;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.item.types.CapsuleType;
 import magicbees.item.types.FluidType;
 import magicbees.main.CommonProxy;
-import magicbees.main.Config;
-import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.TabMagicBees;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemCapsule extends Item
 {
@@ -48,6 +46,7 @@ public class ItemCapsule extends Item
 		return new ItemStack(this, 1, l.ordinal());
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List itemList)

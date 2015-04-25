@@ -1,24 +1,9 @@
 package magicbees.main.utils;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import magicbees.main.CommonProxy;
 
 public class LocalizationManager
 {
-	private enum Locale
-	{
-		de_DE("de_DE"),
-		en_US("en_US"),
-		ru_RU("ru_RU"),
-		zh_CN("zh_CN"),;
-		public String locale;
-
-		private Locale(String loc)
-		{
-			this.locale = loc;
-		}
-	}
-
 	public static String getLocalizedString(String key)
 	{
 		String result = LanguageRegistry.instance().getStringLocalization(key);

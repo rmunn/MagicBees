@@ -37,6 +37,7 @@ public class ItemNugget extends Item
 	
 	@Override
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
 		for (NuggetType type : NuggetType.values())

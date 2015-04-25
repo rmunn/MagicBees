@@ -7,7 +7,7 @@ public enum FluidType
 {
 	// Incidentally, Item meta is the liquid ID.
 	
-	// Args are: forgeLiquidID, Display Name, Icon idx
+	// Args are: forgeLiquidID
 	EMPTY(""),
 	
 	// Vanilla

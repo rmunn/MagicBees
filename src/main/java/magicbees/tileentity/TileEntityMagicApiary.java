@@ -719,6 +719,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
 		return chunks;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private boolean searchChunkForBooster(Chunk chunk) {
 		Vec3 apiaryPos = Vec3.createVectorHelper(xCoord, yCoord, zCoord);
 		for (Map.Entry<ChunkPosition, TileEntity> entry : ((Map<ChunkPosition, TileEntity>)chunk.chunkTileEntityMap).entrySet()) {

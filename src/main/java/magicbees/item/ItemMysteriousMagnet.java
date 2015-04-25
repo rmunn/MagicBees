@@ -65,6 +65,7 @@ public class ItemMysteriousMagnet extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4)
 	{
 		String s = LocalizationManager.getLocalizedString("misc.level", itemStack.getItemDamage() >> 1);
@@ -80,6 +81,7 @@ public class ItemMysteriousMagnet extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubItems(Item item, CreativeTabs tabs, List list)
 	{
 		for (int i = 0; i <= this.maxLevel; i++)
@@ -120,13 +122,13 @@ public class ItemMysteriousMagnet extends Item
 		return itemStack;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onUpdate(ItemStack itemStack, World world, Entity entity, int par4, boolean par5)
 	{
 		if (isMagnetActive(itemStack) && entity instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer)entity;
-			int dragCount = player.getCommandSenderName().hashCode();
 			float radius = getRadius(itemStack.getItemDamage()) - fudgeFactor;
 			AxisAlignedBB bounds = player.boundingBox.expand(radius, radius, radius);
 			
