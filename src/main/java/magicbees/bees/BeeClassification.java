@@ -51,7 +51,7 @@ public enum BeeClassification implements IClassification
 		this.uID = "classification." + name.toLowerCase();
 		this.latin = scientific;
 		this.level = EnumClassLevel.GENUS;
-		this.species = new ArrayList();
+		this.species = new ArrayList<IAlleleSpecies>();
 		this.parent = AlleleManager.alleleRegistry.getClassification("family.apidae");
 		AlleleManager.alleleRegistry.registerClassification(this);
 	}

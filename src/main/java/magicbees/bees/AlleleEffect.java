@@ -58,6 +58,7 @@ public abstract class AlleleEffect extends Allele implements IAlleleBeeEffect
 		return Allele.forestryBaseEffect.doFX(genome, storedData, housing);
 	}
 	
+	@SuppressWarnings("unchecked")
 	protected List<Entity> getEntitiesWithinRange(IBeeGenome genome, IBeeHousing housing)
 	{
 		// Get the size of the affected area
@@ -76,7 +77,7 @@ public abstract class AlleleEffect extends Allele implements IAlleleBeeEffect
 		max[2] = housing.getZCoord() + area[2] / 2;
 		
 		AxisAlignedBB bounds = AxisAlignedBB.getBoundingBox(min[0], min[1], min[2], max[0], max[1], max[2]);
-		return housing.getWorld().getEntitiesWithinAABB(EntityPlayer.class, bounds);
+		return (List<Entity>)housing.getWorld().getEntitiesWithinAABB(EntityPlayer.class, bounds);
 	}
 
 }

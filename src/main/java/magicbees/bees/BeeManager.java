@@ -11,7 +11,6 @@ import magicbees.main.Config;
 import magicbees.main.utils.Tuple;
 import magicbees.main.utils.compat.ExtraBeesHelper;
 import net.minecraft.item.ItemStack;
-import forestry.api.apiculture.EnumBeeChromosome;
 import forestry.api.apiculture.EnumBeeType;
 import forestry.api.apiculture.IAlleleBeeSpecies;
 import forestry.api.apiculture.IBee;

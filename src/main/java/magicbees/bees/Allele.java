@@ -1,7 +1,6 @@
 package magicbees.bees;
 
 import magicbees.api.MagicBeesAPI;
-import magicbees.api.bees.ITransmutationEffectLogic;
 import magicbees.bees.allele.effect.AlleleEffectCrumbling;
 import magicbees.bees.allele.effect.AlleleEffectCure;
 import magicbees.bees.allele.effect.AlleleEffectPotion;
