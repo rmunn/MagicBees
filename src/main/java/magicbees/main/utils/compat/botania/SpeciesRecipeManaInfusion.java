@@ -20,7 +20,8 @@ public class SpeciesRecipeManaInfusion extends RecipeManaInfusion {
 		super(BeeManager.getDefaultItemStackForSpecies(outSpecies, type), BeeManager.getDefaultItemStackForSpecies(inSpecies, type), mana);
 		outputSpecies = outSpecies;
 		inputSpecies = inSpecies;
-		this.beeType = type;
+		beeType = type;
+		outputCache = super.getOutput();
 	}
 	
 	@Override

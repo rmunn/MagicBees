@@ -68,6 +68,10 @@ public class BeeProductHelper {
 		SMOULDERING.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 10)
 			.addProduct(Config.combs.getStackForType(CombType.MOLTEN), 10)
 			.addSpecialty(new ItemStack(Items.blaze_rod), 5);
+		BIGBAD.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 18)
+			.addProduct(new ItemStack(Items.beef), 12)
+			.addProduct(new ItemStack(Items.chicken), 12)
+			.addSpecialty(new ItemStack(Items.melon), 10);
 
 		TIMELY.addProduct(Config.combs.getStackForType(CombType.TEMPORAL), 16);
 		LORDLY.addProduct(Config.combs.getStackForType(CombType.TEMPORAL), 19);

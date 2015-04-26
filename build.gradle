@@ -69,3 +69,7 @@ idea {
     }
 }
 
+task deobfJar(type: Jar) { // Generate deobfuscated
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
