@@ -511,7 +511,7 @@ public class ThaumcraftHelper {
 				new ItemStack(Config.visAuraProvider))
 		.setPages(getResearchPage("MB_VisAuraProvider.1"),
 					new ResearchPage((IArcaneRecipe) visAuraProvider))
-		.setParentsHidden("NodeRelay")
+		.setParentsHidden("VISPOWER")
 		.registerResearchItem();
 	}
 
