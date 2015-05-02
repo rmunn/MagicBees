@@ -40,7 +40,7 @@ public class BotaniaAPIDistanceHelper {
 		infusionBeeBotanical = new SpeciesRecipeManaInfusion(BeeSpecies.BOT_BOTANIC, BeeSpecies.BOT_ROOTED, 55000, EnumBeeType.DRONE);
 		BotaniaAPI.manaInfusionRecipes.add(infusionBeeBotanical);
 		
-		infusionBeeVazbee = new SpeciesRecipeManaInfusion(BeeSpecies.BOT_VAZBEE, BeeSpecies.BOT_VAZBEE, 167392, EnumBeeType.PRINCESS);
+		infusionBeeVazbee = new SpeciesRecipeManaInfusion(BeeSpecies.BOT_VAZBEE, BeeSpecies.BOT_FLORAL, 167392, EnumBeeType.PRINCESS);
 		infusionBeeVazbee.setAlchemy(true);
 		BotaniaAPI.manaInfusionRecipes.add(infusionBeeVazbee);
 		
