@@ -58,6 +58,26 @@ public class BotaniaHelper {
 		MYCELIUM,
 		;
 	}
+	
+	public enum Rune {
+		WATER,
+		FIRE,
+		EARTH,
+		AIR,
+		SPRING,
+		SUMMER,
+		AUTUMN,
+		WINTER,
+		MANA,
+		LUST,
+		GLUTTONY,
+		GREED,
+		SLOTH,
+		WRATH,
+		ENVY,
+		PRIDE,
+		;
+	}
 
 	public static Block blockMysticalFlower;
 	public static Block blockLivingRock;
@@ -68,6 +88,7 @@ public class BotaniaHelper {
 	public static Item itemManaPetal;
 	public static Item itemManaResource;
 	public static Item itemPastureSeed;
+	public static Item itemRune;
 	
 	public static ItemStack[] mysticalFlowerVariants;
 	
@@ -154,6 +175,7 @@ public class BotaniaHelper {
 		itemManaPetal = ItemInterface.getItem(Name, "manaPetal");
 		itemManaResource = ItemInterface.getItem(Name, "manaResource");
 		itemPastureSeed = ItemInterface.getItem(Name, "grassSeeds");
+		itemRune = ItemInterface.getItem(Name, "rune");
 	}
 	
 	public static void doBotaniaModuleConfigs(Configuration configuration) {
@@ -182,5 +204,9 @@ public class BotaniaHelper {
 
 	public static boolean requestMana(ItemStack stack, EntityPlayer player, int manaPerDamage, int charges) {
 		return ManaItemHandler.requestManaExactForTool(stack, player, manaPerDamage * charges, true);
+	}
+	
+	public static ItemStack getRune(Rune rune, int quantity) {
+		return new ItemStack(itemRune, quantity, rune.ordinal());
 	}
 }
