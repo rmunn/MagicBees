@@ -116,6 +116,7 @@ public class BotaniaAPIDistanceHelper {
 		entryHibeescus = new BotaniaLexiconEntry("tile.botania:flower." + SubTileHibeescus.NAME + ".name", BotaniaAPI.categoryFunctionalFlowers);
 		entryHibeescus.setLexiconPages(BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.hibeescus.0"),
 				BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.hibeescus.1"),
+				BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.hibeescus.2"),
 				BotaniaAPI.internalHandler.petalRecipePage("magicbees.botania.lexicon.hibeescus.crafting", hibeescusRecipe)
 			);
 		

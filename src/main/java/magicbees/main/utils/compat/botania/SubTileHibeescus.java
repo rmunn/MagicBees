@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.bees.BeeManager;
+import magicbees.main.utils.compat.BotaniaHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.IIcon;
+import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.subtile.SubTileFunctional;
 import forestry.api.apiculture.EnumBeeType;
 import forestry.api.apiculture.IBee;
@@ -16,7 +21,8 @@ import forestry.api.apiculture.IBee;
 public class SubTileHibeescus extends SubTileFunctional {
 	
 	public static final String NAME = "hibeescus";
-	private final int MANA_PER_OPERATION = 100000;
+	private final int MANA_PER_OPERATION = 10000;
+	// Ticks per second * seconds per minute * real-time minutes
 	private final int OPERATION_TICKS_TIME = 20 * 60 * 15;
 	private final int RANGE = 1;
 	
@@ -26,11 +32,14 @@ public class SubTileHibeescus extends SubTileFunctional {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
+		if (supertile.getWorldObj().isRemote) {
+			return;
+		}
 		
 		if (beeSlot != null && this.mana >= MANA_PER_OPERATION) {
 			progressOperation();
 		}
-		else if (beeSlot == null && this.supertile.getWorldObj().getTotalWorldTime() % 10 == 0) {
+		else if (beeSlot == null && this.supertile.getWorldObj().getTotalWorldTime() % 10 == 0 && redstoneSignal == 0) {
 			findBeeItemToHold();
 		}
 	}
@@ -68,7 +77,10 @@ public class SubTileHibeescus extends SubTileFunctional {
 			ItemStack item = itemEntity.getEntityItem();
 			if (isItemPrincessOrQueen(item)) {
 				beeSlot = itemEntity.getEntityItem();
-				operationTicksRemaining = OPERATION_TICKS_TIME;
+				operationTicksRemaining = (long)(OPERATION_TICKS_TIME * BotaniaHelper.hibeescusTicksMultiplier);
+				if (operationTicksRemaining > 0) {
+					operationTicksRemaining += supertile.getWorldObj().rand.nextInt((int)(operationTicksRemaining * 0.02));
+				}
 				
 				// Princesses and Queens don't stack, but YOU NEVER KNOW.
 				item.stackSize -= 1;
@@ -131,7 +143,13 @@ public class SubTileHibeescus extends SubTileFunctional {
 
 	@Override
 	public int getMaxMana() {
-		return MANA_PER_OPERATION;
+		return (int)(MANA_PER_OPERATION * BotaniaHelper.hibeescusManaCostMultiplier);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon() {
+		return BotaniaAPI.getSignatureForName(NAME).getIconForStack(null);
 	}
 
 	@Override

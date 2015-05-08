@@ -104,6 +104,8 @@ public class BotaniaHelper {
 	public static double hiveacynthRainResistRate;
 	public static double hiveacynthPrincessSpawnRate;
 	public static double hiveacynthPristineRate;
+	public static double hibeescusTicksMultiplier;
+	public static double hibeescusManaCostMultiplier;
 	
 	public static boolean isActive() {
 		return isBotaniaActive;
@@ -198,8 +200,16 @@ public class BotaniaHelper {
 		hiveacynthPrincessSpawnRate = p.getDouble();
 		
 		p = configuration.get(Config.CATEGORY_BOTANIA, "hiveacynthPristineRate", 0.15);
-		p.comment = "Rate at which the Hiveacynth will produce a Pristine Princess, when it produces a princess. Default: 0.15. Setting to 0 will disable.";
+		p.comment = "Rate at which the Hiveacynth will produce a Pristine Princess, when it produces a princess. Default: 0.15. Setting to 0 will disable, setting to 1 will make every Princess produced pristine..";
 		hiveacynthPristineRate = p.getDouble();
+		
+		p = configuration.get(Config.CATEGORY_BOTANIA, "hibeescusManaCostMultiplier", 1.0);
+		p.comment = "Multiplier on Hibeescus mana cost, base 10,000. Default 1.0. Setting to 0 makes you a huge cheater. <3";
+		hibeescusManaCostMultiplier = p.getDouble();
+		
+		p = configuration.get(Config.CATEGORY_BOTANIA, "hibeescusTicksMultiplier", 1.0);
+		p.comment = "Multiplier for Hibeescus operation tick time. Multiplied against 1.5 Minecraft days with some extra randomness. Default: 1.0. Setting to 0 makes you a huge cheater. <3";
+		hibeescusTicksMultiplier = p.getDouble();
 	}
 
 	public static boolean requestMana(ItemStack stack, EntityPlayer player, int manaPerDamage, int charges) {
