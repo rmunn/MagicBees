@@ -10,15 +10,13 @@ public enum AuraCharge {
 
 	public final AuraChargeType type;
 	public final int duration;
-	/** The number of ticks to count between draining vis from the environment **/
+	/** The number of ticks to count between draining vis from a nearby booster. **/
 	public final int tickRate;
-	public final int flag;
 
 	AuraCharge(AuraChargeType chargeType, int duration, int tickRate) {
 		this.type = chargeType;
 		this.duration = duration;
 		this.tickRate = tickRate;
-		flag = 1 << ordinal();
 	}
 	
 	public static AuraCharge fromChargeType(AuraChargeType type) {

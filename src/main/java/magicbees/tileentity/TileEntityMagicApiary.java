@@ -31,6 +31,8 @@ import net.minecraftforge.common.util.Constants;
 
 import com.mojang.authlib.GameProfile;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 import forestry.api.apiculture.IBee;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
@@ -43,7 +45,7 @@ import forestry.api.core.IErrorState;
 import forestry.api.genetics.IIndividual;
 import forestry.core.utils.Utils;
 
-public class TileEntityMagicApiary extends TileEntity implements ISidedInventory, IBeeHousing, ITileEntityAuraCharged {
+public class TileEntityMagicApiary extends TileEntity implements ISidedInventory, IBeeHousing/*, ITileEntityAuraCharged*/ {
 
     public static final String tileEntityName = CommonProxy.DOMAIN + ".magicApiary";
     private GameProfile ownerProfile;
@@ -631,20 +633,55 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
         iCrafting.sendProgressBarUpdate(container, 1, logic.getTotalBreedingTime());
     }
     
+    public boolean isProductionBoostEnabled() {
+    	return auraCharges.isEnabled(AuraCharge.PRODUCTION);
+    }
+    
+    public boolean isDeathBoostEnabled() {
+    	return auraCharges.isEnabled(AuraCharge.DEATH);
+    }
+    
+    public boolean isMutationBoostEnabled() {
+    	return auraCharges.isEnabled(AuraCharge.MUTATION);
+    }
+    
+    public void setProductionBoostEnabled(boolean on) {
+    	setBoostEnabled(AuraCharge.PRODUCTION, on);
+    }
+    
+    public void setDeathBoostEnabled(boolean on) {
+    	setBoostEnabled(AuraCharge.DEATH, on);
+    }
+    
+    public void setMutationBoostEnabled(boolean on) {
+    	setBoostEnabled(AuraCharge.MUTATION, on);
+    }
+    
+    public void setBoostEnabled(AuraCharge chargeType, boolean on) {
+   		boolean tmp = auraCharges.isEnabled(chargeType);
+   		auraCharges.setEnabled(chargeType, on);
+   		NetworkEventHandler.getInstance().sendAuraChargeUpdate(this, auraCharges);
+   		auraCharges.setEnabled(chargeType, tmp);
+    }
+    
+    public boolean isBoosted(AuraCharge chargeType) {
+    	return auraCharges.isEnabled(chargeType) && auraCharges.isActive(chargeType);
+    }
+    
     public boolean isProductionBoosted() {
-        return auraCharges.isActive(AuraCharge.PRODUCTION);
+        return isBoosted(AuraCharge.PRODUCTION);
     }
     
     public boolean isDeathRateBoosted() {
-        return auraCharges.isActive(AuraCharge.DEATH);
+        return isBoosted(AuraCharge.DEATH);
     }
     
     public boolean isMutationBoosted() {
-        return auraCharges.isActive(AuraCharge.MUTATION);
+        return isBoosted(AuraCharge.MUTATION);
     }
     
     private void updateAuraProvider() {
-    	if (worldObj.getTotalWorldTime() % 10 != 0) {
+    	if (worldObj.getTotalWorldTime() % 60 != 0) {
     		return;
     	}
     	if (getAuraProvider(auraProviderPosition) == null) {
@@ -655,8 +692,8 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     	
     	boolean auraChargesChanged = false;
         for (AuraCharge charge : AuraCharge.values()) {
-            if (!auraCharges.isActive(charge) && auraProvider.getCharge(charge.type)) {
-                auraCharges.start(charge, worldObj);
+            if (auraCharges.isEnabled(charge) && !auraCharges.isActive(charge) && auraProvider.getCharge(charge.type)) {
+                auraCharges.beginConsumingCharge(charge, worldObj);
                 auraChargesChanged = true;
             }
         }
@@ -670,8 +707,9 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
         boolean auraChargesChanged = false;
 
         for (AuraCharge charge : AuraCharge.values()) {
-            if (auraCharges.isActive(charge) && auraCharges.isExpired(charge, worldObj) && (auraProvider == null || !auraProvider.getCharge(charge.type))) {
-                auraCharges.stop(charge);
+            if (auraCharges.isEnabled(charge) && auraCharges.isActive(charge) 
+            		&& auraCharges.isExpired(charge, worldObj) && (auraProvider == null || !auraProvider.getCharge(charge.type))) {
+                auraCharges.endConsumingCharge(charge);
                 auraChargesChanged = true;
             }
         }
@@ -747,14 +785,8 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     
 	private IMagicApiaryAuraProvider getAuraProvider(int x, int y, int z) {
 		Chunk chunk = worldObj.getChunkFromBlockCoords(x, z);
-		x %= 16;
-		z %= 16;
-		if (x < 0) {
-			x += 16;
-		}
-		if (z < 0) {
-			z += 16;
-		}
+		x &= 15;
+		z &= 15;
 		ChunkPosition cPos = new ChunkPosition(x, y, z);
 		TileEntity entity = (TileEntity)chunk.chunkTileEntityMap.get(cPos);
         if (!(entity instanceof IMagicApiaryAuraProvider)) {
@@ -763,8 +795,18 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
         return (IMagicApiaryAuraProvider)entity;
     }
 
-    @Override
-    public AuraCharges getAuraCharges() {
+    //@Override
+    private AuraCharges getAuraCharges() {
         return auraCharges;
     }
+    
+    public void updateAuraChargesFromFlags(int flags) {
+    	auraCharges.readFromFlags(flags, FMLCommonHandler.instance().getEffectiveSide());
+		
+		if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+			NetworkEventHandler.getInstance().sendAuraChargeUpdate(this, auraCharges);
+			markDirty();
+		}
+    }
+    
 }

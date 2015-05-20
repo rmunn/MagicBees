@@ -12,8 +12,7 @@ import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.VersionInfo;
 import magicbees.main.utils.error.InvalidEventTypeIndexException;
 import magicbees.tileentity.AuraCharges;
-import magicbees.tileentity.ITileEntityAuraCharged;
-
+import magicbees.tileentity.TileEntityMagicApiary;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.NetHandlerPlayServer;
@@ -73,7 +72,7 @@ public class NetworkEventHandler {
 		sendPacket(packet);
 	}
 
-	public <T extends TileEntity & ITileEntityAuraCharged> void sendAuraChargeUpdate(T entity, AuraCharges auraCharges) {
+	public <T extends TileEntityMagicApiary> void sendAuraChargeUpdate(T entity, AuraCharges auraCharges) {
 		EventAuraChargeUpdate event = new EventAuraChargeUpdate(new ChunkCoords(entity), auraCharges);
 		FMLProxyPacket packet = event.getPacket();
 
