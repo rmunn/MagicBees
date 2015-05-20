@@ -59,9 +59,6 @@ public class MagicBees
 	public void init(FMLInitializationEvent event)
 	{
 		ModHelper.init();
-
-		BeeManager.ititializeBees();
-		
 		LogHelper.info("Init completed");
 	}
 
@@ -69,6 +66,8 @@ public class MagicBees
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		ModHelper.postInit();
+		
+		BeeManager.ititializeBees();
 
 		this.guiHandler = new GUIHandler();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, this.guiHandler);

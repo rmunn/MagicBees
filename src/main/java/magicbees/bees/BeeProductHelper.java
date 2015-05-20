@@ -319,7 +319,7 @@ public class BeeProductHelper {
 		RSA_FLUXED.addProduct(ForestryHelper.itemHoneycomb, 10);
 		
 		if (RedstoneArsenalHelper.isActive()) {
-			RSA_FLUXED.addSpecialty(Config.rsaFluxNugget, 9);
+			RSA_FLUXED.addSpecialty(RedstoneArsenalHelper.fluxNugget, 9);
 		}
 	}
 	

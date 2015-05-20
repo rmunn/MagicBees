@@ -190,9 +190,6 @@ public class Config
 	//----- Ars Magica Items -----------------------------------
 	public static Item amItemResource;
 	public static Item amEssence;
-	//----Redstone Arsenal Items---
-	public static ItemStack rsaFluxBlock;
-	public static ItemStack rsaFluxNugget;
 	//---ThermalExpansion Items ---
 	public static ItemStack teEnderiumBlock;
 	public static ItemStack teElectrumBlock;

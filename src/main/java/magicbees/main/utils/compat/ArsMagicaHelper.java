@@ -48,14 +48,13 @@ public class ArsMagicaHelper {
 	}
 
 	public static void init() {
+	}
+
+	public static void postInit() {
 		if (isActive()) {
 			getBlocks();
 			getItems();
 		}
-
-	}
-
-	public static void postInit() {
 	}
 
 	private static void getBlocks() {
