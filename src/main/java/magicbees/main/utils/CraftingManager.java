@@ -557,14 +557,14 @@ public class CraftingManager
 		});
 
 		output = Config.miscResources.getStackForType(ResourceType.AROMATIC_LUMP, 2);
-		RecipeManagers.carpenterManager.addRecipe(30, FluidRegistry.getFluidStack("honey", 1000), null, output, new Object[] {
+		RecipeManagers.carpenterManager.addRecipe(30, FluidRegistry.getFluidStack("for.honey", 1000), null, output, new Object[] {
 				" P ", "JDJ", " P ",
 				'P', ItemInterface.getItemStack("pollen"),
 				'J', ItemInterface.getItemStack("royalJelly"),
 				'D', Config.drops.getStackForType(DropType.ENCHANTED)
 		});
 
-		RecipeManagers.carpenterManager.addRecipe(30, FluidRegistry.getFluidStack("honey", 1000), null, output, new Object[] {
+		RecipeManagers.carpenterManager.addRecipe(30, FluidRegistry.getFluidStack("for.honey", 1000), null, output, new Object[] {
 				" J ", "PDP", " J ",
 				'P', ItemInterface.getItemStack("pollen"),
 				'J', ItemInterface.getItemStack("royalJelly"),
