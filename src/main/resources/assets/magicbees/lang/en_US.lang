@@ -172,7 +172,7 @@ liquid.cryotheum=Gelid Cryotheum
 liquid.mana=Primal Mana
 liquid.coal=Liquifacted Coal
 
-#Moondial
+#Moondial & Mutation moon phase conditions
 moon.full=Full Moon
 moon.gibbousWaning=Waning Gibbous
 moon.gibbousWaxing=Waxing Gibbous
@@ -181,6 +181,17 @@ moon.halfWaxing=Waxing Half
 moon.crescentWaning=Waning Crescent
 moon.crescentWaxing=Waxing Crescent
 moon.new=New Moon
+
+# Alternate moon names for languages that require a different kind of localization. Remove # to activate.
+#	If missing, will fall back on the non-alternate versions.
+#moon.alt.full=
+#moon.alt.gibbousWaning=
+#moon.alt.gibbousWaxing=
+#moon.alt.halfWaning=
+#moon.alt.halfWaxing=
+#moon.alt.crescentWaning=
+#moon.alt.crescentWaxing=
+#moon.alt.new=
 
 #Backpack
 backpack.thaumaturge=Thaumaturge's Backpack
