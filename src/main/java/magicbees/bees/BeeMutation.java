@@ -493,7 +493,7 @@ public class BeeMutation implements IBeeMutation
 			if (moonPhaseStart != moonPhaseEnd)
 			{
 				conditions.add(String.format(LocalizationManager.getLocalizedString("research.requiresPhase"),
-						moonPhaseStart.getLocalizedName(), moonPhaseEnd.getLocalizedName()));
+						moonPhaseStart.getLocalizedNameAlt(), moonPhaseEnd.getLocalizedNameAlt()));
 			}
 			else
 			{

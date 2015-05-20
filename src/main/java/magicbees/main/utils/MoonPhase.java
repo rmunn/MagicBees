@@ -5,8 +5,7 @@ import net.minecraft.world.World;
 /**
  * Class to abstract the moon phase from the world time a bit.
  */
-public enum MoonPhase
-{
+public enum MoonPhase {
 	FULL("full"),
 	WANING_GIBBOUS("gibbousWaning"),
 	WANING_HALF("halfWaning"),
@@ -18,22 +17,18 @@ public enum MoonPhase
 
 	private String phaseName;
 
-	private MoonPhase(String name)
-	{
+	private MoonPhase(String name) {
 		this.phaseName = name;
 	}
 
-	public boolean isBetween(MoonPhase first, MoonPhase second)
-	{
+	public boolean isBetween(MoonPhase first, MoonPhase second) {
 		boolean flag = false;
 
-		if (first.ordinal() <= second.ordinal())
-		{
+		if (first.ordinal() <= second.ordinal()) {
 			// Straightforward.
 			flag = first.ordinal() <= this.ordinal() && this.ordinal() <= second.ordinal();
 		}
-		else
-		{
+		else {
 			// Wraps around the boundary.
 			flag = (first.ordinal() <= this.ordinal() && this.ordinal() <= WAXING_GIBBOUS.ordinal()) ||
 					(FULL.ordinal() <= this.ordinal() && this.ordinal() <= second.ordinal());
@@ -42,18 +37,23 @@ public enum MoonPhase
 		return flag;
 	}
 
-	public String getLocalizedName()
-	{
+	public String getLocalizedName() {
 		return LocalizationManager.getLocalizedString("moon." + this.phaseName);
 	}
+	
+	public String getLocalizedNameAlt() {
+		String response = LocalizationManager.getLocalizedString("moon." + this.phaseName + ".alt");
+		if (response.isEmpty()) {
+			return getLocalizedName();
+		}
+		return response;
+	}
 
-	public static MoonPhase getMoonPhase(World w)
-	{
+	public static MoonPhase getMoonPhase(World w) {
 		return getMoonPhaseFromTime(w.getWorldTime());
 	}
 
-	public static MoonPhase getMoonPhaseFromTime(long time)
-	{
+	public static MoonPhase getMoonPhaseFromTime(long time) {
 		return MoonPhase.values()[(int)((time - 6000) / 24000L) % 8];
 	}
 }
