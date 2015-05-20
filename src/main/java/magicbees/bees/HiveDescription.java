@@ -30,19 +30,19 @@ import magicbees.world.feature.HiveGenUnderground;
 public enum HiveDescription implements IHiveDescription {
 	CURIOUS(HiveType.CURIOUS, 3.0f, HiveManager.genHelper.tree()),
 	UNUSUAL(HiveType.UNUSUAL, 1.0f, HiveManager.genHelper.ground(Blocks.dirt, Blocks.grass)),
-	RESONANT(HiveType.RESONANT, 0.5f, HiveManager.genHelper.ground(Blocks.sand, Blocks.sandstone)),
-	DEEP(HiveType.DEEP, 2.0f, new HiveGenUnderground(10, 10, 6)) {
+	RESONANT(HiveType.RESONANT, 0.9f, HiveManager.genHelper.ground(Blocks.sand, Blocks.sandstone)),
+	DEEP(HiveType.DEEP, 5.0f, new HiveGenUnderground(10, 15, 5)) {
 		@Override
 		public void postGen(World world, int x, int y, int z)
 		{
 			super.postGen(world, x, y, z);
 			Random random = world.rand;
-			FeatureOreVein.redstoneGen.generateVein(world, random, x + 1, y, z, 2);
-			FeatureOreVein.redstoneGen.generateVein(world, random, x - 1, y, z, 2);
-			FeatureOreVein.redstoneGen.generateVein(world, random, x, y + 1, z, 2);
-			FeatureOreVein.redstoneGen.generateVein(world, random, x, y - 1, z, 2);
-			FeatureOreVein.redstoneGen.generateVein(world, random, x, y, z + 1, 2);
-			FeatureOreVein.redstoneGen.generateVein(world, random, x, y, z - 1, 2);
+			FeatureOreVein.redstoneGen.generateVein(world, random, x + 1, y, z, 5);
+			FeatureOreVein.redstoneGen.generateVein(world, random, x - 1, y, z, 5);
+			FeatureOreVein.redstoneGen.generateVein(world, random, x, y + 1, z, 5);
+			FeatureOreVein.redstoneGen.generateVein(world, random, x, y - 1, z, 5);
+			FeatureOreVein.redstoneGen.generateVein(world, random, x, y, z + 1, 5);
+			FeatureOreVein.redstoneGen.generateVein(world, random, x, y, z - 1, 5);
 		}
 	},
 	INFERNAL(HiveType.INFERNAL, 50.0f, new HiveGenNether(0, 175, 6)) {
