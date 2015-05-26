@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import magicbees.bees.AuraCharge;
 import magicbees.api.bees.IMagicApiaryAuraProvider;
+import magicbees.bees.AuraCharge;
 import magicbees.bees.BeeManager;
 import magicbees.main.CommonProxy;
 import magicbees.main.MagicBees;
@@ -31,8 +31,6 @@ import net.minecraftforge.common.util.Constants;
 
 import com.mojang.authlib.GameProfile;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 import forestry.api.apiculture.IBee;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
@@ -658,10 +656,10 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
     
     public void setBoostEnabled(AuraCharge chargeType, boolean on) {
-   		boolean tmp = auraCharges.isEnabled(chargeType);
+    	int tempFlags = auraCharges.writeEnabledToFlags();
    		auraCharges.setEnabled(chargeType, on);
-   		NetworkEventHandler.getInstance().sendAuraChargeUpdate(this, auraCharges);
-   		auraCharges.setEnabled(chargeType, tmp);
+   		NetworkEventHandler.getInstance().sendAuraEnabledUpdate(this, auraCharges);
+   		auraCharges.readEnabledFromFlags(tempFlags);
     }
     
     public boolean isBoosted(AuraCharge chargeType) {
@@ -680,6 +678,10 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
         return isBoosted(AuraCharge.MUTATION);
     }
     
+    public AuraCharges getAuraCharges() {
+    	return auraCharges;
+    }
+    
     private void updateAuraProvider() {
     	if (worldObj.getTotalWorldTime() % 60 != 0) {
     		return;
@@ -693,7 +695,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     	boolean auraChargesChanged = false;
         for (AuraCharge charge : AuraCharge.values()) {
             if (auraCharges.isEnabled(charge) && !auraCharges.isActive(charge) && auraProvider.getCharge(charge.type)) {
-                auraCharges.beginConsumingCharge(charge, worldObj);
+                auraCharges.beginConsumingCharge(charge, worldObj.getTotalWorldTime());
                 auraChargesChanged = true;
             }
         }
@@ -794,19 +796,13 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
         }
         return (IMagicApiaryAuraProvider)entity;
     }
-
-    //@Override
-    private AuraCharges getAuraCharges() {
-        return auraCharges;
-    }
     
     public void updateAuraChargesFromFlags(int flags) {
-    	auraCharges.readFromFlags(flags, FMLCommonHandler.instance().getEffectiveSide());
-		
-		if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
-			NetworkEventHandler.getInstance().sendAuraChargeUpdate(this, auraCharges);
-			markDirty();
-		}
+    	auraCharges.readChargesFromFlags(flags);
+    }
+    
+    public void updateAurasEnabledFromFlags(int flags) {
+    	auraCharges.readEnabledFromFlags(flags);
     }
     
 }

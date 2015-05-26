@@ -37,7 +37,8 @@ public class NetworkEventHandler {
 		UNKNOWN,
 		INVENTORY_UPDATE,
 		FLAGS_UPDATE,
-		AURA_CHARGE_UPDATE
+		AURA_CHARGE_UPDATE,
+		AURA_ENABLED_UPDATE,
 		;
 	}
 	
@@ -79,6 +80,13 @@ public class NetworkEventHandler {
 		sendPacket(packet);
 	}
 	
+	public <T extends TileEntityMagicApiary> void sendAuraEnabledUpdate(T entity, AuraCharges auraCharges) {
+		EventAuraEnabledUpdate event = new EventAuraEnabledUpdate(new ChunkCoords(entity), auraCharges);
+		FMLProxyPacket packet = event.getPacket();
+		
+		sendPacket(packet);
+	}
+	
 	private void sendPacket(FMLProxyPacket packet) {
     	if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
     		channel.sendToAll(packet);
@@ -113,8 +121,12 @@ public class NetworkEventHandler {
 			eventData.process(player);
 		}
 		else if (eventId == EventType.AURA_CHARGE_UPDATE.ordinal()) {
-			EventAuraChargeUpdate evenData = new EventAuraChargeUpdate(data);
-			evenData.process(player);
+			EventAuraChargeUpdate eventData = new EventAuraChargeUpdate(data);
+			eventData.process(player);
+		}
+		else if (eventId == EventType.AURA_ENABLED_UPDATE.ordinal()) {
+			EventAuraEnabledUpdate eventData = new EventAuraEnabledUpdate(data);
+			eventData.process(player);
 		}
 		else {
 			throw new InvalidEventTypeIndexException("");
