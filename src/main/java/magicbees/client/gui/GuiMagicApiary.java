@@ -1,6 +1,9 @@
 package magicbees.client.gui;
 
+import magicbees.bees.AuraCharge;
 import magicbees.main.CommonProxy;
+import magicbees.main.utils.LogHelper;
+import magicbees.main.utils.net.NetworkEventHandler;
 import magicbees.tileentity.TileEntityMagicApiary;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -166,31 +169,31 @@ public class GuiMagicApiary extends GuiContainer
 	protected void mouseClicked(int x, int y, int buttonId) {
 		int clickX = x - this.guiLeft;
 		int clickY = y - this.guiTop;
-		boolean handled = false;
 		int index = 0;
 		TileEntityMagicApiary apiary = getApiary();
+		AuraCharge charge = null;
 		for (int xOffset : SLIDER_TROUGH_X) {
 			if (!(clickX < xOffset || xOffset + SLIDER_TROUGH_WIDTH < clickX || clickY < SLIDER_TROUGH_Y || SLIDER_TROUGH_Y + SLIDER_TROUGH_HEIGHT < clickY)) {
 				switch (index) {
 				case 0:
-					apiary.setMutationBoostEnabled(!apiary.isMutationBoostEnabled());
-					handled = true;
+					charge = AuraCharge.MUTATION;
 					break;
 				case 1:
-					apiary.setDeathBoostEnabled(!apiary.isDeathBoostEnabled());
-					handled = true;
+					charge = AuraCharge.DEATH;
 					break;
 				case 2:
-					apiary.setProductionBoostEnabled(!apiary.isProductionBoostEnabled());
-					handled = true;
+					charge = AuraCharge.PRODUCTION;
 					break;
 				}
 			}
 			++index;
 		}
 		
-		if (handled) {
+		if (charge != null) {
 			mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1f));
+			boolean chargeStatus = !apiary.isBoostEnabled(charge);
+			LogHelper.warn("Sending network update: " + charge.toString() + " set to " + chargeStatus);
+			NetworkEventHandler.getInstance().sendAuraEnabledUpdate(apiary, charge, chargeStatus);
 			return;
 		}
 		

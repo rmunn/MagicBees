@@ -6,6 +6,7 @@ import io.netty.buffer.ByteBufInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import magicbees.bees.AuraCharge;
 import magicbees.main.MagicBees;
 import magicbees.main.utils.ChunkCoords;
 import magicbees.main.utils.LogHelper;
@@ -80,8 +81,8 @@ public class NetworkEventHandler {
 		sendPacket(packet);
 	}
 	
-	public <T extends TileEntityMagicApiary> void sendAuraEnabledUpdate(T entity, AuraCharges auraCharges) {
-		EventAuraEnabledUpdate event = new EventAuraEnabledUpdate(new ChunkCoords(entity), auraCharges);
+	public <T extends TileEntityMagicApiary> void sendAuraEnabledUpdate(T entity, AuraCharge auraCharge, boolean enabled) {
+		EventAuraEnabledUpdate event = new EventAuraEnabledUpdate(new ChunkCoords(entity), auraCharge, enabled);
 		FMLProxyPacket packet = event.getPacket();
 		
 		sendPacket(packet);

@@ -632,15 +632,19 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
     
     public boolean isProductionBoostEnabled() {
-    	return auraCharges.isEnabled(AuraCharge.PRODUCTION);
+    	return isBoostEnabled(AuraCharge.PRODUCTION);
     }
     
     public boolean isDeathBoostEnabled() {
-    	return auraCharges.isEnabled(AuraCharge.DEATH);
+    	return isBoostEnabled(AuraCharge.DEATH);
     }
     
     public boolean isMutationBoostEnabled() {
-    	return auraCharges.isEnabled(AuraCharge.MUTATION);
+    	return isBoostEnabled(AuraCharge.MUTATION);
+    }
+    
+    public boolean isBoostEnabled(AuraCharge charge) {
+    	return auraCharges.isEnabled(charge);
     }
     
     public void setProductionBoostEnabled(boolean on) {
@@ -656,10 +660,10 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
     
     public void setBoostEnabled(AuraCharge chargeType, boolean on) {
-    	int tempFlags = auraCharges.writeEnabledToFlags();
-   		auraCharges.setEnabled(chargeType, on);
-   		NetworkEventHandler.getInstance().sendAuraEnabledUpdate(this, auraCharges);
-   		auraCharges.readEnabledFromFlags(tempFlags);
+    	if (isBoosted(chargeType) != on) {
+    		auraCharges.setEnabled(chargeType, on);
+    		markDirty();
+    	}
     }
     
     public boolean isBoosted(AuraCharge chargeType) {
