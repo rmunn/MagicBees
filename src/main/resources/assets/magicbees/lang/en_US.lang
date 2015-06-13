@@ -1,7 +1,7 @@
 language.name=English
 language.region=US
 language.code=en_US
-e
+
 # Miscellaneous strings
 # -- Updater strings. Please try to keep these to one line if possible.
 magicbees.versioning.newVersion=A new version of Magic Bees is available: %s
