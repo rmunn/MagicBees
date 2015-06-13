@@ -1,7 +1,7 @@
 language.name=English
 language.region=US
 language.code=en_US
-
+e
 # Miscellaneous strings
 # -- Updater strings. Please try to keep these to one line if possible.
 magicbees.versioning.newVersion=A new version of Magic Bees is available: %s
@@ -403,7 +403,7 @@ magicbees.speciesAMPlant=Fruticic
 magicbees.speciesAMPlant.description=They have an affinity for all that is green and grows.|Apinomicon
 magicbees.speciesAMIce=Glacic
 magicbees.speciesAMIce.description="They keep stealing stuff from me, and I never see them. They're far too slippery."|MysteriousAges, incorrigible punster
-magicbees.speciesAMMagma=Magmatic/entry>
+magicbees.speciesAMMagma=Magmatic
 magicbees.speciesAMMagma.description=As they fly by, they sear the surface of the landscape, eventually scouring all plants and fragile minerals away.|Apinomicon
 magicbees.speciesAMArcane=Arcane
 magicbees.speciesAMArcane.description="Curious creatures, though their produce is quite useful."|Mithion, Adept
