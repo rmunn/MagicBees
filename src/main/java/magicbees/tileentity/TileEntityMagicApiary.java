@@ -41,7 +41,6 @@ import forestry.api.core.EnumTemperature;
 import forestry.api.core.ErrorStateRegistry;
 import forestry.api.core.IErrorState;
 import forestry.api.genetics.IIndividual;
-import forestry.core.utils.Utils;
 
 public class TileEntityMagicApiary extends TileEntity implements ISidedInventory, IBeeHousing, ITileEntityAuraCharged {
 
@@ -569,7 +568,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     public void updateBiome() {
         if (worldObj != null) {
             if (biome == null) {
-                BiomeGenBase biome = Utils.getBiomeAt(worldObj, xCoord, yCoord);
+                BiomeGenBase biome = worldObj.getBiomeGenForCoordsBody(xCoord, zCoord);
                 if (biome != null) {
                     this.biome = biome;
                     setErrorState(ErrorStateRegistry.getErrorState("OK"));
