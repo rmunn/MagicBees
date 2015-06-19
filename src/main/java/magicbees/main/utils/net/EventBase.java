@@ -1,6 +1,5 @@
 package magicbees.main.utils.net;
 
-import forestry.core.proxy.Proxies;
 import io.netty.buffer.Unpooled;
 
 import java.io.ByteArrayInputStream;
@@ -69,7 +68,7 @@ public class EventBase {
 			short meta = data.readShort();
 			itemstack = new ItemStack(item, stackSize, meta);
 
-			if (item.isDamageable() || Proxies.common.needsTagCompoundSynched(item)) {
+			if (item.isDamageable() || item.getShareTag()) {
 				itemstack.stackTagCompound = this.readNBTTagCompound(data);
 			}
 		}
@@ -85,7 +84,7 @@ public class EventBase {
 			data.writeByte(itemstack.stackSize);
 			data.writeShort(itemstack.getItemDamage());
 
-			if (itemstack.getItem().isDamageable() || Proxies.common.needsTagCompoundSynched(itemstack.getItem())) {
+			if (itemstack.getItem().isDamageable() || itemstack.getItem().getShareTag()) {
 				this.writeNBTTagCompound(itemstack.stackTagCompound, data);
 			}
 		}

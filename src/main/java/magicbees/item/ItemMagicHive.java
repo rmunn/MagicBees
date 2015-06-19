@@ -2,29 +2,42 @@ package magicbees.item;
 
 import magicbees.block.types.HiveType;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
-import forestry.core.items.ItemForestryBlock;
+import net.minecraft.util.IIcon;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Created by Allen on 7/29/2014.
  */
-public class ItemMagicHive extends ItemForestryBlock
+public class ItemMagicHive extends ItemBlock
 {
 	public ItemMagicHive(Block block)
 	{
 		super(block);
+		setMaxDamage(0);
+		setHasSubtypes(true);
+	}
+
+	@Override
+	public int getMetadata(int i) {
+		return i;
+	}
+
+	protected Block getBlock() {
+		return field_150939_a;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public IIcon getIconFromDamage(int meta) {
+		return this.getBlock().getIcon(1, meta);
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack)
 	{
 		return getBlock().getUnlocalizedName() + "." + HiveType.getHiveFromMeta(itemstack.getItemDamage()).name().toLowerCase();
-	}
-
-	@Override
-	public String getItemStackDisplayName(ItemStack p_77653_1_)
-	{
-		return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(p_77653_1_) + ".name")).trim();
 	}
 }
