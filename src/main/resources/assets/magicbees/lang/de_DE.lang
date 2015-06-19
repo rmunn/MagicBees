@@ -2,19 +2,39 @@ language.name=German
 language.region=DE
 language.code=de_DE
 
+# Miscellaneous strings
+# -- Updater strings. Please try to keep these to one line if possible.
+magicbees.versioning.newVersion=Eine neue Version von MagicBees ist verfügbar: %s
+magicbees.versioning.critical=Ein wichtiges MagicBees-Update ist verfügbar: %s - Ein Update wird wärmstens empfohlen!
+magicbees.versioning.clickDownload=Klicke, um die Download-Seite zu öffnen. Für Update-Info, einfach die Maus hierüber platzieren
+magicbees.config.category.general=Generelles
+magicbees.config.category.general.tooltip=Generelle Mod-Konfiguration
+magicbees.config.category.debug=Debug
+magicbees.config.category.debug.tooltip=Optionen zum Debugging und/oder für informative Nachrichten
+magicbees.config.category.modules=Module
+magicbees.config.category.modules.tooltip=Optionen, um Kompatibilität zu aktivieren oder zu deaktivieren
+magicbees.config.category.botania=Botania
+magicbees.config.category.botania.tooltip=Botania-Kompatibilitätsoptionen
+
+# -- Mysterious Magnet levels
+misc.level=Level %s
+misc.magnetActive=%s - Aktiv
+misc.magnetInactive=%s - Inaktiv
+
 #Items
 item.magicbees:jellyBabies.name=Handvoll Gummibärchen
+item.manasteelScoop.name=Manastahlkescher
 item.thaumiumScoop.name=Thaumiumkescher
+item.manasteelGrafter.name=Manastahlgartenschere
 item.thaumiumGrafter.name=Thaumiumgartenschere
 item.magicbees:mysteriousMagnet.name=Mysteriöser Magnet
 item.moonDial.name=Jade-Mondskala
 
 #Tiles
-tile.planks.greatwood.name=Greatwood-Planken
-tile.slab.wood.greatwood.name=Greatwood-Stufe
-tile.planks.silverwood.name=Silverwood-Planken
-tile.slab.wood.silverwood.name=Silverwood-Stufe
 tile.effectJar.name=Glas des Bienensammlers
+tile.magicApiary.name=Magischer Bienenkorb
+tile.visAuraProvider.name=Vis-Bienenkorb-Booster
+tile.manaAuraProvider.name=Mana-Bienenkorb-Booster
 tile.hive.curious.name=Seltsamer Bienenstock
 tile.hive.unusual.name=Ungewöhnlicher Bienenstock
 tile.hive.deep.name=Tiefer Bienenstock
@@ -130,7 +150,7 @@ liquid.=Leere
 liquid.water=Wasser
 liquid.lava=Lava
 liquid.biomass=Biomasse
-liquid.biofuel=Biodiesel
+liquid.bioethanol=Bioethanol
 liquid.oil=Öl
 liquid.fuel=Diesel
 liquid.seedoil=Samenkernöl
@@ -140,12 +160,19 @@ liquid.ice=Eis
 liquid.milk=Milkch
 liquid.acid=Säure
 liquid.poison=Gift
-liquid.liquidNitrogen=Flüssiger Stickstoff
-liquid.liquidDNA=Flüssige DNA
-liquid.creosote Oil=Teeröl
+liquid.liquidnitrogen=Flüssigstickstoff
+liquid.liquiddna=Flüssige DNA
+liquid.creosote=Teeröl
 liquid.steam=Dampf
+liquid.redstone=Destabilisiertes Redstone
+liquid.glowstone=Energetisiertes Glowstone
+liquid.ender=Resonantes Ender
+liquid.pyrotheum=Flammendes Pyrotheum
+liquid.cryotheum=Gelenes Kryotheum
+liquid.mana=Primärmana
+liquid.coal=Verflüssigte Kohle
 
-#Moondial
+#Moondial & Mutation moon phase conditions
 moon.full=Vollmond
 moon.gibbousWaning=Abnehmender Dreiviertelmond
 moon.gibbousWaxing=Zunehmender Dreiviertelmond
@@ -155,16 +182,30 @@ moon.crescentWaning=Abnehmender Sichelmond
 moon.crescentWaxing=Zunehmender Sichelmond
 moon.new=Neumond
 
+# Alternate moon names for languages that require a different kind of localization. Remove # to activate.
+#	If missing, will fall back on the non-alternate versions.
+#moon.alt.full=
+#moon.alt.gibbousWaning=
+#moon.alt.gibbousWaxing=
+#moon.alt.halfWaning=
+#moon.alt.halfWaxing=
+#moon.alt.crescentWaning=
+#moon.alt.crescentWaxing=
+#moon.alt.new=
+
 #Backpack
 backpack.thaumaturge=Rucksack des Thaumaturgen
 
 #Itemgroups
-itemGroup.magicBees=Magic Bees/entry>
+itemGroup.magicBees=Magic Bees
 
-#Misc
-misc.level=Level %s
-misc.magnetActive=%s - Aktiv
-misc.magnetInactive=%s - Inaktiv
+#Botania flowers; Lexicon entries nearer the end.
+tile.botania:flower.beegonia.name=Biegonie
+tile.botania:flower.beegonia.lore=Überall nur seltsame Worte
+tile.botania:flower.hiveacynth.name=Mnemohyazinthe
+tile.botania:flower.hiveacynth.lore=Welch ein seltsamer Name...
+tile.botania:flower.hibeescus.name=Hibieskus
+tile.botania:flower.hibeescus.lore=Besticht durch Wortspiele
 
 #Research
 research.requiresBlock=Erfordert die Basis des %s
@@ -173,6 +214,7 @@ research.requiresPhaseSingle=Während des %s
 research.requiresNode=Kommt nur vor, wenn eine Nodie nahe ist
 research.requiresNodeSpecific=Kommt nur vor im Einfluss einer %s Nodie
 research.requiresBiome=Kommt vor in einem %s
+research.requiresNight=Kommt nur nach Sonnenuntergang vor
 research.node.pure=Pur
 research.node.dark=Dunkel
 research.node.chaotic=Chaotisch
@@ -234,11 +276,13 @@ magicbees.speciesSoul.description="Der furchtbare Pirat Roberts ist gekommen fü
 magicbees.speciesSkulking=Schleichend
 magicbees.speciesSkulking.description=Diese Bienen wurden xenophob und schlecht gelaunt, lass Vorsicht walten!|Apinomikon
 magicbees.speciesGhastly=Gespenstisch
-magicbees.speciesGhastly.description="*seufz*... Ernsthaft, Myst?"|Taveria
+magicbees.speciesGhastly.description="*seufz*... Ernsthaft, Myst?"|Taveria, irritierter Bienenzüchter
 magicbees.speciesSpidery=Spinnig
-magicbees.speciesSpidery.description=Spinnenbiene; Macht, was auch immer eine Spinnenbiene macht.|Unbekannt
+magicbees.speciesSpidery.description=Spinnenbiene; Nomen. What auch immer diese macht.|Unbekannt
 magicbees.speciesSmouldering=Schwelend
-magicbees.speciesSmouldering.description=Die schleichenden Bienen sind entflammt worden mit dem Feuer der der immer brennenden Blazes.|Apinomikon
+magicbees.speciesSmouldering.description=Die schleichenden Bienen sind entflammt worden mit dem Feuer der der ewig brennenden Lohen.|Apinomikon
+magicbees.speciesBigBad=Wölfisch
+magicbees.speciesBigBad.description="Schau, Mutter, was ich auf dem Weg nach Hause gefunden habe!"|Rotkäppchen
 
 magicbees.speciesTimely=Rechtzeitig
 magicbees.speciesTimely.description="Ein Imker ist nie zu spät. Er kommt immer dann an, wenn er er es geplant hat!"|Sengir, Verrückter Imker
@@ -376,33 +420,48 @@ magicbees.speciesTEDante.description=Das Vermischen von Bienen in einem Inferno 
 magicbees.speciesTEPyro=Pyrisch
 magicbees.speciesTEPyro.description=Du Monster.|Jeder, an dich.
 magicbees.speciesTEElectrum=Elektrös
-magicbees.speciesTEElectrum.description=...|Apinomikon
+magicbees.speciesTEElectrum.description=Das Bester beider wertvoller Metalle, aus irgendeinem Grund jedoch besser als beide.|Apinomikon
 magicbees.speciesTEPlatinum=Platin
-magicbees.speciesTEPlatinum.description=...|Apinomikon
+magicbees.speciesTEPlatinum.description=Wertvoll, formbar und unglaublich glänzend.|Apinomikon
 magicbees.speciesTENickel=Nickelhaltig
-magicbees.speciesTENickel.description=...|Apinomikon
+magicbees.speciesTENickel.description=Manche Leute reagieren allergisch auf diese Bienen.|Apinomikon
 magicbees.speciesTEInvar=Invarartig
-magicbees.speciesTEInvar.description=...|Apinomikon
-magicbees.speciesTEBronze=Bastelnd
-magicbees.speciesTEBronze.description=...|Apinomikon
+magicbees.speciesTEInvar.description=Hat einen ziemlich niedrigen Ausdehnungskoeffizienten.|Apinomikon
+magicbees.speciesTEBronze=Bronzen
+magicbees.speciesTEBronze.description=Diese Bienen können Patina ansetzen.|Apinomikon
 magicbees.speciesTECoal=Kohlig
-magicbees.speciesTECoal.description=...|Apinomikon
+magicbees.speciesTECoal.description=Nicht zu verwechseln mit Kolik.|Apinomikon
 magicbees.speciesTEDestabilized=Destabilisiert
 magicbees.speciesTEDestabilized.description=Diese Bienen begannen instabil; sie wurden mit der Zeit auch nicht besser.|Apinomikon
 magicbees.speciesTELux=Licht
 magicbees.speciesTELux.description=Es werde Licht...|Apinomikon
 magicbees.speciesTEWinsome=Reizend
-magicbees.speciesTEWinsome.description=....|Apinomikon
+magicbees.speciesTEWinsome.description="Ich mag diese hier, sie sind niedlich!"|Jadedcat
 magicbees.speciesTEEndearing=Enderartig
-magicbees.speciesTEEndearing.description=....|Apinomikon
+magicbees.speciesTEEndearing.description="Abgesehen von den hypnotischen Fähigkeiten und dem bösartigem Wesen sind diese Bienen die allerniedlichsten!"|Jadedcat
 magicbees.speciesRSAFluxed=Fluxierend
-magicbees.speciesRSAFluxed.description=....|Apinomicon
+magicbees.speciesRSAFluxed.description="Wie auch immer das möglich ist..."|Völlig irrelevanter Kommentar
 magicbees.speciesBMBloody=Blutig
-magicbees.speciesBMBloody.description=....|Apinomicon
+magicbees.speciesBMBloody.description=Erfüllt von der Macht des Blutes streben sie nach weiterer Macht.|Apinomicon
 magicbees.speciesBMBound=Gebunden
-magicbees.speciesBMBound.description=....|Apinomicon
-magicbees.species=
-magicbees.species.description=
+magicbees.speciesBMBound.description="Mir gefällt der Name dieser Bienen nicht sonderlich..."|WayOfFlowingTime, Blutmagier
+magicbees.speciesBotRooted=Verwurzelt
+magicbees.speciesBotRooted.description="Diese Bienen kann man problemlos quadrieren"|MysteriousAges mit schlechten Mathewitzen
+magicbees.speciesBotBotanic=Botanisch
+magicbees.speciesBotBotanic.description=Erfüllt von mystischem Leben, verbreiten sie mystische Blumen|Apinomikon
+magicbees.speciesBotBlossom=Blühend
+magicbees.speciesBotBlossom.description=Die bloße Präsenz dieser Bienen bringt Knospen scheller zum Blühen.|Apinomikon
+magicbees.speciesBotFloral=Blumig
+magicbees.speciesBotFloral.description=Sie lieben Blumen so sehr, dass sie quasi die Blüten zum Stock zurückbringen.|Apinomikon
+magicbees.speciesBotVazbee=Weidend
+magicbees.speciesBotVazbee.description="Ich kann diese furchtbaren Wortspiele nicht übersetzen!"|Vexatos, verzweifelter Übersetzer
+magicbees.speciesBotSomnolent=Schläfrig
+magicbees.speciesBotSomnolent.description=Langsam und träge, arbeiten nur sehr langsam verglichen mit anderen Spezies.|Apinomikon
+magicbees.speciesBotDreaming=Träumerisch
+magicbees.speciesBotDreaming.description=Diese Bienen verbringen einen ungeheuerlichen Teil ihres Lebens inaktiv und schlafend; es gibt keine Möglichkeit, zu wissen, wovon sie träumen.|Apinomikon
+magicbees.speciesBotAlfheim=Alheimrig
+magicbees.speciesBotAlfheim.description=Sie erinnern sich an ihre Zeit in Alfheim, sehnen sich nach einer Welt erfüllt von Mana und streben danach.|Apinomikon
+
 magicbees.speedBlinding=Blendend
 magicbees.effectCurative=Reinigend
 magicbees.effectDigSpeed=Abbaugeschwindigkeit
@@ -422,13 +481,18 @@ magicbees.effectWispy=Dünn
 magicbees.effectGhastly=Gespenstisch
 magicbees.effectSpidery=Spinnig
 magicbees.effectAblaze=Brennen
+magicbees.effectCanine=Heulend
 magicbees.effectManaDrainer=Vortex
 magicbees.effectAMWisp=Spirituell
 magicbees.effectTEBlizzy=Frostig
+magicbees.effectDreaming=Träumerisch
+
 flowerProvider.book=Bücher
 flowerProvider.magic=Thaumische Blumen
 flowerProvider.arsmagica=Exotische Blumen
 flowerProvider.node=Nodie
+flowerProvider.botania=Mystische Blumen
+
 classification.veiled=Verschleiert
 classification.veiled.description=Die seltsame Spezies gefunden verstreut in der Welt könnte Fähigkeiten jenseits unserers Logik haben.|Apinomikon
 classification.arcane=Arkan
@@ -463,6 +527,8 @@ classification.alchemical=Alchemisch
 classification.alchemical.description=Diese Bienen haben eine wechselhafte Natur.|Apinomikon
 classification.essential=Essentiell
 classification.essential.description=Diese Bienen haben eine erhöhte Affinität zu aspektischer Magie.|Apinomikon
+classification.botanical=Botanisch
+classification.botanical.description=Eine seltsame Variante gewöhnlicher Bienen, sie scheinen eine versärkte Affinität zu Blumen zu haben|Apinomikon
 
 tc.aspect.tempus=Zeit, Moment, Ewigkeit
 tc.research_category.MAGICBEES=Apimantik
@@ -516,3 +582,28 @@ tc.research_page.MB_DimensionalSingularity.1=Während es gleich einem Tragbaren 
 tc.research_name.MB_EssenceOblivion=Essenz der Verächtlichen Vergessenheit
 tc.research_text.MB_EssenceOblivion=[MB] Befreie dich mit Bosheit
 tc.research_page.MB_EssenceOblivion.1=Bienen für Mutationen zu züchten, kann nervig sein, besonders mit langlebigen Spezies. Mit ein wenig Schläue und nur einem Hauch von Selbstgefälligkeit hast du einen Weg gefunden, die Dimensionalsingularität auf eine Weise zu verwenden, die lediglich die Lebenskraft deiner kleinen fliegenden Freunde aussaugt, Stück für Stück. Naja, vielleicht auch beachtliche Mengen auf einmal. Wahrscheinlich beeinflusst es sie nicht zu schlimm. <BR> Es könnte ein wenig schwierig sein, an mehr als eines dieser §5Dracheneier§0 zu kommen, was nötig wäre, um an mehrere hiervon zu kommen. Vielleicht gibt es eine Bienenart, die bei dieser Einschränkung Abhilfe schaffen kann.
+
+tc.research_name.MB_VisAuraProvider=Vis-Bienenkorb-Booster
+tc.research_text.MB_VisAuraProvider=[MB] Es ist wie Zauberei!
+tc.research_page.MB_VisAuraProvider.1=Die Infusion von Ungewöhnlichen Pollen mit Vis und Gold kreiert einen ungewöhnlichen Kristall, welcher, wird er mit Vis aus einer Auranodie gefüttert, eine energetisierende Aura schafft, die Bienen anzieht, wenn sie auf die Umgebung innerhalb eines Magischen Bienenkorbs gestimmt ist.
+
+#Botania Lexicon entries
+magicbees.botania.lexicon.subtitle=[Magic Bees]
+
+magicbees.botania.lexicon.manasteelScoop=Der &1Manastahlkescher&0
+magicbees.botania.lexicon.manasteelGrafter=die &1Manastahlgartenschere&0
+
+magicbees.botania.lexicon.beeAlfheim.trade=Handel für &bAlfheimdrohnen&0
+magicbees.botania.lexicon.beeAlfheim.0=&1Elbische Bienenzüchter&0 sind bestrebt, die Bienen deiner Welt kennenzulernen, ganz besonders interessieren sie die &1Träumerischen Drohnen&0, die zu zu bieten hast. Im gegenzug bieten sie dir &1Alfheimrige Drohnen&0, die einzigen Bienen, die in Alfheim existieren.
+
+magicbees.botania.lexicon.beegonia.0=Drohnen sind die Basis der glücklichen Zukunft einer Kolonie, jedoch können sie sich so sehr häufen, dass man einfach nicht mehr weiß, wohin mit ihnen.<br>Die &1Biegonie&0 ist eine Lösung für diese Art der Überbevölkerung! Wirf ein paar Drohnen in ihre Nähe und sie wird deren Lebensenergie absorbieren un in Mana umwandeln!
+magicbees.botania.lexicon.beegonia.1=Sie ist nicht sehr wählerisch und wird eine konstante Menge an Mana produzieren, dennoch scheint es, dass "komplexere" Bienen mehr Mana als gewöhnliche enthalten, was auch immer das heißt.
+magicbees.botania.lexicon.beegonia.crafting=Syncrostrike ist Schuld
+magicbees.botania.lexicon.beegonia.2=Nun ja, entweder dies oder eine &2Bienusfliegenfalle&0, aber die hat ihre eigenen Schwächen.
+
+magicbees.botania.lexicon.hiveacynth.crafting=> beesbeesbees.com
+
+magicbees.botania.lexicon.hibeescus.crafting=Es tut mir leid.
+
+magicbees.botania.lexicon.manaBooster.0=Der Magische Bienenkorm ist ein guter Weg, Bienen schnell arbeiten zu lassen, aber er... hat seine Grenzen. Glücklicherweise haben die Eigenschaften von Lebestein und Blütenblättern anscheinen die Möglichkeit, Bienen mit zusätzlicher Energie zu versorgen, sodass sie mehr produzieren. Gib dem &1Mana-Bienenkorb-Booster&0 einfach einen konstanten Manazufluss und er wird die Bienen antreiben.
+magicbees.botania.lexicon.manaBooster.crafting=Mana, wohin man auch sieht!
