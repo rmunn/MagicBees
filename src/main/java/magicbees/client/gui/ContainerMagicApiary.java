@@ -1,7 +1,7 @@
 package magicbees.client.gui;
 
 import forestry.api.apiculture.IHiveFrame;
-import forestry.plugins.PluginApiculture;
+import magicbees.bees.BeeManager;
 import magicbees.main.utils.ItemInterface;
 import magicbees.tileentity.TileEntityMagicApiary;
 import net.minecraft.entity.player.EntityPlayer;
@@ -74,8 +74,8 @@ public class ContainerMagicApiary extends ContainerMB {
                 clearSlot = this.mergeItemStack(srcStack, maxSlot + 1, maxSlot + 36, false);
             }else{
                 if (slotIndex > maxSlot && srcStack != null){
-                    if (PluginApiculture.beeInterface.isMember(srcStack)){
-                            if (!PluginApiculture.beeInterface.isDrone(srcStack)){
+                    if (BeeManager.beeRoot.isMember(srcStack)){
+                            if (!BeeManager.beeRoot.isDrone(srcStack)){
                                 if (this.getSlot(SLOT_QUEEN).getHasStack() == false) {
                                     clearSlot = this.mergeItemStack(srcStack, SLOT_QUEEN, SLOT_QUEEN, false);
                                 }

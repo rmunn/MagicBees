@@ -60,6 +60,9 @@ public class MagicBees
 	{
 		ModHelper.init();
 		LogHelper.info("Init completed");
+		
+		BeeManager.getBeeRoot();
+		BeeManager.setupAlleles();
 	}
 
 	@Mod.EventHandler
@@ -67,7 +70,7 @@ public class MagicBees
 	{
 		ModHelper.postInit();
 		
-		BeeManager.ititializeBees();
+		BeeManager.lateBeeInit();
 
 		this.guiHandler = new GUIHandler();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, this.guiHandler);

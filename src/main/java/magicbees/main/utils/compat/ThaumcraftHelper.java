@@ -29,8 +29,6 @@ import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.research.ResearchCategories;
 import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
-import forestry.core.config.ForestryBlock;
-import forestry.core.config.ForestryItem;
 
 public class ThaumcraftHelper {
 	public enum MiscResource {
@@ -548,37 +546,37 @@ public class ThaumcraftHelper {
 		ThaumcraftApi.registerObjectTag(new ItemStack(Config.hive), list);
 
 		list = new AspectList().add(Aspect.LIGHT, 1);
-		item = ForestryBlock.candle.getItemStack();
+		item = new ItemStack(BlockInterface.getBlock(ForestryHelper.Name, "candle"));
 		ThaumcraftApi.registerObjectTag(item, new int[] { item.getItemDamage() }, list);
 
 		list = new AspectList().add(Aspect.DARKNESS, 1);
-		item = ForestryBlock.stump.getItemStack();
+		item = new ItemStack(BlockInterface.getBlock(ForestryHelper.Name, "stump"));
 		ThaumcraftApi.registerObjectTag(item, new int[] { item.getItemDamage() }, list);
 
 		list = new AspectList(new ItemStack(Blocks.glass)).add(Aspect.SENSES, 1);
-		item = ForestryBlock.glass.getItemStack();
+		item = new ItemStack(BlockInterface.getBlock(ForestryHelper.Name, "glass"));
 		ThaumcraftApi.registerObjectTag(item, list);
 
 		list = new AspectList().add(Aspect.EARTH, 2).add(Aspect.WATER, 2);
-		item = ForestryBlock.soil.getItemStack();
+		item = new ItemStack(BlockInterface.getBlock(ForestryHelper.Name, "soil"));
 		ThaumcraftApi.registerObjectTag(item, new int[] { 1 }, list);
 
 		list = new AspectList(new ItemStack(Blocks.leaves));
-		item = ForestryBlock.leaves.getItemStack();
+		item = ItemInterface.getItemStack(ForestryHelper.Name, "candle");
 		ThaumcraftApi.registerObjectTag(item, new int[] { item.getItemDamage() }, list);
 
 		list = new AspectList(new ItemStack(Blocks.sapling));
-		item = ForestryBlock.saplingGE.getItemStack();
+		item = ItemInterface.getItemStack(ForestryHelper.Name, "candle");
 		ThaumcraftApi.registerObjectTag(item, list);
 
 		list = new AspectList()/* .add(Aspect.SEED, 1) */.add(Aspect.PLANT, 1);
-		item = ForestryItem.pollenFertile.getItemStack();
+		item = ItemInterface.getItemStack(ForestryHelper.Name, "candle");
 		ThaumcraftApi.registerObjectTag(item, list);
 
 		list = new AspectList().add(Aspect.CRYSTAL, 1).add(Aspect.EARTH, 2);
-		item = ForestryItem.apatite.getItemStack();
+		item = ItemInterface.getItemStack(ForestryHelper.Name, "candle");
 		ThaumcraftApi.registerObjectTag(new ItemStack(item.getItem(), 1,ForestryHelper.BlockResource.APATITE.ordinal()), list.copy());
-		item = ForestryItem.apatite.getItemStack();
+		item = ItemInterface.getItemStack(ForestryHelper.Name, "apatite");
 		ThaumcraftApi.registerObjectTag(new ItemStack(item.getItem(), 1, item.getItemDamage()), list.copy().add(Aspect.CRYSTAL, 2));
 
 		list = new AspectList().add(Aspect.MOTION, 2).add(Aspect.FLIGHT, 1);

@@ -436,10 +436,6 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		BOT_SOMNOLENT.registerGenomeTemplate(BeeGenomeManager.getTemplateBotSomnolent());
 		BOT_DREAMING.registerGenomeTemplate(BeeGenomeManager.getTemplateBotDreaming());
 		BOT_ALFHEIM.registerGenomeTemplate(BeeGenomeManager.getTemplateBotAelfheim());
-
-		BeeProductHelper.initBaseProducts();
-		
-		BeeProductHelper.initOreDictSProducts();
 		
 		BeeProductHelper.initThaumcraftProducts();
 		if (!ThaumcraftHelper.isActive()) {

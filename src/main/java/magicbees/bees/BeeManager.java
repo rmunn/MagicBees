@@ -26,14 +26,21 @@ public class BeeManager
 	private static List<Tuple<IAlleleBeeSpecies, Double>> worldgenSpeciesWeights = new ArrayList<Tuple<IAlleleBeeSpecies, Double>>();
 	private static double worldgenSpeciesWeightsTotal = 0;
 	
-	public static void ititializeBees()
-	{
+	public static void getBeeRoot() {
 		beeRoot = (IBeeRoot)AlleleManager.alleleRegistry.getSpeciesRoot("rootBees");
-		
+	}
+	
+	public static void setupAlleles() {
 		Allele.setupAdditionalAlleles();
 		BeeSpecies.setupBeeSpecies();
 		Allele.registerDeprecatedAlleleReplacements();
+	}
+	
+	public static void lateBeeInit()
+	{
 		BeeMutation.setupMutations();
+		BeeProductHelper.initBaseProducts();		
+		BeeProductHelper.initOreDictSProducts();
 		
 		HiveType.initHiveData();
 		
