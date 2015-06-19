@@ -167,7 +167,11 @@ public class BeeProductHelper {
 		COBALT.addProduct(ForestryHelper.itemHoneycomb, 10);
 		if (OreDictionary.getOres("nuggetCobalt").size() > 0) {
 			COBALT.addSpecialty(OreDictionary.getOres("nuggetCobalt").get(0), 18);
-		} else {
+		}
+		if (OreDictionary.getOres("nuggetNaturalCobalt").size() > 0) {
+			COBALT.addSpecialty(OreDictionary.getOres("nuggetNaturalCobalt").get(0), 24);
+		}
+		if (COBALT.getSpecialty().size() <= 0) {
 			COBALT.setInactive();
 		}
 
@@ -197,6 +201,14 @@ public class BeeProductHelper {
 			MANYULLYN.addSpecialty(OreDictionary.getOres("nuggetManyullyn").get(0), 16);
 		} else {
 			MANYULLYN.setInactive();
+		}
+		
+		OSMIUM.addProduct(ForestryHelper.itemHoneycomb, 15);
+		if (OreDictionary.getOres("nuggetOsmium").size() > 0) {
+			OSMIUM.addSpecialty(OreDictionary.getOres("nuggetOsmium").get(0), 16);
+		}
+		else {
+			OSMIUM.setInactive();
 		}
 	}
 	

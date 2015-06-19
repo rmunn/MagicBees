@@ -172,13 +172,28 @@ public class BeeMutation implements IBeeMutation
 		}
 		if (BeeSpecies.COBALT.isActive())
 		{
-			new BeeMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.INFERNAL, BeeSpecies.COBALT, 9)
-					.setBlockRequired("blockCobalt");
+			mutation = new BeeMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.INFERNAL, BeeSpecies.COBALT, 9);
+			if (OreDictionary.getOres("nuggetCobalt").size() > 0 && OreDictionary.getOres("blockCobalt").size() > 0) {
+					mutation.setBlockRequired("blockCobalt");
+			}
+			mutation = new BeeMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.INFERNAL, BeeSpecies.COBALT, 13);
+			if (OreDictionary.getOres("nuggetNaturalCobalt").size() > 0 && OreDictionary.getOres("blockNaturalCobalt").size() > 0) {
+				mutation.setBlockRequired("blockNaturalCobalt");
+			}
 		}
 		if (BeeSpecies.MANYULLYN.isActive())
 		{
 			new BeeMutation(BeeSpecies.ARDITE, BeeSpecies.COBALT, BeeSpecies.MANYULLYN, 9)
 					.setBlockRequired("blockManyullyn");
+		}
+		
+		if (BeeSpecies.OSMIUM.isActive()) {
+			baseA = (BeeSpecies.SILVER.isActive()) ? BeeSpecies.SILVER : Allele.getBaseSpecies("Imperial");
+			baseB = (BeeSpecies.COBALT.isActive()) ? BeeSpecies.COBALT : BeeSpecies.INFERNAL;
+			mutation = new BeeMutation(baseA, baseB, BeeSpecies.OSMIUM, 11);
+			if (OreDictionary.getOres("blockOsmium").size() > 0) {
+				mutation.setBlockRequired("blockOsmium");
+			}
 		}
 		
 		new BeeMutation(Allele.getBaseSpecies("Austere"), BeeSpecies.GOLD, BeeSpecies.DIAMOND, 7)
