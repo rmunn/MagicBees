@@ -115,7 +115,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 	LORDLY("Lordly", "rassilonis", BeeClassification.TIME,
 			0xC6AF86, 0x8E0213, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
 	DOCTORAL("Doctoral", "medicus qui", BeeClassification.TIME,
-			0xDDE5FC, 0x4B6E8C, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, false),
+			0xDDE5FC, 0x4B6E8C, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
 
 	INFERNAL("Infernal", "infernales", BeeClassification.ABOMINABLE,
 			0xFF1C1C, BodyColours.ABOMINABLE, EnumTemperature.HELLISH, EnumHumidity.ARID, false, true),
@@ -881,6 +881,10 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		case TE_DANTE:
 		case TE_PYRO:
 			value = CommonProxy.DOMAIN + ":bees/skulking/";
+			break;
+			
+		case DOCTORAL:
+			value = CommonProxy.DOMAIN + ":bees/doctoral/";
 			break;
 
 		default:

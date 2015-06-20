@@ -59,7 +59,7 @@ public class BlockMagicApiary extends BlockContainer
         }else if (side == 2 || side == 3){
             return icons[2];
         }else{
-            return icons[4];
+            return icons[3];
         }
     }
 
@@ -67,12 +67,12 @@ public class BlockMagicApiary extends BlockContainer
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister register)
     {
-        icons = new IIcon[5];
+        icons = new IIcon[4];
 
         icons[0] = register.registerIcon(CommonProxy.DOMAIN + ":thaumicapiary.0");
         icons[1] = register.registerIcon(CommonProxy.DOMAIN + ":thaumicapiary.1");
         icons[2] = register.registerIcon(CommonProxy.DOMAIN + ":thaumicapiary.2");
-        icons[4] = register.registerIcon(CommonProxy.DOMAIN + ":thaumicapiary.4");
+        icons[3] = register.registerIcon(CommonProxy.DOMAIN + ":thaumicapiary.4");
     }
 
     @Override
