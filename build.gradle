@@ -38,7 +38,7 @@ minecraft {
 }
     
 dependencies {
-    compile "net.sengir.forestry:forestry_${project.version_mc}:${project.version_forestry}:dev"
+    compile "net.sengir.forestry:forestry_${project.version_mc}:${project.version_forestry}:api"
 	compile files("/libs/BloodMagic-${project.version_mc}-${project.version_bloodmagic}.jar")
 	compile files("/libs/Botania ${project.version_botania}-deobf.jar")
 }
