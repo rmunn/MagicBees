@@ -478,30 +478,32 @@ public class CraftingManager
 							Config.propolis.getStackForType(PropolisType.EARTH) },
 					new int[] { 100, 60, 80 });
 			RecipeManagers.centrifugeManager.addRecipe(20, Config.combs.getStackForType(CombType.TC_ORDER),
-					new ItemStack[] { Config.wax.getStackForType(WaxType.MAGIC), Config.propolis.getStackForType(PropolisType.ORDER) },
-					new int[] { 100, 80 });
+					new ItemStack[] { Config.wax.getStackForType(WaxType.MAGIC), new ItemStack(Items.redstone),
+							Config.propolis.getStackForType(PropolisType.ORDER) },
+					new int[] { 100, 60, 80 });
 			RecipeManagers.centrifugeManager.addRecipe(20, Config.combs.getStackForType(CombType.TC_CHAOS),
-					new ItemStack[] { Config.wax.getStackForType(WaxType.MAGIC), Config.propolis.getStackForType(PropolisType.CHAOS) },
-					new int[] { 100, 80 });
+					new ItemStack[] { Config.wax.getStackForType(WaxType.MAGIC), new ItemStack(Items.gunpowder),
+							Config.propolis.getStackForType(PropolisType.CHAOS) },
+					new int[] { 100, 60, 80 });
 
 			RecipeManagers.centrifugeManager.addRecipe(8, Config.propolis.getStackForType(PropolisType.AIR),
 					new ItemStack[] { propolis, Config.miscResources.getStackForType(ResourceType.TC_DUST_AIR) },
-					new int[] { 100, 65 });
+					new int[] { 100, 90 });
 			RecipeManagers.centrifugeManager.addRecipe(8, Config.propolis.getStackForType(PropolisType.FIRE),
 					new ItemStack[] { propolis, Config.miscResources.getStackForType(ResourceType.TC_DUST_FIRE) },
-					new int[] { 100, 65 });
+					new int[] { 100, 90 });
 			RecipeManagers.centrifugeManager.addRecipe(8, Config.propolis.getStackForType(PropolisType.WATER),
 					new ItemStack[] { propolis, Config.miscResources.getStackForType(ResourceType.TC_DUST_WATER) },
-					new int[] { 100, 65 });
+					new int[] { 100, 90 });
 			RecipeManagers.centrifugeManager.addRecipe(8, Config.propolis.getStackForType(PropolisType.EARTH),
 					new ItemStack[] { propolis, Config.miscResources.getStackForType(ResourceType.TC_DUST_EARTH) },
-					new int[] { 100, 65 });
+					new int[] { 100, 90 });
 			RecipeManagers.centrifugeManager.addRecipe(8, Config.propolis.getStackForType(PropolisType.ORDER),
 					new ItemStack[] { propolis, Config.miscResources.getStackForType(ResourceType.TC_DUST_ORDER) },
-					new int[] { 100, 65 });
+					new int[] { 100, 90 });
 			RecipeManagers.centrifugeManager.addRecipe(8, Config.propolis.getStackForType(PropolisType.CHAOS),
 					new ItemStack[] { propolis, Config.miscResources.getStackForType(ResourceType.TC_DUST_CHAOS) },
-					new int[] { 100, 65 });
+					new int[] { 100, 90 });
 		}
 
 		if (ArsMagicaHelper.isActive())

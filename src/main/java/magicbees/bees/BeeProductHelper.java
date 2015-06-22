@@ -4,6 +4,7 @@ import magicbees.item.types.CombType;
 import magicbees.item.types.DropType;
 import magicbees.item.types.NuggetType;
 import magicbees.item.types.PollenType;
+import magicbees.item.types.PropolisType;
 import magicbees.item.types.ResourceType;
 import magicbees.main.Config;
 import magicbees.main.utils.LogHelper;
@@ -213,10 +214,10 @@ public class BeeProductHelper {
 	}
 	
 	public static void initThaumcraftProducts() {
-		TC_AIR.addProduct(Config.combs.getStackForType(CombType.AIRY), 20);
-		TC_FIRE.addProduct(Config.combs.getStackForType(CombType.FIREY), 20);
-		TC_WATER.addProduct(Config.combs.getStackForType(CombType.WATERY), 20);
-		TC_EARTH.addProduct(Config.combs.getStackForType(CombType.EARTHY), 20);
+		TC_AIR.addProduct(Config.combs.getStackForType(CombType.TC_AIR), 20);
+		TC_FIRE.addProduct(Config.combs.getStackForType(CombType.TC_FIRE), 20);
+		TC_WATER.addProduct(Config.combs.getStackForType(CombType.TC_WATER), 20);
+		TC_EARTH.addProduct(Config.combs.getStackForType(CombType.TC_EARTH), 20);
 		TC_ORDER.addProduct(Config.combs.getStackForType(CombType.TC_ORDER), 20);
 		TC_CHAOS.addProduct(Config.combs.getStackForType(CombType.TC_CHAOS), 20);
 
@@ -240,12 +241,12 @@ public class BeeProductHelper {
 			SCHOLARLY.addSpecialty(Config.miscResources.getStackForType(ResourceType.LORE_FRAGMENT), 2);
 			SAVANT.addSpecialty(Config.miscResources.getStackForType(ResourceType.LORE_FRAGMENT), 5);
 
-			TC_AIR.addSpecialty(new ItemStack(Config.tcShard, 1, ThaumcraftHelper.ShardType.AIR.ordinal()), 5);
-			TC_FIRE.addSpecialty(new ItemStack(Config.tcShard, 1, ThaumcraftHelper.ShardType.FIRE.ordinal()), 5);
-			TC_WATER.addSpecialty(new ItemStack(Config.tcShard, 1, ThaumcraftHelper.ShardType.WATER.ordinal()), 5);
-			TC_EARTH.addSpecialty(new ItemStack(Config.tcShard, 1, ThaumcraftHelper.ShardType.EARTH.ordinal()), 5);
-			TC_ORDER.addSpecialty(new ItemStack(Config.tcShard, 1, ThaumcraftHelper.ShardType.ORDER.ordinal()), 5);
-			TC_CHAOS.addSpecialty(new ItemStack(Config.tcShard, 1, ThaumcraftHelper.ShardType.CHAOS.ordinal()), 5);
+			TC_AIR.addSpecialty(Config.propolis.getStackForType(PropolisType.AIR), 18);
+			TC_FIRE.addSpecialty(Config.propolis.getStackForType(PropolisType.FIRE), 18);
+			TC_WATER.addSpecialty(Config.propolis.getStackForType(PropolisType.WATER), 18);
+			TC_EARTH.addSpecialty(Config.propolis.getStackForType(PropolisType.EARTH), 18);
+			TC_ORDER.addSpecialty(Config.propolis.getStackForType(PropolisType.ORDER), 18);
+			TC_CHAOS.addSpecialty(Config.propolis.getStackForType(PropolisType.CHAOS), 18);
 
 			TC_BRAINY.addSpecialty(new ItemStack(Config.tcMiscResource, 1, ThaumcraftHelper.MiscResource.ZOMBIE_BRAIN.ordinal()), 2);
 			TC_CHICKEN.addSpecialty(new ItemStack(Config.tcNuggetChicken, 1), 9);
