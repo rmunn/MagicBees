@@ -75,8 +75,9 @@ public class SubTileHibeescus extends SubTileFunctional {
 		
 		for (EntityItem itemEntity : items) {
 			ItemStack item = itemEntity.getEntityItem();
-			if (isItemPrincessOrQueen(item)) {
+			if (!itemEntity.isDead && isItemPrincessOrQueen(item)) {
 				beeSlot = itemEntity.getEntityItem();
+				itemEntity.setDead();
 				operationTicksRemaining = (long)(OPERATION_TICKS_TIME * BotaniaHelper.hibeescusTicksMultiplier);
 				if (operationTicksRemaining > 0) {
 					operationTicksRemaining += supertile.getWorldObj().rand.nextInt((int)(operationTicksRemaining * 0.02));
