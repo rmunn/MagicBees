@@ -211,6 +211,22 @@ public class BeeProductHelper {
 		else {
 			OSMIUM.setInactive();
 		}
+		
+		CERTUS.addProduct(ForestryHelper.itemHoneycomb, 10);
+		if (OreDictionary.getOres("crystalCertusQuartz").size() > 0) {
+			CERTUS.addSpecialty(OreDictionary.getOres("crystalCertusQuartz").get(0), 16);
+		}
+		else {
+			CERTUS.setInactive();
+		}
+		
+		SILICON.addProduct(ForestryHelper.itemHoneycomb, 10);
+		if (OreDictionary.getOres("crystalCertusQuartz").size() > 0) {
+			SILICON.addSpecialty(OreDictionary.getOres("crystalCertusQuartz").get(0), 16);
+		}
+		else {
+			SILICON.setInactive();
+		}
 	}
 	
 	public static void initThaumcraftProducts() {

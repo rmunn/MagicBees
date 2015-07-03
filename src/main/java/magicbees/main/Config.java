@@ -96,6 +96,7 @@ public class Config
 	public static boolean thaumcraftActive;
 	public static boolean thermalExpansionActive;
 	public static boolean botaniaActive;
+	public static boolean ae2Active;
 
 	public static float magnetBaseRange;
 	public static float magnetLevelMultiplier;
@@ -348,6 +349,9 @@ public class Config
 		p = configuration.get(CATEGORY_MODULES, "Botania", true);
 		botaniaActive = p.getBoolean();
 		BotaniaHelper.doBotaniaModuleConfigs(configuration);
+		
+		p = configuration.get(CATEGORY_MODULES, "AppliedEnergistics2", true);
+		ae2Active = p.getBoolean();
 	}
 
 	private void doGeneralConfigs() {

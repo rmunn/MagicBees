@@ -160,12 +160,16 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 	OSMIUM("Osmium", "hyacintho", BeeClassification.METALLIC,
 			0x374B5B, 0x6C7B89, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
 
-	DIAMOND("Diamond", "diamond", BeeClassification.GEM,
+			DIAMOND("Diamond", "diamond", BeeClassification.GEM,
 			0x209581, 0x8DF5E3, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, false),
 	EMERALD("Emerald", "prasinus", BeeClassification.GEM,
 			0x005300, 0x17DD62, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, false),
 	APATITE("Apatite", "apatite", BeeClassification.GEM,
 			0x2EA7EC, 0x001D51, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
+	CERTUS("Certus", "", BeeClassification.GEM,
+			0xffffff, 0xffffff, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+	SILICON("Silicon", "", BeeClassification.GEM,
+			0xffffff, 0xffffff, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
 
 	MUTABLE("Mutable", "mutable", BeeClassification.TRANSMUTING,
 			0xDBB24C, 0xE0D5A6, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
