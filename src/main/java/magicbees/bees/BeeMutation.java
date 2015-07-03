@@ -113,6 +113,8 @@ public class BeeMutation implements IBeeMutation
 		new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.ETHEREAL, BeeSpecies.GHASTLY, 9);
 		new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.HATEFUL, BeeSpecies.SMOULDERING, 7)
 				.setBiomeRequired(BiomeDictionary.Type.NETHER);
+		new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.MYSTERIOUS, BeeSpecies.BIGBAD, 7)
+				.setMoonPhaseRestricted(MoonPhase.FULL, MoonPhase.FULL);
 		
 		new BeeMutation(BeeSpecies.ETHEREAL, BeeSpecies.OBLIVION, BeeSpecies.NAMELESS, 10);
 		new BeeMutation(BeeSpecies.OBLIVION, BeeSpecies.NAMELESS, BeeSpecies.ABANDONED, 8);
