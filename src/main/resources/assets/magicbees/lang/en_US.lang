@@ -594,9 +594,12 @@ tc.research_page.MB_VisAuraProvider.1=Infusing Unusual Pollen with vis and combi
 #Botania Lexicon entries
 magicbees.botania.lexicon.subtitle=[Magic Bees]
 
+magicbees.botania.lexicon.manasteelTools.title=Manasteel Naturalist's Tools
+magicbees.botania.lexicon.manasteelTools.0=Manasteel's unusual properties lends itself well to Naturalist's tools. The &1Manasteel Scoop&0 can be used to effectively harvest hives, and the &1Manasteel Grafter&0 is a durable subsitute for the generic bronze grafters. Of course, both tools have the ability to regenerate with mana. For best results, combine the tool with Living Wood.
 magicbees.botania.lexicon.manasteelScoop=The &1Manasteel Scoop&0
 magicbees.botania.lexicon.manasteelGrafter=The &1Manasteel Grafter&0
 
+magicbees.botania.lexicon.beeAlfheim.title=Alfheim Apimancy
 magicbees.botania.lexicon.beeAlfheim.trade=Trading for &bAlfheim Drones&0
 magicbees.botania.lexicon.beeAlfheim.0=&1Elven Beekeepers&0 are anxious to discover the delights of your world's bees, and are particularly interested in the &1Dreaming Drones&0 that you can provide. In return, they will trade &bAlfheim Drones&0, the only bees that exist in Alfheim.
 

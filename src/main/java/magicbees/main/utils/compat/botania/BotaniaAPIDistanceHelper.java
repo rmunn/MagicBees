@@ -1,6 +1,7 @@
 package magicbees.main.utils.compat.botania;
 
 import magicbees.bees.BeeSpecies;
+import magicbees.main.Config;
 import magicbees.main.utils.compat.BotaniaHelper;
 import magicbees.main.utils.compat.BotaniaHelper.ManaResource;
 import magicbees.main.utils.compat.BotaniaHelper.Rune;
@@ -18,6 +19,8 @@ import forestry.api.apiculture.EnumBeeType;
  */
 public class BotaniaAPIDistanceHelper {
 	
+	public static LexiconEntry entryManasteelForestryTools;
+	public static LexiconEntry entryBeeTrade;
 	public static LexiconEntry entryBeegonia;
 	public static LexiconEntry entryHiveacynth;
 	public static LexiconEntry entryHibeescus;
@@ -53,13 +56,17 @@ public class BotaniaAPIDistanceHelper {
 		tradeBeeAelfheim = new SpeciesRecipeElvenTrade(BeeSpecies.BOT_DREAMING, BeeSpecies.BOT_ALFHEIM);
 		BotaniaAPI.elvenTradeRecipes.add(tradeBeeAelfheim);
 		
-		LexiconEntry manasteelEntry = getLexiconEntryForName(BotaniaHelper.LEXICON_ENTRY_MANA_GEAR);
-		manasteelEntry.addPage(BotaniaAPI.internalHandler.craftingRecipePage("magicbees.botania.lexicon.manasteelScoop", BotaniaHelper.manasteelScoopRecipe));
-		manasteelEntry.addPage(BotaniaAPI.internalHandler.craftingRecipePage("magicbees.botania.lexicon.manasteelGrafter", BotaniaHelper.manasteelGrafterRecipe));
+		entryManasteelForestryTools = new BotaniaLexiconEntry("magicbees.botania.lexicon.manasteelTools.title", BotaniaAPI.categoryTools);
+		entryManasteelForestryTools.setIcon(new ItemStack(Config.manasteelScoop));
+		entryManasteelForestryTools.addPage(BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.manasteelTools.0"));
+		entryManasteelForestryTools.addPage(BotaniaAPI.internalHandler.craftingRecipePage("magicbees.botania.lexicon.manasteelScoop", BotaniaHelper.manasteelScoopRecipe));
+		entryManasteelForestryTools.addPage(BotaniaAPI.internalHandler.craftingRecipePage("magicbees.botania.lexicon.manasteelGrafter", BotaniaHelper.manasteelGrafterRecipe));
 
-		LexiconEntry elfResourcesEntry = getLexiconEntryForName(BotaniaHelper.LEXICON_ENTRY_ELF_RESOURCES);
-		elfResourcesEntry.addPage(BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.beeAlfheim.0"));
-		elfResourcesEntry.addPage(BotaniaAPI.internalHandler.elvenTradesPage("magicbees.botania.lexicon.beeAlfheim.trade", tradeBeeAelfheim));
+		entryBeeTrade = new BotaniaLexiconEntry("magicbees.botania.lexicon.beeAlfheim.title", BotaniaAPI.categoryAlfhomancy);
+		entryBeeTrade.setIcon(BeeSpecies.BOT_ALFHEIM.getBeeItem(EnumBeeType.PRINCESS));
+		entryBeeTrade.setKnowledgeType(BotaniaAPI.elvenKnowledge);
+		entryBeeTrade.addPage(BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.beeAlfheim.0"));
+		entryBeeTrade.addPage(BotaniaAPI.internalHandler.elvenTradesPage("magicbees.botania.lexicon.beeAlfheim.trade", tradeBeeAelfheim));
 		
 		RecipePetals beegoniaRecipe = BotaniaAPI.registerPetalRecipe(BotaniaAPI.internalHandler.getSubTileAsStack(SubTileBeegonia.NAME),
 				new ItemStack(BotaniaHelper.itemPetal),

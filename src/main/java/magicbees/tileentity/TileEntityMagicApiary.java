@@ -406,7 +406,16 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
 
     @Override
     public int[] getAccessibleSlotsFromSide(int side) {
-        return new int[0];
+    	if (side == 0 || side == 1) {
+    		return new int[] { SLOT_QUEEN, SLOT_DRONE };
+    	}
+    	else {
+    		int[] slots = new int[SLOT_PRODUCTS_COUNT];
+    		for (int i = 0, slot = SLOT_PRODUCTS_START; i < SLOT_PRODUCTS_COUNT; ++i, ++slot) {
+    			slots[i] = slot;
+    		}
+    		return slots;
+    	}
     }
 
     @Override
@@ -424,8 +433,6 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     @Override
     public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
         switch (slot){
-            case SLOT_QUEEN:
-            case SLOT_DRONE:
             case SLOT_FRAME_START:
             case SLOT_FRAME_START + 1:
             case SLOT_FRAME_START + 2:
