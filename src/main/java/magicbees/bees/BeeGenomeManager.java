@@ -673,6 +673,37 @@ public class BeeGenomeManager {
 		return genome;
 	}
 	
+
+	public static IAllele[] getTemplateSilicon() {
+		IAllele[] genome = getTemplateBaseMetallic();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.SILICON;
+		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedSlow");
+		genome[EnumBeeChromosome.TERRITORY.ordinal()] = Allele.getBaseAllele("territoryLarger");
+		genome[EnumBeeChromosome.TOLERANT_FLYER.ordinal()] = Allele.getBaseAllele("boolTrue");
+		
+		return genome;
+	}
+
+	public static IAllele[] getTemplateCertus() {
+		IAllele[] genome = getTemplateBaseMetallic();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.CERTUS;
+		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedSlower");
+		
+		return genome;
+	}
+	
+
+	public static IAllele[] getTemplateFluix() {
+		IAllele[] genome = getTemplateBaseMetallic();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.FLUIX;
+		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedSlowest");
+		
+		return genome;
+	}
+	
 	public static IAllele[] getTemplateMutableBase() {
 		IAllele[] genome = getTemplateModBase();
 		
@@ -1387,6 +1418,17 @@ public class BeeGenomeManager {
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BOT_ALFHEIM;
 		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectDreaming;
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateAESkystone() {
+		IAllele[] genome = getTemplateModBase();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.AE_SKYSTONE;
+		genome[EnumBeeChromosome.CAVE_DWELLING.ordinal()] = Allele.getBaseAllele("boolTrue");
+		genome[EnumBeeChromosome.FERTILITY.ordinal()] = Allele.getBaseAllele("fertilityLow");
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.getBaseAllele("effectIgnition");
 		
 		return genome;
 	}

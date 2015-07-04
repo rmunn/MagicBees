@@ -1,15 +1,12 @@
 package magicbees.main.utils.compat;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 import magicbees.main.Config;
+import net.minecraft.block.Block;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class AppliedEnergisticsHelper {
 	
-	public static ItemStack silicon;
-	public static ItemStack fluixCrystal;
 	public static Block skystone;
 	
 	public static final String Name = "appliedenergistics2";
@@ -27,14 +24,12 @@ public class AppliedEnergisticsHelper {
 	
 	public static void init() {
 		if (isActive()) {
-			skystone = GameRegistry.findBlock(Name, "tile.skystone");
-			silicon = GameRegistry.findItemStack(Name, "item.silicon", 1);
+			skystone = GameRegistry.findBlock(Name, "tile.BlockSkyStone");
 		}
 	}
 	
 	public static void postInit() {
-		if (isActive()) {
-			
-		}
+		/*if (isActive()) {
+		}*/
 	}
 }

@@ -7,6 +7,7 @@ import magicbees.main.Config;
 import magicbees.main.utils.LocalizationManager;
 import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.MoonPhase;
+import magicbees.main.utils.compat.AppliedEnergisticsHelper;
 import magicbees.main.utils.compat.ArsMagicaHelper;
 import magicbees.main.utils.compat.BotaniaHelper;
 import magicbees.main.utils.compat.EquivalentExchangeHelper;
@@ -206,6 +207,31 @@ public class BeeMutation implements IBeeMutation
 		new BeeMutation(Allele.getBaseSpecies("Rural"), BeeSpecies.COPPER, BeeSpecies.APATITE, 12)
 				.setBlockRequired("blockApatite");
 		
+		if (BeeSpecies.SILICON.isActive()) {
+			baseA = (BeeSpecies.AE_SKYSTONE.isActive()) ? BeeSpecies.AE_SKYSTONE : BeeSpecies.EARTHY;
+			new BeeMutation(baseA, BeeSpecies.IRON, BeeSpecies.SILICON, 17);
+		}
+		
+		if (BeeSpecies.CERTUS.isActive()) {
+			baseA = (BeeSpecies.SILICON.isActive()) ? BeeSpecies.SILICON : BeeSpecies.IRON;
+			baseB = (BeeSpecies.AE_SKYSTONE.isActive()) ? BeeSpecies.AE_SKYSTONE : BeeSpecies.EARTHY;
+			new BeeMutation(baseA, baseB, BeeSpecies.CERTUS, 13);
+		}
+		
+		if (BeeSpecies.FLUIX.isActive()) {
+			if (BeeSpecies.CERTUS.isActive()) {
+				baseA = BeeSpecies.CERTUS;
+			}
+			else if (BeeSpecies.SILICON.isActive()) {
+				baseA = BeeSpecies.SILICON;
+			}
+			else {
+				baseA = BeeSpecies.IRON;
+			}
+			baseB = (BeeSpecies.AE_SKYSTONE.isActive()) ? BeeSpecies.AE_SKYSTONE : BeeSpecies.EARTHY;
+			new BeeMutation(baseA, baseB, BeeSpecies.FLUIX, 17);
+		}
+		
 		if (ThaumcraftHelper.isActive())
 		{
 			new BeeMutation(BeeSpecies.WINDY, BeeSpecies.WINDY, BeeSpecies.TC_AIR, 8)
@@ -320,6 +346,13 @@ public class BeeMutation implements IBeeMutation
 			
 			new BeeMutation(BeeSpecies.BOT_BOTANIC, BeeSpecies.EARTHY, BeeSpecies.BOT_BLOSSOM, 12);
 			new BeeMutation(BeeSpecies.BOT_BOTANIC, BeeSpecies.BOT_BLOSSOM, BeeSpecies.BOT_FLORAL, 8);
+		}
+		
+		if (AppliedEnergisticsHelper.isActive()) {
+			if (BeeSpecies.AE_SKYSTONE.isActive()) {
+				new BeeMutation(BeeSpecies.EARTHY, BeeSpecies.WINDY, BeeSpecies.AE_SKYSTONE, 20)
+					.setBlockRequired(AppliedEnergisticsHelper.skystone);
+			}
 		}
 	}
 

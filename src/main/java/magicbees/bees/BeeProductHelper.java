@@ -8,6 +8,7 @@ import magicbees.item.types.PropolisType;
 import magicbees.item.types.ResourceType;
 import magicbees.main.Config;
 import magicbees.main.utils.LogHelper;
+import magicbees.main.utils.compat.AppliedEnergisticsHelper;
 import magicbees.main.utils.compat.ArsMagicaHelper;
 import magicbees.main.utils.compat.BotaniaHelper;
 import magicbees.main.utils.compat.EquivalentExchangeHelper;
@@ -214,18 +215,26 @@ public class BeeProductHelper {
 		
 		CERTUS.addProduct(ForestryHelper.itemHoneycomb, 10);
 		if (OreDictionary.getOres("crystalCertusQuartz").size() > 0) {
-			CERTUS.addSpecialty(OreDictionary.getOres("crystalCertusQuartz").get(0), 16);
+			CERTUS.addSpecialty(OreDictionary.getOres("crystalCertusQuartz").get(0), 8);
 		}
 		else {
 			CERTUS.setInactive();
 		}
 		
 		SILICON.addProduct(ForestryHelper.itemHoneycomb, 10);
-		if (OreDictionary.getOres("crystalCertusQuartz").size() > 0) {
-			SILICON.addSpecialty(OreDictionary.getOres("crystalCertusQuartz").get(0), 16);
+		if (OreDictionary.getOres("itemSilicon").size() > 0) {
+			SILICON.addSpecialty(OreDictionary.getOres("itemSilicon").get(0), 16);
 		}
 		else {
 			SILICON.setInactive();
+		}
+		
+		FLUIX.addProduct(ForestryHelper.itemHoneycomb, 10);
+		if (OreDictionary.getOres("crystalFluix").size() > 0) {
+			FLUIX.addSpecialty(OreDictionary.getOres("crystalFluix").get(0), 6);
+		}
+		else {
+			FLUIX.setInactive();
 		}
 	}
 	
@@ -387,6 +396,16 @@ public class BeeProductHelper {
 			for (PastureSeed type : PastureSeed.values()) {
 				BOT_VAZBEE.addSpecialty(new ItemStack(BotaniaHelper.itemPastureSeed, 1, type.ordinal()), 4);
 			}
+		}
+	}
+	
+	public static void initAppEngProducts() {
+		AE_SKYSTONE.addProduct(Config.combs.getStackForType(CombType.EARTHY), 19);
+		if (AppliedEnergisticsHelper.skystone != null) {
+			AE_SKYSTONE.addSpecialty(new ItemStack(AppliedEnergisticsHelper.skystone), 2);
+		}
+		else {
+			AE_SKYSTONE.setInactive();
 		}
 	}
 }
