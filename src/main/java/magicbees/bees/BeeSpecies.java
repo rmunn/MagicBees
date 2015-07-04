@@ -167,7 +167,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			0x005300, 0x17DD62, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, false),
 	APATITE("Apatite", "apatite", BeeClassification.GEM,
 			0x2EA7EC, 0x001D51, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
-	SILICON("Silicon", "siliconisque	", BeeClassification.GEM,
+	SILICON("Silicon", "siliconisque", BeeClassification.GEM,
 			0xADA2A7, 0x736675, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
 	CERTUS("Certus", "alia cristallum", BeeClassification.GEM,
 			0x93C7FF, 0xA6B8C7, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
@@ -320,7 +320,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			-1, -1, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
 
 	// -------------------Applied Energistics 2 Bees---------------------------
-	AE_SKYSTONE("Skystone", "terra astris", BeeClassification.TRANSMUTING,
+	AE_SKYSTONE("AESkystone", "terra astris", BeeClassification.TRANSMUTING,
 			0x4B8381, 0x252929, EnumTemperature.HOT, EnumHumidity.ARID, false, true),
 	
 	;
