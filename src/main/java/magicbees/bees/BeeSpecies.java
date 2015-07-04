@@ -10,6 +10,7 @@ import java.util.Map;
 import magicbees.main.CommonProxy;
 import magicbees.main.Config;
 import magicbees.main.utils.LocalizationManager;
+import magicbees.main.utils.compat.AppliedEnergisticsHelper;
 import magicbees.main.utils.compat.ArsMagicaHelper;
 import magicbees.main.utils.compat.BloodMagicHelper;
 import magicbees.main.utils.compat.BotaniaHelper;
@@ -166,6 +167,12 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			0x005300, 0x17DD62, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, false),
 	APATITE("Apatite", "apatite", BeeClassification.GEM,
 			0x2EA7EC, 0x001D51, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
+	SILICON("Silicon", "siliconisque	", BeeClassification.GEM,
+			0xADA2A7, 0x736675, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
+	CERTUS("Certus", "alia cristallum", BeeClassification.GEM,
+			0x93C7FF, 0xA6B8C7, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+	FLUIX("Fluix", "alien cristallum", BeeClassification.GEM,
+			0xFC639E, 0x534797, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
 
 	MUTABLE("Mutable", "mutable", BeeClassification.TRANSMUTING,
 			0xDBB24C, 0xE0D5A6, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
@@ -312,6 +319,10 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 	BOT_ALFHEIM("BotAlfheim", "alfheimis", BeeClassification.BOTANICAL,
 			-1, -1, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
 
+	// -------------------Applied Energistics 2 Bees---------------------------
+	AE_SKYSTONE("Skystone", "terra astris", BeeClassification.TRANSMUTING,
+			0x4B8381, 0x252929, EnumTemperature.HOT, EnumHumidity.ARID, false, true),
+	
 	;
 
 	// For body colours used by more than one bee.
@@ -380,6 +391,9 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		DIAMOND.registerGenomeTemplate(BeeGenomeManager.getTemplateDiamond());
 		EMERALD.registerGenomeTemplate(BeeGenomeManager.getTemplateEmerald());
 		APATITE.registerGenomeTemplate(BeeGenomeManager.getTemplateApatite());
+		SILICON.registerGenomeTemplate(BeeGenomeManager.getTemplateSilicon());
+		FLUIX.registerGenomeTemplate(BeeGenomeManager.getTemplateFluix());
+		CERTUS.registerGenomeTemplate(BeeGenomeManager.getTemplateCertus());
 		MUTABLE.registerGenomeTemplate(BeeGenomeManager.getTemplateMutable());
 		TRANSMUTING.registerGenomeTemplate(BeeGenomeManager.getTemplateTransmuting());
 		CRUMBLING.registerGenomeTemplate(BeeGenomeManager.getTemplateCrumbling());	
@@ -439,6 +453,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		BOT_SOMNOLENT.registerGenomeTemplate(BeeGenomeManager.getTemplateBotSomnolent());
 		BOT_DREAMING.registerGenomeTemplate(BeeGenomeManager.getTemplateBotDreaming());
 		BOT_ALFHEIM.registerGenomeTemplate(BeeGenomeManager.getTemplateBotAelfheim());
+		AE_SKYSTONE.registerGenomeTemplate(BeeGenomeManager.getTemplateAESkystone());
 		
 		BeeProductHelper.initThaumcraftProducts();
 		if (!ThaumcraftHelper.isActive()) {
@@ -516,6 +531,11 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			BOT_BOTANIC.setInactive();
 			BOT_FLORAL.setInactive();
 			BOT_VAZBEE.setInactive();
+		}
+		
+		BeeProductHelper.initAppEngProducts();
+		if (!AppliedEnergisticsHelper.isActive()) {
+			AE_SKYSTONE.setInactive();
 		}
 	}
 
