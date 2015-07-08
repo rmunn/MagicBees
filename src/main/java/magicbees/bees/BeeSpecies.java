@@ -527,10 +527,14 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 
 		BeeProductHelper.initBotaniaProducts();
 		if (!BotaniaHelper.isActive()) {
+			BOT_ROOTED.setInactive();
 			BOT_BLOSSOM.setInactive();
 			BOT_BOTANIC.setInactive();
 			BOT_FLORAL.setInactive();
 			BOT_VAZBEE.setInactive();
+			BOT_SOMNOLENT.setInactive();
+			BOT_DREAMING.setInactive();
+			BOT_ALFHEIM.setInactive();
 		}
 		
 		BeeProductHelper.initAppEngProducts();
