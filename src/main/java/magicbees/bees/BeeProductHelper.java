@@ -391,8 +391,8 @@ public class BeeProductHelper {
 			for (int i = 0; i < 16; ++i) {
 				ItemStack petal = new ItemStack(BotaniaHelper.itemPetal, 1, i);
 				BOT_BOTANIC.addSpecialty(petal, 1);
-				BOT_BLOSSOM.addSpecialty(petal, 1);
-				BOT_FLORAL.addSpecialty(petal, 1);
+				BOT_BLOSSOM.addSpecialty(petal, 4);
+				BOT_FLORAL.addSpecialty(petal, 16);
 			}
 
 			for (PastureSeed type : PastureSeed.values()) {
