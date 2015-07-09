@@ -212,20 +212,7 @@ public class Config
 	public static FluidStack teFluidCoal;
 	public static FluidStack teFluidRedstone;
 	public static FluidStack teFluidEnder;
-	//--- Blood Magic Blocks ---
-	public static Block bmBloodStoneBrick;
-	//--- Blood Magic Items ---
-	public static ItemStack bmIncendium;
-	public static ItemStack bmMagicales;
-	public static ItemStack bmSanctus;
-	public static ItemStack bmAether;
-	public static ItemStack bmCrepitous;
-	public static ItemStack bmCrystallos;
-	public static ItemStack bmTerrae;
-	public static ItemStack bmAquasalus;
-	public static ItemStack bmTennebrae;
-
-
+	
 	//----- Config State info ----------------------------------
 	public static Configuration configuration;
 	

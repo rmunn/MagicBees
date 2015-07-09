@@ -2,8 +2,10 @@ package magicbees.item.types;
 
 import magicbees.main.utils.LocalizationManager;
 
-public enum CombType
-{
+public enum CombType {
+	// Reminder: Order matters!
+	// Meta value of comb == ordinal of enum value.
+	
 	MUNDANE("mundane", true),
 	MOLTEN("molten", true),
 	OCCULT("occult", true),
@@ -36,6 +38,8 @@ public enum CombType
 	TE_CARBON("TEcarbon", false),
 	TE_LUX("TElux", false),
 	TE_ENDEARING("TEendearing", false),
+	
+	BM_SANGUINE("BMSanguine", false),
 	;
 	
 	private static int[][] colours = new int[][] {
@@ -71,30 +75,28 @@ public enum CombType
 			{ 0x454545, 0x0F0F0F },
 			{ 0xF5F3A4, 0xC9C87D },
 			{ 0x12E3D9, 0x069E97 },
+			
+			{ 0x7F3228, 0xBE1900 },
 	};
 	
-	private CombType(String pName, boolean show)
-	{
+	private CombType(String pName, boolean show) {
 		this.name = pName;
 		
 		this.showInList = show;
 	}
 	
-	public void setHidden()
-	{
+	public void setHidden() {
 		this.showInList = false;
 	}
 	
 	private String name;
 	public boolean showInList;
 	
-	public String getName()
-	{
+	public String getName() {
 		return LocalizationManager.getLocalizedString("comb." + this.name);
 	}
 	
-	public int[] getColours()
-	{
+	public int[] getColours() {
 		return colours[this.ordinal()];
 	}
 }

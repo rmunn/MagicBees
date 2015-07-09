@@ -362,8 +362,10 @@ public class BeeProductHelper {
 	}
 	
 	public static void initBloodMagicProducts() {
-		BM_BLOODY.addProduct(ForestryHelper.itemHoneycomb, 10);
-		BM_BOUND.addProduct(ForestryHelper.itemHoneycomb, 10);
+		BM_BLOODY.addProduct(Config.combs.getStackForType(CombType.OCCULT), 12)
+				.addSpecialty(Config.combs.getStackForType(CombType.BM_SANGUINE), 8);
+		BM_BOUND.addProduct(Config.combs.getStackForType(CombType.BM_SANGUINE), 8)
+				.addProduct(Config.combs.getStackForType(CombType.OCCULT), 16);
 	}
 	
 	public static void initBotaniaProducts() {

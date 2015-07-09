@@ -11,6 +11,7 @@ import magicbees.item.types.ResourceType;
 import magicbees.item.types.WaxType;
 import magicbees.main.Config;
 import magicbees.main.utils.compat.ArsMagicaHelper;
+import magicbees.main.utils.compat.BloodMagicHelper;
 import magicbees.main.utils.compat.ForestryHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import magicbees.main.utils.compat.ThermalExpansionHelper;
@@ -25,24 +26,21 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
 import forestry.api.recipes.RecipeManagers;
 
-public class CraftingManager
-{
-	public static void registerLiquidContainers()
-	{
+public class CraftingManager {
+	
+	public static void registerLiquidContainers() {
 		registerLiquidContainer(Config.magicCapsule);
 		registerLiquidContainer(Config.voidCapsule);
 	}
 
-	public static void setupCrafting()
-	{
+	public static void setupCrafting() {
 		// Broken up into seperate sections to make things a bit easier to find.
 		setupVanillaCrafting();
 		setupCentrifugeRecipes();
 		setupCarpenterRecipes();
 	}
 
-	private static void setupVanillaCrafting()
-	{
+	private static void setupVanillaCrafting() {
 		ItemStack input;
 		ItemStack output;
 
@@ -248,45 +246,40 @@ public class CraftingManager
 		});
 		// </idiot>
 
-		if (OreDictionary.getOres("ingotCopper").size() <= 0)
-		{
+		if (OreDictionary.getOres("ingotCopper").size() <= 0) {
 			NuggetType.COPPER.setInactive();
 		}
-		else
-		{
+		else {
 			GameRegistry.addRecipe(new ShapedOreRecipe(OreDictionary.getOres("ingotCopper").get(0), new Object[] {
 					"xxx", "xxx", "xxx",
 					'x', "nuggetCopper"
 			}));
 		}
-		if (OreDictionary.getOres("ingotTin").size() <= 0)
-		{
+		
+		if (OreDictionary.getOres("ingotTin").size() <= 0) {
 			NuggetType.TIN.setInactive();
 		}
-		else
-		{
+		else {
 			GameRegistry.addRecipe(new ShapedOreRecipe(OreDictionary.getOres("ingotTin").get(0), new Object[] {
 					"xxx", "xxx", "xxx",
 					'x', "nuggetTin"
 			}));
 		}
-		if (OreDictionary.getOres("ingotSilver").size() <= 0)
-		{
+		
+		if (OreDictionary.getOres("ingotSilver").size() <= 0) {
 			NuggetType.SILVER.setInactive();
 		}
-		else
-		{
+		else {
 			GameRegistry.addRecipe(new ShapedOreRecipe(OreDictionary.getOres("ingotSilver").get(0), new Object[] {
 					"xxx", "xxx", "xxx",
 					'x', "nuggetSilver"
 			}));
 		}
-		if (OreDictionary.getOres("ingotLead").size() <= 0)
-		{
+		
+		if (OreDictionary.getOres("ingotLead").size() <= 0) {
 			NuggetType.LEAD.setInactive();
 		}
-		else
-		{
+		else {
 			GameRegistry.addRecipe(new ShapedOreRecipe(OreDictionary.getOres("ingotLead").get(0), new Object[] {
 					"xxx", "xxx", "xxx",
 					'x', "nuggetLead"
@@ -340,8 +333,7 @@ public class CraftingManager
 				'S', Config.miscResources.getStackForType(ResourceType.DIMENSIONAL_SINGULARITY)
 		});
 
-		for (int level = 1; level <= 8; level++)
-		{
+		for (int level = 1; level <= 8; level++) {
 			output = new ItemStack(Config.magnet, 1, level * 2);
 			GameRegistry.addRecipe(new ShapedOreRecipe(output, new Object[] {
 					" d ", "mSm", " B ",
@@ -360,16 +352,14 @@ public class CraftingManager
 				new ItemStack(Config.fApicultureBlock, 1, ForestryHelper.ApicultureBlock.APIARY.ordinal())
 		});
 
-		if (ThaumcraftHelper.isActive())
-		{
+		if (ThaumcraftHelper.isActive()) {
 			input = Config.miscResources.getStackForType(ResourceType.LORE_FRAGMENT);
 			output = new ItemStack(Config.tcMiscResource, 1, ThaumcraftHelper.MiscResource.KNOWLEDGE_FRAGMENT.ordinal());
 			GameRegistry.addShapelessRecipe(output, new Object[] {
 					input, input, input, input
 			});
 
-			if (Config.thaumaturgeBackpackActive)
-			{
+			if (Config.thaumaturgeBackpackActive) {
 				// T1 Thaumaturge's backpack
 				GameRegistry.addRecipe(new ItemStack(Config.thaumaturgeBackpackT1), new Object[] {
 						"SWS", "NCN", "SWS",
@@ -381,8 +371,7 @@ public class CraftingManager
 			}
 		}
 
-		if (ArsMagicaHelper.isActive())
-		{
+		if (ArsMagicaHelper.isActive()) {
 			input = ItemInterface.getItemStack("apatite");
 			output = Config.miscResources.getStackForType(ResourceType.EXTENDED_FERTILIZER, 4);
 			GameRegistry.addShapelessRecipe(output, new Object[] {
@@ -396,8 +385,7 @@ public class CraftingManager
 		}
 	}
 
-	private static void setupCentrifugeRecipes()
-	{
+	private static void setupCentrifugeRecipes() {
 		ItemStack beeswax = ItemInterface.getItemStack("beeswax");
 		ItemStack propolis = ItemInterface.getItemStack("propolis");
 		propolis.setItemDamage(ForestryHelper.Propolis.PULSATING.ordinal());
@@ -459,8 +447,7 @@ public class CraftingManager
 				new ItemStack[] { Config.wax.getStackForType(WaxType.MAGIC), new ItemStack(Items.clay_ball) },
 				new int[] { 100, 60 });
 
-		if (ThaumcraftHelper.isActive())
-		{
+		if (ThaumcraftHelper.isActive()) {
 			RecipeManagers.centrifugeManager.addRecipe(20, Config.combs.getStackForType(CombType.TC_AIR),
 					new ItemStack[] { Config.wax.getStackForType(WaxType.MAGIC), new ItemStack(Items.feather),
 							Config.propolis.getStackForType(PropolisType.AIR) },
@@ -506,10 +493,11 @@ public class CraftingManager
 					new int[] { 100, 90 });
 		}
 
-		if (ArsMagicaHelper.isActive())
-		{
+		if (ArsMagicaHelper.isActive()) {
 			RecipeManagers.centrifugeManager.addRecipe(20, Config.combs.getStackForType(CombType.AM_ESSENCE),
-					new ItemStack[] { Config.wax.getStackForType(WaxType.MAGIC), new ItemStack(Config.amItemResource), new ItemStack(Config.amItemResource) },
+					new ItemStack[] { Config.wax.getStackForType(WaxType.MAGIC),
+							new ItemStack(Config.amItemResource),
+							new ItemStack(Config.amItemResource) },
 					new int[] { 85, 10, 2 });
 			RecipeManagers.centrifugeManager.addRecipe(20, Config.combs.getStackForType(CombType.AM_POTENT),
 					new ItemStack[] { ItemInterface.getItemStack("beeswax"),
@@ -517,8 +505,15 @@ public class CraftingManager
 							ItemInterface.getItemStack("honeydew") },
 					new int[] { 50, 50, 65 });
 		}
-		if (ThermalExpansionHelper.isActive())
-		{
+		
+		if (BloodMagicHelper.isActive()) {
+			RecipeManagers.centrifugeManager.addRecipe(20, Config.combs.getStackForType(CombType.BM_SANGUINE),
+					new ItemStack[] { Config.wax.getStackForType(WaxType.SOUL),
+							BloodMagicHelper.bloodShard },
+					new int[] { 90, 8 } );
+		}
+		
+		if (ThermalExpansionHelper.isActive()) {
 
 			RecipeManagers.centrifugeManager.addRecipe(20, Config.combs.getStackForType(CombType.TE_DESTABILIZED),
 					new ItemStack[] { Config.wax.getStackForType(WaxType.MAGIC), Config.drops.getStackForType(DropType.DESTABILIZED) },
@@ -532,13 +527,11 @@ public class CraftingManager
 			RecipeManagers.centrifugeManager.addRecipe(20, Config.combs.getStackForType(CombType.TE_ENDEARING),
 					new ItemStack[] { Config.wax.getStackForType(WaxType.MAGIC), Config.drops.getStackForType(DropType.ENDEARING) },
 					new int[] { 50, 22 });
-
 		}
 
 	}
 
-	private static void setupCarpenterRecipes()
-	{
+	private static void setupCarpenterRecipes() {
 		ItemStack input;
 		ItemStack output;
 
@@ -588,16 +581,13 @@ public class CraftingManager
 		}
 	}
 
-	private static void registerLiquidContainer(ItemCapsule baseCapsule)
-	{
+	private static void registerLiquidContainer(ItemCapsule baseCapsule) {
 		ItemStack empty = new ItemStack(baseCapsule, 1, 0);
 		ItemStack filled;
 		FluidStack liquid = null;
 
-		for (FluidType fluidType : FluidType.values())
-		{
-			switch (fluidType)
-			{
+		for (FluidType fluidType : FluidType.values()) {
+			switch (fluidType) {
 				case EMPTY:
 					liquid = null;
 					break;
@@ -612,8 +602,7 @@ public class CraftingManager
 					break;
 			}
 
-			if (liquid != null)
-			{
+			if (liquid != null) {
 				filled = new ItemStack(baseCapsule, 1, fluidType.ordinal());
 				FluidContainerRegistry.registerFluidContainer(liquid, filled, empty);
 
