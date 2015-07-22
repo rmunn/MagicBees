@@ -9,6 +9,7 @@ import magicbees.main.utils.compat.botania.BotaniaAPIDistanceHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -135,14 +136,14 @@ public class BotaniaHelper {
 					"twt", "tmt", " t ",
 					'm', new ItemStack(itemManaResource, 1, ManaResource.MANASTEEL.ordinal()),
 					'w', Blocks.wool,
-					't', new ItemStack(itemManaResource, 1, ManaResource.LIVINGWOOD_TWIG.ordinal())
+					't', Items.stick
 			});
 			manasteelScoopRecipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(CraftingManager.getInstance().getRecipeList().size() - 1);
 			
 			GameRegistry.addRecipe(new ItemStack(Config.manasteelGrafter), new Object[] {
 				"  m", " t ", "t  ",
 				'm', new ItemStack(itemManaResource, 1, ManaResource.MANASTEEL.ordinal()),
-				't', new ItemStack(itemManaResource, 1, ManaResource.LIVINGWOOD_TWIG.ordinal())
+				't', Items.stick
 			});
 			manasteelGrafterRecipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(CraftingManager.getInstance().getRecipeList().size() - 1);
 			
