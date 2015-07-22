@@ -118,11 +118,6 @@ public class SubTileBeegonia extends SubTileGenerating {
 	public int getDelayBetweenPassiveGeneration() {
 		return 1;
 	}
-
-	@Override
-	public boolean isPassiveFlower() {
-		return true;
-	}
 	
 	@Override
 	public int getColor() {
