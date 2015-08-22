@@ -49,8 +49,6 @@ public class MagicBees
 			
 		this.modConfig.setupBlocks();
 		this.modConfig.setupItems();
-		
-		// LocalizationManager.setupLocalizationInfo();
 
 		LogHelper.info("Preinit completed");
 	}

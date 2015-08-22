@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 
 import magicbees.block.BlockEffectJar;
+import magicbees.block.BlockEnchantedEarth;
 import magicbees.block.BlockHive;
 import magicbees.block.BlockMagicApiary;
 import magicbees.block.BlockManaAuraProvider;
@@ -105,6 +106,7 @@ public class Config
 	public static boolean forestryDebugEnabled;
 
 	public static BlockPlanks planksWood;
+	public static BlockEnchantedEarth enchantedEarth;
 	public static BlockWoodSlab slabWoodHalf;
 	public static BlockWoodSlab slabWoodFull;
 	public static BlockEffectJar effectJar;
@@ -246,6 +248,9 @@ public class Config
 
 	public void setupBlocks()
 	{
+		enchantedEarth = new BlockEnchantedEarth();
+		GameRegistry.registerBlock(enchantedEarth, "magicbees.enchantedEarth");
+		
 		setupHives();
 		
 		setupEffectJar();

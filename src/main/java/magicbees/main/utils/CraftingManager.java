@@ -47,341 +47,357 @@ public class CraftingManager {
 		// Magic capsules
 		output = new ItemStack(Config.magicCapsule);
 		output.stackSize = 4;
-		GameRegistry.addRecipe(new ShapedOreRecipe(output, new Object[] {
+		GameRegistry.addRecipe(new ShapedOreRecipe(output,
 				"WWW",
 				'W', "waxMagical"
-		}));
+		));
 
 		// Concentrated Fertilizer -> Forestry fertilizer
 		input = Config.miscResources.getStackForType(ResourceType.EXTENDED_FERTILIZER);
 		output = ItemInterface.getItemStack("Forestry", "fertilizerCompound", 6);
-		GameRegistry.addRecipe(output, new Object[] {
+		GameRegistry.addRecipe(output,
 				" S ", " F ", " S ",
 				'F', input,
 				'S', Blocks.sand
-		});
-		GameRegistry.addRecipe(output, new Object[] {
+		);
+		GameRegistry.addRecipe(output,
 				"   ", "SFS", "   ",
 				'F', input,
 				'S', Blocks.sand
-		});
+		);
 
 		output = output.copy();
 		output.stackSize = 12;
-		GameRegistry.addRecipe(output, new Object[] {
+		GameRegistry.addRecipe(output,
 				"aaa", "aFa", "aaa",
 				'F', input,
 				'a', ItemInterface.getItemStack("ash")
-		});
+		);
 
 		// "bottling" Intellect drops
-		GameRegistry.addRecipe(new ItemStack(Items.experience_bottle), new Object[] {
+		GameRegistry.addRecipe(new ItemStack(Items.experience_bottle),
 				"DDD", "DBD", "DDD",
 				'D', Config.drops.getStackForType(DropType.INTELLECT),
 				'B', Items.glass_bottle
-		});
+		);
 
-		GameRegistry.addRecipe(new ItemStack(Blocks.soul_sand, 4), new Object[] {
+		GameRegistry.addRecipe(new ItemStack(Blocks.soul_sand, 4),
 				"SwS", "wDw", "SwS",
 				'S', Blocks.sand,
 				'D', Blocks.dirt,
 				'w', Config.wax.getStackForType(WaxType.SOUL)
-		});
-		GameRegistry.addRecipe(new ItemStack(Blocks.soul_sand, 4), new Object[] {
+		);
+		GameRegistry.addRecipe(new ItemStack(Blocks.soul_sand, 4),
 				"wSw", "SDS", "wSw",
 				'S', Blocks.sand,
 				'D', Blocks.dirt,
 				'w', Config.wax.getStackForType(WaxType.SOUL)
-		});
+		);
 
 		output = new ItemStack(Config.hiveFrameMagic);
 		input = ItemInterface.getItemStack("frameUntreated");
-		GameRegistry.addRecipe(output, new Object[] {
+		GameRegistry.addRecipe(output,
 				"www", "wfw", "www",
 				'w', Config.wax.getStackForType(WaxType.MAGIC),
 				'f', input
-		});
+		);
 
-		GameRegistry.addRecipe(new ItemStack(Config.hiveFrameTemporal), new Object[] {
+		GameRegistry.addRecipe(new ItemStack(Config.hiveFrameTemporal),
 				"sPs", "PfP", "sPs",
 				's', Blocks.sand,
 				'P', Config.pollen.getStackForType(PollenType.PHASED),
 				'f', Config.hiveFrameMagic
-		});
+		);
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Config.effectJar), new Object[] {
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Config.effectJar),
 				"GSG", "QPQ", "GGG",
 				'G', Blocks.glass,
 				'S', "slabWood",
 				'P', Config.pollen.getStackForType(PollenType.UNUSUAL),
 				'Q', Items.quartz
-		}));
+		));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Config.moonDial), new Object[] {
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Config.moonDial),
 				"DqD", "qrq", "DqD",
 				'r', Items.redstone,
 				'q', Items.quartz,
 				'D', "dyeGreen"
-		}));
+		));
 
-		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.SKULL_FRAGMENT), new Object[] {
+		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.SKULL_FRAGMENT),
 				"xxx", "xxx", "xxx",
 				'x', Config.miscResources.getStackForType(ResourceType.SKULL_CHIP)
-		});
+		);
 
-		GameRegistry.addRecipe(new ItemStack(Items.skull, 1, 1), new Object[] {
+		GameRegistry.addRecipe(new ItemStack(Items.skull, 1, 1),
 				"xxx", "xxx",
 				'x', Config.miscResources.getStackForType(ResourceType.SKULL_FRAGMENT)
-		});
+		);
 
-		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.DRAGON_CHUNK), new Object[] {
+		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.DRAGON_CHUNK),
 				"xxx", "xxx",
 				'x', Config.miscResources.getStackForType(ResourceType.DRAGON_DUST)
-		});
+		);
 
-		GameRegistry.addRecipe(new ItemStack(Blocks.dragon_egg, 1), new Object[] {
+		GameRegistry.addRecipe(new ItemStack(Blocks.dragon_egg, 1),
 				"ccc", "cec", "ccc",
 				'c', Config.miscResources.getStackForType(ResourceType.DRAGON_CHUNK),
 				'e', Config.miscResources.getStackForType(ResourceType.ESSENCE_FALSE_LIFE)
-		});
+		);
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_EVERLASTING_DURABILITY), new Object[] {
+		GameRegistry.addRecipe(new ShapedOreRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_EVERLASTING_DURABILITY),
 				"gwg", "wiw", "gwg",
 				'g', Blocks.glass,
 				'w', "waxMagical",
 				'i', Blocks.iron_block
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_EVERLASTING_DURABILITY), new Object[] {
+		));
+		GameRegistry.addRecipe(new ShapedOreRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_EVERLASTING_DURABILITY),
 				"wgw", "gig", "wgw",
 				'g', Blocks.glass,
 				'w', "waxMagical",
 				'i', Blocks.iron_block
-		}));
+		));
 
-		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_FALSE_LIFE), new Object[] {
+		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_FALSE_LIFE),
 				"gwg", "wfw", "gwg",
 				'g', Blocks.glass,
 				'w', Config.wax.getStackForType(WaxType.SOUL),
 				'f', Blocks.red_flower
-		});
-		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_FALSE_LIFE), new Object[] {
+		);
+		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_FALSE_LIFE),
 				"wgw", "gfg", "wgw",
 				'g', Blocks.glass,
 				'w', Config.wax.getStackForType(WaxType.SOUL),
 				'f', Blocks.red_flower
-		});
+		);
 
-		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_SHALLOW_GRAVE), new Object[] {
+		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_SHALLOW_GRAVE),
 				"gwg", "wfw", "gwg",
 				'g', Blocks.glass,
 				'w', Config.wax.getStackForType(WaxType.SOUL),
 				'f', Items.rotten_flesh
-		});
-		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_SHALLOW_GRAVE), new Object[] {
+		);
+		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_SHALLOW_GRAVE),
 				"wgw", "gfg", "wgw",
 				'g', Blocks.glass,
 				'w', Config.wax.getStackForType(WaxType.SOUL),
 				'f', Items.rotten_flesh
-		});
+		);
 
-		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_LOST_TIME), new Object[] {
+		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_LOST_TIME),
 				"wgw", "gcg", "wgw",
 				'g', Blocks.glass,
 				'w', Config.wax.getStackForType(WaxType.SOUL),
 				'c', Items.clock
-		});
-		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_LOST_TIME), new Object[] {
+		);
+		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_LOST_TIME),
 				"gwg", "wcw", "gwg",
 				'g', Blocks.glass,
 				'w', Config.wax.getStackForType(WaxType.SOUL),
 				'c', Items.clock
-		});
+		);
 
-		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_FICKLE_PERMANENCE), new Object[] {
+		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_FICKLE_PERMANENCE),
 				"wew", "gcg", "wew",
 				'w', Config.wax.getStackForType(WaxType.SOUL),
 				'c', Items.magma_cream,
 				'e', Items.egg,
 				'g', Blocks.glowstone
-		});
+		);
+		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_FICKLE_PERMANENCE),
+				"wgw", "ece", "wgw",
+				'w', Config.wax.getStackForType(WaxType.SOUL),
+				'c', Items.magma_cream,
+				'e', Items.egg,
+				'g', Blocks.glowstone
+		);
 
-		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_SCORNFUL_OBLIVION), new Object[] {
+		GameRegistry.addRecipe(Config.miscResources.getStackForType(ResourceType.ESSENCE_SCORNFUL_OBLIVION),
 				"gst", "sEs", "tsg",
 				'g', Config.miscResources.getStackForType(ResourceType.ESSENCE_SHALLOW_GRAVE),
 				't', Config.miscResources.getStackForType(ResourceType.ESSENCE_LOST_TIME),
 				's', new ItemStack(Items.skull, 1, 1),
-				'E', Blocks.dragon_egg,
-		});
+				'E', Blocks.dragon_egg
+		);
 
 		// IF YOU UPDATE THESE, CHANGE THE RECIPES IN THAUMCRAFT HELPER, YOU IDIOT.
 		input = new ItemStack(Config.hiveFrameMagic);
-		GameRegistry.addShapelessRecipe(new ItemStack(Config.hiveFrameResilient), new Object[] {
+		GameRegistry.addShapelessRecipe(new ItemStack(Config.hiveFrameResilient),
 				Config.miscResources.getStackForType(ResourceType.ESSENCE_EVERLASTING_DURABILITY),
 				input
-		});
+		);
 
-		GameRegistry.addShapelessRecipe(new ItemStack(Config.hiveFrameGentle), new Object[] {
+		GameRegistry.addShapelessRecipe(new ItemStack(Config.hiveFrameGentle),
 				Config.miscResources.getStackForType(ResourceType.ESSENCE_FALSE_LIFE),
 				input
-		});
+		);
 
-		GameRegistry.addShapelessRecipe(new ItemStack(Config.hiveFrameNecrotic), new Object[] {
+		GameRegistry.addShapelessRecipe(new ItemStack(Config.hiveFrameNecrotic),
 				Config.miscResources.getStackForType(ResourceType.ESSENCE_SHALLOW_GRAVE),
 				input
-		});
+		);
 
-		GameRegistry.addShapelessRecipe(new ItemStack(Config.hiveFrameMetabolic), new Object[] {
+		GameRegistry.addShapelessRecipe(new ItemStack(Config.hiveFrameMetabolic),
 				Config.miscResources.getStackForType(ResourceType.ESSENCE_FICKLE_PERMANENCE),
 				input
-		});
+		);
 
-		GameRegistry.addShapelessRecipe(new ItemStack(Config.hiveFrameTemporal), new Object[] {
+		GameRegistry.addShapelessRecipe(new ItemStack(Config.hiveFrameTemporal),
 				Config.miscResources.getStackForType(ResourceType.ESSENCE_LOST_TIME),
 				input
-		});
+		);
 
-		GameRegistry.addShapelessRecipe(new ItemStack(Config.hiveFrameOblivion), new Object[] {
+		GameRegistry.addShapelessRecipe(new ItemStack(Config.hiveFrameOblivion),
 				Config.miscResources.getStackForType(ResourceType.ESSENCE_SCORNFUL_OBLIVION),
 				ItemInterface.getItemStack("frameProven")
-		});
-		// </idiot>
+		);
+		
+		output = new ItemStack(Config.magicApiary);
+		GameRegistry.addShapelessRecipe(output,
+				Config.pollen.getStackForType(PollenType.UNUSUAL, 2),
+				Config.drops.getStackForType(DropType.ENCHANTED, 2),
+				new ItemStack(Config.fApicultureBlock, 1, ForestryHelper.ApicultureBlock.APIARY.ordinal())
+		);
+
+		GameRegistry.addRecipe(new ItemStack(Config.enchantedEarth),
+				"d d", " e ", "d d",
+				'd', new ItemStack(Blocks.dirt, 1, OreDictionary.WILDCARD_VALUE),
+				'e', Config.miscResources.getStackForType(ResourceType.ESSENCE_FALSE_LIFE)
+		);
+		GameRegistry.addRecipe(new ItemStack(Config.enchantedEarth),
+				" d ", "ded", " d ",
+				'd', new ItemStack(Blocks.dirt, 1, OreDictionary.WILDCARD_VALUE),
+				'e', Config.miscResources.getStackForType(ResourceType.ESSENCE_FALSE_LIFE)
+		);
 
 		if (OreDictionary.getOres("ingotCopper").size() <= 0) {
 			NuggetType.COPPER.setInactive();
 		}
 		else {
-			GameRegistry.addRecipe(new ShapedOreRecipe(OreDictionary.getOres("ingotCopper").get(0), new Object[] {
+			GameRegistry.addRecipe(new ShapedOreRecipe(OreDictionary.getOres("ingotCopper").get(0),
 					"xxx", "xxx", "xxx",
 					'x', "nuggetCopper"
-			}));
+			));
 		}
 		
 		if (OreDictionary.getOres("ingotTin").size() <= 0) {
 			NuggetType.TIN.setInactive();
 		}
 		else {
-			GameRegistry.addRecipe(new ShapedOreRecipe(OreDictionary.getOres("ingotTin").get(0), new Object[] {
+			GameRegistry.addRecipe(new ShapedOreRecipe(OreDictionary.getOres("ingotTin").get(0),
 					"xxx", "xxx", "xxx",
 					'x', "nuggetTin"
-			}));
+			));
 		}
 		
 		if (OreDictionary.getOres("ingotSilver").size() <= 0) {
 			NuggetType.SILVER.setInactive();
 		}
 		else {
-			GameRegistry.addRecipe(new ShapedOreRecipe(OreDictionary.getOres("ingotSilver").get(0), new Object[] {
+			GameRegistry.addRecipe(new ShapedOreRecipe(OreDictionary.getOres("ingotSilver").get(0),
 					"xxx", "xxx", "xxx",
 					'x', "nuggetSilver"
-			}));
+			));
 		}
 		
 		if (OreDictionary.getOres("ingotLead").size() <= 0) {
 			NuggetType.LEAD.setInactive();
 		}
 		else {
-			GameRegistry.addRecipe(new ShapedOreRecipe(OreDictionary.getOres("ingotLead").get(0), new Object[] {
+			GameRegistry.addRecipe(new ShapedOreRecipe(OreDictionary.getOres("ingotLead").get(0),
 					"xxx", "xxx", "xxx",
 					'x', "nuggetLead"
-			}));
+			));
 		}
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.iron_ingot), new Object[] {
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.iron_ingot),
 				"xxx", "xxx", "xxx",
 				'x', "nuggetIron"
-		}));
+		));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.diamond), new Object[] {
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.diamond),
 				"xxx", "xxx", "xxx",
 				'x', "shardDiamond"
-		}));
+		));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.emerald), new Object[] {
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.emerald),
 				"xxx", "xxx", "xxx",
 				'x', "shardEmerald"
-		}));
+		));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(ItemInterface.getItemStack("apatite"), new Object[] {
+		GameRegistry.addRecipe(new ShapedOreRecipe(ItemInterface.getItemStack("apatite"),
 				"xxx", "xxx", "xxx",
 				'x', Config.nuggets.getStackForType(NuggetType.APATITE)
-		}));
+		));
 
 		output = Config.miscResources.getStackForType(ResourceType.DIMENSIONAL_SINGULARITY);
-		GameRegistry.addRecipe(output, new Object[] {
+		GameRegistry.addRecipe(output,
 				" G ", "QEQ", " W ",
 				'E', Items.ender_eye,
 				'Q', Blocks.quartz_block,
 				'W', Blocks.end_stone,
 				'G', Blocks.gold_block
-		});
+		);
 
 		output = Config.voidCapsule.getCapsuleForLiquid(FluidType.EMPTY);
 		output.stackSize = 4;
-		GameRegistry.addRecipe(output, new Object[] {
+		GameRegistry.addRecipe(output,
 				"T T", "GFG", "T T",
 				'G', Blocks.glass_pane,
 				'F', Config.miscResources.getStackForType(ResourceType.DIMENSIONAL_SINGULARITY),
 				'T', Items.gold_nugget
-		});
+		);
 
 		output = new ItemStack(Config.magnet);
-		GameRegistry.addRecipe(output, new Object[] {
+		GameRegistry.addRecipe(output,
 				" i ", "cSc", " d ",
 				'i', Items.iron_ingot,
 				'c', Items.compass,
 				'd', Items.diamond,
 				'S', Config.miscResources.getStackForType(ResourceType.DIMENSIONAL_SINGULARITY)
-		});
+		);
 
 		for (int level = 1; level <= 8; level++) {
 			output = new ItemStack(Config.magnet, 1, level * 2);
-			GameRegistry.addRecipe(new ShapedOreRecipe(output, new Object[] {
+			GameRegistry.addRecipe(new ShapedOreRecipe(output,
 					" d ", "mSm", " B ",
 					'd', Items.diamond,
 					'm', "mb.magnet.level" + (level - 1),
 					'B', Blocks.redstone_block,
 					'S', Config.miscResources.getStackForType(ResourceType.DIMENSIONAL_SINGULARITY)
-			}));
+			));
 		}
-		
-		// TODO: Finalize recipe.
-		output = new ItemStack(Config.magicApiary);
-		GameRegistry.addShapelessRecipe(output, new Object[] {
-				Config.pollen.getStackForType(PollenType.UNUSUAL, 2),
-				Config.drops.getStackForType(DropType.ENCHANTED, 2),
-				new ItemStack(Config.fApicultureBlock, 1, ForestryHelper.ApicultureBlock.APIARY.ordinal())
-		});
 
 		if (ThaumcraftHelper.isActive()) {
 			input = Config.miscResources.getStackForType(ResourceType.LORE_FRAGMENT);
 			output = new ItemStack(Config.tcMiscResource, 1, ThaumcraftHelper.MiscResource.KNOWLEDGE_FRAGMENT.ordinal());
-			GameRegistry.addShapelessRecipe(output, new Object[] {
+			GameRegistry.addShapelessRecipe(output,
 					input, input, input, input
-			});
+			);
 
 			if (Config.thaumaturgeBackpackActive) {
 				// T1 Thaumaturge's backpack
-				GameRegistry.addRecipe(new ItemStack(Config.thaumaturgeBackpackT1), new Object[] {
+				GameRegistry.addRecipe(new ItemStack(Config.thaumaturgeBackpackT1),
 						"SWS", "NCN", "SWS",
 						'S', Items.string,
 						'W', Blocks.wool,
 						'N', new ItemStack(Config.tcMiscResource, 1, ThaumcraftHelper.MiscResource.AMBER.ordinal()),
 						'C', Blocks.chest
-				});
+				);
 			}
 		}
 
 		if (ArsMagicaHelper.isActive()) {
 			input = ItemInterface.getItemStack("apatite");
 			output = Config.miscResources.getStackForType(ResourceType.EXTENDED_FERTILIZER, 4);
-			GameRegistry.addShapelessRecipe(output, new Object[] {
+			GameRegistry.addShapelessRecipe(output,
 					new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.EARTH.ordinal()),
 					input, input
-			});
-			GameRegistry.addShapelessRecipe(output, new Object[] {
+			);
+			GameRegistry.addShapelessRecipe(output,
 					new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.PLANT.ordinal()),
 					input, input
-			});
+			);
 		}
 	}
 
@@ -536,35 +552,35 @@ public class CraftingManager {
 		ItemStack output;
 
 		output = ItemInterface.getItemStack("Forestry", "candle", 24);
-		RecipeManagers.carpenterManager.addRecipe(30, new FluidStack(FluidRegistry.WATER, 600), null, output, new Object[] {
+		RecipeManagers.carpenterManager.addRecipe(30, new FluidStack(FluidRegistry.WATER, 600), null, output,
 				" S ", "WWW", "WWW",
 				'W', Config.wax,
 				'S', Items.string
-		});
+		);
 
 		output = ItemInterface.getItemStack("Forestry", "candle", 6);
 		input = ItemInterface.getItemStack("craftingMaterial");
 		input.setItemDamage(ForestryHelper.CraftingMaterial.SILK_WISP.ordinal()); // Set to Silk Wisp
-		RecipeManagers.carpenterManager.addRecipe(30, new FluidStack(FluidRegistry.WATER, 600), null, output, new Object[] {
+		RecipeManagers.carpenterManager.addRecipe(30, new FluidStack(FluidRegistry.WATER, 600), null, output,
 				"WSW",
 				'W', Config.wax,
 				'S', input
-		});
+		);
 
 		output = Config.miscResources.getStackForType(ResourceType.AROMATIC_LUMP, 2);
-		RecipeManagers.carpenterManager.addRecipe(30, FluidRegistry.getFluidStack("for.honey", 1000), null, output, new Object[] {
+		RecipeManagers.carpenterManager.addRecipe(30, FluidRegistry.getFluidStack("for.honey", 1000), null, output,
 				" P ", "JDJ", " P ",
 				'P', ItemInterface.getItemStack("pollen"),
 				'J', ItemInterface.getItemStack("royalJelly"),
 				'D', Config.drops.getStackForType(DropType.ENCHANTED)
-		});
+		);
 
-		RecipeManagers.carpenterManager.addRecipe(30, FluidRegistry.getFluidStack("for.honey", 1000), null, output, new Object[] {
+		RecipeManagers.carpenterManager.addRecipe(30, FluidRegistry.getFluidStack("for.honey", 1000), null, output,
 				" J ", "PDP", " J ",
 				'P', ItemInterface.getItemStack("pollen"),
 				'J', ItemInterface.getItemStack("royalJelly"),
 				'D', Config.drops.getStackForType(DropType.ENCHANTED)
-		});
+		);
 
 		if (ThaumcraftHelper.isActive())
 		{
@@ -572,12 +588,12 @@ public class CraftingManager {
 			input = ItemInterface.getItemStack("craftingMaterial");
 			input.setItemDamage(3); // Set to Silk Mesh
 			output = new ItemStack(Config.thaumaturgeBackpackT2);
-			RecipeManagers.carpenterManager.addRecipe(200, new FluidStack(FluidRegistry.WATER, 1000), null, output, new Object[] {
+			RecipeManagers.carpenterManager.addRecipe(200, new FluidStack(FluidRegistry.WATER, 1000), null, output,
 					"WXW", "WTW", "WWW",
 					'X', Items.diamond,
 					'W', input,
 					'T', new ItemStack(Config.thaumaturgeBackpackT1)
-			});
+			);
 		}
 	}
 
