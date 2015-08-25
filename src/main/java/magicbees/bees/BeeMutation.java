@@ -167,13 +167,18 @@ public class BeeMutation implements IBeeMutation {
 		}
 		
 		if (BeeSpecies.COBALT.isActive()) {
-			mutation = new BeeMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.INFERNAL, BeeSpecies.COBALT, 9);
-			if (OreDictionary.getOres("nuggetCobalt").size() > 0 && OreDictionary.getOres("blockCobalt").size() > 0) {
-					mutation.setBlockRequired("blockCobalt");
+			boolean hasTConCobalt = OreDictionary.getOres("nuggetCobalt").size() > 0 && OreDictionary.getOres("blockCobalt").size() > 0;
+			boolean hasNaturalCobalt = OreDictionary.getOres("nuggetNaturalCobalt").size() > 0 && OreDictionary.getOres("blockNaturalCobalt").size() > 0;
+			if (hasTConCobalt) {
+				new BeeMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.INFERNAL, BeeSpecies.COBALT, 11)
+					.setBlockRequired("blockCobalt");
 			}
-			mutation = new BeeMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.INFERNAL, BeeSpecies.COBALT, 13);
-			if (OreDictionary.getOres("nuggetNaturalCobalt").size() > 0 && OreDictionary.getOres("blockNaturalCobalt").size() > 0) {
-				mutation.setBlockRequired("blockNaturalCobalt");
+			if (hasNaturalCobalt) {
+				new BeeMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.INFERNAL, BeeSpecies.COBALT, 11)
+					.setBlockRequired("blockNaturalCobalt");
+			}
+			if (!(hasTConCobalt || hasNaturalCobalt)) {
+				new BeeMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.INFERNAL, BeeSpecies.COBALT, 7);
 			}
 		}
 		
@@ -392,7 +397,16 @@ public class BeeMutation implements IBeeMutation {
 	}
 
 	@Override
+	@Deprecated
 	public float getChance(IBeeHousing housing, IAllele allele0, IAllele allele1, IGenome genome0, IGenome genome1) {
+		if (allele0 instanceof IAlleleBeeSpecies && allele1 instanceof IAlleleBeeSpecies && genome0 instanceof IBeeGenome && genome1 instanceof IBeeGenome) {
+			return getChance(housing, (IAlleleBeeSpecies)allele0, (IAlleleBeeSpecies)allele1, (IBeeGenome)genome0, (IBeeGenome)genome1);
+		}
+		return 0;
+	}
+
+	@Override
+	public float getChance(IBeeHousing housing, IAlleleBeeSpecies allele0, IAlleleBeeSpecies allele1, IBeeGenome genome0, IBeeGenome genome1) {
 		float finalChance = 0f;
 		float chance = this.baseChance * 1f;
 		
