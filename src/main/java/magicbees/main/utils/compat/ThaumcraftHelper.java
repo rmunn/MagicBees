@@ -135,6 +135,7 @@ public class ThaumcraftHelper {
 		SHIMMERLEAF,
 		CINDERPEARL,
 		PURIFYING_PLANT,
+		VISHROOM,
 		;
 	}
 

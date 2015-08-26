@@ -555,8 +555,8 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 	private boolean isActive;
 	private boolean isNocturnal;
 	private IClassification branch;
-	private HashMap<ItemStack, Integer> products;
-	private HashMap<ItemStack, Integer> specialties;
+	private HashMap<ItemStack, Float> products;
+	private HashMap<ItemStack, Float> specialties;
 	private IAllele genomeTemplate[];
 	private String uid;
 	private boolean dominant;
@@ -603,8 +603,8 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		hasEffect = hasGlowEffect;
 		isSecret = isSpeciesSecret;
 		isCounted = isSpeciesCounted;
-		products = new HashMap<ItemStack, Integer>();
-		specialties = new HashMap<ItemStack, Integer>();
+		products = new HashMap<ItemStack, Float>();
+		specialties = new HashMap<ItemStack, Float>();
 		this.branch = classification;
 		this.branch.addMemberSpecies(this);
 		this.isNocturnal = isSpeciesNocturnal;
@@ -615,13 +615,25 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		return genomeTemplate;
 	}
 
+	@Deprecated
 	public BeeSpecies addProduct(ItemStack produce, int percentChance) {
-		products.put(produce, percentChance);
+		products.put(produce, percentChance / 100f);
+		return this;
+	}
+	
+	public BeeSpecies addProduct(ItemStack produce, float chance) {
+		products.put(produce, chance);
 		return this;
 	}
 
+	@Deprecated
 	public BeeSpecies addSpecialty(ItemStack produce, int percentChance) {
-		specialties.put(produce, Integer.valueOf(percentChance));
+		specialties.put(produce, percentChance / 100f);
+		return this;
+	}
+	
+	public BeeSpecies addSpecialty(ItemStack produce, float chance) {
+		specialties.put(produce, chance);
 		return this;
 	}
 
@@ -695,13 +707,25 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 	}
 
 	@Override
-	public HashMap<ItemStack, Integer> getProducts() {
+	public Map<ItemStack, Float> getProductChances() {
 		return products;
 	}
 
 	@Override
-	public HashMap<ItemStack, Integer> getSpecialty() {
+	public Map<ItemStack, Float> getSpecialtyChances() {
 		return specialties;
+	}
+
+	@Override
+	@Deprecated
+	public HashMap<ItemStack, Integer> getProducts() {
+		return null;
+	}
+
+	@Override
+	@Deprecated
+	public HashMap<ItemStack, Integer> getSpecialty() {
+		return null;
 	}
 
 	@Override

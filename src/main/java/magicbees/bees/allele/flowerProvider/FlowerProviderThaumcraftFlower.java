@@ -7,23 +7,27 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import forestry.api.genetics.IFlowerProvider;
 import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.IPollinatable;
 
-public class FlowerProviderThaumcraftFlower implements IFlowerProvider {
-	private ItemStack[] flowers = { new ItemStack(Config.tcPlant, 1, 2), new ItemStack(Config.tcPlant, 1, 3) };
+public class FlowerProviderThaumcraftFlower extends FlowerProvider {
+	
+	public FlowerProviderThaumcraftFlower() {
+		super(2);
+		flowers.add(new FlowerImpl(Config.tcPlant, ThaumcraftHelper.BlockPlant.SHIMMERLEAF.ordinal(), 1, true));
+		flowers.add(new FlowerImpl(Config.tcPlant, ThaumcraftHelper.BlockPlant.CINDERPEARL.ordinal(), 1, true));
+	}
 
 	@Override
 	public boolean isAcceptedFlower(World world, IIndividual genome, int x, int y, int z) {
-		boolean flag = false;
 		if (world.getBlock(x, y, z) == Config.tcPlant) {
 			int meta = world.getBlockMetadata(x, y, z);
-			if (meta == 2 || meta == 3) {
-				flag = true;
+			if (meta == ThaumcraftHelper.BlockPlant.SHIMMERLEAF.ordinal()
+					|| meta == ThaumcraftHelper.BlockPlant.CINDERPEARL.ordinal()) {
+				return true;
 			}
 		}
-		return flag;
+		return false;
 	}
 
 	@Override
@@ -53,13 +57,8 @@ public class FlowerProviderThaumcraftFlower implements IFlowerProvider {
 	}
 
 	@Override
-	public ItemStack[] getItemStacks() {
-		return this.flowers;
-	}
-
-	@Override
 	public boolean isAcceptedPollinatable(World world, IPollinatable pollinatable) {
-		return pollinatable.getPlantType().size() > 1;
+		return 0 < pollinatable.getPlantType().size();
 	}
 
 }

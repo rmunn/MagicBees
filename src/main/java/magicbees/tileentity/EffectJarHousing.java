@@ -1,10 +1,12 @@
 package magicbees.tileentity;
 
+import java.util.Set;
+
 import com.mojang.authlib.GameProfile;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-
 import forestry.api.apiculture.IBee;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
@@ -147,12 +149,6 @@ public class EffectJarHousing implements IBeeHousing
 	}
 
 	@Override
-	public int getBiomeId()
-	{
-		return getBiome().biomeID;
-	}
-
-	@Override
 	public BiomeGenBase getBiome() {
 		return this.jarEntity.getWorldObj().getBiomeGenForCoords(getXCoord(), getYCoord());
 	}
@@ -196,19 +192,19 @@ public class EffectJarHousing implements IBeeHousing
 	}
 
 	@Override
-	public void setErrorState(int state)
-	{
-	}
-
-	@Override
 	public void setErrorState(IErrorState enumErrorCode)
 	{
 	}
 
 	@Override
-	public int getErrorOrdinal()
-	{
-		return getErrorState().getID();
+	public Set<IErrorState> getErrorStates() {
+		return null;
+	}
+
+
+	@Override
+	public boolean setErrorCondition(boolean condition, IErrorState errorState) {
+		return false;
 	}
 
 	@Override
@@ -246,5 +242,4 @@ public class EffectJarHousing implements IBeeHousing
 	{
 		return 0f;
 	}
-
 }

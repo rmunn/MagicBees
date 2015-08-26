@@ -1,11 +1,13 @@
 package magicbees.tileentity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import magicbees.bees.AuraCharge;
 import magicbees.api.bees.IMagicApiaryAuraProvider;
+import magicbees.bees.AuraCharge;
 import magicbees.bees.BeeManager;
 import magicbees.main.CommonProxy;
 import magicbees.main.MagicBees;
@@ -68,6 +70,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     private final AuraCharges auraCharges = new AuraCharges();
 
     private IErrorState errorState = ErrorStateRegistry.getErrorState("ok");
+    private Set<IErrorState> errors = new HashSet<IErrorState>();
 
     private ItemStack[] items;
 
@@ -274,11 +277,6 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
 
     @Override
-    public int getBiomeId() {
-        return biome.biomeID;
-    }
-
-    @Override
     public BiomeGenBase getBiome() {
         return biome;
     }
@@ -294,24 +292,30 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
 
     @Override
-    public void setErrorState(int state) {
-    	this.errorState = ErrorStateRegistry.getErrorState((short) state);
-    }
-
-    @Override
     public void setErrorState(IErrorState state) {
     	this.errorState = state;
-    }
-
-    @Override
-    public int getErrorOrdinal() {
-        return this.errorState.getID();
     }
 
     @Override
     public IErrorState getErrorState() {
         return this.errorState;
     }
+
+	@Override
+	public boolean setErrorCondition(boolean condition, IErrorState errorState) {
+		if (!condition) {
+			errors.add(errorState);
+		}
+		else {
+			errors.remove(errorState);
+		}
+		return true;
+	}
+
+	@Override
+	public Set<IErrorState> getErrorStates() {
+		return errors;
+	}
 
     @Override
     public boolean addProduct(ItemStack product, boolean all) {
@@ -602,7 +606,9 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
    		}
    		tickCharges();
     	
-        logic.update();
+        if (logic.canWork()) {
+        	logic.doWork();
+        }
 
         IBee queen = logic.getQueen();
         if (queen == null) {

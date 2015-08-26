@@ -6,23 +6,18 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import forestry.api.genetics.IFlowerProvider;
 import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.IPollinatable;
 
-public class FlowerProviderArsMagicaFlower implements IFlowerProvider {
-	private ItemStack[] flowers = { new ItemStack(Config.amBlackOrchid), new ItemStack(Config.amDesertNova), new ItemStack(Config.amAum),
-			new ItemStack(Config.amWakebloom), new ItemStack(Config.amTarmaRoot) };
-
-	@Override
-	public boolean isAcceptedFlower(World world, IIndividual genome, int x, int y, int z) {
-		boolean flag = false;
-		Block block = world.getBlock(x, y, z);
-		if (block == Config.amBlackOrchid || block == Config.amDesertNova || block == Config.amAum || block == Config.amWakebloom
-				|| block == Config.amTarmaRoot) {
-			flag = true;
-		}
-		return flag;
+public class FlowerProviderArsMagicaFlower extends FlowerProvider {
+	
+	public FlowerProviderArsMagicaFlower() {
+		super(5);
+		flowers.add(new FlowerImpl(Config.amBlackOrchid, 0, 1, true));
+		flowers.add(new FlowerImpl(Config.amDesertNova, 0, 1, true));
+		flowers.add(new FlowerImpl(Config.amAum, 0, 1, true));
+		flowers.add(new FlowerImpl(Config.amWakebloom, 0, 1, true));
+		flowers.add(new FlowerImpl(Config.amTarmaRoot, 0, 1, true));
 	}
 
 	@Override
@@ -64,11 +59,6 @@ public class FlowerProviderArsMagicaFlower implements IFlowerProvider {
 	@Override
 	public ItemStack[] affectProducts(World world, IIndividual genome, int x, int y, int z, ItemStack[] products) {
 		return products;
-	}
-
-	@Override
-	public ItemStack[] getItemStacks() {
-		return this.flowers;
 	}
 
 	@Override

@@ -1,18 +1,24 @@
 package magicbees.bees.allele.flowerProvider;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import magicbees.main.utils.LocalizationManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import forestry.api.genetics.IFlowerProvider;
+import forestry.api.genetics.IFlower;
 import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.IPollinatable;
 
-public class FlowerProviderAuraNode implements IFlowerProvider {
-	protected int nodeRange = 70;
+public class FlowerProviderAuraNode extends FlowerProvider {
+	
+	public FlowerProviderAuraNode() {
+		super(0);
+	}
 
 	@Override
 	public boolean isAcceptedFlower(World world, IIndividual genome, int x, int y, int z) {
-		return this.isNodeWithinRange(world, x, y, z);
+		return false;
 	}
 
 	@Override
@@ -32,33 +38,11 @@ public class FlowerProviderAuraNode implements IFlowerProvider {
 
 	@Override
 	public ItemStack[] affectProducts(World world, IIndividual genome, int x, int y, int z, ItemStack[] products) {
+		if (isAcceptedFlower(world, genome, x, y, z)) {
+			
+		}
 		return products;
 	}
-
-	@Override
-	public ItemStack[] getItemStacks() {
-		return null;
-	}
-
-	protected boolean isNodeWithinRange(World w, int x, int y, int z) {
-		boolean nodeNearby = false;
-		/*
-		 * if (ThaumcraftApi.getClosestAuraWithinRange(w, x, y, z,
-		 * this.nodeRange) >= 0) { nodeNearby = true; }
-		 */
-		return nodeNearby;
-	}
-
-	/*
-	 * protected AuraNode getNodeWithinRange(World w, int x, int y, int z) {
-	 * AuraNode node = null;
-	 * 
-	 * int nodeId = ThaumcraftApi.getClosestAuraWithinRange(w, x, y, z,
-	 * this.nodeRange); if (nodeId >= 0) { node =
-	 * ThaumcraftApi.getNodeCopy(nodeId); }
-	 * 
-	 * return node; }
-	 */
 
 	protected ItemStack[] addItemToProducts(ItemStack[] products, ItemStack itemStack) {
 		for (ItemStack stack : products) {
@@ -80,6 +64,11 @@ public class FlowerProviderAuraNode implements IFlowerProvider {
 		}
 
 		return products;
+	}
+
+	@Override
+	public List<IFlower> getFlowers() {
+		return new ArrayList<IFlower>();
 	}
 
 }

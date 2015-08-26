@@ -3,7 +3,6 @@ package magicbees.storage;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import forestry.api.storage.IBackpackDefinition;
 
@@ -40,11 +39,6 @@ public class BackpackDefinition implements IBackpackDefinition
 	}
 
 	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
 	public int getPrimaryColour()
 	{
 		return this.colour;
@@ -63,12 +57,6 @@ public class BackpackDefinition implements IBackpackDefinition
 		{
 			this.items.add(validItem);
 		}
-	}
-
-	@Override
-	public boolean isValidItem(EntityPlayer player, ItemStack itemStack)
-	{
-		return isValidItem(itemStack);
 	}
 
 	@Override
