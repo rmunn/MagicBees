@@ -28,13 +28,16 @@ import magicbees.world.feature.HiveGenOblivion;
 import magicbees.world.feature.HiveGenUnderground;
 
 public enum HiveDescription implements IHiveDescription {
-	CURIOUS(HiveType.CURIOUS, 3.0f, HiveManager.genHelper.tree()),
-	UNUSUAL(HiveType.UNUSUAL, 1.0f, HiveManager.genHelper.ground(Blocks.dirt, Blocks.grass)),
-	RESONANT(HiveType.RESONANT, 0.9f, HiveManager.genHelper.ground(Blocks.sand, Blocks.sandstone)),
-	DEEP(HiveType.DEEP, 5.0f, new HiveGenUnderground(10, 15, 5), true) {
+	CURIOUS(HiveType.CURIOUS, 3.0f, HiveManager.genHelper.tree(), false,
+			BiomeDictionary.Type.FOREST, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.HILLS),
+	UNUSUAL(HiveType.UNUSUAL, 1.0f, HiveManager.genHelper.ground(Blocks.dirt, Blocks.grass), false,
+			BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.RIVER),
+	RESONANT(HiveType.RESONANT, 0.9f, HiveManager.genHelper.ground(Blocks.sand, Blocks.sandstone), false,
+			BiomeDictionary.Type.SANDY, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.MAGICAL),
+	DEEP(HiveType.DEEP, 5.0f, new HiveGenUnderground(10, 15, 5), true,
+			BiomeDictionary.Type.HILLS, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.MAGICAL) {
 		@Override
-		public void postGen(World world, int x, int y, int z)
-		{
+		public void postGen(World world, int x, int y, int z) {
 			super.postGen(world, x, y, z);
 			Random random = world.rand;
 			FeatureOreVein.redstoneGen.generateVein(world, random, x + 1, y, z, 5);
@@ -45,10 +48,10 @@ public enum HiveDescription implements IHiveDescription {
 			FeatureOreVein.redstoneGen.generateVein(world, random, x, y, z - 1, 5);
 		}
 	},
-	INFERNAL(HiveType.INFERNAL, 50.0f, new HiveGenNether(0, 175, 6), true) {
+	INFERNAL(HiveType.INFERNAL, 50.0f, new HiveGenNether(0, 175, 6), true,
+			BiomeDictionary.Type.NETHER) {
 		@Override
-		public void postGen(World world, int x, int y, int z)
-		{
+		public void postGen(World world, int x, int y, int z) {
 			super.postGen(world, x, y, z);
 			Random random = world.rand;
 			FeatureOreVein.netherQuartzGen.generateVein(world, random, x + 1, y, z, 4);
@@ -59,22 +62,20 @@ public enum HiveDescription implements IHiveDescription {
 			FeatureOreVein.netherQuartzGen.generateVein(world, random, x, y, z - 1, 4);
 		}
 	},
-	INFERNAL_OVERWORLD(HiveType.INFERNAL, 1.0f, new HiveGenUnderground(5, 13, 6), true) {
+	INFERNAL_OVERWORLD(HiveType.INFERNAL, 0.95f, new HiveGenUnderground(5, 13, 6), true,
+			BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.HOT) {
 		@Override
-		public void postGen(World world, int x, int y, int z)
-		{
+		public void postGen(World world, int x, int y, int z) {
 			super.postGen(world, x, y, z);
 			Random random = world.rand;
 			FeatureOreVein.glowstoneGen.generateVein(world, random, x + 1, y, z, world.rand.nextInt(4) + 1);
 			FeatureOreVein.glowstoneGen.generateVein(world, random, x - 1, y, z, world.rand.nextInt(4) + 1);
 
-			if (BlockUtil.canBlockReplaceAt(world, x, y + 1, z, Blocks.stone))
-			{
+			if (BlockUtil.canBlockReplaceAt(world, x, y + 1, z, Blocks.stone)) {
 				world.setBlock(x, y + 1, z, Blocks.glowstone, 0, 3);
 			}
 
-			if (BlockUtil.canBlockReplaceAt(world, x, y - 1, z, Blocks.stone))
-			{
+			if (BlockUtil.canBlockReplaceAt(world, x, y - 1, z, Blocks.stone)) {
 				world.setBlock(x, y - 1, z, Blocks.glowstone, 0, 3);
 			}
 
@@ -82,23 +83,22 @@ public enum HiveDescription implements IHiveDescription {
 			FeatureOreVein.glowstoneGen.generateVein(world, random, x, y, z - 1, world.rand.nextInt(4) + 1);
 		}
 	},
-	OBLIVION(HiveType.OBLIVION, 20.0f, new HiveGenOblivion(), true) {
+	OBLIVION(HiveType.OBLIVION, 20.0f, new HiveGenOblivion(), true,
+			BiomeDictionary.Type.END) {
 		@Override
-		public void postGen(World world, int x, int y, int z)
-		{
+		public void postGen(World world, int x, int y, int z) {
 			super.postGen(world, x, y, z);
 			int obsidianSpikeHeight = world.rand.nextInt(8) + 3;
 
-			for (int i = 1; i < obsidianSpikeHeight && y - i > 0; ++i)
-			{
+			for (int i = 1; i < obsidianSpikeHeight && y - i > 0; ++i) {
 				world.setBlock(x, y - i, z, Blocks.obsidian, 0, 2);
 			}
 		}
 	},
-	OBLIVION_OVERWORLD(HiveType.OBLIVION, 1.0f, new HiveGenUnderground(5, 5, 5), true) {
+	OBLIVION_OVERWORLD(HiveType.OBLIVION, 0.87f, new HiveGenUnderground(5, 5, 5), true,
+			BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.COLD) {
 		@Override
-		public void postGen(World world, int x, int y, int z)
-		{
+		public void postGen(World world, int x, int y, int z) {
 			super.postGen(world, x, y, z);
 			Random random = world.rand;
 
@@ -117,43 +117,16 @@ public enum HiveDescription implements IHiveDescription {
 	private final float genChance;
 	private final List<BiomeDictionary.Type> biomes = new ArrayList<BiomeDictionary.Type>();
 	private final IHiveGen hiveGen;
-	private boolean spawnsIgnoreClimate;
-
-	private HiveDescription(HiveType hiveType, float genChance, IHiveGen hiveGen)
-	{
-		this.hiveType = hiveType;
-		this.genChance = genChance;
-		this.hiveGen = hiveGen;
-		spawnsIgnoreClimate = false;
-	}
+	private final boolean spawnsIgnoreClimate;
 	
-	private HiveDescription(HiveType hiveType, float genChance, IHiveGen hiveGen, boolean ignoreClimate) {
-		this(hiveType, genChance, hiveGen);
+	private HiveDescription(HiveType type, float chance, IHiveGen genType, boolean ignoreClimate, BiomeDictionary.Type ... goodBiomeTypes) {
+		hiveType = type;
+		genChance = chance;
+		hiveGen = genType;
 		spawnsIgnoreClimate = ignoreClimate;
-	}
-
-	public static void initHiveData()
-	{
-		CURIOUS.biomes.add(BiomeDictionary.Type.FOREST);
-		CURIOUS.biomes.add(BiomeDictionary.Type.JUNGLE);
-		CURIOUS.biomes.add(BiomeDictionary.Type.HILLS);
-
-		UNUSUAL.biomes.add(BiomeDictionary.Type.PLAINS);
-		UNUSUAL.biomes.add(BiomeDictionary.Type.MOUNTAIN);
-		UNUSUAL.biomes.add(BiomeDictionary.Type.HILLS);
-
-		RESONANT.biomes.add(BiomeDictionary.Type.SANDY);
-		RESONANT.biomes.add(BiomeDictionary.Type.MAGICAL);
-
-		DEEP.biomes.add(BiomeDictionary.Type.HILLS);
-		DEEP.biomes.add(BiomeDictionary.Type.MOUNTAIN);
-		DEEP.biomes.add(BiomeDictionary.Type.MAGICAL);
-
-		INFERNAL.biomes.add(BiomeDictionary.Type.NETHER);
-		INFERNAL_OVERWORLD.biomes.add(BiomeDictionary.Type.MAGICAL);
-
-		OBLIVION.biomes.add(BiomeDictionary.Type.END);
-		OBLIVION_OVERWORLD.biomes.add(BiomeDictionary.Type.MAGICAL);
+		for (BiomeDictionary.Type biomeType : goodBiomeTypes) {
+			biomes.add(biomeType);
+		}
 	}
 
 	@Override
@@ -192,13 +165,13 @@ public enum HiveDescription implements IHiveDescription {
 	@Override
 	public boolean isGoodHumidity(EnumHumidity humidity)
 	{
-		return hiveType.getOccupant().canWorkInHumidity(humidity) || spawnsIgnoreClimate;
+		return spawnsIgnoreClimate || hiveType.getOccupant().canWorkInHumidity(humidity);
 	}
 
 	@Override
 	public boolean isGoodTemperature(EnumTemperature temperature)
 	{
-		return hiveType.getOccupant().canWorkInTemperature(temperature) || spawnsIgnoreClimate;
+		return spawnsIgnoreClimate || hiveType.getOccupant().canWorkInTemperature(temperature);
 	}
 
 	@Override

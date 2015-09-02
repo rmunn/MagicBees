@@ -108,9 +108,6 @@ public class ForestryHelper
 	public static void preInit()
 	{
 		IHiveRegistry hiveRegistry = HiveManager.hiveRegistry;
-
-		HiveDescription.initHiveData();
-
 		registerHive(hiveRegistry, HiveDescription.CURIOUS);
 		registerHive(hiveRegistry, HiveDescription.UNUSUAL);
 		registerHive(hiveRegistry, HiveDescription.RESONANT);
