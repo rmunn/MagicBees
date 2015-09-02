@@ -31,7 +31,7 @@ public enum HiveDescription implements IHiveDescription {
 	CURIOUS(HiveType.CURIOUS, 3.0f, HiveManager.genHelper.tree()),
 	UNUSUAL(HiveType.UNUSUAL, 1.0f, HiveManager.genHelper.ground(Blocks.dirt, Blocks.grass)),
 	RESONANT(HiveType.RESONANT, 0.9f, HiveManager.genHelper.ground(Blocks.sand, Blocks.sandstone)),
-	DEEP(HiveType.DEEP, 5.0f, new HiveGenUnderground(10, 15, 5)) {
+	DEEP(HiveType.DEEP, 5.0f, new HiveGenUnderground(10, 15, 5), true) {
 		@Override
 		public void postGen(World world, int x, int y, int z)
 		{
@@ -45,7 +45,7 @@ public enum HiveDescription implements IHiveDescription {
 			FeatureOreVein.redstoneGen.generateVein(world, random, x, y, z - 1, 5);
 		}
 	},
-	INFERNAL(HiveType.INFERNAL, 50.0f, new HiveGenNether(0, 175, 6)) {
+	INFERNAL(HiveType.INFERNAL, 50.0f, new HiveGenNether(0, 175, 6), true) {
 		@Override
 		public void postGen(World world, int x, int y, int z)
 		{
@@ -59,7 +59,7 @@ public enum HiveDescription implements IHiveDescription {
 			FeatureOreVein.netherQuartzGen.generateVein(world, random, x, y, z - 1, 4);
 		}
 	},
-	INFERNAL_OVERWORLD(HiveType.INFERNAL, 1.0f, new HiveGenUnderground(5, 13, 6)) {
+	INFERNAL_OVERWORLD(HiveType.INFERNAL, 1.0f, new HiveGenUnderground(5, 13, 6), true) {
 		@Override
 		public void postGen(World world, int x, int y, int z)
 		{
@@ -82,7 +82,7 @@ public enum HiveDescription implements IHiveDescription {
 			FeatureOreVein.glowstoneGen.generateVein(world, random, x, y, z - 1, world.rand.nextInt(4) + 1);
 		}
 	},
-	OBLIVION(HiveType.OBLIVION, 20.0f, new HiveGenOblivion()) {
+	OBLIVION(HiveType.OBLIVION, 20.0f, new HiveGenOblivion(), true) {
 		@Override
 		public void postGen(World world, int x, int y, int z)
 		{
@@ -95,7 +95,7 @@ public enum HiveDescription implements IHiveDescription {
 			}
 		}
 	},
-	OBLIVION_OVERWORLD(HiveType.OBLIVION, 1.0f, new HiveGenUnderground(5, 5, 5)) {
+	OBLIVION_OVERWORLD(HiveType.OBLIVION, 1.0f, new HiveGenUnderground(5, 5, 5), true) {
 		@Override
 		public void postGen(World world, int x, int y, int z)
 		{
@@ -117,12 +117,19 @@ public enum HiveDescription implements IHiveDescription {
 	private final float genChance;
 	private final List<BiomeDictionary.Type> biomes = new ArrayList<BiomeDictionary.Type>();
 	private final IHiveGen hiveGen;
+	private boolean spawnsIgnoreClimate;
 
 	private HiveDescription(HiveType hiveType, float genChance, IHiveGen hiveGen)
 	{
 		this.hiveType = hiveType;
 		this.genChance = genChance;
 		this.hiveGen = hiveGen;
+		spawnsIgnoreClimate = false;
+	}
+	
+	private HiveDescription(HiveType hiveType, float genChance, IHiveGen hiveGen, boolean ignoreClimate) {
+		this(hiveType, genChance, hiveGen);
+		spawnsIgnoreClimate = ignoreClimate;
 	}
 
 	public static void initHiveData()
@@ -185,13 +192,13 @@ public enum HiveDescription implements IHiveDescription {
 	@Override
 	public boolean isGoodHumidity(EnumHumidity humidity)
 	{
-		return hiveType.getOccupant().canWorkInHumidity(humidity);
+		return hiveType.getOccupant().canWorkInHumidity(humidity) || spawnsIgnoreClimate;
 	}
 
 	@Override
 	public boolean isGoodTemperature(EnumTemperature temperature)
 	{
-		return hiveType.getOccupant().canWorkInTemperature(temperature);
+		return hiveType.getOccupant().canWorkInTemperature(temperature) || spawnsIgnoreClimate;
 	}
 
 	@Override
