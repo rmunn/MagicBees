@@ -29,7 +29,7 @@ public class ItemGrafter extends Item implements IToolGrafter {
 	public boolean onBlockDestroyed(ItemStack itemstack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving) {
 		int damage = 1;
 		if (ThaumcraftHelper.isActive()) {
-			if (block == Config.tcLeaf)
+			if (block == ThaumcraftHelper.leaf)
 			{
 				int meta = world.getBlockMetadata(x, y, z) & 1;
 				if (meta == 0 || meta == 1)
@@ -37,7 +37,7 @@ public class ItemGrafter extends Item implements IToolGrafter {
 					double chance = Math.random();
 					if (chance <= Config.thaumcraftSaplingDroprate)
 					{
-						this.dropItem(world, x, y, z, new ItemStack(Config.tcPlant, 1, meta));
+						this.dropItem(world, x, y, z, new ItemStack(ThaumcraftHelper.plant, 1, meta));
 					}
 				}
 			}

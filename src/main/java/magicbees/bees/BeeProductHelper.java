@@ -273,10 +273,10 @@ public class BeeProductHelper {
 			TC_ORDER.addSpecialty(Config.propolis.getStackForType(PropolisType.ORDER), 0.18f);
 			TC_CHAOS.addSpecialty(Config.propolis.getStackForType(PropolisType.CHAOS), 0.18f);
 
-			TC_BRAINY.addSpecialty(new ItemStack(Config.tcMiscResource, 1, ThaumcraftHelper.MiscResource.ZOMBIE_BRAIN.ordinal()), 0.2f);
-			TC_CHICKEN.addSpecialty(new ItemStack(Config.tcNuggetChicken, 1), 0.9f);
-			TC_BEEF.addSpecialty(new ItemStack(Config.tcNuggetBeef, 1), 0.9f);
-			TC_PORK.addSpecialty(new ItemStack(Config.tcNuggetPork, 1), 0.9f);
+			TC_BRAINY.addSpecialty(new ItemStack(ThaumcraftHelper.miscResource, 1, ThaumcraftHelper.MiscResource.ZOMBIE_BRAIN.ordinal()), 0.2f);
+			TC_CHICKEN.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetChicken, 1), 0.9f);
+			TC_BEEF.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetBeef, 1), 0.9f);
+			TC_PORK.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetPork, 1), 0.9f);
 		}
 	}
 	

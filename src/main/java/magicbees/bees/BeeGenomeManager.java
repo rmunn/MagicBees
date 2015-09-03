@@ -894,7 +894,7 @@ public class BeeGenomeManager {
 		IAllele[] genome = getTemplateTCBaseVis();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_REJUVENATING;
-		//genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectNodeCharge;
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectVisRecharge;
 		genome[EnumBeeChromosome.FLOWER_PROVIDER.ordinal()] = Allele.flowerAuraNode;
 		genome[EnumBeeChromosome.HUMIDITY_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceNone");
 		

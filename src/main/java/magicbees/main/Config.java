@@ -157,29 +157,6 @@ public class Config
 	public static Item fHoneydew;
 	public static Item fHoneyDrop;
 	public static Item fPollen;
-	public static Item fCraftingResource;
-	//----- Thaumcraft Blocks ----------------------------------
-	public static Block tcPlant;
-	public static Block tcCandle;
-	public static Block tcCrystal;
-	public static Block tcMarker;
-	public static Block tcJar;
-	public static Block tcLog;
-	public static Block tcLeaf;
-	public static Block tcWarded;
-	public static Block tcWooden;
-	public static Block tcMetal;
-	//----- Thaumcraft Items -----------------------------------
-	public static Item tcFilledJar;
-	public static Item tcMiscResource;
-	//public static Item tcEssentiaBottle;
-	public static Item tcShard;
-	public static Item tcGolem;
-	//public static Item tcWispEssence;
-	public static Item tcNuggets;
-	public static Item tcNuggetChicken;
-	public static Item tcNuggetBeef;
-	public static Item tcNuggetPork;
 	//----- Equivalent Exchange Blocks -------------------------
 	//----- Equivalent Exchange Items --------------------------
 	public static Item eeMinuimShard;
@@ -217,6 +194,7 @@ public class Config
 	
 	//----- Config State info ----------------------------------
 	public static Configuration configuration;
+	public static Item fCraftingResource;
 	
 	public Config(File configFile)
 	{

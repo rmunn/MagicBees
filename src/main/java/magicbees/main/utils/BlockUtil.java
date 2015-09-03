@@ -1,7 +1,11 @@
 package magicbees.main.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 public class BlockUtil {
 
@@ -51,5 +55,22 @@ public class BlockUtil {
 		}
 		Block block = world.getBlock(x, y, z);
 		return block.isReplaceableOreGen(world, x, y, z, target);
+	}
+
+	public static List<Chunk> getChunksInSearchRange(World world, int xCoord, int zCoord, int searchRadius) {
+		List<Chunk> searchChunks = new ArrayList<Chunk>();
+		int chunkRange = (int)Math.ceil(searchRadius / 16.0);
+		int minChunkX = xCoord / 16 - chunkRange;
+		int maxChunkX = xCoord / 16 + chunkRange;
+		int minChunkZ = zCoord / 16 - chunkRange;
+		int maxChunkZ = zCoord / 16 + chunkRange;
+		
+		for (int chunkX = minChunkX; chunkX <= maxChunkX; ++chunkX) {
+			for (int chunkZ = minChunkZ; chunkZ <= maxChunkZ; ++chunkZ) {
+				searchChunks.add(world.getChunkFromChunkCoords(chunkX, chunkZ));
+			}
+		}
+		
+		return searchChunks;
 	}
 }

@@ -4,6 +4,7 @@ import magicbees.api.MagicBeesAPI;
 import magicbees.bees.allele.effect.AlleleEffectCrumbling;
 import magicbees.bees.allele.effect.AlleleEffectCure;
 import magicbees.bees.allele.effect.AlleleEffectPotion;
+import magicbees.bees.allele.effect.AlleleEffectRecharge;
 import magicbees.bees.allele.effect.AlleleEffectSpawnMob;
 import magicbees.bees.allele.effect.AlleleEffectSpawnMobWeighted;
 import magicbees.bees.allele.effect.AlleleEffectSpawnWisp;
@@ -47,6 +48,7 @@ public class Allele implements IAllele {
 	public static IAlleleEffect effectMoveSpeed;
 	public static IAlleleEffect effectSlowSpeed;
 	public static IAlleleEffect effectWithering;
+	public static IAlleleEffect effectVisRecharge;
 	public static IAlleleEffect effectTransmuting;
 	public static IAlleleEffect effectCrumbling;
 	public static IAlleleEffect effectInvisibility;
@@ -73,6 +75,8 @@ public class Allele implements IAllele {
 		if (ThaumcraftHelper.isActive()) {
 			Allele.flowerThaumcraft = new AlleleFlower("ThaumcraftPlant", new FlowerProviderThaumcraftFlower(), false);
 			Allele.flowerAuraNode = new AlleleFlower("AuraNode", new FlowerProviderAuraNode(), true);
+			
+			Allele.effectVisRecharge = new AlleleEffectRecharge("VisRecharge", false);
 
 			Allele.spawnBrainyZombie = new AlleleEffectSpawnMob("Brainy", false, ThaumcraftHelper.Entity.BRAINY_ZOMBIE.entityID)
 				.setAggrosPlayerOnSpawn()

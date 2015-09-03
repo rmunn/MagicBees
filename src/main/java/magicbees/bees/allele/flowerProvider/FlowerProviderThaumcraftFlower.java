@@ -1,6 +1,5 @@
 package magicbees.bees.allele.flowerProvider;
 
-import magicbees.main.Config;
 import magicbees.main.utils.LocalizationManager;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import net.minecraft.block.Block;
@@ -14,13 +13,13 @@ public class FlowerProviderThaumcraftFlower extends FlowerProvider {
 	
 	public FlowerProviderThaumcraftFlower() {
 		super(2);
-		flowers.add(new FlowerImpl(Config.tcPlant, ThaumcraftHelper.BlockPlant.SHIMMERLEAF.ordinal(), 1, true));
-		flowers.add(new FlowerImpl(Config.tcPlant, ThaumcraftHelper.BlockPlant.CINDERPEARL.ordinal(), 1, true));
+		flowers.add(new FlowerImpl(ThaumcraftHelper.plant, ThaumcraftHelper.BlockPlant.SHIMMERLEAF.ordinal(), 1, true));
+		flowers.add(new FlowerImpl(ThaumcraftHelper.plant, ThaumcraftHelper.BlockPlant.CINDERPEARL.ordinal(), 1, true));
 	}
 
 	@Override
 	public boolean isAcceptedFlower(World world, IIndividual genome, int x, int y, int z) {
-		if (world.getBlock(x, y, z) == Config.tcPlant) {
+		if (world.getBlock(x, y, z) == ThaumcraftHelper.plant) {
 			int meta = world.getBlockMetadata(x, y, z);
 			if (meta == ThaumcraftHelper.BlockPlant.SHIMMERLEAF.ordinal()
 					|| meta == ThaumcraftHelper.BlockPlant.CINDERPEARL.ordinal()) {
@@ -36,10 +35,10 @@ public class FlowerProviderThaumcraftFlower extends FlowerProvider {
 		Block blockDown = world.getBlock(x, y - 1, z);
 		if (world.getBlock(x, y, z).isAir(world, x, y, z)) {
 			if (blockDown == Blocks.dirt || blockDown == Blocks.grass) {
-				world.setBlock(x, y, z, Config.tcPlant, ThaumcraftHelper.BlockPlant.SHIMMERLEAF.ordinal(), 2);
+				world.setBlock(x, y, z, ThaumcraftHelper.plant, ThaumcraftHelper.BlockPlant.SHIMMERLEAF.ordinal(), 2);
 				flag = true;
 			} else if (blockDown == Blocks.sand) {
-				world.setBlock(x, y, z, Config.tcPlant, ThaumcraftHelper.BlockPlant.CINDERPEARL.ordinal(), 2);
+				world.setBlock(x, y, z, ThaumcraftHelper.plant, ThaumcraftHelper.BlockPlant.CINDERPEARL.ordinal(), 2);
 				flag = true;
 			}
 		}

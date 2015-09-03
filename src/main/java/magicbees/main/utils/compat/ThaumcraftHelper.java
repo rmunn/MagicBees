@@ -14,11 +14,14 @@ import magicbees.main.Config;
 import magicbees.main.utils.BlockInterface;
 import magicbees.main.utils.ItemInterface;
 import magicbees.main.utils.LocalizationManager;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
@@ -106,6 +109,16 @@ public class ThaumcraftHelper {
 		BANNER,
 		;
 	}
+	
+	public enum AiryBlockType {
+		NODE,
+		NITOR,
+		_2,
+		_3,
+		WARDING_STONE_FENCE,
+		ENERGIZED_NODE,
+		;
+	}
 
 	public enum Entity {
 		BRAINY_ZOMBIE("entBrainyZombie", "EntityBrainyZombie"),
@@ -144,6 +157,33 @@ public class ThaumcraftHelper {
 		SILVERWOOD,
 		;
 	}
+
+	public static Block plant;
+	public static Block candle;
+	public static Block crystal;
+	public static Block marker;
+	public static Block jar;
+	public static Block log;
+	public static Block leaf;
+	public static Block warded;
+	public static Block wooden;
+	public static Block metal;
+	public static Block airy;
+	public static Block fluxGas;
+	public static Block fluxGoo;
+
+	public static Item filledJar;
+	public static Item miscResource;
+	//public static Item tcEssentiaBottle;
+	public static Item shard;
+	public static Item golem;
+	//public static Item tcWispEssence;
+	public static Item nuggetMetal;
+	public static Item nuggetChicken;
+	public static Item nuggetBeef;
+	public static Item nuggetPork;
+	
+	public static Class<? extends TileEntity> nodeClass;
 
 	public static final String Name = "Thaumcraft";
 	private static boolean isThaumcraftPresent = false;
@@ -184,6 +224,12 @@ public class ThaumcraftHelper {
 			setupItemAspects();
 			setupCrafting();
 			setupResearch();
+			
+			try {
+				nodeClass = (Class<? extends TileEntity>) Class.forName("thaumcraft.common.tiles.TileNode");
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -204,64 +250,65 @@ public class ThaumcraftHelper {
 	private static Object visAuraProvider;
 
 	private static void getBlocks() {
-		Config.tcPlant = BlockInterface.getBlock(Name, "blockCustomPlant");
-		Config.tcCandle = BlockInterface.getBlock(Name, "blockCandle");
-		Config.tcCrystal = BlockInterface.getBlock(Name, "blockCrystal");
-		Config.tcMarker = BlockInterface.getBlock(Name, "blockMarker");
-		Config.tcJar = BlockInterface.getBlock(Name, "blockJar");
-		Config.tcLog = BlockInterface.getBlock(Name, "blockMagicalLog");
-		Config.tcLeaf = BlockInterface.getBlock(Name, "blockMagicalLeaves");
-		Config.tcWarded = BlockInterface.getBlock(Name, "blockWarded");
-		Config.tcWooden = BlockInterface.getBlock(Name, "blockWoodenDevice");
-		Config.tcMetal = BlockInterface.getBlock(Name, "blockMetalDevice");
+		plant = BlockInterface.getBlock(Name, "blockCustomPlant");
+		candle = BlockInterface.getBlock(Name, "blockCandle");
+		crystal = BlockInterface.getBlock(Name, "blockCrystal");
+		marker = BlockInterface.getBlock(Name, "blockMarker");
+		jar = BlockInterface.getBlock(Name, "blockJar");
+		log = BlockInterface.getBlock(Name, "blockMagicalLog");
+		leaf = BlockInterface.getBlock(Name, "blockMagicalLeaves");
+		warded = BlockInterface.getBlock(Name, "blockWarded");
+		wooden = BlockInterface.getBlock(Name, "blockWoodenDevice");
+		metal = BlockInterface.getBlock(Name, "blockMetalDevice");
+		airy = BlockInterface.getBlock(Name, "blockAiry");
 	}
 
 	private static void getItems() {
-		Config.tcFilledJar = ItemInterface.getItem(Name, "BlockJarFilledItem");
-		Config.tcMiscResource = ItemInterface.getItem(Name, "ItemResource");
+		filledJar = ItemInterface.getItem(Name, "BlockJarFilledItem");
+		miscResource = ItemInterface.getItem(Name, "ItemResource");
 		// Config.tcEssentiaBottle = ItemInterface.getItem(Name,
 		// "BlockJarFilledItem");
-		Config.tcShard = ItemInterface.getItem(Name, "ItemShard");
-		Config.tcGolem = ItemInterface.getItem(Name, "ItemGolemPlacer");
+		shard = ItemInterface.getItem(Name, "ItemShard");
+		golem = ItemInterface.getItem(Name, "ItemGolemPlacer");
 		// Config.tcWispEssence = ItemApi.getItem("itemWispEssence",
 		// 0).getItem();
-		Config.tcNuggets = ItemInterface.getItem(Name, "ItemNugget");
-		Config.tcShard = ItemInterface.getItem(Name, "ItemShard");
-		Config.tcNuggetChicken = ItemInterface.getItem(Name,
+		nuggetMetal = ItemInterface.getItem(Name, "ItemNugget");
+		shard = ItemInterface.getItem(Name, "ItemShard");
+		nuggetChicken = ItemInterface.getItem(Name,
 				"ItemNuggetChicken");
-		Config.tcNuggetBeef = ItemInterface.getItem(Name, "ItemNuggetBeef");
-		Config.tcNuggetPork = ItemInterface.getItem(Name, "ItemNuggetPork");
+		nuggetBeef = ItemInterface.getItem(Name, "ItemNuggetBeef");
+		nuggetPork = ItemInterface.getItem(Name, "ItemNuggetPork");
 	}
 
 	private static void setupCrafting() {
 		ItemStack input, output;
 
 		input = Config.miscResources.getStackForType(ResourceType.TC_DUST_AIR);
-		output = new ItemStack(Config.tcShard, 1, ShardType.AIR.ordinal());
+		output = new ItemStack(shard, 1, ShardType.AIR.ordinal());
 		GameRegistry.addShapelessRecipe(output, input, input, input, input);
 
 		input = Config.miscResources
 				.getStackForType(ResourceType.TC_DUST_WATER);
-		output = new ItemStack(Config.tcShard, 1, ShardType.WATER.ordinal());
+		output = new ItemStack(shard, 1, ShardType.WATER.ordinal());
 		GameRegistry.addShapelessRecipe(output, input, input, input, input);
 
 		input = Config.miscResources.getStackForType(ResourceType.TC_DUST_FIRE);
-		output = new ItemStack(Config.tcShard, 1, ShardType.FIRE.ordinal());
+		output = new ItemStack(shard, 1, ShardType.FIRE.ordinal());
 		GameRegistry.addShapelessRecipe(output, input, input, input, input);
 
 		input = Config.miscResources
 				.getStackForType(ResourceType.TC_DUST_EARTH);
-		output = new ItemStack(Config.tcShard, 1, ShardType.EARTH.ordinal());
+		output = new ItemStack(shard, 1, ShardType.EARTH.ordinal());
 		GameRegistry.addShapelessRecipe(output, input, input, input, input);
 
 		input = Config.miscResources
 				.getStackForType(ResourceType.TC_DUST_ORDER);
-		output = new ItemStack(Config.tcShard, 1, ShardType.ORDER.ordinal());
+		output = new ItemStack(shard, 1, ShardType.ORDER.ordinal());
 		GameRegistry.addShapelessRecipe(output, input, input, input, input);
 
 		input = Config.miscResources
 				.getStackForType(ResourceType.TC_DUST_CHAOS);
-		output = new ItemStack(Config.tcShard, 1, ShardType.CHAOS.ordinal());
+		output = new ItemStack(shard, 1, ShardType.CHAOS.ordinal());
 		GameRegistry.addShapelessRecipe(output, input, input, input, input);
 
 		thaumScoop = ThaumcraftApi.addArcaneCraftingRecipe("MB_Scoop", new ItemStack(Config.thaumiumScoop),
@@ -269,28 +316,28 @@ public class ThaumcraftHelper {
 						"sWs", "sTs", " T ",
 						's', Items.stick,
 						'W', Blocks.wool,
-						'T', new ItemStack(Config.tcMiscResource, 1, MiscResource.THAUMIUM.ordinal()) });
+						'T', new ItemStack(miscResource, 1, MiscResource.THAUMIUM.ordinal()) });
 
 		thaumGrafter = ThaumcraftApi.addArcaneCraftingRecipe("MB_Grafter",
 				new ItemStack(Config.thaumiumGrafter),
 				new AspectList().add(Aspect.ORDER, 5), new Object[] {
 						"  T", " s ", "s  ",
 						's', Items.stick,
-						'T', new ItemStack(Config.tcMiscResource, 1, MiscResource.THAUMIUM.ordinal()) });
+						'T', new ItemStack(miscResource, 1, MiscResource.THAUMIUM.ordinal()) });
 
 		frameMagic = ThaumcraftApi.addArcaneCraftingRecipe("MB_FrameMagic", new ItemStack(Config.hiveFrameMagic),
 				new AspectList().add(Aspect.ORDER, 5).add(Aspect.AIR, 2).add(Aspect.EARTH, 2), new Object[] {
 						"sss", "sCs", "sss",
 						's', Items.stick,
-						'C', new ItemStack(Config.tcMiscResource, 1, MiscResource.ENCHANTED_FABRIC.ordinal()) });
+						'C', new ItemStack(miscResource, 1, MiscResource.ENCHANTED_FABRIC.ordinal()) });
 		
 		visAuraProvider = ThaumcraftApi.addArcaneCraftingRecipe("MB_VisAuraProvider", new ItemStack(Config.visAuraProvider),
 				new AspectList().add(Aspect.ORDER, 60).add(Aspect.AIR, 60).add(Aspect.ENTROPY, 60).add(Aspect.WATER, 60),
 				new Object[] {
 					"ngn", "gvg", "npn",
 					'n', Items.gold_nugget,
-					'g', new ItemStack(Config.tcWooden, 1, ThaumcraftHelper.WoodenDeviceType.PLANKS_GREATWOOD.ordinal()),
-					'v', new ItemStack(Config.tcMetal, 1, ThaumcraftHelper.MetalDeviceType.VIS_RELAY.ordinal()),
+					'g', new ItemStack(wooden, 1, WoodenDeviceType.PLANKS_GREATWOOD.ordinal()),
+					'v', new ItemStack(metal, 1, MetalDeviceType.VIS_RELAY.ordinal()),
 					'p', Config.pollen.getStackForType(PollenType.UNUSUAL)});
 
 		essenceLife = ThaumcraftApi.addCrucibleRecipe("MB_EssenceLife", Config.miscResources.getStackForType(ResourceType.ESSENCE_FALSE_LIFE),
@@ -368,7 +415,7 @@ public class ThaumcraftHelper {
 		list.add(Config.miscResources.getStackForType(ResourceType.LORE_FRAGMENT));
 		list.add(Config.miscResources.getStackForType(ResourceType.LORE_FRAGMENT));
 		list.add(Config.miscResources.getStackForType(ResourceType.LORE_FRAGMENT));
-		recipe = new ShapelessRecipes(new ItemStack(Config.tcMiscResource, 1,
+		recipe = new ShapelessRecipes(new ItemStack(miscResource, 1,
 				MiscResource.KNOWLEDGE_FRAGMENT.ordinal()), list);
 
 		new ResearchItem("MB_LoreFragment", category,

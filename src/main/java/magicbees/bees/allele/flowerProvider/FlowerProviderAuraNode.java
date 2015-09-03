@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import magicbees.main.utils.LocalizationManager;
+import magicbees.main.utils.compat.ThaumcraftHelper;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 import forestry.api.genetics.IFlower;
 import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.IPollinatable;
@@ -13,11 +16,20 @@ import forestry.api.genetics.IPollinatable;
 public class FlowerProviderAuraNode extends FlowerProvider {
 	
 	public FlowerProviderAuraNode() {
-		super(0);
+		super(2);
+		flowers.add(new FlowerImpl(ThaumcraftHelper.airy, ThaumcraftHelper.AiryBlockType.NODE.ordinal(), 1, false));
+		flowers.add(new FlowerImpl(ThaumcraftHelper.airy, ThaumcraftHelper.AiryBlockType.ENERGIZED_NODE.ordinal(), 1, false));
 	}
 
 	@Override
 	public boolean isAcceptedFlower(World world, IIndividual genome, int x, int y, int z) {
+		Block block = world.getBlock(x, y, z);
+		int meta = world.getBlockMetadata(x, y, z);
+		for (IFlower flower : flowers) {
+			if (flower.getBlock() == block && (flower.getMeta() == OreDictionary.WILDCARD_VALUE || flower.getMeta() == meta)) {
+				return true;
+			}
+		}
 		return false;
 	}
 

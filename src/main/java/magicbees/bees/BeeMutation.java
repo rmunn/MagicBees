@@ -231,17 +231,17 @@ public class BeeMutation implements IBeeMutation {
 		
 		if (ThaumcraftHelper.isActive()) {
 			new BeeMutation(BeeSpecies.WINDY, BeeSpecies.WINDY, BeeSpecies.TC_AIR, 8)
-					.setBlockAndMetaRequired(Config.tcCrystal, ThaumcraftHelper.ShardType.AIR.ordinal());
+					.setBlockAndMetaRequired(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.AIR.ordinal());
 			new BeeMutation(BeeSpecies.FIREY, BeeSpecies.FIREY, BeeSpecies.TC_FIRE, 8)
-					.setBlockAndMetaRequired(Config.tcCrystal, ThaumcraftHelper.ShardType.FIRE.ordinal());
+					.setBlockAndMetaRequired(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.FIRE.ordinal());
 			new BeeMutation(BeeSpecies.WATERY, BeeSpecies.WATERY, BeeSpecies.TC_WATER, 8)
-					.setBlockAndMetaRequired(Config.tcCrystal, ThaumcraftHelper.ShardType.WATER.ordinal());
+					.setBlockAndMetaRequired(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.WATER.ordinal());
 			new BeeMutation(BeeSpecies.EARTHY, BeeSpecies.EARTHY, BeeSpecies.TC_EARTH, 8)
-					.setBlockAndMetaRequired(Config.tcCrystal, ThaumcraftHelper.ShardType.EARTH.ordinal());
+					.setBlockAndMetaRequired(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.EARTH.ordinal());
 			new BeeMutation(BeeSpecies.ETHEREAL, BeeSpecies.ARCANE, BeeSpecies.TC_ORDER, 8)
-					.setBlockAndMetaRequired(Config.tcCrystal, ThaumcraftHelper.ShardType.ORDER.ordinal());
+					.setBlockAndMetaRequired(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.ORDER.ordinal());
 			new BeeMutation(BeeSpecies.ETHEREAL, BeeSpecies.SUPERNATURAL, BeeSpecies.TC_CHAOS, 8)
-					.setBlockAndMetaRequired(Config.tcCrystal, ThaumcraftHelper.ShardType.CHAOS.ordinal());
+					.setBlockAndMetaRequired(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.CHAOS.ordinal());
 			
 			new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.WINDY, BeeSpecies.TC_BATTY, 9);
 			new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.PUPIL, BeeSpecies.TC_BRAINY, 9);

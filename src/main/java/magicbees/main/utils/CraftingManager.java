@@ -373,7 +373,7 @@ public class CraftingManager {
 
 		if (ThaumcraftHelper.isActive()) {
 			input = Config.miscResources.getStackForType(ResourceType.LORE_FRAGMENT);
-			output = new ItemStack(Config.tcMiscResource, 1, ThaumcraftHelper.MiscResource.KNOWLEDGE_FRAGMENT.ordinal());
+			output = new ItemStack(ThaumcraftHelper.miscResource, 1, ThaumcraftHelper.MiscResource.KNOWLEDGE_FRAGMENT.ordinal());
 			GameRegistry.addShapelessRecipe(output,
 					input, input, input, input
 			);
@@ -384,7 +384,7 @@ public class CraftingManager {
 						"SWS", "NCN", "SWS",
 						'S', Items.string,
 						'W', Blocks.wool,
-						'N', new ItemStack(Config.tcMiscResource, 1, ThaumcraftHelper.MiscResource.AMBER.ordinal()),
+						'N', new ItemStack(ThaumcraftHelper.miscResource, 1, ThaumcraftHelper.MiscResource.AMBER.ordinal()),
 						'C', Blocks.chest
 				);
 			}
