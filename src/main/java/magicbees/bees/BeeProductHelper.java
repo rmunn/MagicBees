@@ -247,10 +247,15 @@ public class BeeProductHelper {
 		TC_CHAOS.addProduct(Config.combs.getStackForType(CombType.TC_CHAOS), 0.20f);
 
 		TC_VIS.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.10f);
-		TC_TAINT.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.18f);
-		TC_ATTRACT.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.14f);
-		TC_PURE.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.16f);
 		TC_REJUVENATING.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.18f);
+		TC_EMPOWERING.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.14f);
+		TC_EMPOWERING.addSpecialty(new ItemStack(Config.fPollen, 1, ForestryHelper.Pollen.CRYSTALLINE.ordinal()), 0.2f);
+		TC_NEXUS.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.25f);
+		TC_NEXUS.addProduct(Config.combs.getStackForType(CombType.TEMPORAL), 0.12f);
+		TC_NEXUS.addSpecialty(new ItemStack(Config.fPollen, 1, ForestryHelper.Pollen.CRYSTALLINE.ordinal()), 0.2f);
+		TC_TAINT.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.18f);
+		TC_PURE.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.16f);
+		TC_HUNGRY.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.28f);
 
 		TC_BRAINY.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.10f)
 			.addProduct(new ItemStack(Items.rotten_flesh), 0.6f);

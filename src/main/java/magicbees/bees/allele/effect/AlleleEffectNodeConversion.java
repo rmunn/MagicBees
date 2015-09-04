@@ -7,15 +7,18 @@ import magicbees.main.utils.BlockUtil;
 import magicbees.main.utils.compat.thaumcraft.NodeHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import thaumcraft.api.nodes.NodeType;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
 import forestry.api.genetics.IEffectData;
 
-public class AlleleEffectRecharge extends AlleleEffect {
+public class AlleleEffectNodeConversion extends AlleleEffect {
+
+	private NodeType targetType;
 	
-	public AlleleEffectRecharge(String id, boolean isDominant) {
-		super(id, isDominant, 20);
-		combinable = true;
+	public AlleleEffectNodeConversion(String id, NodeType targetNodeType, boolean isDominant, int timeout) {
+		super(id, isDominant, timeout);
+		targetType = targetNodeType;
 	}
 
 	@Override
@@ -35,10 +38,11 @@ public class AlleleEffectRecharge extends AlleleEffect {
 		int range = (int)Math.ceil(genome.getTerritory()[0] * housing.getTerritoryModifier(genome, 1f));
 		List<Chunk> chunks = BlockUtil.getChunksInSearchRange(world, xCoord, zCoord, range);
 		
-        if (NodeHelper.rechargeNodeInRange(chunks, world, xCoord, yCoord, zCoord, range)) {
-        	storedData.setInteger(0, storedData.getInteger(0) - throttle);
-        }
-
+	    if (NodeHelper.convertNodeInRangeToType(chunks, world, xCoord, yCoord, zCoord, range, targetType)) {
+	    	storedData.setInteger(0, storedData.getInteger(0) - throttle);
+	    }
+    
 		return storedData;
 	}
+
 }

@@ -840,6 +840,7 @@ public class BeeGenomeManager {
 		genome[EnumBeeChromosome.FERTILITY.ordinal()] = Allele.getBaseAllele("fertilityLow");
 		genome[EnumBeeChromosome.HUMIDITY_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceBoth1");
 		genome[EnumBeeChromosome.TEMPERATURE_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceBoth1");
+		genome[EnumBeeChromosome.FLOWER_PROVIDER.ordinal()] = Allele.flowerAuraNode;
 		
 		return genome;
 	}
@@ -850,8 +851,35 @@ public class BeeGenomeManager {
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_VIS;
 		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedSlow");
 		genome[EnumBeeChromosome.FLOWERING.ordinal()] = Allele.getBaseAllele("floweringSlower");
-		genome[EnumBeeChromosome.FLOWER_PROVIDER.ordinal()] = Allele.flowerAuraNode;
 
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateTCRejuvinating() {
+		IAllele[] genome = getTemplateTCBaseVis();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_REJUVENATING;
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectVisRecharge;
+		genome[EnumBeeChromosome.HUMIDITY_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceNone");
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateTCEmpowering() {
+		IAllele[] genome = getTemplateTCBaseVis();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_EMPOWERING;
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectNodeEmpower;
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateTCNexus() {
+		IAllele[] genome = getTemplateTCBaseVis();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_NEXUS;
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectNodeRepair;
+		
 		return genome;
 	}
 	
@@ -861,18 +889,7 @@ public class BeeGenomeManager {
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_TAINT;
 		genome[EnumBeeChromosome.HUMIDITY_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceNone");
 		genome[EnumBeeChromosome.TEMPERATURE_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceNone");
-		genome[EnumBeeChromosome.FLOWER_PROVIDER.ordinal()] = Allele.flowerAuraNode;
-		//genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectNodeFlux;
-		
-		return genome;
-	}
-	
-	public static IAllele[] getTemplateTCAttract() {
-		IAllele[] genome = getTemplateTCBaseVis();
-		
-		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_ATTRACT;
-		genome[EnumBeeChromosome.FLOWER_PROVIDER.ordinal()] = Allele.flowerAuraNode;
-		//genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectNodeAttract;
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectNodeConversionTaint;
 		
 		return genome;
 	}
@@ -884,22 +901,23 @@ public class BeeGenomeManager {
 		genome[EnumBeeChromosome.HUMIDITY_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceNone");
 		genome[EnumBeeChromosome.TEMPERATURE_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceNone");
 		genome[EnumBeeChromosome.FLOWERING.ordinal()] = Allele.getBaseAllele("floweringAverage");
-		genome[EnumBeeChromosome.FLOWER_PROVIDER.ordinal()] = Allele.flowerAuraNode;
-		//genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectNodePurify;
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectNodeConversionPure;
 		
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCRejuvinating() {
+	public static IAllele[] getTemplateTCHungry() {
 		IAllele[] genome = getTemplateTCBaseVis();
 		
-		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_REJUVENATING;
-		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectVisRecharge;
-		genome[EnumBeeChromosome.FLOWER_PROVIDER.ordinal()] = Allele.flowerAuraNode;
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_HUNGRY;
+		genome[EnumBeeChromosome.TERRITORY.ordinal()] = Allele.getBaseAllele("territoryLargest");
 		genome[EnumBeeChromosome.HUMIDITY_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceNone");
+		genome[EnumBeeChromosome.TEMPERATURE_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceNone");
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectNodeConversionHungry;
 		
 		return genome;
 	}
+	
 	
 	public static IAllele[] getTemplateTCBrainy() {
 		IAllele[] genome = getTemplateBaseMalevolent();

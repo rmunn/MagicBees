@@ -224,12 +224,6 @@ public class ThaumcraftHelper {
 			setupItemAspects();
 			setupCrafting();
 			setupResearch();
-			
-			try {
-				nodeClass = (Class<? extends TileEntity>) Class.forName("thaumcraft.common.tiles.TileNode");
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}
 		}
 	}
 

@@ -1,8 +1,12 @@
 package magicbees.bees;
 
+import thaumcraft.api.nodes.NodeType;
 import magicbees.api.MagicBeesAPI;
 import magicbees.bees.allele.effect.AlleleEffectCrumbling;
 import magicbees.bees.allele.effect.AlleleEffectCure;
+import magicbees.bees.allele.effect.AlleleEffectEmpowering;
+import magicbees.bees.allele.effect.AlleleEffectNodeRepair;
+import magicbees.bees.allele.effect.AlleleEffectNodeConversion;
 import magicbees.bees.allele.effect.AlleleEffectPotion;
 import magicbees.bees.allele.effect.AlleleEffectRecharge;
 import magicbees.bees.allele.effect.AlleleEffectSpawnMob;
@@ -49,6 +53,11 @@ public class Allele implements IAllele {
 	public static IAlleleEffect effectSlowSpeed;
 	public static IAlleleEffect effectWithering;
 	public static IAlleleEffect effectVisRecharge;
+	public static IAlleleEffect effectNodeEmpower;
+	public static IAlleleEffect effectNodeRepair;
+	public static IAlleleEffect effectNodeConversionTaint;
+	public static IAlleleEffect effectNodeConversionPure;
+	public static IAlleleEffect effectNodeConversionHungry;
 	public static IAlleleEffect effectTransmuting;
 	public static IAlleleEffect effectCrumbling;
 	public static IAlleleEffect effectInvisibility;
@@ -77,6 +86,11 @@ public class Allele implements IAllele {
 			Allele.flowerAuraNode = new AlleleFlower("AuraNode", new FlowerProviderAuraNode(), true);
 			
 			Allele.effectVisRecharge = new AlleleEffectRecharge("VisRecharge", false);
+			Allele.effectNodeEmpower = new AlleleEffectEmpowering("NodeEmpower", false);
+			Allele.effectNodeRepair = new AlleleEffectNodeRepair("NodeRepair", false);
+			Allele.effectNodeConversionTaint = new AlleleEffectNodeConversion("NodeTainting", NodeType.TAINTED, false, 250);
+			Allele.effectNodeConversionPure = new AlleleEffectNodeConversion("NodePurifying", NodeType.PURE, false, 250);
+			Allele.effectNodeConversionHungry = new AlleleEffectNodeConversion("NodeRavening", NodeType.HUNGRY, false, 2);
 
 			Allele.spawnBrainyZombie = new AlleleEffectSpawnMob("Brainy", false, ThaumcraftHelper.Entity.BRAINY_ZOMBIE.entityID)
 				.setAggrosPlayerOnSpawn()
@@ -222,7 +236,7 @@ public class Allele implements IAllele {
 		registry.registerDeprecatedAlleleReplacement("thaumicbees.speciesVis", BeeSpecies.TC_VIS);
 		registry.registerDeprecatedAlleleReplacement("thaumicbees.speciesPure", BeeSpecies.TC_PURE);
 		registry.registerDeprecatedAlleleReplacement("thaumicbees.speciesFlux", BeeSpecies.TC_TAINT);
-		registry.registerDeprecatedAlleleReplacement("thaumicbees.speciesNode", BeeSpecies.TC_ATTRACT);
+		registry.registerDeprecatedAlleleReplacement("thaumicbees.speciesNode", BeeSpecies.TC_EMPOWERING);
 		registry.registerDeprecatedAlleleReplacement("thaumicbees.speciesRejuvenating", BeeSpecies.TC_REJUVENATING);
 		registry.registerDeprecatedAlleleReplacement("thaumicbees.speciesBrainy", BeeSpecies.TC_BRAINY);
 		registry.registerDeprecatedAlleleReplacement("thaumicbees.speciesGossamer", BeeSpecies.TC_WISPY);
@@ -246,6 +260,7 @@ public class Allele implements IAllele {
 		registry.registerDeprecatedAlleleReplacement("thaumicbees.speciesArkanen", BeeSpecies.AM_ARCANE);
 		registry.registerDeprecatedAlleleReplacement("thaumicbees.speciesVortex", BeeSpecies.AM_VORTEX);
 		registry.registerDeprecatedAlleleReplacement("thaumicbees.speciesWight", BeeSpecies.AM_WIGHT);
+		registry.registerDeprecatedAlleleReplacement("magicbees.speciesTCAttractive", BeeSpecies.TC_EMPOWERING);
 	}
 
 	public static IAlleleBeeSpecies getBaseSpecies(String name) {

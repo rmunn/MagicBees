@@ -186,28 +186,32 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 
 	// --------- Thaumcraft Bees ---------------------------------------------------------------------------------------
 	TC_AIR("TCAir", "aether", BeeClassification.THAUMIC,
-			0xD9D636, BodyColours.THAUMCRAFT, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, true),
+			0xD9D636, BodyColours.THAUMCRAFT_SHARD, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, true),
 	TC_FIRE("TCFire", "praefervidus", BeeClassification.THAUMIC,
-			0xE50B0B, BodyColours.THAUMCRAFT, EnumTemperature.HOT, EnumHumidity.ARID, true, true),
+			0xE50B0B, BodyColours.THAUMCRAFT_SHARD, EnumTemperature.HOT, EnumHumidity.ARID, true, true),
 	TC_WATER("TCWater", "umidus", BeeClassification.THAUMIC,
-			0x36CFD9, BodyColours.THAUMCRAFT, EnumTemperature.NORMAL, EnumHumidity.DAMP, true, true),
+			0x36CFD9, BodyColours.THAUMCRAFT_SHARD, EnumTemperature.NORMAL, EnumHumidity.DAMP, true, true),
 	TC_EARTH("TCEarth", "sordida", BeeClassification.THAUMIC,
-			0x005100, BodyColours.THAUMCRAFT, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, true),
+			0x005100, BodyColours.THAUMCRAFT_SHARD, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, true),
 	TC_ORDER("TCOrder", "ordinatus", BeeClassification.THAUMIC,
-			0xaa32fc, BodyColours.THAUMCRAFT, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, true),
+			0xaa32fc, BodyColours.THAUMCRAFT_SHARD, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, true),
 	TC_CHAOS("TCChaos", "tenebrarum", BeeClassification.THAUMIC,
-			0xCCCCCC, BodyColours.THAUMCRAFT, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, false),
+			0xCCCCCC, BodyColours.THAUMCRAFT_SHARD, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, false),
 
 	TC_VIS("TCVis", "arcanus saecula", BeeClassification.THAUMIC,
-			0x004c99, 0x675ED1, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
-	TC_TAINT("TCFlux", "arcanus labe", BeeClassification.THAUMIC,
-			0x91376A, 0x675ED1, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
-	TC_ATTRACT("TCAttractive", "tractus", BeeClassification.THAUMIC,
-			0x96FFBC, 0x675ED1, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+			0x004c99, BodyColours.THAUMCRAFT_NODE, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
 	TC_REJUVENATING("TCRejuvenating", "arcanus vitae", BeeClassification.THAUMIC,
-			0x91D0D9, 0x675ED1, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
+			0x91D0D9, BodyColours.THAUMCRAFT_NODE, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
+	TC_EMPOWERING("TCEmpowering", "tractus", BeeClassification.THAUMIC,
+			0x96FFBC, BodyColours.THAUMCRAFT_NODE, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+	TC_NEXUS("TCNexus", "nexi", BeeClassification.THAUMIC,
+			0x15AFAF, BodyColours.THAUMCRAFT_NODE, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, false),
+	TC_TAINT("TCFlux", "arcanus labe", BeeClassification.THAUMIC,
+			0x91376A, BodyColours.THAUMCRAFT_NODE, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
 	TC_PURE("TCPure", "arcanus puritatem", BeeClassification.THAUMIC,
-			0xb0092e, 0x675ED1, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
+			0xE23F65, BodyColours.THAUMCRAFT_NODE, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
+	TC_HUNGRY("TCHungry", "omnique", BeeClassification.THAUMIC,
+			0xDCA5E2, BodyColours.THAUMCRAFT_NODE, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
 
 	TC_BRAINY("TCBrainy", "cerebrum", BeeClassification.THAUMIC,
 			0x83FF70, BodyColours.SKULKING, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
@@ -327,12 +331,13 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 
 	// For body colours used by more than one bee.
 	private class BodyColours {
-		final static int DEFAULT = 0xFF7C26;
+		static final int DEFAULT = 0xFF7C26;
 		static final int ARCANE = 0xFF9D60;
 		static final int ABOMINABLE = 0x960F00;
 		static final int EXTRINSIC = 0xF696FF;
 		static final int SKULKING = 0xe15236;
-		static final int THAUMCRAFT = 0x999999;
+		static final int THAUMCRAFT_SHARD = 0x999999;
+		static final int THAUMCRAFT_NODE = 0x675ED1;
 		static final int ARSMAGICA = 0xE3A55B;
 		static final int BOTANIA = 0xFFB2BB;
 	}
@@ -405,10 +410,12 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		TC_ORDER.registerGenomeTemplate(BeeGenomeManager.getTemplateTCOrder());
 		TC_CHAOS.registerGenomeTemplate(BeeGenomeManager.getTemplateTCChaos());
 		TC_VIS.registerGenomeTemplate(BeeGenomeManager.getTemplateTCVis());
-		TC_TAINT.registerGenomeTemplate(BeeGenomeManager.getTemplateTCTaint());
-		TC_ATTRACT.registerGenomeTemplate(BeeGenomeManager.getTemplateTCAttract());
 		TC_REJUVENATING.registerGenomeTemplate(BeeGenomeManager.getTemplateTCRejuvinating());
+		TC_EMPOWERING.registerGenomeTemplate(BeeGenomeManager.getTemplateTCEmpowering());
+		TC_NEXUS.registerGenomeTemplate(BeeGenomeManager.getTemplateTCNexus());
+		TC_TAINT.registerGenomeTemplate(BeeGenomeManager.getTemplateTCTaint());
 		TC_PURE.registerGenomeTemplate(BeeGenomeManager.getTemplateTCPure());
+		TC_HUNGRY.registerGenomeTemplate(BeeGenomeManager.getTemplateTCHungry());
 		TC_BRAINY.registerGenomeTemplate(BeeGenomeManager.getTemplateTCBrainy());
 		TC_WISPY.registerGenomeTemplate(BeeGenomeManager.getTemplateTCWispy());
 		TC_BATTY.registerGenomeTemplate(BeeGenomeManager.getTemplateTCBatty());
@@ -477,7 +484,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		}
 		// These species should be fixed. ¯\_(ツ)_/¯
 		TC_TAINT.setInactive();
-		TC_ATTRACT.setInactive();
+		TC_EMPOWERING.setInactive();
 		//TC_REJUVENATING.setInactive();
 
 		BeeProductHelper.initEquivalentExchange3Species();

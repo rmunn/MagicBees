@@ -13,17 +13,24 @@ import forestry.api.genetics.IEffectData;
 public abstract class AlleleEffect extends Allele implements IAlleleBeeEffect
 {
 	protected int throttle;
+	protected boolean combinable;
 
 	public AlleleEffect(String id, boolean isDominant, int timeout)
 	{
 		super("effect" + id, isDominant);
 		this.throttle = timeout;
+		combinable = false;
 	}
 
 	@Override
 	public boolean isCombinable()
 	{
-		return false;
+		return combinable;
+	}
+	
+	public AlleleEffect setIsCombinable(boolean canCombine) {
+		combinable = canCombine;
+		return this;
 	}
 
 	@Override
