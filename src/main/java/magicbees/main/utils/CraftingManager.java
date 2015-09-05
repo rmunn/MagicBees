@@ -259,7 +259,7 @@ public class CraftingManager {
 		GameRegistry.addShapelessRecipe(output,
 				Config.pollen.getStackForType(PollenType.UNUSUAL, 2),
 				Config.drops.getStackForType(DropType.ENCHANTED, 2),
-				new ItemStack(Config.fApicultureBlock, 1, ForestryHelper.ApicultureBlock.APIARY.ordinal())
+				new ItemStack(ForestryHelper.apicultureBlock, 1, ForestryHelper.ApicultureBlock.APIARY.ordinal())
 		);
 
 		GameRegistry.addRecipe(new ItemStack(Config.enchantedEarth),
@@ -469,7 +469,7 @@ public class CraftingManager {
 		output = newMap();
 		output.put(Config.wax.getStackForType(WaxType.MAGIC), 1f);
 		output.put(Config.pollen.getStackForType(PollenType.PHASED), 0.055f);
-		output.put(new ItemStack(Config.fHoneydew, 1), 0.6f);
+		output.put(new ItemStack(ForestryHelper.honeydew, 1), 0.6f);
 		RecipeManagers.centrifugeManager.addRecipe(20, Config.combs.getStackForType(CombType.TEMPORAL), output);
 		
 		output = newMap();

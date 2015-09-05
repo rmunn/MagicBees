@@ -148,15 +148,6 @@ public class Config
 	public static Item thaumaturgeBackpackT2;
 	public static BackpackDefinition thaumaturgeBackpackDef;
 
-	//----- Forestry Blocks ------------------------------------
-	public static Block fHiveBlock;
-	public static Block fAlvearyBlock;
-	public static Block fApicultureBlock;
-	//----- Forestry Items -------------------------------------
-	public static Item fBeeComb;
-	public static Item fHoneydew;
-	public static Item fHoneyDrop;
-	public static Item fPollen;
 	//----- Equivalent Exchange Blocks -------------------------
 	//----- Equivalent Exchange Items --------------------------
 	public static Item eeMinuimShard;
@@ -194,7 +185,6 @@ public class Config
 	
 	//----- Config State info ----------------------------------
 	public static Configuration configuration;
-	public static Item fCraftingResource;
 	
 	public Config(File configFile)
 	{

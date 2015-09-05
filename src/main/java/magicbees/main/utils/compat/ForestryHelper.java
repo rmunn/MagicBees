@@ -8,6 +8,8 @@ import magicbees.main.Config;
 import magicbees.main.utils.BlockInterface;
 import magicbees.main.utils.ItemInterface;
 import magicbees.main.utils.VersionInfo;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -102,7 +104,19 @@ public class ForestryHelper
 	}
 
 	public static final String Name = "Forestry";
-	
+
+
+	//----- Forestry Blocks ------------------------------------
+	public static Block hiveBlock;
+	public static Block alvearyBlock;
+	public static Block apicultureBlock;
+	//----- Forestry Items -------------------------------------
+	public static Item beeComb;
+	public static Item honeydew;
+	public static Item honeyDrop;
+	public static Item propolis;
+	public static Item pollen;
+	public static Item craftingResource;
 	public static ItemStack itemHoneycomb;
 
 	public static void preInit()
@@ -139,20 +153,21 @@ public class ForestryHelper
 
 	private static void getBlocks()
 	{
-		Config.fAlvearyBlock = BlockInterface.getBlock("alveary");
-		Config.fHiveBlock = BlockInterface.getBlock("beehives");
-		Config.fApicultureBlock = BlockInterface.getBlock("apiculture");
+		alvearyBlock = BlockInterface.getBlock("alveary");
+		hiveBlock = BlockInterface.getBlock("beehives");
+		apicultureBlock = BlockInterface.getBlock("apiculture");
 	}
 
 	private static void getItems()
 	{
-		Config.fBeeComb = ItemInterface.getItem("beeCombs");
-		Config.fPollen = ItemInterface.getItem("pollen");
-		Config.fCraftingResource = ItemInterface.getItem("craftingMaterial");
-		Config.fHoneyDrop = ItemInterface.getItem("honeyDrop");
-		Config.fHoneydew = ItemInterface.getItem("honeydew");
+		beeComb = ItemInterface.getItem("beeCombs");
+		pollen = ItemInterface.getItem("pollen");
+		ForestryHelper.craftingResource = ItemInterface.getItem("craftingMaterial");
+		honeyDrop = ItemInterface.getItem("honeyDrop");
+		propolis = ItemInterface.getItem("propolis");
+		honeydew = ItemInterface.getItem("honeydew");
 		// Caching a single item stack. Turns out it's used a LOT.
-		itemHoneycomb = new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.HONEY.ordinal());
+		itemHoneycomb = new ItemStack(beeComb, 1, Comb.HONEY.ordinal());
 	}
 
 	public static IAllele[] getTemplateForestryForSpecies(String speciesName)

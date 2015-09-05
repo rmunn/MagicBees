@@ -852,11 +852,11 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			}
 		}
 
-		if (itemStack.getItem() == Config.fHoneyDrop) {
+		if (itemStack.getItem() == ForestryHelper.honeyDrop) {
 			return 0.5f;
-		} else if (itemStack.getItem() == Config.fHoneydew) {
+		} else if (itemStack.getItem() == ForestryHelper.honeydew) {
 			return 0.7f;
-		} else if (itemStack.getItem() == Config.fBeeComb || itemStack.getItem() == Config.combs) {
+		} else if (itemStack.getItem() == ForestryHelper.beeComb || itemStack.getItem() == Config.combs) {
 			return 0.4f;
 		} else if (getRoot().isMember(itemStack)) {
 			return 1.0f;

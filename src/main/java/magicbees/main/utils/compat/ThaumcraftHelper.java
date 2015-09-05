@@ -583,7 +583,7 @@ public class ThaumcraftHelper {
 		}
 
 		list = new AspectList().add(Aspect.ORDER, 5).add(Aspect.ARMOR, 2).add(Aspect.BEAST, 1);
-		item = new ItemStack(Config.fHiveBlock);
+		item = new ItemStack(ForestryHelper.hiveBlock);
 		ThaumcraftApi.registerObjectTag(item, list);
 		ThaumcraftApi.registerObjectTag(new ItemStack(Config.hive), list);
 

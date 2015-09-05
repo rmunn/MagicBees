@@ -106,16 +106,16 @@ public class BeeProductHelper {
 		APATITE.addProduct(ForestryHelper.itemHoneycomb, 0.10f)
 				.addSpecialty(Config.nuggets.getStackForType(NuggetType.APATITE), 0.10f);
 		
-		MUTABLE.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.PARCHED.ordinal()), 0.30f)
+		MUTABLE.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.PARCHED.ordinal()), 0.30f)
 				.addProduct(Config.combs.getStackForType(CombType.TRANSMUTED), 0.10f);
-		TRANSMUTING.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.PARCHED.ordinal()), 0.10f)
+		TRANSMUTING.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.PARCHED.ordinal()), 0.10f)
 				.addProduct(Config.combs.getStackForType(CombType.TRANSMUTED), 0.30f)
-				.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.SILKY.ordinal()), 0.5f)
-				.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.SIMMERING.ordinal()), 0.5f);
-		CRUMBLING.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.PARCHED.ordinal()), 0.10f)
+				.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.SILKY.ordinal()), 0.5f)
+				.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.SIMMERING.ordinal()), 0.5f);
+		CRUMBLING.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.PARCHED.ordinal()), 0.10f)
 				.addProduct(Config.combs.getStackForType(CombType.TRANSMUTED), 0.30f)
-				.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.POWDERY.ordinal()), 0.10f)
-				.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.COCOA.ordinal()), 0.15f);
+				.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.POWDERY.ordinal()), 0.10f)
+				.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.COCOA.ordinal()), 0.15f);
 		
 		INVISIBLE.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 0.35f);
 
@@ -249,20 +249,23 @@ public class BeeProductHelper {
 		TC_VIS.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.10f);
 		TC_REJUVENATING.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.18f);
 		TC_EMPOWERING.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.14f);
-		TC_EMPOWERING.addSpecialty(new ItemStack(Config.fPollen, 1, ForestryHelper.Pollen.CRYSTALLINE.ordinal()), 0.2f);
+		TC_EMPOWERING.addSpecialty(new ItemStack(ForestryHelper.pollen, 1, ForestryHelper.Pollen.CRYSTALLINE.ordinal()), 0.2f);
 		TC_NEXUS.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.25f);
 		TC_NEXUS.addProduct(Config.combs.getStackForType(CombType.TEMPORAL), 0.12f);
-		TC_NEXUS.addSpecialty(new ItemStack(Config.fPollen, 1, ForestryHelper.Pollen.CRYSTALLINE.ordinal()), 0.2f);
+		TC_NEXUS.addSpecialty(new ItemStack(ForestryHelper.pollen, 1, ForestryHelper.Pollen.CRYSTALLINE.ordinal()), 0.2f);
 		TC_TAINT.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.18f);
+		TC_TAINT.addProduct(new ItemStack(ForestryHelper.craftingResource, 1 , ForestryHelper.Propolis.STICKY.ordinal()), 0.213f);
 		TC_PURE.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.16f);
+		TC_PURE.addSpecialty(Config.combs.getStackForType(CombType.SOUL), 0.19f);
 		TC_HUNGRY.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.28f);
+		TC_HUNGRY.addSpecialty(Config.combs.getStackForType(CombType.TEMPORAL), 0.195f);
 
 		TC_BRAINY.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.10f)
 			.addProduct(new ItemStack(Items.rotten_flesh), 0.6f);
 		TC_BATTY.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.10f)
 			.addSpecialty(new ItemStack(Items.gunpowder), 0.4f);
-		TC_WISPY.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.SILKY.ordinal()), 0.22f)
-				.addSpecialty(new ItemStack(Config.fCraftingResource, 1, ForestryHelper.CraftingMaterial.SILK_WISP.ordinal()), 0.4f);
+		TC_WISPY.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.SILKY.ordinal()), 0.22f)
+				.addSpecialty(new ItemStack(ForestryHelper.craftingResource, 1, ForestryHelper.CraftingMaterial.SILK_WISP.ordinal()), 0.4f);
 		TC_CHICKEN.addProduct(ForestryHelper.itemHoneycomb, 0.10f);
 		TC_BEEF.addProduct(ForestryHelper.itemHoneycomb, 0.10f);
 		TC_PORK.addProduct(ForestryHelper.itemHoneycomb, 0.10f);
@@ -339,13 +342,13 @@ public class BeeProductHelper {
 		TE_WINSOME.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.10f)
 			.addProduct(Config.combs.getStackForType(CombType.TE_ENDEARING), 0.5f)
 			.addSpecialty(new ItemStack(Items.ender_pearl), 0.5f);
-		TE_ENDEARING.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.MYSTERIOUS.ordinal()), 0.10f)
+		TE_ENDEARING.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.MYSTERIOUS.ordinal()), 0.10f)
 			.addProduct(Config.combs.getStackForType(CombType.TE_ENDEARING), 0.5f);
 		TE_COAL.addProduct(ForestryHelper.itemHoneycomb, 0.10f)
 			.addProduct(Config.combs.getStackForType(CombType.TE_CARBON), 0.5f)
 			.addSpecialty(new ItemStack(Items.coal), 0.5f);
-		TE_BLIZZY.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.FROZEN.ordinal()), 0.10f);
-		TE_GELID.addProduct(new ItemStack(Config.fBeeComb, 1, ForestryHelper.Comb.FROZEN.ordinal()), 0.10f);
+		TE_BLIZZY.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.FROZEN.ordinal()), 0.10f);
+		TE_GELID.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.FROZEN.ordinal()), 0.10f);
 		
 		if (ThermalExpansionHelper.isActive()) {
 			LogHelper.info("Thermal Expansion bees active");

@@ -3,7 +3,6 @@ package magicbees.bees;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import magicbees.main.Config;
 import magicbees.main.utils.LocalizationManager;
 import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.MoonPhase;
@@ -243,6 +242,20 @@ public class BeeMutation implements IBeeMutation {
 			new BeeMutation(BeeSpecies.ETHEREAL, BeeSpecies.SUPERNATURAL, BeeSpecies.TC_CHAOS, 8)
 					.setBlockAndMetaRequired(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.CHAOS.ordinal());
 			
+			new BeeMutation(BeeSpecies.ETHEREAL, BeeSpecies.INFERNAL, BeeSpecies.TC_VIS, 9)
+					.setMoonPhaseRestricted(MoonPhase.WAXING_HALF, MoonPhase.WANING_HALF);
+			new BeeMutation(BeeSpecies.ATTUNED, BeeSpecies.TC_VIS, BeeSpecies.TC_REJUVENATING, 8);
+			new BeeMutation(BeeSpecies.TC_VIS, BeeSpecies.TC_REJUVENATING, BeeSpecies.TC_EMPOWERING, 6)
+					.setMoonPhaseBonus(MoonPhase.FULL, MoonPhase.FULL, 1.322f);
+			new BeeMutation(BeeSpecies.TC_REJUVENATING, BeeSpecies.TC_EMPOWERING, BeeSpecies.TC_NEXUS, 10)
+					.setBiomeRequired(Type.MAGICAL)
+					.setBlockAndMetaRequired(ThaumcraftHelper.airy, ThaumcraftHelper.AiryBlockType.NODE.ordinal());
+			
+			new BeeMutation(BeeSpecies.TRANSMUTING, BeeSpecies.TC_EMPOWERING, BeeSpecies.TC_TAINT, 11);
+			new BeeMutation(BeeSpecies.TRANSMUTING, BeeSpecies.TC_REJUVENATING, BeeSpecies.TC_PURE, 8)
+					.setBiomeRequired(Type.MAGICAL);
+			new BeeMutation(BeeSpecies.BIGBAD, BeeSpecies.TC_VIS, BeeSpecies.TC_HUNGRY, 20);
+			
 			new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.WINDY, BeeSpecies.TC_BATTY, 9);
 			new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.PUPIL, BeeSpecies.TC_BRAINY, 9);
 			new BeeMutation(BeeSpecies.ETHEREAL, BeeSpecies.GHASTLY, BeeSpecies.TC_WISPY, 9)
@@ -435,7 +448,7 @@ public class BeeMutation implements IBeeMutation {
 					blockMeta = housing.getWorld().getBlockMetadata(housing.getXCoord(), housing.getYCoord() - i, housing.getZCoord());
 					++i;
 				}
-				while (blockBelow != null && (blockBelow instanceof IBeeHousing || blockBelow == Config.fAlvearyBlock));
+				while (blockBelow != null && (blockBelow instanceof IBeeHousing || blockBelow == ForestryHelper.alvearyBlock));
 				
 				if (this.requiredBlockOreDictEntry != null) {
 					int[] dicId = OreDictionary.getOreIDs(new ItemStack(blockBelow, 1, blockMeta));
