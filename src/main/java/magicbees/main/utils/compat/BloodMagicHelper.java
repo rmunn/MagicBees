@@ -66,7 +66,7 @@ public class BloodMagicHelper
 	public static void getBlocks()
 	{
 		bloodStoneBrick = BlockInterface.getBlock(Name, "bloodStoneBrick");
-		masterRitualStone = BlockInterface.getBlock(Name, "blockMasterStone");
+		masterRitualStone = BlockInterface.getBlock(Name, "masterStone");
 	}
 
 	public static void getItems()
