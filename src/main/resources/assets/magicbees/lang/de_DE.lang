@@ -483,7 +483,7 @@ magicbees.species.description=
 magicbees.speedBlinding=Blendend
 
 magicbees.effectCurative=Reinigen
-binniecore.allele.magicbees.effectCurative.desc=Erschaft willkürlich(e) Wölfe
+binniecore.allele.magicbees.effectCurative.desc=Entfernt negative Effekte von Spielern
 magicbees.effectDigSpeed=Buddeln
 binniecore.allele.magicbees.effectDigSpeed.desc=Lässt Spieler schneller graben
 magicbees.effectMoveSpeed=Schnelligkeit
