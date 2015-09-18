@@ -472,7 +472,12 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			TC_ORDER.setInactive();
 
 			TC_VIS.setInactive();
+			TC_REJUVENATING.setInactive();
+			TC_EMPOWERING.setInactive();
+			TC_NEXUS.setInactive();
+			TC_TAINT.setInactive();
 			TC_PURE.setInactive();
+			TC_HUNGRY.setInactive();
 
 			TC_BRAINY.setInactive();
 			TC_BATTY.setInactive();
@@ -482,10 +487,6 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			
 			TC_WISPY.setInactive();
 		}
-		// These species should be fixed. ¯\_(ツ)_/¯
-		TC_TAINT.setInactive();
-		TC_EMPOWERING.setInactive();
-		//TC_REJUVENATING.setInactive();
 
 		BeeProductHelper.initEquivalentExchange3Species();
 		if (!EquivalentExchangeHelper.isActive()) {

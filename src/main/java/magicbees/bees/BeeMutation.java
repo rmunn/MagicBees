@@ -553,7 +553,7 @@ public class BeeMutation implements IBeeMutation {
 			}
 			else if (this.requiredBlockOreDictEntry != null) {
 				ArrayList<ItemStack> ores = OreDictionary.getOres(this.requiredBlockOreDictEntry);
-				if (ores.size() > 0) {
+				if (ores != null && 0 < ores.size()) {
 					conditions.add(String.format(LocalizationManager.getLocalizedString("research.requiresBlock"), ores.get(0).getDisplayName()));
 				}
 			}

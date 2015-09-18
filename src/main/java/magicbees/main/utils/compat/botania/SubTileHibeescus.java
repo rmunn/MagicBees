@@ -9,10 +9,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.bees.BeeManager;
 import magicbees.main.utils.compat.BotaniaHelper;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.subtile.SubTileFunctional;
 import forestry.api.apiculture.EnumBeeType;
@@ -24,10 +26,16 @@ public class SubTileHibeescus extends SubTileFunctional {
 	private final int MANA_PER_OPERATION = 10000;
 	// Ticks per second * seconds per minute * real-time minutes
 	private final int OPERATION_TICKS_TIME = 20 * 60 * 15;
-	private final int RANGE = 1;
+	private final double RANGE = 0.75;
 	
 	private ItemStack beeSlot;
 	private long operationTicksRemaining;
+	private float manaCostRollover;
+
+	@Override
+	public int getColor() {
+		return 0xF94F4F;
+	}
 
 	@Override
 	public void onUpdate() {
@@ -36,19 +44,29 @@ public class SubTileHibeescus extends SubTileFunctional {
 			return;
 		}
 		
-		if (beeSlot != null && this.mana >= MANA_PER_OPERATION) {
+		if (beeSlot != null) {
 			progressOperation();
 		}
-		else if (beeSlot == null && this.supertile.getWorldObj().getTotalWorldTime() % 10 == 0 && redstoneSignal == 0) {
+		else if (beeSlot == null && isTimeToPickUpItem() && redstoneSignal == 0) {
 			findBeeItemToHold();
 		}
 	}
+
+	protected boolean isTimeToPickUpItem() {
+		return (this.supertile.getWorldObj().getTotalWorldTime() ^ supertile.xCoord ^ supertile.zCoord) % 11 == 0;
+	}
 	
 	private void progressOperation() {
-		operationTicksRemaining--;
-		
-		if (operationTicksRemaining <= 0) {
-			mana -= MANA_PER_OPERATION;
+		if (0 < operationTicksRemaining && 0 < this.mana) {
+			operationTicksRemaining--;
+			manaCostRollover += getManaPerOpTick();
+			if (1f <= manaCostRollover) {
+				int amount = (int)manaCostRollover;
+				mana -= amount;
+				manaCostRollover -= amount;
+			}
+		}
+		else if (operationTicksRemaining <= 0) {
 			IBee bee = BeeManager.beeRoot.getMember(beeSlot);
 			bee.setIsNatural(true);
 			EnumBeeType beeType = EnumBeeType.QUEEN;
@@ -56,17 +74,22 @@ public class SubTileHibeescus extends SubTileFunctional {
 				beeType = EnumBeeType.PRINCESS;
 			}
 			ItemStack outputStack = BeeManager.beeRoot.getMemberStack(bee, beeType.ordinal());
-			Random r = supertile.getWorldObj().rand;
-			EntityItem entity = new EntityItem(supertile.getWorldObj(),
-					supertile.xCoord - RANGE + r.nextInt(RANGE * 2 + 1), supertile.yCoord + 1, supertile.zCoord - RANGE + r.nextInt(RANGE * 2 + 1),
-					outputStack);
-			entity.motionX = 0;
-			entity.motionY = 0;
-			entity.motionZ = 0;
+			EntityItem entity = dropItemStackInRange(outputStack);
 			
 			supertile.getWorldObj().spawnEntityInWorld(entity);
 			beeSlot = null;
 		}
+	}
+
+	protected EntityItem dropItemStackInRange(ItemStack outputStack) {
+		Random r = supertile.getWorldObj().rand;
+		EntityItem entity = new EntityItem(supertile.getWorldObj(),
+				supertile.xCoord - RANGE + r.nextInt((int)(RANGE * 2 + 1)), supertile.yCoord + 1, supertile.zCoord - RANGE + r.nextInt((int)(RANGE * 2 + 1)),
+				outputStack);
+		entity.motionX = 0;
+		entity.motionY = 0;
+		entity.motionZ = 0;
+		return entity;
 	}
 	
 	private void findBeeItemToHold() {
@@ -76,12 +99,10 @@ public class SubTileHibeescus extends SubTileFunctional {
 		for (EntityItem itemEntity : items) {
 			ItemStack item = itemEntity.getEntityItem();
 			if (!itemEntity.isDead && isItemPrincessOrQueen(item)) {
-				beeSlot = itemEntity.getEntityItem();
-				itemEntity.setDead();
-				operationTicksRemaining = (long)(OPERATION_TICKS_TIME * BotaniaHelper.hibeescusTicksMultiplier);
-				if (operationTicksRemaining > 0) {
-					operationTicksRemaining += supertile.getWorldObj().rand.nextInt((int)(operationTicksRemaining * 0.02));
-				}
+				beeSlot = itemEntity.getEntityItem().copy();
+				beeSlot.stackSize = 1;
+				operationTicksRemaining = (long)(OPERATION_TICKS_TIME * BotaniaHelper.hibeescusTicksMultiplier) + supertile.getWorldObj().rand.nextInt(200);
+				manaCostRollover = 0f;
 				
 				// Princesses and Queens don't stack, but YOU NEVER KNOW.
 				item.stackSize -= 1;
@@ -94,7 +115,7 @@ public class SubTileHibeescus extends SubTileFunctional {
 			}
 		}
 	}
-	
+
 	private boolean isItemPrincessOrQueen(ItemStack stack) {
 		boolean isBee = BeeManager.beeRoot.isMember(stack, EnumBeeType.PRINCESS.ordinal()) 
 				|| BeeManager.beeRoot.isMember(stack, EnumBeeType.QUEEN.ordinal());
@@ -121,6 +142,7 @@ public class SubTileHibeescus extends SubTileFunctional {
 			beeSlot = ItemStack.loadItemStackFromNBT(itemTag);
 		}
 		operationTicksRemaining = cmp.getLong("operationTicks");
+		manaCostRollover = cmp.getFloat("manaRollover");
 	}
 
 	@Override
@@ -132,6 +154,7 @@ public class SubTileHibeescus extends SubTileFunctional {
 			cmp.setTag("slot", itemTag);	
 		}
 		cmp.setLong("operationTicks", operationTicksRemaining);
+		cmp.setFloat("manaRollover", manaCostRollover);
 	}
 
 	@Override
@@ -144,7 +167,15 @@ public class SubTileHibeescus extends SubTileFunctional {
 
 	@Override
 	public int getMaxMana() {
+		return getFinalOperationManaCost() / 20;
+	}
+
+	protected int getFinalOperationManaCost() {
 		return (int)(MANA_PER_OPERATION * BotaniaHelper.hibeescusManaCostMultiplier);
+	}
+	
+	protected float getManaPerOpTick() {
+		return getFinalOperationManaCost() / OPERATION_TICKS_TIME;
 	}
 
 	@Override

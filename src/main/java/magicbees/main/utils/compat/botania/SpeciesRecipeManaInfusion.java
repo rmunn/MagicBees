@@ -33,6 +33,7 @@ public class SpeciesRecipeManaInfusion extends RecipeManaInfusion {
 		IBee bee = BeeManager.beeRoot.getMember(stack);
 		if (bee.getGenome().getPrimary().equals(inputSpecies)) {
 			outputCache = ForestryHelper.replaceSpecies(stack, outputSpecies);
+			outputCache.stackSize = 1;
 			return true;
 		}
 
