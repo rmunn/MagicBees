@@ -269,6 +269,7 @@ public class BeeProductHelper {
 		TC_CHICKEN.addProduct(ForestryHelper.itemHoneycomb, 0.10f);
 		TC_BEEF.addProduct(ForestryHelper.itemHoneycomb, 0.10f);
 		TC_PORK.addProduct(ForestryHelper.itemHoneycomb, 0.10f);
+		TC_VOID.addProduct(ForestryHelper.itemHoneycomb, 0.10f);
 		
 		if (ThaumcraftHelper.isActive()) {
 			SCHOLARLY.addSpecialty(Config.miscResources.getStackForType(ResourceType.LORE_FRAGMENT), 0.2f);
