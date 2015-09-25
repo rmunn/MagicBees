@@ -974,6 +974,15 @@ public class BeeGenomeManager {
 		
 		return genome;
 	}
+
+	public static IAllele[] getTemplaceTCVoid() {
+		IAllele[] genome = getTemplateBaseMetallic();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_VOID;
+		genome[EnumBeeChromosome.TEMPERATURE_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceUp1");
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.getBaseAllele("effectGlacial");
+		
+		return genome;	}
 	
 	private static IAllele[] getTemplateEEBase() {
 		IAllele[] genome = getTemplateModBase();
@@ -988,6 +997,7 @@ public class BeeGenomeManager {
 		IAllele[] genome = getTemplateEEBase();
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.EE_MINIUM;
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.effectTransmuting;
 		
 		return genome;
 	}

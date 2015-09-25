@@ -20,8 +20,8 @@ public class AlleleEffectRecharge extends AlleleEffect {
 
 	@Override
 	public IEffectData validateStorage(IEffectData storedData) {
-		if (storedData == null || !(storedData instanceof magicbees.bees.EffectData)) {
-			storedData = new magicbees.bees.EffectData(1, 0, 0);
+		if (storedData == null || !(storedData instanceof magicbees.bees.allele.effect.EffectData)) {
+			storedData = new magicbees.bees.allele.effect.EffectData(1, 0, 0);
 		}
 		return storedData;
 	}

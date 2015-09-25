@@ -226,6 +226,8 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			0x40221A, 0xAC6753, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
 	TC_PORK("TCPork", "porcina", BeeClassification.FLESHY,
 			0x725D2F, 0xD2BF93, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+	TC_VOID("TCVoid", "obscurus", BeeClassification.METALLIC,
+			0x180A29, 0x4B2A74, EnumTemperature.ICY, EnumHumidity.NORMAL, false, false),
 
 	// --------- Equivalent Exchange Bees -----------------------------------------------------------------------------	
 	EE_MINIUM("EEMinium", "mutabilis", BeeClassification.ALCHEMICAL,
@@ -422,6 +424,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		TC_CHICKEN.registerGenomeTemplate(BeeGenomeManager.getTemplateTCChicken());
 		TC_BEEF.registerGenomeTemplate(BeeGenomeManager.getTemplateTCBeef());
 		TC_PORK.registerGenomeTemplate(BeeGenomeManager.getTemplateTCPork());
+		TC_VOID.registerGenomeTemplate(BeeGenomeManager.getTemplaceTCVoid());
 		EE_MINIUM.registerGenomeTemplate(BeeGenomeManager.getTemplateEEMinium());
 		AM_ESSENCE.registerGenomeTemplate(BeeGenomeManager.getTemplateAMEssence());
 		AM_QUINTESSENCE.registerGenomeTemplate(BeeGenomeManager.getTemplateAMQuintessence());
@@ -486,6 +489,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			TC_PORK.setInactive();
 			
 			TC_WISPY.setInactive();
+			TC_VOID.setInactive();
 		}
 
 		BeeProductHelper.initEquivalentExchange3Species();

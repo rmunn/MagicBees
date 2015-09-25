@@ -7,8 +7,9 @@ import magicbees.main.utils.LocalizationManager;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
+import thaumcraft.api.nodes.INode;
 import forestry.api.genetics.IFlower;
 import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.IPollinatable;
@@ -25,8 +26,9 @@ public class FlowerProviderAuraNode extends FlowerProvider {
 	public boolean isAcceptedFlower(World world, IIndividual genome, int x, int y, int z) {
 		Block block = world.getBlock(x, y, z);
 		int meta = world.getBlockMetadata(x, y, z);
-		for (IFlower flower : flowers) {
-			if (flower.getBlock() == block && (flower.getMeta() == OreDictionary.WILDCARD_VALUE || flower.getMeta() == meta)) {
+		if (block.hasTileEntity(meta)) {
+			TileEntity tileEntity = world.getTileEntity(x, y, z);
+			if (tileEntity instanceof INode) {
 				return true;
 			}
 		}

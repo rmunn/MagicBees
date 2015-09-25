@@ -267,6 +267,10 @@ public class BeeMutation implements IBeeMutation {
 					.setBiomeRequired(Type.PLAINS);
 			new BeeMutation(Allele.getBaseSpecies("Common"), BeeSpecies.SKULKING, BeeSpecies.TC_PORK, 12)
 					.setBiomeRequired(Type.MOUNTAIN);
+			
+			new BeeMutation(BeeSpecies.IRON, BeeSpecies.TC_TAINT, BeeSpecies.TC_VOID, 5)
+					.setBiomeRequired(Type.MAGICAL)
+					.setRequiresNight();
 		}
 		
 		if (ArsMagicaHelper.isActive()) {
@@ -554,16 +558,17 @@ public class BeeMutation implements IBeeMutation {
 			else if (this.requiredBlockOreDictEntry != null) {
 				ArrayList<ItemStack> ores = OreDictionary.getOres(this.requiredBlockOreDictEntry);
 				if (ores != null && 0 < ores.size()) {
-					conditions.add(String.format(LocalizationManager.getLocalizedString("research.requiresBlock"), ores.get(0).getDisplayName()));
+					String displayName = ores.get(0).getDisplayName();
+					conditions.add(String.format(LocalizationManager.getLocalizedString("research.requiresBlock"), displayName));
 				}
 			}
-			else {
+			else if (this.requiredBlock != null) {
 				int meta = OreDictionary.WILDCARD_VALUE;
 				if (this.requiredBlockMeta != OreDictionary.WILDCARD_VALUE) {
 					meta = this.requiredBlockMeta;
 				}
-				conditions.add(String.format(LocalizationManager.getLocalizedString("research.requiresBlock"),
-						new ItemStack(this.requiredBlock, 1, meta).getDisplayName()));
+				String displayName = new ItemStack(this.requiredBlock, 1, meta).getDisplayName();
+				conditions.add(String.format(LocalizationManager.getLocalizedString("research.requiresBlock"), displayName));
 			}
 		}
 		

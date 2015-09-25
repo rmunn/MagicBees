@@ -1,4 +1,4 @@
-package magicbees.bees;
+package magicbees.bees.allele.effect;
 
 import net.minecraft.nbt.NBTTagCompound;
 import forestry.api.genetics.IEffectData;

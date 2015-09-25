@@ -3,7 +3,6 @@ package magicbees.bees.allele.effect;
 import java.util.List;
 
 import magicbees.bees.AlleleEffect;
-import magicbees.bees.EffectData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;

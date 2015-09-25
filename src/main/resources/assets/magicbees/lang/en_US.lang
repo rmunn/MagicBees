@@ -385,6 +385,9 @@ magicbees.speciesTCPure=Pure
 magicbees.speciesTCPure.description="It's like a bee janitor!"|MysteriousAges, Thaumaturge
 magicbees.speciesTCHungry=Ravening
 magicbees.speciesTCHungry.description=It is unknown how the bees take raw essence from the nodes and what they do with it, but the process eventually transforms the node into a terrifying vortex.|Apinomicon
+magicbees.speciesTCVoid=Void
+# Description is gibberish; don't bother translating. <3
+magicbees.speciesTCVoid.description=§kNeque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit|?????
 magicbees.speciesTCBrainy=Brainy
 magicbees.speciesTCBrainy.description=Their combs may be fetid and foul-smelling, but their intelligence is well-developed.|Apinomicon
 magicbees.speciesTCWispy=Wispy

@@ -285,6 +285,7 @@ public class BeeProductHelper {
 			TC_CHICKEN.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetChicken, 1), 0.9f);
 			TC_BEEF.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetBeef, 1), 0.9f);
 			TC_PORK.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetPork, 1), 0.9f);
+			TC_VOID.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetMetal, 1, ThaumcraftHelper.NuggetType.VOID_METAL.ordinal()), 0.155f);
 		}
 	}
 	

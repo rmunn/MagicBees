@@ -3,7 +3,6 @@ package magicbees.bees.allele.effect;
 import java.util.List;
 
 import magicbees.bees.AlleleEffect;
-import magicbees.bees.EffectData;
 import magicbees.item.ItemArmorApiarist;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -39,7 +38,7 @@ public class AlleleEffectSpawnMob extends AlleleEffect {
 
 	@Override
 	public IEffectData validateStorage(IEffectData storedData) {
-		if (storedData == null || !(storedData instanceof magicbees.bees.EffectData)) {
+		if (storedData == null || !(storedData instanceof magicbees.bees.allele.effect.EffectData)) {
 			// Throttle; Ready to spawn
 			storedData = new EffectData(1, 1, 0);
 		}

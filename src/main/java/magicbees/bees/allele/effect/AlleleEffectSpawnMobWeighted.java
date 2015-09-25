@@ -1,7 +1,6 @@
 package magicbees.bees.allele.effect;
 
 import magicbees.bees.AlleleEffect;
-import magicbees.bees.EffectData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -25,7 +24,7 @@ public class AlleleEffectSpawnMobWeighted extends AlleleEffect {
 
 	@Override
 	public IEffectData validateStorage(IEffectData storedData) {
-		if (storedData == null || !(storedData instanceof magicbees.bees.EffectData)) {
+		if (storedData == null || !(storedData instanceof magicbees.bees.allele.effect.EffectData)) {
 			storedData = new EffectData(1, 0, 0);
 		}
 		return storedData;

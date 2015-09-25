@@ -57,13 +57,15 @@ public class ThaumcraftHelper {
 		LEAD,
 		QUICKSILVER,
 		THAUMIUM,
-		_7, _8, _9, _10, _11, _12, _13, _14, _15,
+		VOID_METAL,
+		_8, _9, _10, _11, _12, _13, _14, _15,
 		NATIVE_IRON,
 		NATIVE_COPPER,
 		NATIVE_TIN,
 		NATIVE_SILVER,
 		NATIVE_LEAD,
-		_21, _22, _23, _24, _25, _26, _27, _28, _29, _30,
+		NATIVE_CINNABAR,
+		_22, _23, _24, _25, _26, _27, _28, _29, _30,
 		NATIVE_GOLD,
 		;
 	}
@@ -174,10 +176,8 @@ public class ThaumcraftHelper {
 
 	public static Item filledJar;
 	public static Item miscResource;
-	//public static Item tcEssentiaBottle;
 	public static Item shard;
 	public static Item golem;
-	//public static Item tcWispEssence;
 	public static Item nuggetMetal;
 	public static Item nuggetChicken;
 	public static Item nuggetBeef;
