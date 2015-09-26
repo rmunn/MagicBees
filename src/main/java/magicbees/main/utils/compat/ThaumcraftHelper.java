@@ -33,7 +33,8 @@ import thaumcraft.api.research.ResearchCategories;
 import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
 
-public class ThaumcraftHelper {
+public class ThaumcraftHelper implements IModHelper {
+	
 	public enum MiscResource {
 		ALUMENTUM,
 		NITOR,
@@ -192,7 +193,7 @@ public class ThaumcraftHelper {
 		return isThaumcraftPresent;
 	}
 
-	public static void preInit() {
+	public void preInit() {
 		if (Loader.isModLoaded(Name) && Config.thaumcraftActive) {
 			isThaumcraftPresent = true;
 			aspectTime = new Aspect("tempus", 0xB68CFF, new Aspect[] {
@@ -212,14 +213,14 @@ public class ThaumcraftHelper {
 		}
 	}
 
-	public static void init() {
+	public void init() {
 		if (isActive()) {
 			getBlocks();
 			getItems();
 		}
 	}
 
-	public static void postInit() {
+	public void postInit() {
 		if (isActive()) {
 			setupItemAspects();
 			setupCrafting();

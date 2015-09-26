@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class AppliedEnergisticsHelper {
+public class AppliedEnergisticsHelper implements IModHelper {
 	
 	public static Block skystone;
 	
@@ -16,19 +16,19 @@ public class AppliedEnergisticsHelper {
 		return isModActive;
 	}
 
-	public static void preInit() {
+	public void preInit() {
 		if (Loader.isModLoaded(Name) && Config.ae2Active) {
 			isModActive = true;
 		}
 	}
 	
-	public static void init() {
+	public void init() {
 		if (isActive()) {
 			skystone = GameRegistry.findBlock(Name, "tile.BlockSkyStone");
 		}
 	}
 	
-	public static void postInit() {
+	public void postInit() {
 		/*if (isActive()) {
 		}*/
 	}

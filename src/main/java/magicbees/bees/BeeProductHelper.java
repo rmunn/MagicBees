@@ -294,7 +294,7 @@ public class BeeProductHelper {
 		EE_MINIUM.addProduct(Config.combs.getStackForType(CombType.OCCULT), 0.16f);
 		
 		if (EquivalentExchangeHelper.isActive()) {
-			EE_MINIUM.addSpecialty(new ItemStack(Config.eeMinuimShard), 0.6f);
+			EE_MINIUM.addSpecialty(new ItemStack(EquivalentExchangeHelper.minuimShard), 0.6f);
 		}
 	}
 	
@@ -314,17 +314,17 @@ public class BeeProductHelper {
 			.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.10f);
 		
 		if (ArsMagicaHelper.isActive()) {
-			AM_QUINTESSENCE.addSpecialty(new ItemStack(Config.amItemResource, 1, ArsMagicaHelper.ResourceType.ARCANE_COMPOUND.ordinal()), 0.5f);
-			AM_EARTH.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.EARTH.ordinal()), 0.7f);
-			AM_AIR.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.AIR.ordinal()), 0.7f);
-			AM_FIRE.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.FIRE.ordinal()), 0.7f);
-			AM_WATER.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.WATER.ordinal()), 0.7f);
-			AM_LIGHTNING.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.LIGHTNING.ordinal()), 0.7f);
-			AM_PLANT.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.PLANT.ordinal()), 0.7f);
-			AM_ICE.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.ICE.ordinal()), 0.7f);
-			AM_ARCANE.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.ARCANE.ordinal()), 0.11f);
-			AM_VORTEX.addSpecialty(new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.EARTH.ordinal()), 0.15f);
-			AM_WIGHT.addSpecialty(new ItemStack(Config.amItemResource, 1, ArsMagicaHelper.ResourceType.ARCANE_COMPOUND.ordinal()), 0.11f);
+			AM_QUINTESSENCE.addSpecialty(new ItemStack(ArsMagicaHelper.itemResource, 1, ArsMagicaHelper.ResourceType.ARCANE_COMPOUND.ordinal()), 0.5f);
+			AM_EARTH.addSpecialty(new ItemStack(ArsMagicaHelper.essence, 1, ArsMagicaHelper.EssenceType.EARTH.ordinal()), 0.7f);
+			AM_AIR.addSpecialty(new ItemStack(ArsMagicaHelper.essence, 1, ArsMagicaHelper.EssenceType.AIR.ordinal()), 0.7f);
+			AM_FIRE.addSpecialty(new ItemStack(ArsMagicaHelper.essence, 1, ArsMagicaHelper.EssenceType.FIRE.ordinal()), 0.7f);
+			AM_WATER.addSpecialty(new ItemStack(ArsMagicaHelper.essence, 1, ArsMagicaHelper.EssenceType.WATER.ordinal()), 0.7f);
+			AM_LIGHTNING.addSpecialty(new ItemStack(ArsMagicaHelper.essence, 1, ArsMagicaHelper.EssenceType.LIGHTNING.ordinal()), 0.7f);
+			AM_PLANT.addSpecialty(new ItemStack(ArsMagicaHelper.essence, 1, ArsMagicaHelper.EssenceType.PLANT.ordinal()), 0.7f);
+			AM_ICE.addSpecialty(new ItemStack(ArsMagicaHelper.essence, 1, ArsMagicaHelper.EssenceType.ICE.ordinal()), 0.7f);
+			AM_ARCANE.addSpecialty(new ItemStack(ArsMagicaHelper.essence, 1, ArsMagicaHelper.EssenceType.ARCANE.ordinal()), 0.11f);
+			AM_VORTEX.addSpecialty(new ItemStack(ArsMagicaHelper.essence, 1, ArsMagicaHelper.EssenceType.EARTH.ordinal()), 0.15f);
+			AM_WIGHT.addSpecialty(new ItemStack(ArsMagicaHelper.itemResource, 1, ArsMagicaHelper.ResourceType.ARCANE_COMPOUND.ordinal()), 0.11f);
 		}
 	}
 	
@@ -354,12 +354,12 @@ public class BeeProductHelper {
 		
 		if (ThermalModsHelper.isActive()) {
 			LogHelper.info("Thermal Expansion bees active");
-			TE_BLIZZY.addSpecialty(ThermalModsHelper.teDustBlizz, 0.9f);
-			TE_GELID.addSpecialty(ThermalModsHelper.teDustCryotheum, 0.9f);
-			TE_DANTE.addSpecialty(ThermalModsHelper.teDustSulfur, 0.9f);
-			TE_PYRO.addSpecialty(ThermalModsHelper.teDustPyrotheum, 0.9f);
-			TE_WINSOME.addSpecialty(ThermalModsHelper.teDustPlatinum, 0.9f);
-			TE_ENDEARING.addSpecialty(ThermalModsHelper.teEnderiumNugget, 0.9f);
+			TE_BLIZZY.addSpecialty(ThermalModsHelper.dustBlizz, 0.9f);
+			TE_GELID.addSpecialty(ThermalModsHelper.dustCryotheum, 0.9f);
+			TE_DANTE.addSpecialty(ThermalModsHelper.dustSulfur, 0.9f);
+			TE_PYRO.addSpecialty(ThermalModsHelper.dustPyrotheum, 0.9f);
+			TE_WINSOME.addSpecialty(ThermalModsHelper.dustPlatinum, 0.9f);
+			TE_ENDEARING.addSpecialty(ThermalModsHelper.enderiumNugget, 0.9f);
 		}
 	}
 	

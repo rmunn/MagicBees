@@ -10,7 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public class ThermalModsHelper {
+public class ThermalModsHelper implements IModHelper {
 	
 	public enum MiscResource {
 		EnderiumBlock,
@@ -32,7 +32,10 @@ public class ThermalModsHelper {
 	}
 
 	public enum Entity {
-		BLIZZ("Blizz"),;
+		BLIZZ("Blizz"),
+		BLITZ("Blitz"),
+		BASALZ("Basalz"),
+		;
 
 		public final String entityID;
 
@@ -43,26 +46,30 @@ public class ThermalModsHelper {
 	}
 
 	//---ThermalExpansion Items ---
-	public static ItemStack teEnderiumBlock;
-	public static ItemStack teElectrumBlock;
-	public static ItemStack teInvarBlock;
-	public static ItemStack teNickelBlock;
-	public static ItemStack tePlatinumBlock;
-	public static ItemStack teBronzeBlock;
-	public static ItemStack teEnderiumNugget;
-	public static ItemStack teInvarNugget;
-	public static ItemStack teElectrumNugget;
-	public static ItemStack teNickelNugget;
-	public static ItemStack tePlatinumNugget;
-	public static ItemStack teDustCryotheum;
-	public static ItemStack teDustBlizz;
-	public static ItemStack teDustPyrotheum;
-	public static ItemStack teDustSulfur;
-	public static ItemStack teDustPlatinum;
-	public static FluidStack teFluidGlowstone;
-	public static FluidStack teFluidCoal;
-	public static FluidStack teFluidRedstone;
-	public static FluidStack teFluidEnder;
+	public static ItemStack enderiumBlock;
+	public static ItemStack electrumBlock;
+	public static ItemStack invarBlock;
+	public static ItemStack nickelBlock;
+	public static ItemStack platinumBlock;
+	public static ItemStack bronzeBlock;
+	public static ItemStack enderiumNugget;
+	public static ItemStack invarNugget;
+	public static ItemStack electrumNugget;
+	public static ItemStack nickelNugget;
+	public static ItemStack platinumNugget;
+	public static ItemStack dustCryotheum;
+	public static ItemStack dustBlizz;
+	public static ItemStack dustPyrotheum;
+	public static ItemStack dustBlitz;
+	public static ItemStack dustAerotheum;
+	public static ItemStack dustBasalz;
+	public static ItemStack dustPetrotheum;
+	public static ItemStack dustSulfur;
+	public static ItemStack dustPlatinum;
+	public static FluidStack fluidGlowstone;
+	public static FluidStack fluidCoal;
+	public static FluidStack fluidRedstone;
+	public static FluidStack fluidEnder;
 	
 	public static final String Name = "ThermalExpansion";
 	private static boolean isThermalExpansionPresent = false;
@@ -71,13 +78,13 @@ public class ThermalModsHelper {
 		return isThermalExpansionPresent;
 	}
 
-	public static void preInit() {
+	public void preInit() {
 		if (Loader.isModLoaded(Name) && Config.thermalExpansionActive) {
 			isThermalExpansionPresent = true;
 		}
 	}
 
-	public static void init() {
+	public void init() {
 		if (isActive()) {
 			getBlocks();
 			getItems();
@@ -86,37 +93,41 @@ public class ThermalModsHelper {
 		}
 	}
 
-	public static void postInit() {
+	public void postInit() {
 		// if (isActive()) { }
 	}
 
 	private static void getFluids() {
-		teFluidGlowstone = FluidRegistry.getFluidStack("glowstone", 50);
-		teFluidCoal = FluidRegistry.getFluidStack("coal", 50);
-		teFluidRedstone = FluidRegistry.getFluidStack("redstone", 50);
-		teFluidEnder = FluidRegistry.getFluidStack("ender", 50);
+		fluidGlowstone = FluidRegistry.getFluidStack("glowstone", 50);
+		fluidCoal = FluidRegistry.getFluidStack("coal", 50);
+		fluidRedstone = FluidRegistry.getFluidStack("redstone", 50);
+		fluidEnder = FluidRegistry.getFluidStack("ender", 50);
 	}
 
 	private static void getBlocks() {
-		teEnderiumBlock = GameRegistry.findItemStack(Name, "blockEnderium", 1);
-		teElectrumBlock = GameRegistry.findItemStack(Name, "blockElectrum", 1);
-		teInvarBlock = GameRegistry.findItemStack(Name, "blockInvar", 1);
-		teNickelBlock = GameRegistry.findItemStack(Name, "blockNickel", 1);
-		tePlatinumBlock = GameRegistry.findItemStack(Name, "blockPlatinum", 1);
-		teBronzeBlock = GameRegistry.findItemStack(Name, "blockBronze", 1);
+		enderiumBlock = GameRegistry.findItemStack(Name, "blockEnderium", 1);
+		electrumBlock = GameRegistry.findItemStack(Name, "blockElectrum", 1);
+		invarBlock = GameRegistry.findItemStack(Name, "blockInvar", 1);
+		nickelBlock = GameRegistry.findItemStack(Name, "blockNickel", 1);
+		platinumBlock = GameRegistry.findItemStack(Name, "blockPlatinum", 1);
+		bronzeBlock = GameRegistry.findItemStack(Name, "blockBronze", 1);
 	}
 
 	private static void getItems() {
-		teEnderiumNugget = GameRegistry.findItemStack(Name, "nuggetEnderium", 1);
-		teInvarNugget = GameRegistry.findItemStack(Name, "nuggetInvar", 1);
-		teElectrumNugget = GameRegistry.findItemStack(Name, "nuggetElectrum", 1);
-		teNickelNugget = GameRegistry.findItemStack(Name, "nuggetNickel", 1);
-		tePlatinumNugget = GameRegistry.findItemStack(Name, "nuggetPlatinum", 1);
-		teDustCryotheum = GameRegistry.findItemStack(Name, "dustCryotheum", 1);
-		teDustBlizz = GameRegistry.findItemStack(Name, "dustBlizz", 1);
-		teDustPyrotheum = GameRegistry.findItemStack(Name, "dustPyrotheum", 1);
-		teDustSulfur = GameRegistry.findItemStack(Name, "dustSulfur", 1);
-		teDustPlatinum = GameRegistry.findItemStack(Name, "dustPlatinum", 1);
+		enderiumNugget = GameRegistry.findItemStack(Name, "nuggetEnderium", 1);
+		invarNugget = GameRegistry.findItemStack(Name, "nuggetInvar", 1);
+		electrumNugget = GameRegistry.findItemStack(Name, "nuggetElectrum", 1);
+		nickelNugget = GameRegistry.findItemStack(Name, "nuggetNickel", 1);
+		platinumNugget = GameRegistry.findItemStack(Name, "nuggetPlatinum", 1);
+		dustCryotheum = GameRegistry.findItemStack(Name, "dustCryotheum", 1);
+		dustBlizz = GameRegistry.findItemStack(Name, "dustBlizz", 1);
+		dustPyrotheum = GameRegistry.findItemStack(Name, "dustPyrotheum", 1);
+		dustBlitz = GameRegistry.findItemStack(Name, "dustBlitz", 1);
+		dustAerotheum = GameRegistry.findItemStack(Name, "dustAerotheum", 1);
+		dustBasalz = GameRegistry.findItemStack(Name, "dustBasalz", 1);
+		dustPetrotheum = GameRegistry.findItemStack(Name, "dustPetrotheum", 1);
+		dustSulfur = GameRegistry.findItemStack(Name, "dustSulfur", 1);
+		dustPlatinum = GameRegistry.findItemStack(Name, "dustPlatinum", 1);
 	}
 
 	private static void setupCrafting() {
@@ -126,7 +137,7 @@ public class ThermalModsHelper {
 		toSend.setTag("output", new NBTTagCompound());
 		ItemStack carbonDrop = Config.drops.getStackForType(DropType.CARBON);
 		carbonDrop.writeToNBT(toSend.getCompoundTag("input"));
-		teFluidCoal.writeToNBT(toSend.getCompoundTag("output"));
+		fluidCoal.writeToNBT(toSend.getCompoundTag("output"));
 		FMLInterModComms.sendMessage("ThermalExpansion", "CrucibleRecipe", toSend);
 
 
@@ -136,7 +147,7 @@ public class ThermalModsHelper {
 		toSend.setTag("output", new NBTTagCompound());
 		ItemStack destabilizedDrop = Config.drops.getStackForType(DropType.DESTABILIZED);
 		destabilizedDrop.writeToNBT(toSend.getCompoundTag("input"));
-		teFluidRedstone.writeToNBT(toSend.getCompoundTag("output"));
+		fluidRedstone.writeToNBT(toSend.getCompoundTag("output"));
 		FMLInterModComms.sendMessage("ThermalExpansion", "CrucibleRecipe", toSend);
 
 		toSend = new NBTTagCompound();
@@ -145,7 +156,7 @@ public class ThermalModsHelper {
 		toSend.setTag("output", new NBTTagCompound());
 		ItemStack endearingDrop = Config.drops.getStackForType(DropType.ENDEARING);
 		endearingDrop.writeToNBT(toSend.getCompoundTag("input"));
-		teFluidEnder.writeToNBT(toSend.getCompoundTag("output"));
+		fluidEnder.writeToNBT(toSend.getCompoundTag("output"));
 		FMLInterModComms.sendMessage("ThermalExpansion", "CrucibleRecipe", toSend);
 
 		toSend = new NBTTagCompound();
@@ -154,7 +165,7 @@ public class ThermalModsHelper {
 		toSend.setTag("output", new NBTTagCompound());
 		ItemStack luxDrop = Config.drops.getStackForType(DropType.LUX);
 		luxDrop.writeToNBT(toSend.getCompoundTag("input"));
-		teFluidGlowstone.writeToNBT(toSend.getCompoundTag("output"));
+		fluidGlowstone.writeToNBT(toSend.getCompoundTag("output"));
 		FMLInterModComms.sendMessage("ThermalExpansion", "CrucibleRecipe", toSend);
 	}
 }

@@ -1,11 +1,23 @@
 package magicbees.main.utils.compat;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import cpw.mods.fml.common.Loader;
 import magicbees.main.Config;
 import magicbees.main.utils.BlockInterface;
 import magicbees.main.utils.ItemInterface;
 
-public class ArsMagicaHelper {
+public class ArsMagicaHelper implements IModHelper {
+
+	public static Block resourceBlock;
+	public static Block blackOrchid;
+	public static Block desertNova;
+	public static Block aum;
+	public static Block wakebloom;
+	public static Block tarmaRoot;
+
+	public static Item itemResource;
+	public static Item essence;
 	
 	public enum ResourceType {
 		VINTEUM_DUST,
@@ -41,16 +53,16 @@ public class ArsMagicaHelper {
 		return isArsMagicaPresent;
 	}
 
-	public static void preInit() {
+	public void preInit() {
 		if (Loader.isModLoaded(Name) && Config.arsMagicaActive) {
 			isArsMagicaPresent = true;
 		}
 	}
 
-	public static void init() {
+	public void init() {
 	}
 
-	public static void postInit() {
+	public void postInit() {
 		if (isActive()) {
 			getBlocks();
 			getItems();
@@ -58,16 +70,16 @@ public class ArsMagicaHelper {
 	}
 
 	private static void getBlocks() {
-		Config.amResourceBlock = BlockInterface.getBlock(Name, "AMOres");
-		Config.amBlackOrchid = BlockInterface.getBlock(Name, "blueOrchid");
-		Config.amDesertNova = BlockInterface.getBlock(Name, "desertNova");
-		Config.amAum = BlockInterface.getBlock(Name, "aum");
-		Config.amWakebloom = BlockInterface.getBlock(Name, "wakebloom");
-		Config.amTarmaRoot = BlockInterface.getBlock(Name, "tarmaRoot");
+		ArsMagicaHelper.resourceBlock = BlockInterface.getBlock(Name, "AMOres");
+		ArsMagicaHelper.blackOrchid = BlockInterface.getBlock(Name, "blueOrchid");
+		ArsMagicaHelper.desertNova = BlockInterface.getBlock(Name, "desertNova");
+		ArsMagicaHelper.aum = BlockInterface.getBlock(Name, "aum");
+		ArsMagicaHelper.wakebloom = BlockInterface.getBlock(Name, "wakebloom");
+		ArsMagicaHelper.tarmaRoot = BlockInterface.getBlock(Name, "tarmaRoot");
 	}
 
 	private static void getItems() {
-		Config.amItemResource = ItemInterface.getItem(Name, "itemOre");
-		Config.amEssence = ItemInterface.getItem(Name, "essence");
+		ArsMagicaHelper.itemResource = ItemInterface.getItem(Name, "itemOre");
+		ArsMagicaHelper.essence = ItemInterface.getItem(Name, "essence");
 	}
 }

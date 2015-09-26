@@ -20,17 +20,15 @@ import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
 import forestry.api.genetics.IAllele;
 
-public class ForestryHelper
-{
-	public enum BlockResource
-	{
+public class ForestryHelper implements IModHelper {
+	
+	public enum BlockResource {
 		APATITE,
 		COPPER,
 		TIN,;
 	}
 
-	public enum CraftingMaterial
-	{
+	public enum CraftingMaterial {
 		PULSATING_DUST, // unused
 		PULSATING_MESH,
 		SILK_WISP,
@@ -40,8 +38,7 @@ public class ForestryHelper
 		SCENTED_PANELING,;
 	}
 
-	public enum Comb
-	{
+	public enum Comb {
 		HONEY,
 		COCOA,
 		SIMMERING,
@@ -60,30 +57,26 @@ public class ForestryHelper
 		MOSSY,;
 	}
 
-	public enum Propolis
-	{
+	public enum Propolis {
 		NORMAL,
 		STICKY, // Unused.
 		PULSATING,
 		SILKY,;
 	}
 
-	public enum Pollen
-	{
+	public enum Pollen {
 		NORMAL,
 		CRYSTALLINE,;
 	}
 
-	public enum CircuitBoard
-	{
+	public enum CircuitBoard {
 		BASIC,
 		ENHANCED,
 		REFINED,
 		INTRICATE,;
 	}
 
-	public enum Tube
-	{
+	public enum Tube {
 		COPPER,
 		TIN,
 		BRONZE,
@@ -119,8 +112,7 @@ public class ForestryHelper
 	public static Item craftingResource;
 	public static ItemStack itemHoneycomb;
 
-	public static void preInit()
-	{
+	public void preInit() {
 		IHiveRegistry hiveRegistry = HiveManager.hiveRegistry;
 		registerHive(hiveRegistry, HiveDescription.CURIOUS);
 		registerHive(hiveRegistry, HiveDescription.UNUSUAL);
@@ -129,11 +121,18 @@ public class ForestryHelper
 		registerHive(hiveRegistry, HiveDescription.INFERNAL);
 		registerHive(hiveRegistry, HiveDescription.OBLIVION);
 
-		if (Config.doSpecialHiveGen)
-		{
+		if (Config.doSpecialHiveGen) {
 			registerHive(hiveRegistry, HiveDescription.INFERNAL_OVERWORLD);
 			registerHive(hiveRegistry, HiveDescription.OBLIVION_OVERWORLD);
 		}
+	}
+
+	public void init() {
+		getBlocks();
+		getItems();
+	}
+
+	public void postInit() {
 	}
 
 	private static void registerHive(IHiveRegistry hiveRegistry, HiveDescription hiveDescription) {
@@ -141,25 +140,13 @@ public class ForestryHelper
 		hiveRegistry.registerHive(hiveName, hiveDescription);
 	}
 
-	public static void init()
-	{
-		getBlocks();
-		getItems();
-	}
-
-	public static void postInit()
-	{
-	}
-
-	private static void getBlocks()
-	{
+	private static void getBlocks() {
 		alvearyBlock = BlockInterface.getBlock("alveary");
 		hiveBlock = BlockInterface.getBlock("beehives");
 		apicultureBlock = BlockInterface.getBlock("apiculture");
 	}
 
-	private static void getItems()
-	{
+	private static void getItems() {
 		beeComb = ItemInterface.getItem("beeCombs");
 		pollen = ItemInterface.getItem("pollen");
 		ForestryHelper.craftingResource = ItemInterface.getItem("craftingMaterial");
@@ -170,18 +157,15 @@ public class ForestryHelper
 		itemHoneycomb = new ItemStack(beeComb, 1, Comb.HONEY.ordinal());
 	}
 
-	public static IAllele[] getTemplateForestryForSpecies(String speciesName)
-	{
+	public static IAllele[] getTemplateForestryForSpecies(String speciesName) {
 		return BeeManager.beeRoot.getTemplate("forestry.species" + speciesName);
 	}
 
-	public static EnumTemperature getEnumTemperatureFromValue(float rawTemp)
-	{
+	public static EnumTemperature getEnumTemperatureFromValue(float rawTemp) {
 		return EnumTemperature.getFromValue(rawTemp);
 	}
 
-	public static EnumHumidity getEnumHumidityFromValue(float rawHumidity)
-	{
+	public static EnumHumidity getEnumHumidityFromValue(float rawHumidity) {
 		return EnumHumidity.getFromValue(rawHumidity);
 	}
 

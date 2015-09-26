@@ -8,9 +8,7 @@ import magicbees.block.BlockEnchantedEarth;
 import magicbees.block.BlockHive;
 import magicbees.block.BlockMagicApiary;
 import magicbees.block.BlockManaAuraProvider;
-import magicbees.block.BlockPlanks;
 import magicbees.block.BlockVisAuraProvider;
-import magicbees.block.BlockWoodSlab;
 import magicbees.block.types.HiveType;
 import magicbees.item.ItemCapsule;
 import magicbees.item.ItemComb;
@@ -43,7 +41,6 @@ import magicbees.tileentity.TileEntityEffectJar;
 import magicbees.tileentity.TileEntityMagicApiary;
 import magicbees.tileentity.TileEntityManaAuraProvider;
 import magicbees.tileentity.TileEntityVisAuraProvider;
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -104,10 +101,7 @@ public class Config
 
 	public static boolean forestryDebugEnabled;
 
-	public static BlockPlanks planksWood;
 	public static BlockEnchantedEarth enchantedEarth;
-	public static BlockWoodSlab slabWoodHalf;
-	public static BlockWoodSlab slabWoodFull;
 	public static BlockEffectJar effectJar;
 	public static BlockHive hive;
     public static BlockMagicApiary magicApiary;
@@ -147,20 +141,6 @@ public class Config
 	public static Item thaumaturgeBackpackT2;
 	public static BackpackDefinition thaumaturgeBackpackDef;
 
-	//----- Equivalent Exchange Blocks -------------------------
-	//----- Equivalent Exchange Items --------------------------
-	public static Item eeMinuimShard;
-	//----- Ars Magica Blocks ----------------------------------
-	public static Block amResourceBlock;
-	public static Block amBlackOrchid;
-	public static Block amDesertNova;
-	public static Block amAum;
-	public static Block amWakebloom;
-	public static Block amTarmaRoot;
-	//----- Ars Magica Items -----------------------------------
-	public static Item amItemResource;
-	public static Item amEssence;
-	
 	//----- Config State info ----------------------------------
 	public static Configuration configuration;
 	

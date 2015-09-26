@@ -3,7 +3,7 @@ package magicbees.main.utils.compat;
 import magicbees.main.Config;
 import cpw.mods.fml.common.Loader;
 
-public class ExtraBeesHelper {
+public class ExtraBeesHelper implements IModHelper {
 	
 	public enum CombType {
 		BARREN,
@@ -96,16 +96,15 @@ public class ExtraBeesHelper {
 		return isEBPresent;
 	}
 
-	public static void preInit() {
-		if (Loader.isModLoaded("ExtraBees") && Config.extraBeesActive)
-		{
+	public void preInit() {
+		if (Loader.isModLoaded("ExtraBees") && Config.extraBeesActive) {
 			isEBPresent = true;
 		}
 	}
 
-	public static void init() {
+	public void init() {
 	}
 
-	public static void postInit() {
+	public void postInit() {
 	}
 }

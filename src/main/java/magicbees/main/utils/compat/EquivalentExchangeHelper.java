@@ -1,36 +1,40 @@
 package magicbees.main.utils.compat;
 
+import net.minecraft.item.Item;
 import magicbees.main.Config;
 import magicbees.main.utils.ItemInterface;
 import cpw.mods.fml.common.Loader;
 
-public class EquivalentExchangeHelper {
+public class EquivalentExchangeHelper implements IModHelper {
+
+	public static Item minuimShard;
+	
 	private static boolean isEquivalentExchangePresent = false;
 
 	public static boolean isActive() {
 		return isEquivalentExchangePresent;
 	}
 
-	public static void preInit() {
+	public void preInit() {
 		if (Loader.isModLoaded("EE3") && Config.equivalentExchangeActive) {
 			isEquivalentExchangePresent = true;
 		}
 	}
 
-	public static void init() {
+	public void init() {
 		if (isActive()) {
 			getBlocks();
 			getItems();
 		}
 	}
 
-	public static void postInit() {
+	public void postInit() {
 	}
 
 	private static void getBlocks() {
 	}
 
 	private static void getItems() {
-		Config.eeMinuimShard = ItemInterface.getItem("EE3", "miniumShard");
+		minuimShard = ItemInterface.getItem("EE3", "miniumShard");
 	}
 }

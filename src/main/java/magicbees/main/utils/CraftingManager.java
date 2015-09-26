@@ -394,11 +394,11 @@ public class CraftingManager {
 			input = ItemInterface.getItemStack("apatite");
 			output = Config.miscResources.getStackForType(ResourceType.EXTENDED_FERTILIZER, 4);
 			GameRegistry.addShapelessRecipe(output,
-					new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.EARTH.ordinal()),
+					new ItemStack(ArsMagicaHelper.essence, 1, ArsMagicaHelper.EssenceType.EARTH.ordinal()),
 					input, input
 			);
 			GameRegistry.addShapelessRecipe(output,
-					new ItemStack(Config.amEssence, 1, ArsMagicaHelper.EssenceType.PLANT.ordinal()),
+					new ItemStack(ArsMagicaHelper.essence, 1, ArsMagicaHelper.EssenceType.PLANT.ordinal()),
 					input, input
 			);
 		}
@@ -564,8 +564,8 @@ public class CraftingManager {
 		if (ArsMagicaHelper.isActive()) {
 			output = newMap();
 			output.put(Config.wax.getStackForType(WaxType.MAGIC),  0.85f);
-			output.put(new ItemStack(Config.amItemResource),  0.10f);
-			output.put(new ItemStack(Config.amItemResource),  0.024f);
+			output.put(new ItemStack(ArsMagicaHelper.itemResource),  0.10f);
+			output.put(new ItemStack(ArsMagicaHelper.itemResource),  0.024f);
 			RecipeManagers.centrifugeManager.addRecipe(20, Config.combs.getStackForType(CombType.AM_ESSENCE), output);
 			output = newMap();
 			output.put(ItemInterface.getItemStack("beeswax"),  0.5f);

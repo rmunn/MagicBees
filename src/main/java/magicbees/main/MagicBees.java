@@ -6,7 +6,7 @@ import magicbees.main.utils.CraftingManager;
 import magicbees.main.utils.IMCManager;
 import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.VersionInfo;
-import magicbees.main.utils.compat.ModHelper;
+import magicbees.main.utils.compat.ModHelperManager;
 import magicbees.main.utils.net.NetworkEventHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -45,7 +45,7 @@ public class MagicBees
 		FMLCommonHandler.instance().bus().register(modConfig);
 
 		// Compatibility Helpers setup time.
-		ModHelper.preInit();
+		ModHelperManager.preInit();
 			
 		this.modConfig.setupBlocks();
 		this.modConfig.setupItems();
@@ -56,7 +56,7 @@ public class MagicBees
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		ModHelper.init();
+		ModHelperManager.init();
 		LogHelper.info("Init completed");
 		
 		BeeManager.getBeeRoot();
@@ -66,7 +66,7 @@ public class MagicBees
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		ModHelper.postInit();
+		ModHelperManager.postInit();
 		
 		BeeManager.lateBeeInit();
 

@@ -5,7 +5,7 @@ import magicbees.main.utils.ItemInterface;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.Loader;
 
-public class RedstoneArsenalHelper {
+public class RedstoneArsenalHelper implements IModHelper {
 	public enum MiscResource {
 		FLUXED_ELECTRUMBLOCK, ;
 	}
@@ -24,17 +24,17 @@ public class RedstoneArsenalHelper {
 		return isRedstoneArsenalPresent;
 	}
 
-	public static void preInit() {
+	public void preInit() {
 		if (Loader.isModLoaded(Name) && Config.redstoneArsenalActive) {
 			isRedstoneArsenalPresent = true;
 		}
 	}
 
-	public static void init() {
+	public void init() {
 		// if (isActive()) { }
 	}
 
-	public static void postInit() {
+	public void postInit() {
 		if (isActive()) {
 			getBlocks();
 			getItems();

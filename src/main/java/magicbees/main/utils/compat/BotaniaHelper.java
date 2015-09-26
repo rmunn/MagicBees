@@ -24,7 +24,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BotaniaHelper {
+public class BotaniaHelper implements IModHelper {
 	
 	@SideOnly(Side.CLIENT)
 	public static IIcon subtileIcons[];
@@ -112,13 +112,13 @@ public class BotaniaHelper {
 		return isBotaniaActive;
 	}
 
-	public static void preInit() {
+	public void preInit() {
 		if (Loader.isModLoaded(Name) && Config.botaniaActive) {
 			isBotaniaActive = true;
 		}
 	}
 
-	public static void init() {
+	public void init() {
 		if (isActive()) {
 			getBlocks();
 			getItems();
@@ -127,7 +127,7 @@ public class BotaniaHelper {
 		}
 	}
 
-	public static void postInit() {
+	public void postInit() {
 		if (isActive()) {
 			// Hiveacynth would appreciate it if this list existed.
 			BeeManager.populateSpeciesListRarity();

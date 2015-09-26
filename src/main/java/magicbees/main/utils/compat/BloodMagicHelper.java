@@ -11,8 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import forestry.api.apiculture.EnumBeeType;
 
-public class BloodMagicHelper
-{
+public class BloodMagicHelper implements IModHelper {
 
 	//--- Blood Magic Blocks ---
 	public static Block bloodStoneBrick;
@@ -32,30 +31,24 @@ public class BloodMagicHelper
 	private static boolean isBloodMagicActive = false;
 	public static final String Name = "AWWayofTime";
 
-	public static boolean isActive()
-	{
+	public static boolean isActive() {
 		return isBloodMagicActive;
 	}
 
-	public static void preInit()
-	{
-		if (Loader.isModLoaded(Name) && Config.bloodMagicActive)
-		{
+	public void preInit() {
+		if (Loader.isModLoaded(Name) && Config.bloodMagicActive) {
 			isBloodMagicActive = true;
 		}
 	}
 
-	public static void init()
-	{
-		if (isActive())
-		{
+	public void init() {
+		if (isActive()) {
 			getBlocks();
 			getItems();
 		}
 	}
 
-	public static void postInit()
-	{
+	public void postInit() {
 		if (isActive()) {
 			// Disabled for now until we can figure out a better way to match these.
 			/*BloodMagicHelper.addAltarRecipeBee(BeeSpecies.MYSTICAL, BeeSpecies.BM_BLOODY, 1, 1000, 100, 100);	
@@ -63,14 +56,12 @@ public class BloodMagicHelper
 		}
 	}
 
-	public static void getBlocks()
-	{
+	public static void getBlocks() {
 		bloodStoneBrick = BlockInterface.getBlock(Name, "bloodStoneBrick");
 		masterRitualStone = BlockInterface.getBlock(Name, "masterStone");
 	}
 
-	public static void getItems()
-	{
+	public static void getItems() {
 		bloodShard = ItemInterface.getItemStack(Name, "weakBloodShard");
 		incendium = ItemInterface.getItemStack(Name, "incendium");
 		magicales = ItemInterface.getItemStack(Name, "magicales");
@@ -83,25 +74,21 @@ public class BloodMagicHelper
 		tennebrae = ItemInterface.getItemStack(Name, "tennebrae");
 	}
 
-	public static void addAltarRecipe(ItemStack requiredItem, ItemStack result, int minTier, int liquidRequired, int consumptionRate, int drainRate, boolean canBeFilled)
-	{
+	public static void addAltarRecipe(ItemStack requiredItem, ItemStack result, int minTier, int liquidRequired, int consumptionRate, int drainRate, boolean canBeFilled) {
 		AltarRecipeRegistry.registerAltarRecipe(result, requiredItem, minTier, liquidRequired, consumptionRate, drainRate, canBeFilled);
 	}
 
-	public static void addAltarRecipeBee(BeeSpecies inputBee, BeeSpecies outputBee, int minTier, int liquidRequired, int consumptionRate, int drainRate)
-	{
+	public static void addAltarRecipeBee(BeeSpecies inputBee, BeeSpecies outputBee, int minTier, int liquidRequired, int consumptionRate, int drainRate) {
 		addAltarRecipe(inputBee.getBeeItem(EnumBeeType.DRONE), outputBee.getBeeItem(EnumBeeType.DRONE), minTier, liquidRequired, consumptionRate, drainRate, false);
 		addAltarRecipe(inputBee.getBeeItem(EnumBeeType.PRINCESS), outputBee.getBeeItem(EnumBeeType.PRINCESS), minTier, liquidRequired, consumptionRate, drainRate, false);
 		addAltarRecipe(inputBee.getBeeItem(EnumBeeType.QUEEN), outputBee.getBeeItem(EnumBeeType.QUEEN), minTier, liquidRequired, consumptionRate, drainRate, false);
 	}
 
-	public static void addBindingRecipe(ItemStack input, ItemStack output)
-	{
+	public static void addBindingRecipe(ItemStack input, ItemStack output) {
 		BindingRegistry.registerRecipe(output, input);
 	}
 
-	public static void addBindingRecipeBee(BeeSpecies inputBee, BeeSpecies outputBee)
-	{
+	public static void addBindingRecipeBee(BeeSpecies inputBee, BeeSpecies outputBee) {
 		addBindingRecipe(inputBee.getBeeItem(EnumBeeType.DRONE), outputBee.getBeeItem(EnumBeeType.DRONE));
 		addBindingRecipe(inputBee.getBeeItem(EnumBeeType.PRINCESS), outputBee.getBeeItem(EnumBeeType.PRINCESS));
 		addBindingRecipe(inputBee.getBeeItem(EnumBeeType.QUEEN), outputBee.getBeeItem(EnumBeeType.QUEEN));
