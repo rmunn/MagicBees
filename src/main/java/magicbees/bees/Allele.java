@@ -26,7 +26,7 @@ import magicbees.main.utils.LocalizationManager;
 import magicbees.main.utils.compat.ArsMagicaHelper;
 import magicbees.main.utils.compat.BotaniaHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
-import magicbees.main.utils.compat.ThermalExpansionHelper;
+import magicbees.main.utils.compat.ThermalModsHelper;
 import net.minecraft.potion.Potion;
 import forestry.api.apiculture.IAlleleBeeEffect;
 import forestry.api.apiculture.IAlleleBeeSpecies;
@@ -133,8 +133,8 @@ public class Allele implements IAllele {
 			Allele.spawnManaDrainer = Allele.spawnWispOrHecate = (IAlleleEffect) Allele.getBaseAllele("effectNone");
 		}
 
-		if (ThermalExpansionHelper.isActive()) {
-			Allele.spawnBlizz = new AlleleEffectSpawnMob("TEBlizzy", true, ThermalExpansionHelper.Entity.BLIZZ.entityID)
+		if (ThermalModsHelper.isActive()) {
+			Allele.spawnBlizz = new AlleleEffectSpawnMob("TEBlizzy", true, ThermalModsHelper.Entity.BLIZZ.entityID)
 				.setThrottle(100)
 				.setChanceToSpawn(80);
 		} else {

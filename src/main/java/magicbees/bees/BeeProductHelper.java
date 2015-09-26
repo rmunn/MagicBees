@@ -15,7 +15,7 @@ import magicbees.main.utils.compat.EquivalentExchangeHelper;
 import magicbees.main.utils.compat.ForestryHelper;
 import magicbees.main.utils.compat.RedstoneArsenalHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
-import magicbees.main.utils.compat.ThermalExpansionHelper;
+import magicbees.main.utils.compat.ThermalModsHelper;
 import magicbees.main.utils.compat.BotaniaHelper.PastureSeed;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -352,14 +352,14 @@ public class BeeProductHelper {
 		TE_BLIZZY.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.FROZEN.ordinal()), 0.10f);
 		TE_GELID.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.FROZEN.ordinal()), 0.10f);
 		
-		if (ThermalExpansionHelper.isActive()) {
+		if (ThermalModsHelper.isActive()) {
 			LogHelper.info("Thermal Expansion bees active");
-			TE_BLIZZY.addSpecialty(Config.teDustBlizz, 0.9f);
-			TE_GELID.addSpecialty(Config.teDustCryotheum, 0.9f);
-			TE_DANTE.addSpecialty(Config.teDustSulfur, 0.9f);
-			TE_PYRO.addSpecialty(Config.teDustPyrotheum, 0.9f);
-			TE_WINSOME.addSpecialty(Config.teDustPlatinum, 0.9f);
-			TE_ENDEARING.addSpecialty(Config.teEnderiumNugget, 0.9f);
+			TE_BLIZZY.addSpecialty(ThermalModsHelper.teDustBlizz, 0.9f);
+			TE_GELID.addSpecialty(ThermalModsHelper.teDustCryotheum, 0.9f);
+			TE_DANTE.addSpecialty(ThermalModsHelper.teDustSulfur, 0.9f);
+			TE_PYRO.addSpecialty(ThermalModsHelper.teDustPyrotheum, 0.9f);
+			TE_WINSOME.addSpecialty(ThermalModsHelper.teDustPlatinum, 0.9f);
+			TE_ENDEARING.addSpecialty(ThermalModsHelper.teEnderiumNugget, 0.9f);
 		}
 	}
 	

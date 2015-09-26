@@ -18,7 +18,7 @@ import magicbees.main.utils.compat.EquivalentExchangeHelper;
 import magicbees.main.utils.compat.ForestryHelper;
 import magicbees.main.utils.compat.RedstoneArsenalHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
-import magicbees.main.utils.compat.ThermalExpansionHelper;
+import magicbees.main.utils.compat.ThermalModsHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -514,7 +514,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		}
 
 		BeeProductHelper.initThermalExpansionProducts();
-		if (!ThermalExpansionHelper.isActive()) {
+		if (!ThermalModsHelper.isActive()) {
 			TE_BLIZZY.setInactive();
 			TE_GELID.setInactive();
 			TE_DANTE.setInactive();

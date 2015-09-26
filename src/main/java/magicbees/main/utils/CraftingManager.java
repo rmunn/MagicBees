@@ -17,7 +17,7 @@ import magicbees.main.utils.compat.ArsMagicaHelper;
 import magicbees.main.utils.compat.BloodMagicHelper;
 import magicbees.main.utils.compat.ForestryHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
-import magicbees.main.utils.compat.ThermalExpansionHelper;
+import magicbees.main.utils.compat.ThermalModsHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -581,7 +581,7 @@ public class CraftingManager {
 			RecipeManagers.centrifugeManager.addRecipe(20, Config.combs.getStackForType(CombType.BM_SANGUINE), output);
 		}
 		
-		if (ThermalExpansionHelper.isActive()) {
+		if (ThermalModsHelper.isActive()) {
 			output = newMap();
 			output.put(Config.wax.getStackForType(WaxType.MAGIC),  0.55f);
 			output.put(Config.drops.getStackForType(DropType.DESTABILIZED),  0.22f);

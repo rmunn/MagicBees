@@ -15,7 +15,7 @@ import magicbees.main.utils.compat.ExtraBeesHelper;
 import magicbees.main.utils.compat.ForestryHelper;
 import magicbees.main.utils.compat.RedstoneArsenalHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
-import magicbees.main.utils.compat.ThermalExpansionHelper;
+import magicbees.main.utils.compat.ThermalModsHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -309,7 +309,7 @@ public class BeeMutation implements IBeeMutation {
 					.setBlockRequired("blockElectrumFlux");
 		}
 		
-		if (ThermalExpansionHelper.isActive()) {
+		if (ThermalModsHelper.isActive()) {
 			new BeeMutation(BeeSpecies.TIN, BeeSpecies.COPPER, BeeSpecies.TE_BRONZE, 12)
 					.setBlockRequired("blockBronze");
 			

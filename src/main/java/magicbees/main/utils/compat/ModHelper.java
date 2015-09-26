@@ -9,8 +9,7 @@ public class ModHelper
 		ThaumcraftHelper.preInit();
 		EquivalentExchangeHelper.preInit();
 		ArsMagicaHelper.preInit();
-		ThermalFoundationHelper.preInit();
-		ThermalExpansionHelper.preInit();
+		ThermalModsHelper.preInit();
 		RedstoneArsenalHelper.preInit();
 		BloodMagicHelper.preInit();
 		BotaniaHelper.preInit();
@@ -24,8 +23,7 @@ public class ModHelper
 		ThaumcraftHelper.init();
 		EquivalentExchangeHelper.init();
 		ArsMagicaHelper.init();
-		ThermalFoundationHelper.init();
-		ThermalExpansionHelper.init();
+		ThermalModsHelper.init();
 		RedstoneArsenalHelper.init();
 		BloodMagicHelper.init();
 		BotaniaHelper.init();
@@ -39,8 +37,7 @@ public class ModHelper
 		ThaumcraftHelper.postInit();
 		EquivalentExchangeHelper.postInit();
 		ArsMagicaHelper.postInit();
-		ThermalFoundationHelper.postInit();
-		ThermalExpansionHelper.postInit();
+		ThermalModsHelper.postInit();
 		RedstoneArsenalHelper.postInit();
 		BloodMagicHelper.postInit();
 		BotaniaHelper.postInit();
