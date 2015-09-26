@@ -48,17 +48,19 @@ public class AlleleEffectSpawnMobWeighted extends AlleleEffect {
 		for (int i = 0; i < this.spawnChance.length && !flag; ++i) {
 			roll = 100 - w.rand.nextInt(100) + 1;
 			if (roll < this.spawnChance[i]) {
-				flag = true;
 				Entity mob = EntityList.createEntityByName(this.entityNames[i], w);
-				double[] coords = this.randomMobSpawnCoords(w, genome, housing);
-
-				mob.setPositionAndRotation(coords[0], coords[1], coords[2], w.rand.nextFloat() * 360f, 0f);
-				if (mob instanceof EntityLiving) {
-					if (((EntityLiving) mob).getCanSpawnHere()) {
+				if (mob != null) {
+					flag = true;
+					double[] coords = this.randomMobSpawnCoords(w, genome, housing);
+	
+					mob.setPositionAndRotation(coords[0], coords[1], coords[2], w.rand.nextFloat() * 360f, 0f);
+					if (mob instanceof EntityLiving) {
+						if (((EntityLiving) mob).getCanSpawnHere()) {
+							w.spawnEntityInWorld(mob);
+						}
+					} else {
 						w.spawnEntityInWorld(mob);
 					}
-				} else {
-					w.spawnEntityInWorld(mob);
 				}
 			}
 		}
