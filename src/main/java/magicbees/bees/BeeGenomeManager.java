@@ -325,6 +325,44 @@ public class BeeGenomeManager {
 		
 		return genome;
 	}
+	
+	public static IAllele[] getTemplateBatty() {
+		IAllele[] genome = getTemplateBaseMalevolent();
+
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BATTY;
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnBats;
+		genome[EnumBeeChromosome.TERRITORY.ordinal()] = Allele.getBaseAllele("territoryLarge");
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateChicken() {
+		IAllele[] genome = getTemplateBaseMalevolent();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.CHICKEN;
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnChicken;
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateBeef() {
+		IAllele[] genome = getTemplateBaseMalevolent();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BEEF;
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnCow;
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplatePork() {
+		IAllele[] genome = getTemplateBaseMalevolent();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.PORK;
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnPig;
+		
+		return genome;
+	}
+
 
 	public static IAllele[] getTemplateBigbad() {
 		IAllele[] genome = getTemplateBaseMalevolent();
@@ -332,6 +370,38 @@ public class BeeGenomeManager {
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BIGBAD;
 		genome[EnumBeeChromosome.CAVE_DWELLING.ordinal()] = Allele.getBaseAllele("boolTrue");
 		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnWolf;
+		
+		return genome;
+	}
+
+	public static IAllele[] getTemplateSheepish() {
+		IAllele[] genome = getTemplateBaseMalevolent();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.SHEEPISH;
+		genome[EnumBeeChromosome.CAVE_DWELLING.ordinal()] = Allele.getBaseAllele("boolTrue");
+		genome[EnumBeeChromosome.TEMPERATURE_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceDown2");
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnSheep;
+		
+		return genome;
+	}
+
+	public static IAllele[] getTemplateHorse() {
+		IAllele[] genome = getTemplateBaseMalevolent();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.HORSE;
+		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedFastest");
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnHorse;
+		
+		return genome;
+	}
+
+	public static IAllele[] getTemplateCatty() {
+		IAllele[] genome = getTemplateBaseMalevolent();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.CATTY;
+		genome[EnumBeeChromosome.CAVE_DWELLING.ordinal()] = Allele.getBaseAllele("boolTrue");
+		genome[EnumBeeChromosome.TEMPERATURE_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceBoth3");
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnCat;
 		
 		return genome;
 	}
@@ -358,6 +428,16 @@ public class BeeGenomeManager {
 		genome[EnumBeeChromosome.NOCTURNAL.ordinal()] = Allele.getBaseAllele("boolTrue");
 		genome[EnumBeeChromosome.TERRITORY.ordinal()] = Allele.getBaseAllele("territoryLarger");
 		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnSpider;
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateBrainy() {
+		IAllele[] genome = getTemplateBaseMalevolent();
+
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BRAINY;
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnBrainyZombie;
+		genome[EnumBeeChromosome.FERTILITY.ordinal()] = Allele.getBaseAllele("fertilityLow");
 		
 		return genome;
 	}
@@ -917,18 +997,7 @@ public class BeeGenomeManager {
 		
 		return genome;
 	}
-	
-	
-	public static IAllele[] getTemplateTCBrainy() {
-		IAllele[] genome = getTemplateBaseMalevolent();
-
-		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_BRAINY;
-		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnBrainyZombie;
-		genome[EnumBeeChromosome.FERTILITY.ordinal()] = Allele.getBaseAllele("fertilityLow");
 		
-		return genome;
-	}
-	
 	public static IAllele[] getTemplateTCWispy() {
 		IAllele[] genome = getTemplateBaseMalevolent();
 
@@ -941,40 +1010,6 @@ public class BeeGenomeManager {
 		return genome;
 	}
 	
-	public static IAllele[] getTemplateTCBatty() {
-		IAllele[] genome = getTemplateBaseMalevolent();
-
-		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_BATTY;
-		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnBats;
-		genome[EnumBeeChromosome.TERRITORY.ordinal()] = Allele.getBaseAllele("territoryLarge");
-		
-		return genome;
-	}
-	
-	public static IAllele[] getTemplateTCChicken() {
-		IAllele[] genome = getTemplateBaseMetallic();
-		
-		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_CHICKEN;
-		
-		return genome;
-	}
-	
-	public static IAllele[] getTemplateTCBeef() {
-		IAllele[] genome = getTemplateBaseMetallic();
-		
-		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_BEEF;
-		
-		return genome;
-	}
-	
-	public static IAllele[] getTemplateTCPork() {
-		IAllele[] genome = getTemplateBaseMetallic();
-		
-		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TC_PORK;
-		
-		return genome;
-	}
-
 	public static IAllele[] getTemplaceTCVoid() {
 		IAllele[] genome = getTemplateBaseMetallic();
 		
@@ -1253,23 +1288,6 @@ public class BeeGenomeManager {
 		
 		return genome;
 	}
-
-	public static IAllele[] getTemplateTEDante() {
-		IAllele[] genome = getTemplateTEBaseNether();
-		
-		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_DANTE;
-		
-		return genome;
-	}
-	
-	public static IAllele[] getTemplateTEPyro() {
-		IAllele[] genome = getTemplateTEEnd();
-		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_PYRO;
-		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.getBaseAllele("effectIgnition");
-
-		return genome;
-	}
-	
 	
 	public static IAllele[] getTemplateTEDestabilized() {
 		IAllele[] genome = getTemplateTEBase();
@@ -1302,6 +1320,22 @@ public class BeeGenomeManager {
 		
 		return genome;
 	}
+
+	public static IAllele[] getTemplateTEDante() {
+		IAllele[] genome = getTemplateTEBaseNether();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_DANTE;
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateTEPyro() {
+		IAllele[] genome = getTemplateTEEnd();
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_PYRO;
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.getBaseAllele("effectIgnition");
+
+		return genome;
+	}	
 	
 	public static IAllele[] getTemplateTEBlizzy() {
 		IAllele[] genome = getTemplateTEEnd();
@@ -1318,6 +1352,46 @@ public class BeeGenomeManager {
 		
 		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_GELID;
 		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnBlizz;
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateTEShocking() {
+		IAllele[] genome = getTemplateTEEnd();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_SHOCKING;
+		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedFast");
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateTEAmped() {
+		IAllele[] genome = getTemplateTEShocking();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_AMPED;
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnBlitz;
+		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.speedBlinding;
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateTEGrounded() {
+		IAllele[] genome = getTemplateTEEnd();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_GROUNDED;
+		genome[EnumBeeChromosome.CAVE_DWELLING.ordinal()] = Allele.getBaseAllele("boolTrue");
+		genome[EnumBeeChromosome.TOLERANT_FLYER.ordinal()] = Allele.getBaseAllele("boolTrue");
+		genome[EnumBeeChromosome.NOCTURNAL.ordinal()] = Allele.getBaseAllele("boolTrue");
+		
+		return genome;
+	}
+	
+	public static IAllele[] getTemplateTERocking() {
+		IAllele[] genome = getTemplateTEGrounded();
+		
+		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.TE_ROCKING;
+		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedFaster");
+		genome[EnumBeeChromosome.EFFECT.ordinal()] = Allele.spawnBasalz;
 		
 		return genome;
 	}

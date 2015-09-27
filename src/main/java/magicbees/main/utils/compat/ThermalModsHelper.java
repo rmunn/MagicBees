@@ -32,16 +32,18 @@ public class ThermalModsHelper implements IModHelper {
 	}
 
 	public enum Entity {
-		BLIZZ("Blizz"),
-		BLITZ("Blitz"),
-		BASALZ("Basalz"),
+		BLIZZ("Blizz", "ThermalFoundation:mobBlizzBreathe0"),
+		BLITZ("Blitz", "ThermalFoundation:mobBlitzBreathe1"),
+		BASALZ("Basalz", "ThermalFoundation:mobBasalzBreathe0"),
 		;
 
 		public final String entityID;
+		public final String soundName;
 
-		private Entity(String s)
+		private Entity(String id, String sound)
 		{
-			this.entityID = s;
+			this.entityID = id;
+			soundName = sound;
 		}
 	}
 
@@ -71,16 +73,16 @@ public class ThermalModsHelper implements IModHelper {
 	public static FluidStack fluidRedstone;
 	public static FluidStack fluidEnder;
 	
-	public static final String Name = "ThermalExpansion";
-	private static boolean isThermalExpansionPresent = false;
+	public static final String Name = "ThermalFoundation";
+	private static boolean isThermalFoundationPresent = false;
 
 	public static boolean isActive() {
-		return isThermalExpansionPresent;
+		return isThermalFoundationPresent;
 	}
 
 	public void preInit() {
-		if (Loader.isModLoaded(Name) && Config.thermalExpansionActive) {
-			isThermalExpansionPresent = true;
+		if (Loader.isModLoaded(Name) && Config.thermalFoundationActive) {
+			isThermalFoundationPresent = true;
 		}
 	}
 

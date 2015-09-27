@@ -104,11 +104,30 @@ public class BeeMutation implements IBeeMutation {
 
 		new BeeMutation(Allele.getBaseSpecies("Modest"), BeeSpecies.ELDRITCH, BeeSpecies.SKULKING, 12);
 		new BeeMutation(Allele.getBaseSpecies("Tropical"), BeeSpecies.SKULKING, BeeSpecies.SPIDERY, 10);
-		new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.ETHEREAL, BeeSpecies.GHASTLY, 9);
-		new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.HATEFUL, BeeSpecies.SMOULDERING, 7)
+		new BeeMutation(BeeSpecies.BATTY, BeeSpecies.ETHEREAL, BeeSpecies.GHASTLY, 9);
+		new BeeMutation(BeeSpecies.GHASTLY, BeeSpecies.HATEFUL, BeeSpecies.SMOULDERING, 7)
 				.setBiomeRequired(BiomeDictionary.Type.NETHER);
 		new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.MYSTERIOUS, BeeSpecies.BIGBAD, 7)
-				.setMoonPhaseRestricted(MoonPhase.FULL, MoonPhase.FULL);
+				.setMoonPhaseRestricted(MoonPhase.FULL);			
+		new BeeMutation(Allele.getBaseSpecies("Common"), BeeSpecies.SKULKING, BeeSpecies.CHICKEN, 12)
+				.setBiomeRequired(Type.FOREST);
+		new BeeMutation(Allele.getBaseSpecies("Common"), BeeSpecies.SKULKING, BeeSpecies.BEEF, 12)
+				.setBiomeRequired(Type.PLAINS);
+		new BeeMutation(Allele.getBaseSpecies("Common"), BeeSpecies.SKULKING, BeeSpecies.PORK, 12)
+				.setBiomeRequired(Type.MOUNTAIN);
+		new BeeMutation(BeeSpecies.PORK, BeeSpecies.SKULKING, BeeSpecies.SHEEPISH, 13)
+				.setBiomeRequired(Type.PLAINS);
+		new BeeMutation(BeeSpecies.BEEF, BeeSpecies.SHEEPISH, BeeSpecies.HORSE, 12)
+				.setBiomeRequired(Type.PLAINS);
+		new BeeMutation(BeeSpecies.CHICKEN, BeeSpecies.SPIDERY, BeeSpecies.CATTY, 15)
+				.setBiomeRequired(Type.JUNGLE);
+		new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.WINDY, BeeSpecies.BATTY, 9);
+		if (ThaumcraftHelper.isActive()) {
+			new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.PUPIL, BeeSpecies.BRAINY, 9);
+		}
+		else {
+			new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.MUTABLE, BeeSpecies.BRAINY, 14);
+		}
 		
 		new BeeMutation(BeeSpecies.ETHEREAL, BeeSpecies.OBLIVION, BeeSpecies.NAMELESS, 10);
 		new BeeMutation(BeeSpecies.OBLIVION, BeeSpecies.NAMELESS, BeeSpecies.ABANDONED, 8);
@@ -251,22 +270,15 @@ public class BeeMutation implements IBeeMutation {
 					.setBiomeRequired(Type.MAGICAL)
 					.setBlockAndMetaRequired(ThaumcraftHelper.airy, ThaumcraftHelper.AiryBlockType.NODE.ordinal());
 			
-			new BeeMutation(BeeSpecies.TRANSMUTING, BeeSpecies.TC_EMPOWERING, BeeSpecies.TC_TAINT, 11);
+			new BeeMutation(BeeSpecies.TRANSMUTING, BeeSpecies.TC_EMPOWERING, BeeSpecies.TC_TAINT, 11)
+					.setMoonPhaseRestricted(MoonPhase.NEW);
 			new BeeMutation(BeeSpecies.TRANSMUTING, BeeSpecies.TC_REJUVENATING, BeeSpecies.TC_PURE, 8)
-					.setBiomeRequired(Type.MAGICAL);
+					.setBiomeRequired(Type.MAGICAL)
+					.setMoonPhaseRestricted(MoonPhase.NEW);
 			new BeeMutation(BeeSpecies.BIGBAD, BeeSpecies.TC_VIS, BeeSpecies.TC_HUNGRY, 20);
 			
-			new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.WINDY, BeeSpecies.TC_BATTY, 9);
-			new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.PUPIL, BeeSpecies.TC_BRAINY, 9);
 			new BeeMutation(BeeSpecies.ETHEREAL, BeeSpecies.GHASTLY, BeeSpecies.TC_WISPY, 9)
 					.setMoonPhaseRestricted(MoonPhase.WANING_CRESCENT, MoonPhase.WAXING_CRESCENT);
-			
-			new BeeMutation(Allele.getBaseSpecies("Common"), BeeSpecies.SKULKING, BeeSpecies.TC_CHICKEN, 12)
-					.setBiomeRequired(Type.FOREST);
-			new BeeMutation(Allele.getBaseSpecies("Common"), BeeSpecies.SKULKING, BeeSpecies.TC_BEEF, 12)
-					.setBiomeRequired(Type.PLAINS);
-			new BeeMutation(Allele.getBaseSpecies("Common"), BeeSpecies.SKULKING, BeeSpecies.TC_PORK, 12)
-					.setBiomeRequired(Type.MOUNTAIN);
 			
 			new BeeMutation(BeeSpecies.IRON, BeeSpecies.TC_TAINT, BeeSpecies.TC_VOID, 5)
 					.setBiomeRequired(Type.MAGICAL)
@@ -296,12 +308,11 @@ public class BeeMutation implements IBeeMutation {
 		}
 		
 		if (BloodMagicHelper.isActive()) {
-			new BeeMutation(BeeSpecies.ELDRITCH, BeeSpecies.EARTHY, BeeSpecies.BM_BLOODY, 8)
-				.setMoonPhaseBonus(MoonPhase.WANING_CRESCENT, MoonPhase.WAXING_CRESCENT, 8)
+			new BeeMutation(BeeSpecies.ELDRITCH, BeeSpecies.EARTHY, BeeSpecies.BM_BLOODY, 13)
+				.setMoonPhaseBonus(MoonPhase.WANING_CRESCENT, MoonPhase.WAXING_CRESCENT, 0.85f)
 				.setBlockRequired(BloodMagicHelper.bloodStoneBrick);
 			
-			new BeeMutation(BeeSpecies.BM_BLOODY, BeeSpecies.ARCANE, BeeSpecies.BM_BOUND, 8)
-				.setBlockRequired(BloodMagicHelper.masterRitualStone);
+			new BeeMutation(BeeSpecies.BM_BLOODY, BeeSpecies.ARCANE, BeeSpecies.BM_BOUND, 8);
 		}
 		
 		if (RedstoneArsenalHelper.isActive()) {
@@ -344,8 +355,13 @@ public class BeeMutation implements IBeeMutation {
 					.setBiomeRequired(BiomeDictionary.Type.NETHER);
 			
 			new BeeMutation(BeeSpecies.SKULKING, Allele.getBaseSpecies("Wintry"), BeeSpecies.TE_BLIZZY, 12);
-
 			new BeeMutation(BeeSpecies.TE_BLIZZY, Allele.getBaseSpecies("Icy"), BeeSpecies.TE_GELID, 8);
+			
+			new BeeMutation(BeeSpecies.SMOULDERING, BeeSpecies.WINDY, BeeSpecies.TE_SHOCKING, 13);
+			new BeeMutation(BeeSpecies.TE_SHOCKING, BeeSpecies.WINDY, BeeSpecies.TE_AMPED, 8);
+			
+			new BeeMutation(BeeSpecies.SMOULDERING, BeeSpecies.EARTHY, BeeSpecies.TE_GROUNDED, 12);
+			new BeeMutation(BeeSpecies.TE_GROUNDED, BeeSpecies.EARTHY, BeeSpecies.TE_ROCKING, 9);
 
 			new BeeMutation(BeeSpecies.TE_PLATINUM, BeeSpecies.OBLIVION, BeeSpecies.TE_WINSOME, 12);
 
@@ -373,6 +389,7 @@ public class BeeMutation implements IBeeMutation {
 			}
 		}
 	}
+
 
 	private IAllele parent1;
 	private IAllele parent2;
@@ -629,6 +646,11 @@ public class BeeMutation implements IBeeMutation {
 	public BeeMutation setBlockRequiredNameOverride(String blockName) {
 		this.requiredBlockName = blockName;
 		
+		return this;
+	}
+	
+	public BeeMutation setMoonPhaseRestricted(MoonPhase phase) {
+		setMoonPhaseRestricted(phase, phase);
 		return this;
 	}
 	

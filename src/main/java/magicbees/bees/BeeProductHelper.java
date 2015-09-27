@@ -70,10 +70,29 @@ public class BeeProductHelper {
 		SMOULDERING.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.10f)
 			.addProduct(Config.combs.getStackForType(CombType.MOLTEN), 0.10f)
 			.addSpecialty(new ItemStack(Items.blaze_rod), 0.05f);
+		BRAINY.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.10f)
+			.addProduct(new ItemStack(Items.rotten_flesh), 0.6f);
 		BIGBAD.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.18f)
 			.addProduct(new ItemStack(Items.beef), 0.12f)
 			.addProduct(new ItemStack(Items.chicken), 0.12f)
 			.addSpecialty(new ItemStack(Items.melon), 0.20f);
+		BATTY.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.10f)
+			.addSpecialty(new ItemStack(Items.string), 0.00001f);
+		CHICKEN.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.23f)
+			.addSpecialty(new ItemStack(Items.feather), 0.08f)
+			.addSpecialty(new ItemStack(Items.egg), 0.08f);
+		BEEF.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.25f)
+			.addSpecialty(new ItemStack(Items.leather), 0.165f);
+		PORK.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.10f)
+			.addSpecialty(new ItemStack(Items.carrot), 0.165f);
+		SHEEPISH.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.25f)
+			.addSpecialty(new ItemStack(Blocks.wool), 0.16f)
+			.addSpecialty(new ItemStack(Items.wheat), 0.24f);
+		HORSE.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.25f)
+			.addSpecialty(new ItemStack(Items.leather), 0.24f)
+			.addSpecialty(new ItemStack(Items.apple), 0.38f);
+		CATTY.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.25f)
+			.addSpecialty(new ItemStack(Items.fish), 0.24f);
 
 		TIMELY.addProduct(Config.combs.getStackForType(CombType.TEMPORAL), 0.16f);
 		LORDLY.addProduct(Config.combs.getStackForType(CombType.TEMPORAL), 0.19f);
@@ -259,16 +278,8 @@ public class BeeProductHelper {
 		TC_PURE.addSpecialty(Config.combs.getStackForType(CombType.SOUL), 0.19f);
 		TC_HUNGRY.addProduct(Config.combs.getStackForType(CombType.INTELLECT), 0.28f);
 		TC_HUNGRY.addSpecialty(Config.combs.getStackForType(CombType.TEMPORAL), 0.195f);
-
-		TC_BRAINY.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.10f)
-			.addProduct(new ItemStack(Items.rotten_flesh), 0.6f);
-		TC_BATTY.addProduct(Config.combs.getStackForType(CombType.FURTIVE), 0.10f)
-			.addSpecialty(new ItemStack(Items.gunpowder), 0.4f);
 		TC_WISPY.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.SILKY.ordinal()), 0.22f)
 				.addSpecialty(new ItemStack(ForestryHelper.craftingResource, 1, ForestryHelper.CraftingMaterial.SILK_WISP.ordinal()), 0.4f);
-		TC_CHICKEN.addProduct(ForestryHelper.itemHoneycomb, 0.10f);
-		TC_BEEF.addProduct(ForestryHelper.itemHoneycomb, 0.10f);
-		TC_PORK.addProduct(ForestryHelper.itemHoneycomb, 0.10f);
 		TC_VOID.addProduct(ForestryHelper.itemHoneycomb, 0.10f);
 		
 		if (ThaumcraftHelper.isActive()) {
@@ -282,10 +293,11 @@ public class BeeProductHelper {
 			TC_ORDER.addSpecialty(Config.propolis.getStackForType(PropolisType.ORDER), 0.18f);
 			TC_CHAOS.addSpecialty(Config.propolis.getStackForType(PropolisType.CHAOS), 0.18f);
 
-			TC_BRAINY.addSpecialty(new ItemStack(ThaumcraftHelper.miscResource, 1, ThaumcraftHelper.MiscResource.ZOMBIE_BRAIN.ordinal()), 0.2f);
-			TC_CHICKEN.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetChicken, 1), 0.9f);
-			TC_BEEF.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetBeef, 1), 0.9f);
-			TC_PORK.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetPork, 1), 0.9f);
+			BATTY.addSpecialty(new ItemStack(Items.gunpowder), 0.4f);
+			BRAINY.addSpecialty(new ItemStack(ThaumcraftHelper.miscResource, 1, ThaumcraftHelper.MiscResource.ZOMBIE_BRAIN.ordinal()), 0.2f);
+			CHICKEN.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetChicken, 1), 0.9f);
+			BEEF.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetBeef, 1), 0.9f);
+			PORK.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetPork, 1), 0.9f);
 			TC_VOID.addSpecialty(new ItemStack(ThaumcraftHelper.nuggetMetal, 1, ThaumcraftHelper.NuggetType.VOID_METAL.ordinal()), 0.155f);
 		}
 	}
@@ -351,6 +363,10 @@ public class BeeProductHelper {
 			.addSpecialty(new ItemStack(Items.coal), 0.5f);
 		TE_BLIZZY.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.FROZEN.ordinal()), 0.10f);
 		TE_GELID.addProduct(new ItemStack(ForestryHelper.beeComb, 1, ForestryHelper.Comb.FROZEN.ordinal()), 0.10f);
+		TE_SHOCKING.addProduct(Config.combs.getStackForType(CombType.AIRY), 0.16f);
+		TE_AMPED.addProduct(Config.combs.getStackForType(CombType.AIRY), 0.29f);
+		TE_GROUNDED.addProduct(Config.combs.getStackForType(CombType.EARTHY), 0.16f);
+		TE_ROCKING.addProduct(Config.combs.getStackForType(CombType.EARTHY), 0.29f);
 		
 		if (ThermalModsHelper.isActive()) {
 			LogHelper.info("Thermal Expansion bees active");
@@ -358,6 +374,10 @@ public class BeeProductHelper {
 			TE_GELID.addSpecialty(ThermalModsHelper.dustCryotheum, 0.9f);
 			TE_DANTE.addSpecialty(ThermalModsHelper.dustSulfur, 0.9f);
 			TE_PYRO.addSpecialty(ThermalModsHelper.dustPyrotheum, 0.9f);
+			TE_SHOCKING.addSpecialty(ThermalModsHelper.dustBlitz, 0.9f);
+			TE_AMPED.addSpecialty(ThermalModsHelper.dustAerotheum, 0.9f);
+			TE_GROUNDED.addSpecialty(ThermalModsHelper.dustBasalz, 0.9f);
+			TE_ROCKING.addSpecialty(ThermalModsHelper.dustPetrotheum, 0.9f);
 			TE_WINSOME.addSpecialty(ThermalModsHelper.dustPlatinum, 0.9f);
 			TE_ENDEARING.addSpecialty(ThermalModsHelper.enderiumNugget, 0.9f);
 		}

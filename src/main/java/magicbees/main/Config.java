@@ -91,7 +91,7 @@ public class Config
 	public static boolean extraBeesActive;
 	public static boolean redstoneArsenalActive;
 	public static boolean thaumcraftActive;
-	public static boolean thermalExpansionActive;
+	public static boolean thermalFoundationActive;
 	public static boolean botaniaActive;
 	public static boolean ae2Active;
 
@@ -262,7 +262,7 @@ public class Config
 		thaumcraftActive = p.getBoolean();
 
 		p = configuration.get(CATEGORY_MODULES, "ThermalExpansion", true);
-		thermalExpansionActive = p.getBoolean();
+		thermalFoundationActive = p.getBoolean();
 		
 		p = configuration.get(CATEGORY_MODULES, "Botania", true);
 		botaniaActive = p.getBoolean();

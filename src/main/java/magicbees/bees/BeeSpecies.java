@@ -108,8 +108,24 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			0x0888888, 0x222222, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
 	SMOULDERING("Smouldering", "flagrantia", BeeClassification.SKULKING,
 			0xFFC747, 0xEA8344, EnumTemperature.HELLISH, EnumHumidity.NORMAL, false, false),
+	BRAINY("TCBrainy", "cerebrum", BeeClassification.SKULKING,
+			0x83FF70, BodyColours.SKULKING, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
 	BIGBAD("BigBad", "magnumalum", BeeClassification.SKULKING,
 			0xA9344B, 0x453536, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false, true, true, true),
+	CHICKEN("TCChicken", "pullus", BeeClassification.FLESHY,
+			0xFF0000, 0xD3D3D3, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+	BEEF("TCBeef", "bubulae", BeeClassification.FLESHY,
+			0xB7B7B7, 0x3F3024, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+	PORK("TCPork", "porcina", BeeClassification.FLESHY,
+			0xF1AEAC, 0xDF847B, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+	BATTY("TCBatty", "chiroptera", BeeClassification.FLESHY,
+			0x5B482B, 0x271B0F, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+	SHEEPISH("Sheepish", "balans", BeeClassification.FLESHY,
+			0xF7F7F7, 0xCACACA, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+	HORSE("Horse", "equus", BeeClassification.FLESHY,
+			0x906330, 0x7B4E1B, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
+	CATTY("Catty", "feline", BeeClassification.FLESHY,
+			0xECE684, 0x563C24, EnumTemperature.HOT, EnumHumidity.NORMAL, false, true),
 
 	TIMELY("Timely", "gallifreis", BeeClassification.TIME,
 			0xC6AF86, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
@@ -213,19 +229,8 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 	TC_HUNGRY("TCHungry", "omnique", BeeClassification.THAUMIC,
 			0xDCA5E2, BodyColours.THAUMCRAFT_NODE, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
 
-	TC_BRAINY("TCBrainy", "cerebrum", BeeClassification.THAUMIC,
-			0x83FF70, BodyColours.SKULKING, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
 	TC_WISPY("TCWispy", "umbrabilis", BeeClassification.THAUMIC,
 			0x9cb8d5, BodyColours.SKULKING, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
-	TC_BATTY("TCBatty", "chiroptera", BeeClassification.THAUMIC,
-			0x27350d, BodyColours.SKULKING, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
-
-	TC_CHICKEN("TCChicken", "pullus", BeeClassification.FLESHY,
-			0x7D431E, 0xE0905E, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
-	TC_BEEF("TCBeef", "bubulae", BeeClassification.FLESHY,
-			0x40221A, 0xAC6753, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
-	TC_PORK("TCPork", "porcina", BeeClassification.FLESHY,
-			0x725D2F, 0xD2BF93, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
 	TC_VOID("TCVoid", "obscurus", BeeClassification.METALLIC,
 			0x180A29, 0x4B2A74, EnumTemperature.ICY, EnumHumidity.NORMAL, false, false),
 
@@ -268,8 +273,16 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			0x4AAFF7, EnumTemperature.COLD, EnumHumidity.NORMAL, true, true),
 	TE_DANTE("TEDante", "inferno", BeeClassification.ABOMINABLE,
 			0xF7AC4A, EnumTemperature.HELLISH, EnumHumidity.ARID, false, false),
-	TE_PYRO("TEPyro", "pyromaniac", BeeClassification.ABOMINABLE,
+	TE_PYRO("TEPyro", "pyromania", BeeClassification.ABOMINABLE,
 			0xFA930C, EnumTemperature.HELLISH, EnumHumidity.ARID, true, true),
+	TE_SHOCKING("TEShocking", "horrendum", BeeClassification.ABOMINABLE,
+			0xC5FF26, 0xF8EE00, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
+	TE_AMPED("TEAmped", "concitatus", BeeClassification.ABOMINABLE,
+			0x8AFFFF, 0xECE670, EnumTemperature.NORMAL, EnumHumidity.NORMAL, true, false),
+	TE_GROUNDED("TEGrounded", "tellus", BeeClassification.ABOMINABLE,
+			0xCEC1C1, 0x826767, EnumTemperature.HOT, EnumHumidity.ARID, false, true),
+	TE_ROCKING("TERocking", "saxsous", BeeClassification.ABOMINABLE,
+			0x980000, 0xAB9D9B, EnumTemperature.HOT, EnumHumidity.ARID, true, true),
 
 	TE_ELECTRUM("TEElectrum", "electrum", BeeClassification.THERMAL,
 			0xEAF79E, EnumTemperature.HOT,EnumHumidity.ARID, false, false),
@@ -371,7 +384,13 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		GHASTLY.registerGenomeTemplate(BeeGenomeManager.getTemplateGhastly());
 		SPIDERY.registerGenomeTemplate(BeeGenomeManager.getTemplateSpidery());
 		SMOULDERING.registerGenomeTemplate(BeeGenomeManager.getTemplateSmouldering());
-		BIGBAD.registerGenomeTemplate(BeeGenomeManager.getTemplateBigbad());	
+		BIGBAD.registerGenomeTemplate(BeeGenomeManager.getTemplateBigbad());
+		CHICKEN.registerGenomeTemplate(BeeGenomeManager.getTemplateChicken());
+		BEEF.registerGenomeTemplate(BeeGenomeManager.getTemplateBeef());
+		PORK.registerGenomeTemplate(BeeGenomeManager.getTemplatePork());
+		SHEEPISH.registerGenomeTemplate(BeeGenomeManager.getTemplateSheepish());
+		HORSE.registerGenomeTemplate(BeeGenomeManager.getTemplateHorse());
+		CATTY.registerGenomeTemplate(BeeGenomeManager.getTemplateCatty());
 		TIMELY.registerGenomeTemplate(BeeGenomeManager.getTemplateTimely());
 		LORDLY.registerGenomeTemplate(BeeGenomeManager.getTemplateLordly());
 		DOCTORAL.registerGenomeTemplate(BeeGenomeManager.getTemplateDoctoral());	
@@ -418,12 +437,9 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		TC_TAINT.registerGenomeTemplate(BeeGenomeManager.getTemplateTCTaint());
 		TC_PURE.registerGenomeTemplate(BeeGenomeManager.getTemplateTCPure());
 		TC_HUNGRY.registerGenomeTemplate(BeeGenomeManager.getTemplateTCHungry());
-		TC_BRAINY.registerGenomeTemplate(BeeGenomeManager.getTemplateTCBrainy());
+		BRAINY.registerGenomeTemplate(BeeGenomeManager.getTemplateBrainy());
 		TC_WISPY.registerGenomeTemplate(BeeGenomeManager.getTemplateTCWispy());
-		TC_BATTY.registerGenomeTemplate(BeeGenomeManager.getTemplateTCBatty());
-		TC_CHICKEN.registerGenomeTemplate(BeeGenomeManager.getTemplateTCChicken());
-		TC_BEEF.registerGenomeTemplate(BeeGenomeManager.getTemplateTCBeef());
-		TC_PORK.registerGenomeTemplate(BeeGenomeManager.getTemplateTCPork());
+		BATTY.registerGenomeTemplate(BeeGenomeManager.getTemplateBatty());
 		TC_VOID.registerGenomeTemplate(BeeGenomeManager.getTemplaceTCVoid());
 		EE_MINIUM.registerGenomeTemplate(BeeGenomeManager.getTemplateEEMinium());
 		AM_ESSENCE.registerGenomeTemplate(BeeGenomeManager.getTemplateAMEssence());
@@ -442,6 +458,10 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		TE_GELID.registerGenomeTemplate(BeeGenomeManager.getTemplateTEGelid());
 		TE_DANTE.registerGenomeTemplate(BeeGenomeManager.getTemplateTEDante());
 		TE_PYRO.registerGenomeTemplate(BeeGenomeManager.getTemplateTEPyro());
+		TE_SHOCKING.registerGenomeTemplate(BeeGenomeManager.getTemplateTEShocking());
+		TE_AMPED.registerGenomeTemplate(BeeGenomeManager.getTemplateTEAmped());
+		TE_GROUNDED.registerGenomeTemplate(BeeGenomeManager.getTemplateTEGrounded());
+		TE_ROCKING.registerGenomeTemplate(BeeGenomeManager.getTemplateTERocking());
 		TE_ELECTRUM.registerGenomeTemplate(BeeGenomeManager.getTemplateTEElectrum());
 		TE_PLATINUM.registerGenomeTemplate(BeeGenomeManager.getTemplateTEPlatinum());
 		TE_NICKEL.registerGenomeTemplate(BeeGenomeManager.getTemplateTENickel());
@@ -482,11 +502,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			TC_PURE.setInactive();
 			TC_HUNGRY.setInactive();
 
-			TC_BRAINY.setInactive();
-			TC_BATTY.setInactive();
-			TC_CHICKEN.setInactive();
-			TC_BEEF.setInactive();
-			TC_PORK.setInactive();
+			BRAINY.setInactive();
 			
 			TC_WISPY.setInactive();
 			TC_VOID.setInactive();
@@ -939,15 +955,22 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		case SPIDERY:
 		case SMOULDERING:
 		case BIGBAD:
-		case TC_BRAINY:
+		case BATTY:
+		case SHEEPISH:
+		case HORSE:
+		case CATTY:
+		case BRAINY:
 		case TC_WISPY:
-		case TC_BATTY:
 		case AM_VORTEX:
 		case AM_WIGHT:
 		case TE_BLIZZY:
 		case TE_GELID:
 		case TE_DANTE:
 		case TE_PYRO:
+		case TE_SHOCKING:
+		case TE_AMPED:
+		case TE_GROUNDED:
+		case TE_ROCKING:
 			value = CommonProxy.DOMAIN + ":bees/skulking/";
 			break;
 			

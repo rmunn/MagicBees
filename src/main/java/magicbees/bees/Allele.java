@@ -86,13 +86,19 @@ public class Allele implements IAllele {
 	public static IAlleleEffect effectInvisibility;
 	public static IAlleleEffect effectDreaming;
 
+	public static IAlleleEffect spawnWolf;
+	public static IAlleleEffect spawnBats;
+	public static IAlleleEffect spawnCow;
+	public static IAlleleEffect spawnChicken;
+	public static IAlleleEffect spawnPig;
+	public static IAlleleEffect spawnSheep;
+	public static IAlleleEffect spawnCat;
+	public static IAlleleEffect spawnHorse;
 	public static IAlleleEffect spawnGhast;
 	public static IAlleleEffect spawnSpider;
 	public static IAlleleEffect spawnBlaze;
-	public static IAlleleEffect spawnWolf;
 	public static IAlleleEffect spawnBrainyZombie;
 	public static IAlleleEffect spawnWisp;
-	public static IAlleleEffect spawnBats;
 	public static IAlleleEffect spawnBlizz;
 	public static IAlleleEffect spawnBlitz;
 	public static IAlleleEffect spawnBasalz;
@@ -105,85 +111,6 @@ public class Allele implements IAllele {
 
 		speedBlinding = new AlleleFloat("speedBlinding", 2f, false);
 		flowerBookshelf = new AlleleFlower("Bookshelf", new FlowerProviderBookshelf(), true);
-
-		if (ThaumcraftHelper.isActive()) {
-			flowerThaumcraft = new AlleleFlower(FLOWERS_THAUMCRAFT_PLANT, new FlowerProviderThaumcraftFlower(), false);
-			flowerAuraNode = new AlleleFlower(FLOWERS_AURA_NODE, new FlowerProviderAuraNode(), true);
-			
-			effectVisRecharge = new AlleleEffectRecharge(EFFECT_VIS_RECHARGE, false);
-			effectNodeEmpower = new AlleleEffectEmpowering(EFFECT_NODE_EMPOWER, false);
-			effectNodeRepair = new AlleleEffectNodeRepair(EFFECT_NODE_REPAIR, false);
-			effectNodeConversionTaint = new AlleleEffectNodeConversion(EFFECT_NODE_TAINTING, NodeType.TAINTED, false, 250);
-			effectNodeConversionPure = new AlleleEffectNodeConversion(EFFECT_NODE_PURIFYING, NodeType.PURE, false, 250);
-			effectNodeConversionHungry = new AlleleEffectNodeConversion(EFFECT_NODE_RAVENING, NodeType.HUNGRY, false, 2);
-
-			spawnBrainyZombie = new AlleleEffectSpawnMob(EFFECT_BRAINY, false, ThaumcraftHelper.Entity.BRAINY_ZOMBIE.entityID)
-				.setAggrosPlayerOnSpawn()
-				.setThrottle(800)
-				.setSpawnsOnPlayerNear(null)
-				.setMaxMobsInSpawnZone(2);
-
-			spawnBats = new AlleleEffectSpawnMob(EFFECT_BATTY, false, ThaumcraftHelper.Entity.FIREBAT.entityID)
-				.setThrottle(300)
-				.setSpawnsOnPlayerNear("Bat");
-
-			spawnWisp = new AlleleEffectSpawnWisp(EFFECT_WISPY, false, ThaumcraftHelper.Entity.WISP.entityID, "thaumcraft.wisplive")
-				.setThrottle(1800)
-				.setChanceToSpawn(79);
-		} else {
-			flowerThaumcraft = new AlleleFlower(FLOWERS_THAUMCRAFT_PLANT, vanillaFlowers, false);
-			flowerAuraNode = new AlleleFlower(FLOWERS_AURA_NODE, vanillaFlowers, true);Allele.effectVisRecharge = new AlleleEffectRecharge(EFFECT_VIS_RECHARGE, false);
-			effectNodeEmpower = new AlleleEffectPlaceholder(EFFECT_NODE_EMPOWER, false);
-			effectNodeRepair = new AlleleEffectPlaceholder(EFFECT_NODE_REPAIR, false);
-			effectNodeConversionTaint = new AlleleEffectPlaceholder(EFFECT_NODE_TAINTING, false);
-			effectNodeConversionPure = new AlleleEffectPlaceholder(EFFECT_NODE_PURIFYING, false);
-			effectNodeConversionHungry = new AlleleEffectPlaceholder(EFFECT_NODE_RAVENING, false);
-			spawnBrainyZombie = new AlleleEffectPlaceholder(EFFECT_BRAINY, false);
-			spawnBats = new AlleleEffectPlaceholder(EFFECT_BATTY, false);
-			spawnWisp = new AlleleEffectPlaceholder(EFFECT_WISPY, false);
-		}
-
-		if (BotaniaHelper.isActive()) {
-			flowerBotania = new AlleleFlower(FLOWER_BOTANIA, new FlowerProviderBotania(), true);
-			effectDreaming = new AlleleEffectTransmuting(EFFECT_DREAMING, false,
-					new TransmutationEffectController(new TransmutationEffectLBotaniaLiving()), 100);
-		} else {
-			flowerBotania = new AlleleFlower(FLOWER_BOTANIA, vanillaFlowers, true);
-			effectDreaming = new AlleleEffectPlaceholder(EFFECT_DREAMING, false);
-		}
-
-		if (ArsMagicaHelper.isActive()) {
-			flowerArsMagica = new AlleleFlower(FLOWER_ARS_MAGICA_PLANT, new FlowerProviderArsMagicaFlower(), false);
-			spawnManaDrainer = new AlleleEffectSpawnMobWeighted(EFFECT_MANA_DRAIN, true, 20,
-					new String[] { ArsMagicaHelper.Name + ".MobManaCreeper", ArsMagicaHelper.Name + ".ManaVortex" },
-					new int[] { 60, 2 }
-			);
-
-			spawnWispOrHecate = new AlleleEffectSpawnMobWeighted(EFFECT_AM_WISP, true, 20,
-					new String[] { ArsMagicaHelper.Name + ".MobWisp", ArsMagicaHelper.Name + ".MobHecate" },
-					new int[] { 40, 3 }
-			);
-		} else {
-			flowerArsMagica =  new AlleleFlower(FLOWER_ARS_MAGICA_PLANT, vanillaFlowers, false);
-			spawnManaDrainer = new AlleleEffectPlaceholder(EFFECT_MANA_DRAIN, true);
-			spawnWispOrHecate = new AlleleEffectPlaceholder(EFFECT_AM_WISP, true);
-		}
-
-		if (ThermalModsHelper.isActive()) {
-			spawnBlizz = new AlleleEffectSpawnMob(EFFECT_TE_BLIZZY, true, ThermalModsHelper.Entity.BLIZZ.entityID)
-			.setThrottle(100)
-			.setChanceToSpawn(80);
-			spawnBlitz = new AlleleEffectSpawnMob(EFFECT_TE_BLITZ, true, ThermalModsHelper.Entity.BLIZZ.entityID)
-			.setThrottle(100)
-			.setChanceToSpawn(80);
-			spawnBasalz = new AlleleEffectSpawnMob(EFFECT_TE_BASALZ, true, ThermalModsHelper.Entity.BLIZZ.entityID)
-			.setThrottle(100)
-			.setChanceToSpawn(80);
-		} else {
-			spawnBlizz = new AlleleEffectPlaceholder(EFFECT_TE_BLIZZY, true);
-			spawnBlitz = new AlleleEffectPlaceholder(EFFECT_TE_BLITZ, true);
-			spawnBasalz = new AlleleEffectPlaceholder(EFFECT_TE_BASALZ, true);
-		}
 
 		effectCleansing = new AlleleEffectCure("Curative", false);
 		effectDigSpeed = new AlleleEffectPotion("DigSpeed", Potion.digSpeed, 15, false);
@@ -217,6 +144,111 @@ public class Allele implements IAllele {
 				.setThrottle(650)
 				.setChanceToSpawn(40)
 				.setMaxMobsInSpawnZone(2);
+		spawnPig = new AlleleEffectSpawnMob("Porcine", true, "Pig", "mob.pig.say")
+				.setThrottle(350)
+				.setMaxMobsInSpawnZone(4);
+		spawnCow = new AlleleEffectSpawnMob("Bovine", true, "Cow", "mob.cow.say")
+				.setThrottle(640)
+				.setMaxMobsInSpawnZone(3);
+		spawnChicken = new AlleleEffectSpawnMob("Chicken", true, "Chicken", "mob.chicken.hurt")
+				.setThrottle(20)
+				.setMaxMobsInSpawnZone(20);
+		spawnSheep = new AlleleEffectSpawnMob("Sheep", false, "Sheep", "mob.sheep.say")
+				.setThrottle(450)
+				.setMaxMobsInSpawnZone(5);
+		spawnCat = new AlleleEffectSpawnMob("Catty", false, "Ozelot", "mob.cat.meow")
+				.setThrottle(702)
+				.setChanceToSpawn(60)
+				.setMaxMobsInSpawnZone(2);
+		spawnHorse = new AlleleEffectSpawnMob("Horse", false, "EntityHorse", "mob.horse.idle")
+				.setThrottle(450)
+				.setChanceToSpawn(59)
+				.setMaxMobsInSpawnZone(2);
+
+		if (ThaumcraftHelper.isActive()) {
+			flowerThaumcraft = new AlleleFlower(FLOWERS_THAUMCRAFT_PLANT, new FlowerProviderThaumcraftFlower(), false);
+			flowerAuraNode = new AlleleFlower(FLOWERS_AURA_NODE, new FlowerProviderAuraNode(), true);
+			
+			effectVisRecharge = new AlleleEffectRecharge(EFFECT_VIS_RECHARGE, false);
+			effectNodeEmpower = new AlleleEffectEmpowering(EFFECT_NODE_EMPOWER, false);
+			effectNodeRepair = new AlleleEffectNodeRepair(EFFECT_NODE_REPAIR, false);
+			effectNodeConversionTaint = new AlleleEffectNodeConversion(EFFECT_NODE_TAINTING, NodeType.TAINTED, false, 250);
+			effectNodeConversionPure = new AlleleEffectNodeConversion(EFFECT_NODE_PURIFYING, NodeType.PURE, false, 250);
+			effectNodeConversionHungry = new AlleleEffectNodeConversion(EFFECT_NODE_RAVENING, NodeType.HUNGRY, false, 2);
+
+			spawnBrainyZombie = new AlleleEffectSpawnMob(EFFECT_BRAINY, false, ThaumcraftHelper.Entity.BRAINY_ZOMBIE.entityID)
+				.setAggrosPlayerOnSpawn()
+				.setThrottle(800)
+				.setSpawnsOnPlayerNear(null)
+				.setMaxMobsInSpawnZone(2);
+
+			spawnBats = new AlleleEffectSpawnMob(EFFECT_BATTY, false, ThaumcraftHelper.Entity.FIREBAT.entityID)
+				.setThrottle(300)
+				.setSpawnsOnPlayerNear("Bat");
+
+			spawnWisp = new AlleleEffectSpawnWisp(EFFECT_WISPY, false, ThaumcraftHelper.Entity.WISP.entityID, "thaumcraft.wisplive")
+				.setThrottle(1800)
+				.setChanceToSpawn(79);
+		}
+		else {
+			spawnBats = new AlleleEffectSpawnMob(EFFECT_BATTY, false, "Bat")
+				.setThrottle(150);
+			
+			flowerThaumcraft = new AlleleFlower(FLOWERS_THAUMCRAFT_PLANT, vanillaFlowers, false);
+			flowerAuraNode = new AlleleFlower(FLOWERS_AURA_NODE, vanillaFlowers, true);Allele.effectVisRecharge = new AlleleEffectRecharge(EFFECT_VIS_RECHARGE, false);
+			effectNodeEmpower = new AlleleEffectPlaceholder(EFFECT_NODE_EMPOWER, false);
+			effectNodeRepair = new AlleleEffectPlaceholder(EFFECT_NODE_REPAIR, false);
+			effectNodeConversionTaint = new AlleleEffectPlaceholder(EFFECT_NODE_TAINTING, false);
+			effectNodeConversionPure = new AlleleEffectPlaceholder(EFFECT_NODE_PURIFYING, false);
+			effectNodeConversionHungry = new AlleleEffectPlaceholder(EFFECT_NODE_RAVENING, false);
+			spawnBrainyZombie = new AlleleEffectPlaceholder(EFFECT_BRAINY, false);
+			spawnWisp = new AlleleEffectPlaceholder(EFFECT_WISPY, false);
+		}
+
+		if (BotaniaHelper.isActive()) {
+			flowerBotania = new AlleleFlower(FLOWER_BOTANIA, new FlowerProviderBotania(), true);
+			effectDreaming = new AlleleEffectTransmuting(EFFECT_DREAMING, false,
+					new TransmutationEffectController(new TransmutationEffectLBotaniaLiving()), 100);
+		}
+		else {
+			flowerBotania = new AlleleFlower(FLOWER_BOTANIA, vanillaFlowers, true);
+			effectDreaming = new AlleleEffectPlaceholder(EFFECT_DREAMING, false);
+		}
+
+		if (ArsMagicaHelper.isActive()) {
+			flowerArsMagica = new AlleleFlower(FLOWER_ARS_MAGICA_PLANT, new FlowerProviderArsMagicaFlower(), false);
+			spawnManaDrainer = new AlleleEffectSpawnMobWeighted(EFFECT_MANA_DRAIN, true, 20,
+					new String[] { ArsMagicaHelper.Name + ".MobManaCreeper", ArsMagicaHelper.Name + ".ManaVortex" },
+					new int[] { 60, 2 }
+			);
+
+			spawnWispOrHecate = new AlleleEffectSpawnMobWeighted(EFFECT_AM_WISP, true, 20,
+					new String[] { ArsMagicaHelper.Name + ".MobWisp", ArsMagicaHelper.Name + ".MobHecate" },
+					new int[] { 40, 3 }
+			);
+		}
+		else {
+			flowerArsMagica =  new AlleleFlower(FLOWER_ARS_MAGICA_PLANT, vanillaFlowers, false);
+			spawnManaDrainer = new AlleleEffectPlaceholder(EFFECT_MANA_DRAIN, true);
+			spawnWispOrHecate = new AlleleEffectPlaceholder(EFFECT_AM_WISP, true);
+		}
+
+		if (ThermalModsHelper.isActive()) {
+			spawnBlizz = new AlleleEffectSpawnMob(EFFECT_TE_BLIZZY, true, ThermalModsHelper.Entity.BLIZZ.entityID, ThermalModsHelper.Entity.BLIZZ.soundName)
+			.setThrottle(100)
+			.setChanceToSpawn(80);
+			spawnBlitz = new AlleleEffectSpawnMob(EFFECT_TE_BLITZ, true, ThermalModsHelper.Entity.BLIZZ.entityID, ThermalModsHelper.Entity.BLIZZ.soundName)
+			.setThrottle(100)
+			.setChanceToSpawn(80);
+			spawnBasalz = new AlleleEffectSpawnMob(EFFECT_TE_BASALZ, true, ThermalModsHelper.Entity.BLIZZ.entityID, ThermalModsHelper.Entity.BLIZZ.soundName)
+			.setThrottle(100)
+			.setChanceToSpawn(80);
+		}
+		else {
+			spawnBlizz = new AlleleEffectPlaceholder(EFFECT_TE_BLIZZY, true);
+			spawnBlitz = new AlleleEffectPlaceholder(EFFECT_TE_BLITZ, true);
+			spawnBasalz = new AlleleEffectPlaceholder(EFFECT_TE_BASALZ, true);
+		}
 	}
 
 	public static void registerDeprecatedAlleleReplacements() {
