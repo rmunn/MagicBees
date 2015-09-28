@@ -535,6 +535,10 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 			TE_GELID.setInactive();
 			TE_DANTE.setInactive();
 			TE_PYRO.setInactive();
+			TE_SHOCKING.setInactive();
+			TE_AMPED.setInactive();
+			TE_GROUNDED.setInactive();
+			TE_ROCKING.setInactive();
 			TE_DESTABILIZED.setInactive();
 			TE_COAL.setInactive();
 			TE_LUX.setInactive();
