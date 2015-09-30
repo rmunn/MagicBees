@@ -168,7 +168,8 @@ public class ItemMysteriousMagnet extends Item implements IBauble {
 					List<EntityArrow> arrows = world.getEntitiesWithinAABB(EntityArrow.class, bounds);
 					
 					for (EntityArrow arrow : arrows) {
-						if (arrow.canBePickedUp == 1 || world.rand.nextFloat() < 0.3f) {
+						if ((arrow.canBePickedUp == 1 || world.rand.nextFloat() < 0.3f)
+								&& arrow.shootingEntity != entity) {
 							EntityItem replacement = new EntityItem(world, arrow.posX, arrow.posY, arrow.posZ,
 									new ItemStack(Items.arrow));
 							world.spawnEntityInWorld(replacement);
