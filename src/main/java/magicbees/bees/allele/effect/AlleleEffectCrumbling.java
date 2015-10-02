@@ -3,13 +3,17 @@ package magicbees.bees.allele.effect;
 import java.util.HashMap;
 
 import magicbees.bees.AlleleEffect;
+import magicbees.bees.BeeManager;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
+import forestry.api.apiculture.IBeeModifier;
 import forestry.api.genetics.IEffectData;
 
 public class AlleleEffectCrumbling extends AlleleEffect {
@@ -50,14 +54,17 @@ public class AlleleEffectCrumbling extends AlleleEffect {
 	@Override
 	protected IEffectData doEffectThrottled(IBeeGenome genome, IEffectData storedData, IBeeHousing housing) {
 		World world = housing.getWorld();
-		// Get random coords within territory
-		int xRange = (int) (housing.getTerritoryModifier(genome, 1f) * genome.getTerritory()[0]);
-		int yRange = (int) (housing.getTerritoryModifier(genome, 1f) * genome.getTerritory()[1]);
-		int zRange = (int) (housing.getTerritoryModifier(genome, 1f) * genome.getTerritory()[2]);
+		ChunkCoordinates coords = housing.getCoordinates();
+		IBeeModifier beeModifier = BeeManager.beeRoot.createBeeHousingModifier(housing);
 
-		int xCoord = housing.getXCoord() + world.rand.nextInt(xRange) - xRange / 2;
-		int yCoord = housing.getYCoord() + world.rand.nextInt(yRange) - yRange / 2;
-		int zCoord = housing.getZCoord() + world.rand.nextInt(zRange) - zRange / 2;
+		// Get random coords within territory
+		int xRange = (int) (beeModifier.getTerritoryModifier(genome, 1f) * genome.getTerritory()[0]);
+		int yRange = (int) (beeModifier.getTerritoryModifier(genome, 1f) * genome.getTerritory()[1]);
+		int zRange = (int) (beeModifier.getTerritoryModifier(genome, 1f) * genome.getTerritory()[2]);
+
+		int xCoord = coords.posX + world.rand.nextInt(xRange) - xRange / 2;
+		int yCoord = coords.posY + world.rand.nextInt(yRange) - yRange / 2;
+		int zCoord = coords.posZ + world.rand.nextInt(zRange) - zRange / 2;
 
 		Block block = world.getBlock(xCoord, yCoord, zCoord);
 		if (block != null) {

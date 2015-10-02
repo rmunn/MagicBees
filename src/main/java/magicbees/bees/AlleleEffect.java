@@ -5,6 +5,8 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChunkCoordinates;
+
 import forestry.api.apiculture.IAlleleBeeEffect;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
@@ -70,18 +72,19 @@ public abstract class AlleleEffect extends Allele implements IAlleleBeeEffect
 	{
 		// Get the size of the affected area
 		int[] area = genome.getTerritory();
+		ChunkCoordinates coords = housing.getCoordinates();
 		
 		// Calculate offset
 		int[] min = new int[3];
 		int[] max = new int[3];
-		min[0] = housing.getXCoord() - area[0] / 2;
-		max[0] = housing.getXCoord() + area[0] / 2;
+		min[0] = coords.posX - area[0] / 2;
+		max[0] = coords.posX + area[0] / 2;
 		
-		min[1] = housing.getYCoord() - area[1] / 2;
-		max[1] = housing.getYCoord() + area[1] / 2;
+		min[1] = coords.posY - area[1] / 2;
+		max[1] = coords.posY + area[1] / 2;
 		
-		min[2] = housing.getZCoord() - area[2] / 2;
-		max[2] = housing.getZCoord() + area[2] / 2;
+		min[2] = coords.posZ - area[2] / 2;
+		max[2] = coords.posZ + area[2] / 2;
 		
 		AxisAlignedBB bounds = AxisAlignedBB.getBoundingBox(min[0], min[1], min[2], max[0], max[1], max[2]);
 		return (List<Entity>)housing.getWorld().getEntitiesWithinAABB(EntityPlayer.class, bounds);

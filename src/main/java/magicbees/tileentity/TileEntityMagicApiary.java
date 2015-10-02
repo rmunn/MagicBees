@@ -1,16 +1,15 @@
 package magicbees.tileentity;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import magicbees.api.bees.IMagicApiaryAuraProvider;
 import magicbees.bees.AuraCharge;
 import magicbees.bees.BeeManager;
 import magicbees.main.CommonProxy;
-import magicbees.main.MagicBees;
 import magicbees.main.utils.ChunkCoords;
 import magicbees.main.utils.ItemStackUtils;
 import magicbees.main.utils.net.EventAuraChargeUpdate;
@@ -19,11 +18,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
@@ -33,50 +34,75 @@ import net.minecraftforge.common.util.Constants;
 
 import com.mojang.authlib.GameProfile;
 
+import forestry.api.apiculture.DefaultBeeListener;
+import forestry.api.apiculture.DefaultBeeModifier;
 import forestry.api.apiculture.IBee;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
+import forestry.api.apiculture.IBeeHousingInventory;
+import forestry.api.apiculture.IBeeListener;
+import forestry.api.apiculture.IBeeModifier;
 import forestry.api.apiculture.IBeekeepingLogic;
+import forestry.api.apiculture.IBeekeepingMode;
 import forestry.api.apiculture.IHiveFrame;
 import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
-import forestry.api.core.ErrorStateRegistry;
-import forestry.api.core.IErrorState;
-import forestry.api.genetics.IIndividual;
+import forestry.api.core.ForestryAPI;
+import forestry.api.core.IErrorLogic;
 
 public class TileEntityMagicApiary extends TileEntity implements ISidedInventory, IBeeHousing, ITileEntityAuraCharged {
 
-    public static final String tileEntityName = CommonProxy.DOMAIN + ".magicApiary";
-    private GameProfile ownerProfile;
-
     // Constants
-    private static final int SLOT_QUEEN = 0;
-    private static final int SLOT_DRONE = 1;
-    private static final int SLOT_FRAME_START = 2;
-    private static final int SLOT_FRAME_COUNT = 3;
-    private static final int SLOT_PRODUCTS_START = 5;
-    private static final int SLOT_PRODUCTS_COUNT = 7;
-    
     private static final int AURAPROVIDER_SEARCH_RADIUS = 6;
-    
-    private IBeekeepingLogic logic;
+    public static final String tileEntityName = CommonProxy.DOMAIN + ".magicApiary";
+
+    private GameProfile ownerProfile;
     private IMagicApiaryAuraProvider auraProvider;
     private ChunkCoords auraProviderPosition;
     private BiomeGenBase biome;
-    private int displayHealthMax = 0;
-    private int displayHealth = 0;
-    private boolean init = false;
+    private int breedingProgressPercent = 0;
 
+    private final IBeekeepingLogic beeLogic;
+    private final IErrorLogic errorLogic;
+    private final IBeeListener beeListener;
+    private final IBeeModifier beeModifier;
+    private final MagicApiaryInventory inventory;
     private final AuraCharges auraCharges = new AuraCharges();
 
-    private IErrorState errorState = ErrorStateRegistry.getErrorState("ok");
-    private Set<IErrorState> errors = new HashSet<IErrorState>();
-
-    private ItemStack[] items;
-
     public TileEntityMagicApiary(){
-        items = new ItemStack[12];
-        logic = BeeManager.beeRoot.createBeekeepingLogic(this);
+        beeLogic = BeeManager.beeRoot.createBeekeepingLogic(this);
+        beeModifier = new MagicApiaryBeeModifier(this);
+        beeListener = new MagicApiaryBeeListener(this);
+        inventory = new MagicApiaryInventory(this);
+        errorLogic = ForestryAPI.errorStateRegistry.createErrorLogic();
+    }
+
+    @Override
+    public Iterable<IBeeModifier> getBeeModifiers() {
+        List<IBeeModifier> beeModifiers = new ArrayList<IBeeModifier>();
+
+        beeModifiers.add(beeModifier);
+
+        for (IHiveFrame frame : inventory.getFrames()) {
+            beeModifiers.add(frame.getBeeModifier());
+        }
+
+        return beeModifiers;
+    }
+
+    @Override
+    public Iterable<IBeeListener> getBeeListeners() {
+        return Collections.singleton(beeListener);
+    }
+
+    @Override
+    public IBeeHousingInventory getBeeInventory() {
+        return inventory;
+    }
+
+    @Override
+    public IBeekeepingLogic getBeekeepingLogic() {
+        return beeLogic;
     }
 
     public void setOwner(EntityPlayer player) {
@@ -84,175 +110,12 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
 
     @Override
-    public ItemStack getQueen() {
-        return getStackInSlot(SLOT_QUEEN);
+    public IErrorLogic getErrorLogic() {
+        return errorLogic;
     }
 
     @Override
-    public ItemStack getDrone() {
-        return getStackInSlot(SLOT_DRONE);
-    }
-
-    @Override
-    public void setQueen(ItemStack itemstack) {
-        setInventorySlotContents(SLOT_QUEEN, itemstack);
-    }
-
-    @Override
-    public void setDrone(ItemStack itemstack) {
-        setInventorySlotContents(SLOT_DRONE, itemstack);
-    }
-
-    @Override
-    public boolean canBreed() {
-        return true;
-    }
-
-    @Override
-    public void onQueenChange(ItemStack queenStack) {
-    	if (!worldObj.isRemote) {
-    		MagicBees.object.netHandler.sendInventoryUpdate(this, SLOT_QUEEN, queenStack);
-    	}
-    }
-
-    @Override
-    public void wearOutEquipment(int amount) {
-        int wear = Math.round(amount * BeeManager.beeRoot.getBeekeepingMode(worldObj).getWearModifier());
-
-        for (int i = SLOT_FRAME_START; i < SLOT_FRAME_START + SLOT_FRAME_COUNT; i++) {
-            if (getStackInSlot(i) == null) {
-                continue;
-            }
-            if (!(getStackInSlot(i).getItem() instanceof  IHiveFrame)) {
-                continue;
-            }
-
-            setInventorySlotContents(i, ((IHiveFrame) getStackInSlot(i).getItem()).frameUsed(this, getStackInSlot(i),
-                            BeeManager.beeRoot.getMember(getStackInSlot(SLOT_QUEEN)), wear));
-        }
-    }
-
-    @Override
-    public void onQueenDeath(IBee queen) {
-
-    }
-
-    @Override
-    public void onPostQueenDeath(IBee queen) {
-
-    }
-
-    @Override
-    public boolean onPollenRetrieved(IBee queen, IIndividual pollen, boolean isHandled) {
-        return false;
-    }
-
-    @Override
-    public boolean onEggLaid(IBee queen) {
-        return false;
-    }
-
-	private boolean isItemStackFrame(int i) {
-		return getStackInSlot(i) != null && getStackInSlot(i).getItem() instanceof IHiveFrame;
-	}
-
-    @Override
-    public float getTerritoryModifier(IBeeGenome genome, float currentModifier) {
-        float mod = 1.0f;
-        for (int slotIndex = SLOT_FRAME_START; slotIndex < SLOT_FRAME_START + SLOT_FRAME_COUNT; slotIndex++) {
-            if (isItemStackFrame(slotIndex)) {
-                mod *= ((IHiveFrame) getStackInSlot(slotIndex).getItem()).getTerritoryModifier(genome, mod);
-            }
-        }
-        return mod;
-    }
-
-    @Override
-    public float getMutationModifier(IBeeGenome genome, IBeeGenome mate, float currentModifier) {
-        float mod = 1.0f;
-        for (int slotIndex = SLOT_FRAME_START; slotIndex < SLOT_FRAME_START + SLOT_FRAME_COUNT; slotIndex++) {
-            if (isItemStackFrame(slotIndex)) {
-                mod *= ((IHiveFrame) getStackInSlot(slotIndex).getItem()).getMutationModifier(genome, mate, mod);
-            }
-        }
-        if (this.isMutationBoosted()) {
-        	mod = mod * 2f;
-        }
-        return mod;
-    }
-
-    @Override
-    public float getLifespanModifier(IBeeGenome genome, IBeeGenome mate, float currentModifier) {
-        float mod = 1.0f;
-        for (int slotIndex = SLOT_FRAME_START; slotIndex < SLOT_FRAME_START + SLOT_FRAME_COUNT; slotIndex++) {
-            if (isItemStackFrame(slotIndex)) {
-                mod *= ((IHiveFrame) getStackInSlot(slotIndex).getItem()).getLifespanModifier(genome, mate, mod);
-            }
-        }
-        if (this.isDeathRateBoosted()) {
-        	mod = mod / 2f;
-        }
-        return mod;
-    }
-
-    @Override
-    public float getProductionModifier(IBeeGenome genome, float currentModifier) {
-        float mod = 0.9f;
-        for (int slotIndex = SLOT_FRAME_START; slotIndex < SLOT_FRAME_START + SLOT_FRAME_COUNT; slotIndex++){
-            if (isItemStackFrame(slotIndex)) {
-                mod *= ((IHiveFrame) getStackInSlot(slotIndex).getItem()).getProductionModifier(genome, mod);
-            }
-        }
-        if (this.isProductionBoosted()) {
-        	mod = mod * 2f;
-        }
-        return mod;
-    }
-
-    @Override
-    public float getFloweringModifier(IBeeGenome genome, float currentModifier) {
-        float mod = 1.0f;
-        for (int slotIndex = SLOT_FRAME_START; slotIndex < SLOT_FRAME_START + SLOT_FRAME_COUNT; slotIndex++) {
-            if (isItemStackFrame(slotIndex)) {
-                mod *= ((IHiveFrame) getStackInSlot(slotIndex).getItem()).getFloweringModifier(genome, mod);
-            }
-        }
-        return mod;
-    }
-
-    @Override
-    public float getGeneticDecay(IBeeGenome genome, float currentModifier) {
-        float mod = 0.8f;
-        for (int slotIndex = SLOT_FRAME_START; slotIndex < SLOT_FRAME_START + SLOT_FRAME_COUNT; slotIndex++) {
-            if (isItemStackFrame(slotIndex)) {
-                mod *= ((IHiveFrame) getStackInSlot(slotIndex).getItem()).getGeneticDecay(genome, mod);
-            }
-        }
-        return mod;
-    }
-
-    @Override
-    public boolean isSealed() {
-        return false;
-    }
-
-    @Override
-    public boolean isSelfLighted() {
-        return false;
-    }
-
-    @Override
-    public boolean isSunlightSimulated() {
-        return false;
-    }
-
-    @Override
-    public boolean isHellish() {
-        return false;
-    }
-
-    @Override
-    public GameProfile getOwnerName() {
+    public GameProfile getOwner() {
         return this.ownerProfile;
     }
 
@@ -262,28 +125,21 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
 
     @Override
-    public int getXCoord() {
-        return xCoord;
-    }
-
-    @Override
-    public int getYCoord() {
-        return yCoord;
-    }
-
-    @Override
-    public int getZCoord() {
-        return zCoord;
+    public ChunkCoordinates getCoordinates() {
+        return new ChunkCoordinates(xCoord, yCoord, zCoord);
     }
 
     @Override
     public BiomeGenBase getBiome() {
+        if (biome == null) {
+            biome = worldObj.getBiomeGenForCoordsBody(xCoord, zCoord);
+        }
         return biome;
     }
 
     @Override
     public EnumTemperature getTemperature() {
-        return EnumTemperature.getFromValue(getExactTemperature());
+        return EnumTemperature.getFromBiome(getBiome(), xCoord, yCoord, zCoord);
     }
 
     @Override
@@ -292,51 +148,23 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
 
     @Override
-    public void setErrorState(IErrorState state) {
-    	this.errorState = state;
+    public int getBlockLightValue() {
+        return worldObj.getBlockLightValue(xCoord, yCoord + 1, zCoord);
     }
 
     @Override
-    public IErrorState getErrorState() {
-        return this.errorState;
-    }
-
-	@Override
-	public boolean setErrorCondition(boolean condition, IErrorState errorState) {
-		if (!condition) {
-			errors.add(errorState);
-		}
-		else {
-			errors.remove(errorState);
-		}
-		return true;
-	}
-
-	@Override
-	public Set<IErrorState> getErrorStates() {
-		return errors;
-	}
-
-    @Override
-    public boolean addProduct(ItemStack product, boolean all) {
-    	int countAdded = ItemStackUtils.addItemToInventory(this, product, SLOT_PRODUCTS_START, SLOT_PRODUCTS_COUNT);
-    	
-    	if (all) {
-    		return countAdded == product.stackSize;
-    	}
-    	else {
-    		return countAdded > 0;
-    	}
+    public boolean canBlockSeeTheSky() {
+        return worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord);
     }
 
     @Override
     public int getSizeInventory() {
-        return items.length;
+        return inventory.getSizeInventory();
     }
 
     @Override
     public ItemStack getStackInSlot(int i) {
-        return items[i];
+        return inventory.getStackInSlot(i);
     }
 
     @Override
@@ -364,12 +192,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
 
     @Override
     public void setInventorySlotContents(int i, ItemStack itemStack) {
-        items[i] = itemStack;
-
-        if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()){
-            itemStack.stackSize = getInventoryStackLimit();
-        }
-
+        inventory.setInventorySlotContents(i, itemStack);
         markDirty();
     }
 
@@ -385,7 +208,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
 
     @Override
     public int getInventoryStackLimit() {
-        return 64;
+        return inventory.getInventoryStackLimit();
     }
 
     @Override
@@ -408,82 +231,8 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
         return true;
     }
 
-    @Override
-    public int[] getAccessibleSlotsFromSide(int side) {
-    	if (side == 0 || side == 1) {
-    		return new int[] { SLOT_QUEEN, SLOT_DRONE };
-    	}
-    	else {
-    		int[] slots = new int[SLOT_PRODUCTS_COUNT];
-    		for (int i = 0, slot = SLOT_PRODUCTS_START; i < SLOT_PRODUCTS_COUNT; ++i, ++slot) {
-    			slots[i] = slot;
-    		}
-    		return slots;
-    	}
-    }
-
-    @Override
-    public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
-        if(slot == SLOT_QUEEN && BeeManager.beeRoot.isMember(itemStack)
-                && !BeeManager.beeRoot.isDrone(itemStack)) {
-            return true;
-        }
-        else if (slot == SLOT_DRONE && BeeManager.beeRoot.isDrone(itemStack)) {
-        	return true;
-        }
-        return slot == SLOT_DRONE && BeeManager.beeRoot.isDrone(itemStack);
-    }
-
-    @Override
-    public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
-        switch (slot){
-            case SLOT_FRAME_START:
-            case SLOT_FRAME_START + 1:
-            case SLOT_FRAME_START + 2:
-                return false;
-            default:
-                return true;
-        }
-
-    }
-
-    private int getHealthDisplay() {
-        if (getStackInSlot(SLOT_QUEEN) == null) {
-            return 0;
-        }
-
-        if (BeeManager.beeRoot.isMated(getStackInSlot(SLOT_QUEEN))) {
-            return BeeManager.beeRoot.getMember(getStackInSlot(SLOT_QUEEN)).getHealth();
-        }
-        else if (!BeeManager.beeRoot.isDrone(getStackInSlot(SLOT_QUEEN))) {
-            return displayHealth;
-        }
-        else {
-            return 0;
-        }
-    }
-
-    private int getMaxHealthDisplay() {
-        if (getStackInSlot(SLOT_QUEEN) == null) {
-            return 0;
-        }
-        if (BeeManager.beeRoot.isMated(getStackInSlot(SLOT_QUEEN))) {
-            return BeeManager.beeRoot.getMember(getStackInSlot(SLOT_QUEEN)).getMaxHealth();
-        }
-        else if (!BeeManager.beeRoot.isDrone(getStackInSlot(SLOT_QUEEN))) {
-            return displayHealthMax;
-        }
-        else {
-            return 0;
-        }
-    }
-
     public int getHealthScaled(int i) {
-        if (getMaxHealthDisplay() == 0) {
-            return 0;
-        }
-
-        return (getHealthDisplay() * i) / getMaxHealthDisplay();
+        return (breedingProgressPercent * i) / 100;
     }
 
     public int getTemperatureScaled(int i) {
@@ -499,27 +248,9 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     public void writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
 
-        NBTTagList items = new NBTTagList();
-
-        for (int i = 0; i < getSizeInventory(); i++) {
-            ItemStack itemStack = getStackInSlot(i);
-
-            if (itemStack != null) {
-                NBTTagCompound item = new NBTTagCompound();
-                item.setByte("Slot", (byte)i);
-                itemStack.writeToNBT(item);
-                items.appendTag(item);
-            }
-        }
-        compound.setTag("Items", items);
-
-        compound.setInteger("BiomeId", biome.biomeID);
-        if (logic != null) {
-            logic.writeToNBT(compound);
-        }
-
-        ChunkCoords.writeToNBT(this.auraProviderPosition, compound);
-
+        inventory.writeToNBT(compound);
+        beeLogic.writeToNBT(compound);
+        ChunkCoords.writeToNBT(auraProviderPosition, compound);
         auraCharges.writeToNBT(compound);
     }
 
@@ -527,47 +258,29 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
 
-        NBTTagList items = compound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
-
-        for (int i = 0; i < items.tagCount(); i++) {
-            NBTTagCompound item = items.getCompoundTagAt(i);
-            int slot = item.getByte("Slot");
-
-            if (slot >= 0 && slot < getSizeInventory()) {
-                setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
-            }
-        }
-
-        int biomeId = compound.getInteger("BiomeId");
-        biome = BiomeGenBase.getBiome(biomeId);
-        logic.readFromNBT(compound);
-
-        this.auraProviderPosition = ChunkCoords.readFromNBT(compound);
-
+        inventory.readFromNBT(compound);
+        beeLogic.readFromNBT(compound);
+        auraProviderPosition = ChunkCoords.readFromNBT(compound);
         auraCharges.readFromNBT(compound);
     }
 
     @Override
     public Packet getDescriptionPacket() {
+        beeLogic.syncToClient();
         EventAuraChargeUpdate event = new EventAuraChargeUpdate(new ChunkCoords(this), auraCharges);
         return event.getPacket();
     }
 
     public float getExactTemperature() {
-        return biome.temperature;
+        return getBiome().getFloatTemperature(xCoord, yCoord, zCoord);
     }
 
     public float getExactHumidity() {
-        return biome.rainfall;
+        return getBiome().rainfall;
     }
 
     @Override
     public void updateEntity() {
-        if (!init) {
-            init = true;
-            updateBiome();
-        }
-
         if (worldObj.isRemote) {
             updateClientSide();
         }
@@ -576,24 +289,9 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
         }
     }
 
-    public void updateBiome() {
-        if (worldObj != null) {
-            if (biome == null) {
-                BiomeGenBase biome = worldObj.getBiomeGenForCoordsBody(xCoord, zCoord);
-                if (biome != null) {
-                    this.biome = biome;
-                    setErrorState(ErrorStateRegistry.getErrorState("OK"));
-                }
-            }
-        }
-    }
-
     public void updateClientSide() {
-        if (BeeManager.beeRoot.isMated(getStackInSlot(SLOT_QUEEN))) {
-            if (getErrorState() == ErrorStateRegistry.getErrorState("OK") && worldObj.getTotalWorldTime() % 10 == 0) {
-                IBee displayQueen = BeeManager.beeRoot.getMember(getStackInSlot(SLOT_QUEEN));
-                displayQueen.doFX(logic.getEffectData(), this);
-            }
+        if (beeLogic.canDoBeeFX() && worldObj.getTotalWorldTime() % 10 == 0) {
+            beeLogic.doBeeFX();
         }
     }
 
@@ -605,42 +303,22 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
    			updateAuraProvider();
    		}
    		tickCharges();
-    	
-        if (logic.canWork()) {
-        	logic.doWork();
-        }
 
-        IBee queen = logic.getQueen();
-        if (queen == null) {
-            return;
-        }
-
-        if (worldObj.getTotalWorldTime() % 5 == 0) {
-            onQueenChange(getStackInSlot(SLOT_QUEEN));
+        if (beeLogic.canWork()) {
+            beeLogic.doWork();
         }
     }
 
     public void getGUINetworkData(int i, int j) {
-        if (logic == null) {
-            return;
-        }
-
-        switch(i) {
+        switch (i) {
             case 0:
-                displayHealth = j;
-                break;
-            case 1: displayHealthMax = j;
+                breedingProgressPercent = j;
                 break;
         }
     }
 
     public void sendGUINetworkData(Container container, ICrafting iCrafting) {
-        if (logic == null) {
-            return;
-        }
-
-        iCrafting.sendProgressBarUpdate(container, 0, logic.getBreedingTime());
-        iCrafting.sendProgressBarUpdate(container, 1, logic.getTotalBreedingTime());
+        iCrafting.sendProgressBarUpdate(container, 0, beeLogic.getBeeProgressPercent());
     }
     
     public boolean isProductionBoosted() {
@@ -778,5 +456,247 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     @Override
     public AuraCharges getAuraCharges() {
         return auraCharges;
+    }
+
+    @Override
+    public int[] getAccessibleSlotsFromSide(int i) {
+        return inventory.getAccessibleSlotsFromSide(i);
+    }
+
+    @Override
+    public boolean canInsertItem(int i, ItemStack itemStack, int i1) {
+        return inventory.canInsertItem(i, itemStack, i1);
+    }
+
+    @Override
+    public boolean canExtractItem(int i, ItemStack itemStack, int i1) {
+        return inventory.canExtractItem(i, itemStack, i1);
+    }
+
+    private static class MagicApiaryInventory implements IBeeHousingInventory {
+        public static final int SLOT_QUEEN = 0;
+        public static final int SLOT_DRONE = 1;
+        public static final int SLOT_FRAME_START = 2;
+        public static final int SLOT_FRAME_COUNT = 3;
+        public static final int SLOT_PRODUCTS_START = 5;
+        public static final int SLOT_PRODUCTS_COUNT = 7;
+
+        private final TileEntityMagicApiary magicApiary;
+        private ItemStack[] items;
+
+        public MagicApiaryInventory(TileEntityMagicApiary magicApiary) {
+            this.magicApiary = magicApiary;
+            this.items = new ItemStack[12];
+        }
+
+        @Override
+        public ItemStack getQueen() {
+            return magicApiary.getStackInSlot(SLOT_QUEEN);
+        }
+
+        @Override
+        public ItemStack getDrone() {
+            return magicApiary.getStackInSlot(SLOT_DRONE);
+        }
+
+        @Override
+        public void setQueen(ItemStack itemstack) {
+            magicApiary.setInventorySlotContents(SLOT_QUEEN, itemstack);
+        }
+
+        @Override
+        public void setDrone(ItemStack itemstack) {
+            magicApiary.setInventorySlotContents(SLOT_DRONE, itemstack);
+        }
+
+        @Override
+        public boolean addProduct(ItemStack product, boolean all) {
+            int countAdded = ItemStackUtils.addItemToInventory(magicApiary, product, SLOT_PRODUCTS_START, SLOT_PRODUCTS_COUNT);
+
+            if (all) {
+                return countAdded == product.stackSize;
+            }
+            else {
+                return countAdded > 0;
+            }
+        }
+
+        public int getSizeInventory() {
+            return items.length;
+        }
+
+        public ItemStack getStackInSlot(int i) {
+            return items[i];
+        }
+
+        public void setInventorySlotContents(int i, ItemStack itemStack) {
+            items[i] = itemStack;
+
+            if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()){
+                itemStack.stackSize = getInventoryStackLimit();
+            }
+        }
+
+        public int[] getAccessibleSlotsFromSide(int side) {
+            if (side == 0 || side == 1) {
+                return new int[] { SLOT_QUEEN, SLOT_DRONE };
+            }
+            else {
+                int[] slots = new int[SLOT_PRODUCTS_COUNT];
+                for (int i = 0, slot = SLOT_PRODUCTS_START; i < SLOT_PRODUCTS_COUNT; ++i, ++slot) {
+                    slots[i] = slot;
+                }
+                return slots;
+            }
+        }
+
+        public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
+            if(slot == SLOT_QUEEN && BeeManager.beeRoot.isMember(itemStack)
+                    && !BeeManager.beeRoot.isDrone(itemStack)) {
+                return true;
+            }
+            else if (slot == SLOT_DRONE && BeeManager.beeRoot.isDrone(itemStack)) {
+                return true;
+            }
+            return slot == SLOT_DRONE && BeeManager.beeRoot.isDrone(itemStack);
+        }
+
+        public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
+            switch (slot){
+                case SLOT_FRAME_START:
+                case SLOT_FRAME_START + 1:
+                case SLOT_FRAME_START + 2:
+                    return false;
+                default:
+                    return true;
+            }
+        }
+
+        public int getInventoryStackLimit() {
+            return 64;
+        }
+
+        public Collection<IHiveFrame> getFrames() {
+            Collection<IHiveFrame> hiveFrames = new ArrayList<IHiveFrame>(SLOT_FRAME_COUNT);
+
+            for (int i = SLOT_FRAME_START; i < SLOT_FRAME_START + SLOT_FRAME_COUNT; i++) {
+                ItemStack stackInSlot = magicApiary.getStackInSlot(i);
+                if (stackInSlot == null) {
+                    continue;
+                }
+
+                Item itemInSlot = stackInSlot.getItem();
+                if (itemInSlot instanceof IHiveFrame) {
+                    hiveFrames.add((IHiveFrame) itemInSlot);
+                }
+            }
+
+            return hiveFrames;
+        }
+
+        public void writeToNBT(NBTTagCompound compound) {
+            NBTTagList itemsNBT = new NBTTagList();
+
+            for (int i = 0; i < items.length; i++) {
+                ItemStack itemStack = items[i];
+
+                if (itemStack != null) {
+                    NBTTagCompound item = new NBTTagCompound();
+                    item.setByte("Slot", (byte)i);
+                    itemStack.writeToNBT(item);
+                    itemsNBT.appendTag(item);
+                }
+            }
+            compound.setTag("Items", itemsNBT);
+        }
+
+        public void readFromNBT(NBTTagCompound compound) {
+            NBTTagList items = compound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
+
+            for (int i = 0; i < items.tagCount(); i++) {
+                NBTTagCompound item = items.getCompoundTagAt(i);
+                int slot = item.getByte("Slot");
+
+                if (slot >= 0 && slot < getSizeInventory()) {
+                    setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
+                }
+            }
+        }
+    }
+
+    private static class MagicApiaryBeeModifier extends DefaultBeeModifier {
+
+        private final TileEntityMagicApiary magicApiary;
+
+        public MagicApiaryBeeModifier(TileEntityMagicApiary magicApiary) {
+            this.magicApiary = magicApiary;
+        }
+
+        @Override
+        public float getMutationModifier(IBeeGenome genome, IBeeGenome mate, float currentModifier) {
+            float mod = 1.0f;
+            if (magicApiary.isMutationBoosted()) {
+                mod = mod * 2f;
+            }
+            return mod;
+        }
+
+        @Override
+        public float getLifespanModifier(IBeeGenome genome, IBeeGenome mate, float currentModifier) {
+            float mod = 1.0f;
+            if (magicApiary.isDeathRateBoosted()) {
+                mod = mod / 2f;
+            }
+            return mod;
+        }
+
+        @Override
+        public float getProductionModifier(IBeeGenome genome, float currentModifier) {
+            float mod = 0.9f;
+            if (magicApiary.isProductionBoosted()) {
+                mod = mod * 2f;
+            }
+            return mod;
+        }
+
+        @Override
+        public float getGeneticDecay(IBeeGenome genome, float currentModifier) {
+            return 0.8f;
+        }
+    }
+
+    private static class MagicApiaryBeeListener extends DefaultBeeListener {
+
+        private final TileEntityMagicApiary magicApiary;
+
+        public MagicApiaryBeeListener(TileEntityMagicApiary magicApiary) {
+            this.magicApiary = magicApiary;
+        }
+
+        @Override
+        public void wearOutEquipment(int amount) {
+            IBeekeepingMode beekeepingMode = BeeManager.beeRoot.getBeekeepingMode(magicApiary.getWorldObj());
+            int wear = Math.round(amount * beekeepingMode.getWearModifier());
+
+            for (int i = MagicApiaryInventory.SLOT_FRAME_START; i < MagicApiaryInventory.SLOT_FRAME_START + MagicApiaryInventory.SLOT_FRAME_COUNT; i++) {
+                ItemStack hiveFrameStack = magicApiary.getStackInSlot(i);
+                if (hiveFrameStack == null) {
+                    continue;
+                }
+
+                Item hiveFrameItem = hiveFrameStack.getItem();
+                if (!(hiveFrameItem instanceof IHiveFrame)) {
+                    continue;
+                }
+
+                IHiveFrame hiveFrame = (IHiveFrame) hiveFrameItem;
+
+                ItemStack queenStack = magicApiary.getBeeInventory().getQueen();
+                IBee queen = BeeManager.beeRoot.getMember(queenStack);
+                ItemStack usedFrame = hiveFrame.frameUsed(magicApiary, hiveFrameStack, queen, wear);
+
+                magicApiary.setInventorySlotContents(i, usedFrame);
+            }
+        }
     }
 }

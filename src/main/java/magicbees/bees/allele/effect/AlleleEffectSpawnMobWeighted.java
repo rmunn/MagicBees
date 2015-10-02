@@ -1,12 +1,17 @@
 package magicbees.bees.allele.effect;
 
 import magicbees.bees.AlleleEffect;
+import magicbees.bees.BeeManager;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
+
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
+import forestry.api.apiculture.IBeeModifier;
 import forestry.api.genetics.IEffectData;
 
 public class AlleleEffectSpawnMobWeighted extends AlleleEffect {
@@ -69,10 +74,13 @@ public class AlleleEffectSpawnMobWeighted extends AlleleEffect {
 	}
 
 	protected double[] randomMobSpawnCoords(World world, IBeeGenome bee, IBeeHousing housing) {
+		ChunkCoordinates coords = housing.getCoordinates();
+		IBeeModifier beeModifier = BeeManager.beeRoot.createBeeHousingModifier(housing);
+
 		double pos[] = new double[3];
-		pos[0] = housing.getXCoord() + world.rand.nextDouble() * (bee.getTerritory()[0] * housing.getTerritoryModifier(bee, 1f)) - bee.getTerritory()[0] / 2;
-		pos[1] = housing.getYCoord() + world.rand.nextDouble() * (bee.getTerritory()[1] * housing.getTerritoryModifier(bee, 1f)) - bee.getTerritory()[1] / 2;
-		pos[2] = housing.getZCoord() + world.rand.nextDouble() * (bee.getTerritory()[2] * housing.getTerritoryModifier(bee, 1f)) - bee.getTerritory()[2] / 2;
+		pos[0] = coords.posX + world.rand.nextDouble() * (bee.getTerritory()[0] * beeModifier.getTerritoryModifier(bee, 1f)) - bee.getTerritory()[0] / 2;
+		pos[1] = coords.posY + world.rand.nextDouble() * (bee.getTerritory()[1] * beeModifier.getTerritoryModifier(bee, 1f)) - bee.getTerritory()[1] / 2;
+		pos[2] = coords.posZ + world.rand.nextDouble() * (bee.getTerritory()[2] * beeModifier.getTerritoryModifier(bee, 1f)) - bee.getTerritory()[2] / 2;
 		return pos;
 	}
 

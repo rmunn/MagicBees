@@ -9,23 +9,19 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
-import forestry.api.apiculture.IAlleleBeeSpecies;
 import forestry.api.apiculture.IBee;
 import forestry.api.genetics.IEffectData;
 
 
 public class TileEntityEffectJar extends TileEntity implements IInventory {
 	public static final String tileEntityName = CommonProxy.DOMAIN + ".effectJar";
-	
-	private GameProfile ownerName;
-	
 	private static final int SLOT_COUNT = 2;
 	public static final int DRONE_SLOT = 0;
 	public static final int QUEEN_SLOT = SLOT_COUNT - 1;
-	
+
+	private GameProfile ownerName;
 	private ItemStack[] beeSlots;
 	private IEffectData[] effectData = new IEffectData[2];
-	
 	private int throttle;
 	public int currentBeeHealth;
 	public int currentBeeColour;
@@ -89,7 +85,7 @@ public class TileEntityEffectJar extends TileEntity implements IInventory {
 			int current = bee.getHealth();
 			int max = bee.getMaxHealth();
 			currentBeeHealth = (current * 100) / max;
-			currentBeeColour = ((IAlleleBeeSpecies)bee.getGenome().getPrimary()).getIconColour(0);
+			currentBeeColour = bee.getGenome().getPrimary().getIconColour(0);
 		}
 		this.markDirty();
 	}
@@ -102,9 +98,9 @@ public class TileEntityEffectJar extends TileEntity implements IInventory {
 		IBee queen = magicbees.bees.BeeManager.beeRoot.getMember(this.beeSlots[QUEEN_SLOT]);
 
 		currentBeeHealth = (queen.getHealth() * 100) / queen.getMaxHealth();
-		currentBeeColour = ((IAlleleBeeSpecies)queen.getGenome().getPrimary()).getIconColour(0);
+		currentBeeColour = queen.getGenome().getPrimary().getIconColour(0);
 		
-		EffectJarHousing housingLogic = EffectJarHousing.getFor(this);
+		EffectJarHousing housingLogic = new EffectJarHousing(this);
 		this.effectData = queen.doEffect(this.effectData, housingLogic);
 		if (this.worldObj.getWorldTime() % 5 == 0)
 		{

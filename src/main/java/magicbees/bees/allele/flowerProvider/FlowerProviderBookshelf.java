@@ -14,21 +14,17 @@ import forestry.api.genetics.IPollinatable;
 public class FlowerProviderBookshelf extends FlowerProvider {
 	
 	public FlowerProviderBookshelf() {
-		super(1);
-		flowers.add(new FlowerImpl(Blocks.bookshelf, OreDictionary.WILDCARD_VALUE, 1, false));
-	}
-
-	public boolean isAcceptedFlower(World world, IIndividual genome, int x, int i, int j) {
-		boolean flag = false;
-		if (world.getBlock(x, i, j) == Blocks.bookshelf) {
-			flag = true;
-		}
-		return flag;
+		registerAcceptableFlower(Blocks.bookshelf, OreDictionary.WILDCARD_VALUE);
 	}
 
 	@Override
 	public boolean growFlower(World world, IIndividual genome, int x, int i, int j) {
 		return true;
+	}
+
+	@Override
+	public String getFlowerType() {
+		return "flowersBookshelf";
 	}
 
 	@Override

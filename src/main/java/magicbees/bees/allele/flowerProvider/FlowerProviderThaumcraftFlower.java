@@ -12,21 +12,8 @@ import forestry.api.genetics.IPollinatable;
 public class FlowerProviderThaumcraftFlower extends FlowerProvider {
 	
 	public FlowerProviderThaumcraftFlower() {
-		super(2);
-		flowers.add(new FlowerImpl(ThaumcraftHelper.plant, ThaumcraftHelper.BlockPlant.SHIMMERLEAF.ordinal(), 1, true));
-		flowers.add(new FlowerImpl(ThaumcraftHelper.plant, ThaumcraftHelper.BlockPlant.CINDERPEARL.ordinal(), 1, true));
-	}
-
-	@Override
-	public boolean isAcceptedFlower(World world, IIndividual genome, int x, int y, int z) {
-		if (world.getBlock(x, y, z) == ThaumcraftHelper.plant) {
-			int meta = world.getBlockMetadata(x, y, z);
-			if (meta == ThaumcraftHelper.BlockPlant.SHIMMERLEAF.ordinal()
-					|| meta == ThaumcraftHelper.BlockPlant.CINDERPEARL.ordinal()) {
-				return true;
-			}
-		}
-		return false;
+		registerPlantableFlower(ThaumcraftHelper.plant, ThaumcraftHelper.BlockPlant.SHIMMERLEAF.ordinal(), 1);
+		registerPlantableFlower(ThaumcraftHelper.plant, ThaumcraftHelper.BlockPlant.CINDERPEARL.ordinal(), 1);
 	}
 
 	@Override
@@ -43,6 +30,11 @@ public class FlowerProviderThaumcraftFlower extends FlowerProvider {
 			}
 		}
 		return flag;
+	}
+
+	@Override
+	public String getFlowerType() {
+		return "flowersThaumcraft";
 	}
 
 	@Override
