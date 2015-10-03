@@ -66,8 +66,13 @@ public class SubTileBeegonia extends SubTileGenerating {
 			return 0;
 		}
 		else {
-			int halfComplexity = species.getComplexity() / 2;
-			return (halfComplexity >= 1) ? halfComplexity : 1;
+			try {
+				int halfComplexity = species.getComplexity() / 2;
+				return (halfComplexity >= 1) ? halfComplexity : 1;
+			}
+			catch (NoSuchMethodError error) {
+				return 1;
+			}
 		}
 	}
 	
