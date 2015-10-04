@@ -32,7 +32,7 @@ public class AlleleEffectEmpowering extends AlleleEffect {
 		int xCoord = housing.getXCoord();
 		int yCoord = housing.getYCoord();
 		int zCoord = housing.getZCoord();
-		int range = (int)Math.ceil(genome.getTerritory()[0] * housing.getTerritoryModifier(genome, 1f));
+		int range = (int)Math.max(Math.ceil(genome.getTerritory()[0] * housing.getTerritoryModifier(genome, 1f)), 1);
 		List<Chunk> chunks = BlockUtil.getChunksInSearchRange(world, xCoord, zCoord, range);
 		
         if (NodeHelper.growNodeInRange(chunks, world, xCoord, yCoord, zCoord, range)) {

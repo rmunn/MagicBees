@@ -102,7 +102,8 @@ public class NodeHelper {
 				if (node != null) {
 					++attemptedNodes;
 					AspectList aspectsBase = node.getAspectsBase();
-		            if (world.rand.nextInt(aspectsBase.visSize()) < 120) {
+					int randBase = Math.max(aspectsBase.visSize(), 1);
+		            if (world.rand.nextInt(randBase) < 120) {
 						Aspect aspectToAdd;
 						int rollAttempts = 0;
 						do {
