@@ -35,7 +35,7 @@ public class AlleleEffectEmpowering extends AlleleEffect {
 		World world = housing.getWorld();
 		ChunkCoordinates coords = housing.getCoordinates();
 		IBeeModifier beeModifier = BeeManager.beeRoot.createBeeHousingModifier(housing);
-		int range = (int)Math.ceil(genome.getTerritory()[0] * beeModifier.getTerritoryModifier(genome, 1f));
+		int range = Math.max((int)Math.ceil(genome.getTerritory()[0] * beeModifier.getTerritoryModifier(genome, 1f)), 1);
 		List<Chunk> chunks = BlockUtil.getChunksInSearchRange(world, coords.posX, coords.posZ, range);
 		
         if (NodeHelper.growNodeInRange(chunks, world, coords.posX, coords.posY, coords.posZ, range)) {
