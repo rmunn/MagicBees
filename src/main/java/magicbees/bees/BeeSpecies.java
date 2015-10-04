@@ -588,11 +588,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 	private boolean isNocturnal;
 	private IClassification branch;
 	private HashMap<ItemStack, Float> products;
-	@Deprecated
-	private HashMap<ItemStack, Integer> oldProducts;
 	private HashMap<ItemStack, Float> specialties;
-	@Deprecated
-	private HashMap<ItemStack, Integer> oldSpecialties;
 	private IAllele genomeTemplate[];
 	private String uid;
 	private boolean dominant;
@@ -640,9 +636,7 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 		isSecret = isSpeciesSecret;
 		isCounted = isSpeciesCounted;
 		products = new HashMap<ItemStack, Float>();
-		oldProducts = new HashMap<ItemStack, Integer>();
 		specialties = new HashMap<ItemStack, Float>();
-		oldSpecialties = new HashMap<ItemStack, Integer>();
 		this.branch = classification;
 		this.branch.addMemberSpecies(this);
 		this.isNocturnal = isSpeciesNocturnal;
@@ -652,28 +646,14 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 	public IAllele[] getGenome() {
 		return genomeTemplate;
 	}
-
-	@Deprecated
-	public BeeSpecies addProduct(ItemStack produce, int percentChance) {
-		// Don't use this plz.
-		return null;
-	}
 	
 	public BeeSpecies addProduct(ItemStack produce, float chance) {
 		products.put(produce, chance);
-		oldProducts.put(produce, (int)(chance * 100));
 		return this;
-	}
-
-	@Deprecated
-	public BeeSpecies addSpecialty(ItemStack produce, int percentChance) {
-		// Don't use this plz.
-		return null;
 	}
 	
 	public BeeSpecies addSpecialty(ItemStack produce, float chance) {
 		specialties.put(produce, chance);
-		oldSpecialties.put(produce, (int)(chance * 100));
 		return this;
 	}
 
@@ -754,18 +734,6 @@ public enum BeeSpecies implements IAlleleBeeSpecies, IIconProvider
 	@Override
 	public Map<ItemStack, Float> getSpecialtyChances() {
 		return specialties;
-	}
-
-	@Override
-	@Deprecated
-	public HashMap<ItemStack, Integer> getProducts() {
-		return oldProducts;
-	}
-
-	@Override
-	@Deprecated
-	public HashMap<ItemStack, Integer> getSpecialty() {
-		return oldSpecialties;
 	}
 
 	@Override

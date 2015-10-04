@@ -1,8 +1,11 @@
 package magicbees.item.types;
 
+import forestry.api.apiculture.IBeeGenome;
+import forestry.api.apiculture.IBeeModifier;
+
 import magicbees.main.utils.LocalizationManager;
 
-public enum HiveFrameType
+public enum HiveFrameType implements IBeeModifier
 {
 	MAGIC("Magic", 240, 1f, 1f, 1f, 2f, 0.6f),
 	RESILIENT("Resilient", 800, 1f, 1f, 1f, 2f, 0.5f),
@@ -12,14 +15,26 @@ public enum HiveFrameType
 	TEMPORAL("Temporal", 300, 1f, 1f, 2.5f, 1f, 0.8f),
 	OBLIVION("Oblivion", 50, 1f, 1f, 0.0001f, 0f, 1f),
 	;
+
+	private final String frameName;
+	public final int maxDamage;
+
+	private final float territoryMod;
+	private final float mutationMod;
+	private final float lifespanMod;
+	private final float productionMod;
+	private final float floweringMod;
+	private final float geneticDecayMod;
+	private final boolean isSealed;
+	private final boolean isLit;
+	private final boolean isSunlit;
+	private final boolean isHellish;
 	
-	private HiveFrameType(String name, int damage,
-						  float territory, float mutation, float lifespan, float production, float geneticDecay)
-	{
+	HiveFrameType(String name, int damage, float territory, float mutation, float lifespan, float production, float geneticDecay) {
 		this(name, damage, territory, mutation, lifespan, production, 1f, geneticDecay, false, false, false, false);
 	}
 	
-	private HiveFrameType(String name, int damage,
+	HiveFrameType(String name, int damage,
 						  float territory, float mutation, float lifespan, float production, float flowering, float geneticDecay,
 						  boolean sealed, boolean lit, boolean sunlit, boolean hellish)
 	{
@@ -37,21 +52,7 @@ public enum HiveFrameType
 		this.isSunlit = sunlit;
 		this.isHellish = hellish;
 	}
-	
-	private String frameName;
-	public int maxDamage;
-	
-	public float territoryMod;
-	public float mutationMod;
-	public float lifespanMod;
-	public float productionMod;
-	public float floweringMod;
-	public float geneticDecayMod;
-	public boolean isSealed;
-	public boolean isLit;
-	public boolean isSunlit;
-	public boolean isHellish;
-	
+
 	public String getName()
 	{
 		return this.frameName;
@@ -60,5 +61,55 @@ public enum HiveFrameType
 	public String getLocalizedName()
 	{
 		return LocalizationManager.getLocalizedString("frame." + this.frameName);
+	}
+
+	@Override
+	public float getTerritoryModifier(IBeeGenome genome, float currentModifier) {
+		return territoryMod;
+	}
+
+	@Override
+	public float getMutationModifier(IBeeGenome genome, IBeeGenome mate, float currentModifier) {
+		return mutationMod;
+	}
+
+	@Override
+	public float getLifespanModifier(IBeeGenome genome, IBeeGenome mate, float currentModifier) {
+		return lifespanMod;
+	}
+
+	@Override
+	public float getProductionModifier(IBeeGenome genome, float currentModifier) {
+		return productionMod;
+	}
+
+	@Override
+	public float getFloweringModifier(IBeeGenome genome, float currentModifier) {
+		return floweringMod;
+	}
+
+	@Override
+	public float getGeneticDecay(IBeeGenome genome, float currentModifier) {
+		return geneticDecayMod;
+	}
+
+	@Override
+	public boolean isSealed() {
+		return isSealed;
+	}
+
+	@Override
+	public boolean isSelfLighted() {
+		return isLit;
+	}
+
+	@Override
+	public boolean isSunlightSimulated() {
+		return isSunlit;
+	}
+
+	@Override
+	public boolean isHellish() {
+		return isHellish;
 	}
 }

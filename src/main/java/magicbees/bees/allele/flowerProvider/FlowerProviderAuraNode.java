@@ -1,38 +1,18 @@
 package magicbees.bees.allele.flowerProvider;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import magicbees.main.utils.LocalizationManager;
 import magicbees.main.utils.compat.ThaumcraftHelper;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import thaumcraft.api.nodes.INode;
-import forestry.api.genetics.IFlower;
+
 import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.IPollinatable;
 
 public class FlowerProviderAuraNode extends FlowerProvider {
 	
 	public FlowerProviderAuraNode() {
-		super(2);
-		flowers.add(new FlowerImpl(ThaumcraftHelper.airy, ThaumcraftHelper.AiryBlockType.NODE.ordinal(), 1, false));
-		flowers.add(new FlowerImpl(ThaumcraftHelper.airy, ThaumcraftHelper.AiryBlockType.ENERGIZED_NODE.ordinal(), 1, false));
-	}
-
-	@Override
-	public boolean isAcceptedFlower(World world, IIndividual genome, int x, int y, int z) {
-		Block block = world.getBlock(x, y, z);
-		int meta = world.getBlockMetadata(x, y, z);
-		if (block.hasTileEntity(meta)) {
-			TileEntity tileEntity = world.getTileEntity(x, y, z);
-			if (tileEntity instanceof INode) {
-				return true;
-			}
-		}
-		return false;
+		registerAcceptableFlower(ThaumcraftHelper.airy, ThaumcraftHelper.AiryBlockType.NODE.ordinal());
+		registerAcceptableFlower(ThaumcraftHelper.airy, ThaumcraftHelper.AiryBlockType.ENERGIZED_NODE.ordinal());
 	}
 
 	@Override
@@ -46,15 +26,17 @@ public class FlowerProviderAuraNode extends FlowerProvider {
 	}
 
 	@Override
+	public String getFlowerType() {
+		return "flowersThaumcraftAuraNode";
+	}
+
+	@Override
 	public String getDescription() {
 		return LocalizationManager.getLocalizedString("flowerProvider.node");
 	}
 
 	@Override
 	public ItemStack[] affectProducts(World world, IIndividual genome, int x, int y, int z, ItemStack[] products) {
-		if (isAcceptedFlower(world, genome, x, y, z)) {
-			
-		}
 		return products;
 	}
 
@@ -78,11 +60,6 @@ public class FlowerProviderAuraNode extends FlowerProvider {
 		}
 
 		return products;
-	}
-
-	@Override
-	public List<IFlower> getFlowers() {
-		return new ArrayList<IFlower>();
 	}
 
 }

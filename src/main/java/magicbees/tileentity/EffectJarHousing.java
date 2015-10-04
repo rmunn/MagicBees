@@ -1,245 +1,240 @@
 package magicbees.tileentity;
 
-import java.util.Set;
+import com.google.common.collect.ImmutableSet;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 
 import com.mojang.authlib.GameProfile;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import forestry.api.apiculture.IBee;
+import forestry.api.apiculture.DefaultBeeListener;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
+import forestry.api.apiculture.IBeeHousingInventory;
+import forestry.api.apiculture.IBeeListener;
+import forestry.api.apiculture.IBeeModifier;
+import forestry.api.apiculture.IBeekeepingLogic;
 import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
-import forestry.api.core.ErrorStateRegistry;
+import forestry.api.core.IErrorLogic;
 import forestry.api.core.IErrorState;
-import forestry.api.genetics.IIndividual;
+
+import magicbees.bees.BeeManager;
+
 
 /**
- * Singleton object to simulate enough of a bee house to fire the bee effects. =D
+ * Simulates enough of a bee house to fire the bee effects. =D
  *
- * @author MysteriousAges
+ * @author MysteriousAges, mezz
  */
-public class EffectJarHousing implements IBeeHousing
-{
-	private static EffectJarHousing instance = new EffectJarHousing();
+public class EffectJarHousing implements IBeeHousing {
 
-	TileEntityEffectJar jarEntity;
+	private static final IErrorLogic errorLogic = new JarErrorLogic();
+	private static final Iterable<IBeeListener> beeListeners = ImmutableSet.<IBeeListener>of(new DefaultBeeListener());
+	private static final Iterable<IBeeModifier> beeModifiers = ImmutableSet.<IBeeModifier>of(new JarHousingModifier());
 
-	public static EffectJarHousing getFor(TileEntityEffectJar entity)
-	{
-		instance.jarEntity = entity;
-		return instance;
+	private final IBeekeepingLogic beekeepingLogic;
+	private final TileEntityEffectJar jarEntity;
+	private final BiomeGenBase biome;
+	private final IBeeHousingInventory inventory;
+
+	public EffectJarHousing(TileEntityEffectJar entity) {
+		this.jarEntity = entity;
+		this.biome = entity.getWorldObj().getBiomeGenForCoords(entity.xCoord, entity.zCoord);
+		this.inventory = new JarBeeHousingInventory(entity);
+		this.beekeepingLogic = BeeManager.beeRoot.createBeekeepingLogic(this);
 	}
 
 	@Override
-	public float getTerritoryModifier(IBeeGenome genome, float currentModifier)
-	{
-		return 0.9f;
-	}
-
-	@Override
-	public float getMutationModifier(IBeeGenome genome, IBeeGenome mate, float currentModifier)
-	{
-		return 0f;
-	}
-
-	@Override
-	public float getLifespanModifier(IBeeGenome genome, IBeeGenome mate, float currentModifier)
-	{
-		return 0f;
-	}
-
-	@Override
-	public float getProductionModifier(IBeeGenome genome, float currentModifier)
-	{
-		return 0f;
-	}
-
-	@Override
-	public float getFloweringModifier(IBeeGenome genome, float currentModifier)
-	{
-		return 0f;
-	}
-
-	@Override
-	public int getXCoord()
-	{
-		return this.jarEntity.xCoord;
-	}
-
-	@Override
-	public int getYCoord()
-	{
-		return this.jarEntity.yCoord;
-	}
-
-	@Override
-	public int getZCoord()
-	{
-		return this.jarEntity.zCoord;
-	}
-
-	@Override
-	public boolean isSealed()
-	{
-		return true;
-	}
-
-	@Override
-	public boolean isSelfLighted()
-	{
-		return true;
-	}
-
-	@Override
-	public boolean isSunlightSimulated()
-	{
-		return true;
-	}
-
-	@Override
-	public boolean isHellish()
-	{
-		return false;
-	}
-
-	@Override
-	public void onQueenChange(ItemStack queen)
-	{
-	}
-
-	@Override
-	public void wearOutEquipment(int amount)
-	{
-	}
-
-	@Override
-	public void onQueenDeath(IBee queen)
-	{
-	}
-
-	@Override
-	public void onPostQueenDeath(IBee queen)
-	{
-	}
-
-	@Override
-	public ItemStack getQueen()
-	{
-		return this.jarEntity.getStackInSlot(TileEntityEffectJar.QUEEN_SLOT);
-	}
-
-	@Override
-	public ItemStack getDrone()
-	{
-		return null;
-	}
-
-	@Override
-	public void setQueen(ItemStack itemStack)
-	{
-		this.jarEntity.setInventorySlotContents(TileEntityEffectJar.QUEEN_SLOT, itemStack);
-	}
-
-	@Override
-	public void setDrone(ItemStack itemstack)
-	{
+	public ChunkCoordinates getCoordinates() {
+		return new ChunkCoordinates(jarEntity.xCoord, jarEntity.yCoord, jarEntity.zCoord);
 	}
 
 	@Override
 	public BiomeGenBase getBiome() {
-		return this.jarEntity.getWorldObj().getBiomeGenForCoords(getXCoord(), getYCoord());
+		return biome;
 	}
 
 	@Override
-	public EnumTemperature getTemperature()
-	{
-		EnumTemperature temp = EnumTemperature.NORMAL;
-		ItemStack stack = this.jarEntity.getStackInSlot(TileEntityEffectJar.QUEEN_SLOT);
-		if (stack != null)
-		{
-			IBee queen = magicbees.bees.BeeManager.beeRoot.getMember(stack);
-			temp = queen.getGenome().getPrimary().getTemperature();
+	public EnumTemperature getTemperature() {
+		return EnumTemperature.getFromBiome(biome, jarEntity.xCoord, jarEntity.yCoord, jarEntity.zCoord);
+	}
+
+	@Override
+	public EnumHumidity getHumidity() {
+		return EnumHumidity.getFromValue(biome.rainfall);
+	}
+
+	@Override
+	public int getBlockLightValue() {
+		return jarEntity.getWorldObj().getBlockLightValue(jarEntity.xCoord, jarEntity.yCoord + 1, jarEntity.zCoord);
+	}
+
+	@Override
+	public boolean canBlockSeeTheSky() {
+		return jarEntity.getWorldObj().canBlockSeeTheSky(jarEntity.xCoord, jarEntity.yCoord + 1, jarEntity.zCoord);
+	}
+
+	@Override
+	public World getWorld() {
+		return jarEntity.getWorldObj();
+	}
+
+	@Override
+	public GameProfile getOwner() {
+		return jarEntity.getOwner();
+	}
+
+	@Override
+	public IErrorLogic getErrorLogic() {
+		return errorLogic;
+	}
+
+	@Override
+	public IBeeHousingInventory getBeeInventory() {
+		return inventory;
+	}
+
+	@Override
+	public IBeekeepingLogic getBeekeepingLogic() {
+		return beekeepingLogic;
+	}
+
+	@Override
+	public Iterable<IBeeModifier> getBeeModifiers() {
+		return beeModifiers;
+	}
+
+	@Override
+	public Iterable<IBeeListener> getBeeListeners() {
+		return beeListeners;
+	}
+
+	private static class JarBeeHousingInventory implements IBeeHousingInventory {
+		private final TileEntityEffectJar jarEntity;
+
+		public JarBeeHousingInventory(TileEntityEffectJar jarEntity) {
+			this.jarEntity = jarEntity;
 		}
-		return temp;
-	}
 
-	@Override
-	public EnumHumidity getHumidity()
-	{
-		EnumHumidity humid = EnumHumidity.NORMAL;
-		ItemStack stack = this.jarEntity.getStackInSlot(TileEntityEffectJar.QUEEN_SLOT);
-		if (stack != null)
-		{
-			IBee queen = magicbees.bees.BeeManager.beeRoot.getMember(stack);
-			humid = queen.getGenome().getPrimary().getHumidity();
+		@Override
+		public ItemStack getQueen() {
+			return jarEntity.getStackInSlot(TileEntityEffectJar.QUEEN_SLOT);
 		}
-		return humid;
+
+		@Override
+		public ItemStack getDrone() {
+			return null;
+		}
+
+		@Override
+		public void setQueen(ItemStack itemStack) {
+			jarEntity.setInventorySlotContents(TileEntityEffectJar.QUEEN_SLOT, itemStack);
+		}
+
+		@Override
+		public void setDrone(ItemStack itemstack) {
+		}
+
+		@Override
+		public boolean addProduct(ItemStack product, boolean all) {
+			return false;
+		}
 	}
 
-	@Override
-	public World getWorld()
-	{
-		return this.jarEntity.getWorldObj();
+	private static class JarErrorLogic implements IErrorLogic {
+
+		@Override
+		public boolean setCondition(boolean condition, IErrorState errorState) {
+			return condition;
+		}
+
+		@Override
+		public boolean contains(IErrorState state) {
+			return false;
+		}
+
+		@Override
+		public boolean hasErrors() {
+			return false;
+		}
+
+		@Override
+		public void clearErrors() {
+
+		}
+
+		@Override
+		public void writeData(DataOutputStream data) throws IOException {
+
+		}
+
+		@Override
+		public void readData(DataInputStream data) throws IOException {
+
+		}
+
+		@Override
+		public ImmutableSet<IErrorState> getErrorStates() {
+			return ImmutableSet.of();
+		}
 	}
 
-	@Override
-	public GameProfile getOwnerName()
-	{
-		return this.jarEntity.getOwner();
-	}
+	private static class JarHousingModifier implements IBeeModifier {
+		@Override
+		public float getTerritoryModifier(IBeeGenome genome, float currentModifier) {
+			return 0.9f;
+		}
 
-	@Override
-	public void setErrorState(IErrorState enumErrorCode)
-	{
-	}
+		@Override
+		public float getMutationModifier(IBeeGenome genome, IBeeGenome mate, float currentModifier) {
+			return 0f;
+		}
 
-	@Override
-	public Set<IErrorState> getErrorStates() {
-		return null;
-	}
+		@Override
+		public float getLifespanModifier(IBeeGenome genome, IBeeGenome mate, float currentModifier) {
+			return 0f;
+		}
 
+		@Override
+		public float getProductionModifier(IBeeGenome genome, float currentModifier) {
+			return 0f;
+		}
 
-	@Override
-	public boolean setErrorCondition(boolean condition, IErrorState errorState) {
-		return false;
-	}
+		@Override
+		public float getFloweringModifier(IBeeGenome genome, float currentModifier) {
+			return 0f;
+		}
 
-	@Override
-	public IErrorState getErrorState()
-	{
-		return ErrorStateRegistry.getErrorState("ok");
-	}
+		@Override
+		public float getGeneticDecay(IBeeGenome genome, float currentModifier) {
+			return 0f;
+		}
 
-	@Override
-	public boolean canBreed()
-	{
-		return false;
-	}
+		@Override
+		public boolean isSealed() {
+			return true;
+		}
 
-	@Override
-	public boolean addProduct(ItemStack product, boolean all)
-	{
-		return true;
-	}
+		@Override
+		public boolean isSelfLighted() {
+			return true;
+		}
 
-	@Override
-	public boolean onPollenRetrieved(IBee queen, IIndividual pollen, boolean isHandled)
-	{
-		return false;
-	}
+		@Override
+		public boolean isSunlightSimulated() {
+			return true;
+		}
 
-	@Override
-	public boolean onEggLaid(IBee queen)
-	{
-		return false;
-	}
-
-	@Override
-	public float getGeneticDecay(IBeeGenome genome, float currentModifier)
-	{
-		return 0f;
+		@Override
+		public boolean isHellish() {
+			return false;
+		}
 	}
 }

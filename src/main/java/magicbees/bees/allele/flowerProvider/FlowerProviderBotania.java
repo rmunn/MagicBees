@@ -11,8 +11,7 @@ import forestry.api.genetics.IPollinatable;
 public class FlowerProviderBotania extends FlowerProvider {
 	
 	public FlowerProviderBotania() {
-		super(1);
-		flowers.add(new FlowerImpl(BotaniaHelper.blockMysticalFlower, OreDictionary.WILDCARD_VALUE, 1, true));
+		registerPlantableFlower(BotaniaHelper.blockMysticalFlower, OreDictionary.WILDCARD_VALUE, 1);
 	}
 
 	@Override
@@ -35,8 +34,8 @@ public class FlowerProviderBotania extends FlowerProvider {
 	}
 
 	@Override
-	public boolean isAcceptedFlower(World world, IIndividual individual, int x, int y, int z) {
-		return world.getBlock(x, y, z) == BotaniaHelper.blockMysticalFlower;
+	public String getFlowerType() {
+		return "flowersBotania";
 	}
 
 	@Override

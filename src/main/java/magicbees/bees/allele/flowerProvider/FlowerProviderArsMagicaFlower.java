@@ -6,18 +6,18 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.IPollinatable;
 
 public class FlowerProviderArsMagicaFlower extends FlowerProvider {
 	
 	public FlowerProviderArsMagicaFlower() {
-		super(5);
-		flowers.add(new FlowerImpl(ArsMagicaHelper.blackOrchid, 0, 1, true));
-		flowers.add(new FlowerImpl(ArsMagicaHelper.desertNova, 0, 1, true));
-		flowers.add(new FlowerImpl(ArsMagicaHelper.aum, 0, 1, true));
-		flowers.add(new FlowerImpl(ArsMagicaHelper.wakebloom, 0, 1, true));
-		flowers.add(new FlowerImpl(ArsMagicaHelper.tarmaRoot, 0, 1, true));
+		registerPlantableFlower(ArsMagicaHelper.blackOrchid, 0, 1);
+		registerPlantableFlower(ArsMagicaHelper.desertNova, 0, 1);
+		registerPlantableFlower(ArsMagicaHelper.aum, 0, 1);
+		registerPlantableFlower(ArsMagicaHelper.wakebloom, 0, 1);
+		registerPlantableFlower(ArsMagicaHelper.tarmaRoot, 0, 1);
 	}
 
 	@Override
@@ -49,6 +49,11 @@ public class FlowerProviderArsMagicaFlower extends FlowerProvider {
 			}
 		}
 		return flag;
+	}
+
+	@Override
+	public String getFlowerType() {
+		return "flowersArsMagica";
 	}
 
 	@Override

@@ -19,16 +19,19 @@ import magicbees.main.utils.compat.ThermalModsHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChunkCoordinates;
+
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.oredict.OreDictionary;
 import forestry.api.apiculture.IAlleleBeeSpecies;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
+import forestry.api.apiculture.IBeeModifier;
 import forestry.api.apiculture.IBeeMutation;
 import forestry.api.apiculture.IBeeRoot;
 import forestry.api.genetics.IAllele;
-import forestry.api.genetics.IGenome;
+import forestry.api.genetics.IAlleleSpecies;
 
 public class BeeMutation implements IBeeMutation {
 	
@@ -390,9 +393,8 @@ public class BeeMutation implements IBeeMutation {
 		}
 	}
 
-
-	private IAllele parent1;
-	private IAllele parent2;
+	private IAlleleSpecies parent1;
+	private IAlleleSpecies parent2;
 	private IAllele mutationTemplate[];
 	private int baseChance;
 	private boolean isSecret;
@@ -431,18 +433,10 @@ public class BeeMutation implements IBeeMutation {
 	}
 
 	@Override
-	@Deprecated
-	public float getChance(IBeeHousing housing, IAllele allele0, IAllele allele1, IGenome genome0, IGenome genome1) {
-		if (allele0 instanceof IAlleleBeeSpecies && allele1 instanceof IAlleleBeeSpecies && genome0 instanceof IBeeGenome && genome1 instanceof IBeeGenome) {
-			return getChance(housing, (IAlleleBeeSpecies)allele0, (IAlleleBeeSpecies)allele1, (IBeeGenome)genome0, (IBeeGenome)genome1);
-		}
-		return 0;
-	}
-
-	@Override
 	public float getChance(IBeeHousing housing, IAlleleBeeSpecies allele0, IAlleleBeeSpecies allele1, IBeeGenome genome0, IBeeGenome genome1) {
 		float finalChance = 0f;
 		float chance = this.baseChance * 1f;
+		ChunkCoordinates housingCoords = housing.getCoordinates();
 		
 		if (this.arePartners(allele0, allele1)) {
 			// This mutation applies. Continue calculation.
@@ -464,9 +458,8 @@ public class BeeMutation implements IBeeMutation {
 				int blockMeta;
 				int i = 1;
 				do {
-					blockBelow = housing.getWorld().getBlock(housing.getXCoord(), housing.getYCoord() - i,
-							housing.getZCoord());
-					blockMeta = housing.getWorld().getBlockMetadata(housing.getXCoord(), housing.getYCoord() - i, housing.getZCoord());
+					blockBelow = housing.getWorld().getBlock(housingCoords.posX, housingCoords.posY - i, housingCoords.posZ);
+					blockMeta = housing.getWorld().getBlockMetadata(housingCoords.posX, housingCoords.posY - i, housingCoords.posZ);
 					++i;
 				}
 				while (blockBelow != null && (blockBelow instanceof IBeeHousing || blockBelow == ForestryHelper.alvearyBlock));
@@ -489,10 +482,10 @@ public class BeeMutation implements IBeeMutation {
 			}
 			
 			if (this.requiredBiomeType != null) {
-				BiomeDictionary.Type[] types = BiomeDictionary.getTypesForBiome(housing.getWorld().getBiomeGenForCoords(housing.getXCoord(), housing.getZCoord()));
+				BiomeDictionary.Type[] types = BiomeDictionary.getTypesForBiome(housing.getWorld().getBiomeGenForCoords(housingCoords.posX, housingCoords.posZ));
 				boolean found = false;
-				for (int i = 0; i < types.length; ++i) {
-					if (this.requiredBiomeType == types[i]) {
+				for (Type type : types) {
+					if (this.requiredBiomeType == type) {
 						found = true;
 						break;
 					}
@@ -507,25 +500,25 @@ public class BeeMutation implements IBeeMutation {
 					chance = 0;
 				}
 			}
-			
+
+			IBeeModifier housingBeeModifier = BeeManager.beeRoot.createBeeHousingModifier(housing);
+			IBeeModifier modeBeeModifier = BeeManager.beeRoot.getBeekeepingMode(housing.getWorld()).getBeeModifier();
+
 			finalChance = Math.round(chance
-					* housing.getMutationModifier((IBeeGenome)genome0,
-					(IBeeGenome)genome1, chance)
-					* BeeManager.beeRoot.getBeekeepingMode(housing.getWorld())
-					.getMutationModifier((IBeeGenome)genome0,
-							(IBeeGenome)genome1, chance));
+					* housingBeeModifier.getMutationModifier(genome0, genome1, chance)
+					* modeBeeModifier.getMutationModifier(genome0, genome1, chance));
 		}
 		
 		return finalChance;
 	}
 
 	@Override
-	public IAllele getAllele0() {
+	public IAlleleSpecies getAllele0() {
 		return parent1;
 	}
 
 	@Override
-	public IAllele getAllele1() {
+	public IAlleleSpecies getAllele1() {
 		return parent2;
 	}
 
