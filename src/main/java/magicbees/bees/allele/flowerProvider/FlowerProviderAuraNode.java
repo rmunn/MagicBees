@@ -21,6 +21,7 @@ public class FlowerProviderAuraNode extends FlowerProvider {
 	}
 
 	@Override
+	@Deprecated
 	public boolean growFlower(World world, IIndividual genome, int x, int y, int z) {
 		return true;
 	}

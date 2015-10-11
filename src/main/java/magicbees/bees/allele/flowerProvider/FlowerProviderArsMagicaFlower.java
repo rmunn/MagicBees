@@ -7,21 +7,61 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import forestry.api.genetics.IFlowerGrowthHelper;
+import forestry.api.genetics.IFlowerGrowthRule;
+import forestry.api.genetics.IFlowerRegistry;
 import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.IPollinatable;
 
-public class FlowerProviderArsMagicaFlower extends FlowerProvider {
-	
+public class FlowerProviderArsMagicaFlower extends FlowerProvider implements IFlowerGrowthRule {
+
 	public FlowerProviderArsMagicaFlower() {
 		registerPlantableFlower(ArsMagicaHelper.blackOrchid, 0, 1);
 		registerPlantableFlower(ArsMagicaHelper.desertNova, 0, 1);
 		registerPlantableFlower(ArsMagicaHelper.aum, 0, 1);
 		registerPlantableFlower(ArsMagicaHelper.wakebloom, 0, 1);
 		registerPlantableFlower(ArsMagicaHelper.tarmaRoot, 0, 1);
+		registerGrowthRule(this);
 	}
 
 	@Override
+	public String getFlowerType() {
+		return "flowersArsMagica";
+	}
+
+	@Override
+	public String getDescription() {
+		return LocalizationManager.getLocalizedString("flowerProvider.arsmagica");
+	}
+
+	@Override
+	public ItemStack[] affectProducts(World world, IIndividual genome, int x, int y, int z, ItemStack[] products) {
+		return products;
+	}
+
+	@Override
+	public boolean isAcceptedPollinatable(World world, IPollinatable pollinatable) {
+		return pollinatable.getPlantType().size() > 1;
+	}
+
+	@Override
+	@Deprecated
 	public boolean growFlower(World world, IIndividual genome, int x, int y, int z) {
+		return growFlower(world, x, y, z);
+	}
+
+	@Override
+	public boolean growFlower(IFlowerGrowthHelper helper, String flowerType, World world, int x, int y, int z) {
+		return growFlower(world, x, y, z);
+	}
+
+	@Override
+	@Deprecated
+	public boolean growFlower(IFlowerRegistry fr, String flowerType, World world, IIndividual individual, int x, int y, int z) {
+		return growFlower(world, x, y, z);
+	}
+
+	private boolean growFlower(World world, int x, int y, int z) {
 		boolean flag = false;
 		Block blockDown = world.getBlock(x, y - 1, z);
 		if (world.getBlock(x, y, z).isAir(world, x, y, z)) {
@@ -50,25 +90,4 @@ public class FlowerProviderArsMagicaFlower extends FlowerProvider {
 		}
 		return flag;
 	}
-
-	@Override
-	public String getFlowerType() {
-		return "flowersArsMagica";
-	}
-
-	@Override
-	public String getDescription() {
-		return LocalizationManager.getLocalizedString("flowerProvider.arsmagica");
-	}
-
-	@Override
-	public ItemStack[] affectProducts(World world, IIndividual genome, int x, int y, int z, ItemStack[] products) {
-		return products;
-	}
-
-	@Override
-	public boolean isAcceptedPollinatable(World world, IPollinatable pollinatable) {
-		return pollinatable.getPlantType().size() > 1;
-	}
-
 }

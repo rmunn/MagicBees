@@ -18,6 +18,7 @@ public class FlowerProviderBookshelf extends FlowerProvider {
 	}
 
 	@Override
+	@Deprecated
 	public boolean growFlower(World world, IIndividual genome, int x, int i, int j) {
 		return true;
 	}
