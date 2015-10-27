@@ -1,6 +1,6 @@
 package magicbees.main.utils;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
+import net.minecraft.util.StatCollector;
 
 public class LocalizationManager
 {
