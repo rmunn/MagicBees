@@ -6,21 +6,25 @@ public class LocalizationManager
 {
 	public static String getLocalizedString(String key)
 	{
-		String result = LanguageRegistry.instance().getStringLocalization(key);
-		if (result.isEmpty())
+		if(StatCollector.canTranslate(key))
 		{
-			result = LanguageRegistry.instance().getStringLocalization(key, "en_US");
+			return StatCollector.translateToLocal(key);
 		}
-		return result;
+		else
+		{
+			return StatCollector.translateToFallback(key);
+		}
 	}
 
 	public static String getLocalizedString(String key, Object... objects)
 	{
-		String result = LanguageRegistry.instance().getStringLocalization(key);
-		if (result.isEmpty())
+		if(StatCollector.canTranslate(key))
 		{
-			result = LanguageRegistry.instance().getStringLocalization(key, "en_US");
+			return String.format(StatCollector.translateToLocal(key), objects);
 		}
-		return String.format(result, objects);
+		else
+		{
+			return String.format(StatCollector.translateToFallback(key), objects);
+		}
 	}
 }
