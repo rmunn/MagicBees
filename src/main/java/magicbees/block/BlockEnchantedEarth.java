@@ -33,8 +33,13 @@ public class BlockEnchantedEarth extends Block {
 	public void updateTick(World world, int x, int y, int z, Random random) {
 		for (int height = y + 1; height <= 256; ++height) {
 			Block b = world.getBlock(x, height, z);
-			if (b != this && b.getTickRandomly()) {
-				world.scheduleBlockUpdate(x, height, z, b, 0);
+			if (b == this) {
+				continue;
+			}
+			else {
+				if (b.getTickRandomly()) {
+					world.scheduleBlockUpdate(x, height, z, b, 0);
+				}
 				break;
 			}
 		}
