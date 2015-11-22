@@ -4,6 +4,7 @@ import java.util.List;
 
 import magicbees.bees.AlleleEffect;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -27,13 +28,10 @@ public class AlleleEffectCure extends AlleleEffect {
 
 	@Override
 	public IEffectData doEffectThrottled(IBeeGenome genome, IEffectData storedData, IBeeHousing housing) {
-		List<Entity> entityList = this.getEntitiesWithinRange(genome, housing);
+		List<EntityPlayer> entityList = this.getEntitiesWithinRange(genome, housing, EntityPlayer.class);
 
-		for (Entity e : entityList) {
-			if (e instanceof EntityPlayer) {
-				EntityPlayer player = (EntityPlayer) e;
-				player.curePotionEffects(new ItemStack(Items.milk_bucket));
-			}
+		for (EntityPlayer player : entityList) {
+			player.curePotionEffects(new ItemStack(Items.milk_bucket));
 		}
 		storedData.setInteger(0, 0);
 

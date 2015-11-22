@@ -1,5 +1,6 @@
 package magicbees.bees;
 
+import forestry.api.apiculture.EnumBeeChromosome;
 import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IAlleleFlowers;
 import forestry.api.genetics.IFlowerProvider;
@@ -10,10 +11,8 @@ public class AlleleFlower extends Allele implements IAlleleFlowers
 	
 	public AlleleFlower(String uid, IFlowerProvider flowerProvider, boolean isDominant)
 	{
-		super("flower" + uid, isDominant);
+		super("flower" + uid, isDominant, EnumBeeChromosome.FLOWER_PROVIDER);
 		this.provider = flowerProvider;
-		
-		AlleleManager.alleleRegistry.registerAllele(this);
 	}
 
 	@Override

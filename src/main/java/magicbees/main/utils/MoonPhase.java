@@ -1,5 +1,6 @@
 package magicbees.main.utils;
 
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 /**
@@ -11,7 +12,7 @@ public enum MoonPhase {
 	WANING_HALF("halfWaning"),
 	WANING_CRESCENT("crescentWaning"),
 	NEW("new"),
-	WAXING_CRESCENT("crecentWaxing"),
+	WAXING_CRESCENT("crescentWaxing"),
 	WAXING_HALF("halfWaxing"),
 	WAXING_GIBBOUS("gibbousWaxing");
 
@@ -42,11 +43,10 @@ public enum MoonPhase {
 	}
 	
 	public String getLocalizedNameAlt() {
-		String response = LocalizationManager.getLocalizedString("moon.alt." + this.phaseName);
-		if (response.isEmpty()) {
-			return getLocalizedName();
+		if (StatCollector.canTranslate("moon.alt." + this.phaseName)) {
+			return LocalizationManager.getLocalizedString("moon.alt." + this.phaseName);
 		}
-		return response;
+		return getLocalizedName();
 	}
 
 	public static MoonPhase getMoonPhase(World w) {

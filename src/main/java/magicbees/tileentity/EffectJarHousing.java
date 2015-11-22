@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
@@ -89,6 +90,11 @@ public class EffectJarHousing implements IBeeHousing {
 	@Override
 	public GameProfile getOwner() {
 		return jarEntity.getOwner();
+	}
+
+	@Override
+	public Vec3 getBeeFXCoordinates() {
+		return Vec3.createVectorHelper(jarEntity.xCoord + 0.5f, jarEntity.yCoord + 0.5f, jarEntity.zCoord + 0.5f);
 	}
 
 	@Override

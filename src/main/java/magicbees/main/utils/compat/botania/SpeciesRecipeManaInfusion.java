@@ -1,6 +1,7 @@
 package magicbees.main.utils.compat.botania;
 
 import magicbees.bees.BeeManager;
+import magicbees.bees.BeeSpecies;
 import magicbees.main.utils.compat.ForestryHelper;
 import net.minecraft.item.ItemStack;
 import vazkii.botania.api.recipe.RecipeManaInfusion;
@@ -16,10 +17,10 @@ public class SpeciesRecipeManaInfusion extends RecipeManaInfusion {
 	
 	private ItemStack outputCache;
 
-	public SpeciesRecipeManaInfusion(IAlleleBeeSpecies outSpecies, IAlleleBeeSpecies inSpecies, int mana, EnumBeeType type) {
-		super(BeeManager.getDefaultItemStackForSpecies(outSpecies, type), BeeManager.getDefaultItemStackForSpecies(inSpecies, type), mana);
-		outputSpecies = outSpecies;
-		inputSpecies = inSpecies;
+	public SpeciesRecipeManaInfusion(BeeSpecies outSpecies, BeeSpecies inSpecies, int mana, EnumBeeType type) {
+		super(BeeManager.getDefaultItemStackForSpecies(outSpecies.getSpecies(), type), BeeManager.getDefaultItemStackForSpecies(inSpecies.getSpecies(), type), mana);
+		outputSpecies = outSpecies.getSpecies();
+		inputSpecies = inSpecies.getSpecies();
 		beeType = type;
 		outputCache = super.getOutput();
 	}

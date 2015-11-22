@@ -47,13 +47,13 @@ public class BeeManager
 		beeRoot.setResearchSuitability(Config.drops.getStackForType(DropType.INTELLECT), 0.5f);
 	}
 	
-	public static ItemStack getDefaultItemStackForSpecies(IAlleleBeeSpecies species, EnumBeeType type) {
-		IBee bee = getBeeFromSpecies(species, false);
+	public static ItemStack getDefaultItemStackForSpecies(IAlleleBeeSpecies beeSpecies, EnumBeeType type) {
+		IBee bee = getBeeFromSpecies(beeSpecies, false);
 		return BeeManager.beeRoot.getMemberStack(bee, type.ordinal());
 	}
 	
-	public static IBee getBeeFromSpecies(IAlleleBeeSpecies species, boolean applyRainResist) {
-		IAllele[] speciesTemplate = BeeManager.beeRoot.getTemplate(species.getUID());
+	public static IBee getBeeFromSpecies(IAlleleBeeSpecies beeSpecies, boolean applyRainResist) {
+		IAllele[] speciesTemplate = BeeManager.beeRoot.getTemplate(beeSpecies.getUID());
 		
 		if (applyRainResist) {
 			speciesTemplate = BeeGenomeManager.addRainResist(speciesTemplate);
@@ -98,12 +98,12 @@ public class BeeManager
 			worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(Allele.getExtraSpecies("Basalt"), 10.0));
 		}
 
-		worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(BeeSpecies.MYSTICAL, 20.0));
-		worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(BeeSpecies.UNUSUAL, 20.0));
-		worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(BeeSpecies.SORCEROUS, 13.0));
-		worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(BeeSpecies.ATTUNED, 6.0));
-		worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(BeeSpecies.INFERNAL, 10.0));
-		worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(BeeSpecies.OBLIVION, 1.0));
+		worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(BeeSpecies.MYSTICAL.getSpecies(), 20.0));
+		worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(BeeSpecies.UNUSUAL.getSpecies(), 20.0));
+		worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(BeeSpecies.SORCEROUS.getSpecies(), 13.0));
+		worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(BeeSpecies.ATTUNED.getSpecies(), 6.0));
+		worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(BeeSpecies.INFERNAL.getSpecies(), 10.0));
+		worldgenSpeciesWeights.add(new Tuple<IAlleleBeeSpecies, Double>(BeeSpecies.OBLIVION.getSpecies(), 1.0));
 		
 		for (Tuple<IAlleleBeeSpecies, Double> t : worldgenSpeciesWeights) {
 			worldgenSpeciesWeightsTotal += t.right.doubleValue();
