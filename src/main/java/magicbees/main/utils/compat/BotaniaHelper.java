@@ -158,7 +158,7 @@ public class BotaniaHelper implements IModHelper {
 					's', blockLivingRock,
 					'm', new ItemStack(itemManaResource, 1, ManaResource.MANASTEEL.ordinal()),
 					'p', Config.pollen.getStackForType(PollenType.UNUSUAL),
-					'l', new ItemStack(itemPetal, 1, OreDictionary.WILDCARD_VALUE)
+					'l', new ItemStack(BotaniaHelper.itemManaResource, 1, ManaResource.MANA_POWDER.ordinal())
 			});
 			manaBoosterRecipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(CraftingManager.getInstance().getRecipeList().size() - 1);
 			
