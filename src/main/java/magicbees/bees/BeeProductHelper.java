@@ -192,7 +192,7 @@ public class BeeProductHelper {
 		if (OreDictionary.getOres("nuggetNaturalCobalt").size() > 0) {
 			COBALT.addSpecialty(OreDictionary.getOres("nuggetNaturalCobalt").get(0), 0.24f);
 		}
-		if (COBALT.getSpecialtyChances().size() <= 0) {
+		if (COBALT.getSpecies().getSpecialtyChances().size() <= 0) {
 			COBALT.setInactive();
 		}
 

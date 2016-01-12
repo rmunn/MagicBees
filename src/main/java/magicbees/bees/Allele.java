@@ -29,6 +29,8 @@ import magicbees.main.utils.compat.ThaumcraftHelper;
 import magicbees.main.utils.compat.ThermalModsHelper;
 import net.minecraft.potion.Potion;
 import thaumcraft.api.nodes.NodeType;
+
+import forestry.api.apiculture.EnumBeeChromosome;
 import forestry.api.apiculture.IAlleleBeeEffect;
 import forestry.api.apiculture.IAlleleBeeSpecies;
 import forestry.api.genetics.AlleleManager;
@@ -36,6 +38,7 @@ import forestry.api.genetics.IAllele;
 import forestry.api.genetics.IAlleleEffect;
 import forestry.api.genetics.IAlleleFlowers;
 import forestry.api.genetics.IAlleleRegistry;
+import forestry.api.genetics.IChromosomeType;
 import forestry.api.genetics.IFlowerProvider;
 
 public class Allele implements IAllele {
@@ -109,7 +112,7 @@ public class Allele implements IAllele {
 		forestryBaseEffect = (IAlleleBeeEffect) getBaseAllele("effectNone");
 		IFlowerProvider vanillaFlowers = ((IAlleleFlowers)getBaseAllele("flowersVanilla")).getProvider();
 
-		speedBlinding = new AlleleFloat("speedBlinding", 2f, false);
+		speedBlinding = new AlleleFloat("speedBlinding", 2f, false, EnumBeeChromosome.SPEED);
 		flowerBookshelf = new AlleleFlower("Bookshelf", new FlowerProviderBookshelf(), true);
 
 		effectCleansing = new AlleleEffectCure("Curative", false);
@@ -258,7 +261,7 @@ public class Allele implements IAllele {
 		registry.registerDeprecatedAlleleReplacement("magicbees.effectNodePurify", effectNodeConversionPure);
 		registry.registerDeprecatedAlleleReplacement("magicbees.effectNodeFlux", effectNodeConversionTaint);
 		registry.registerDeprecatedAlleleReplacement("magicbees.effectNodeCharge", effectNodeEmpower);
-		registry.registerDeprecatedAlleleReplacement("magicbees.speciesTCAttractive", BeeSpecies.TC_EMPOWERING);
+		registry.registerDeprecatedAlleleReplacement("magicbees.speciesTCAttractive", BeeSpecies.TC_EMPOWERING.getSpecies());
 	}
 
 	public static IAlleleBeeSpecies getBaseSpecies(String name) {
@@ -281,10 +284,10 @@ public class Allele implements IAllele {
 	private String uid;
 	private boolean dominant;
 
-	public Allele(String id, boolean isDominant) {
+	public Allele(String id, boolean isDominant, IChromosomeType... chromosomeTypes) {
 		this.uid = "magicbees." + id;
 		this.dominant = isDominant;
-		AlleleManager.alleleRegistry.registerAllele(this);
+		AlleleManager.alleleRegistry.registerAllele(this, chromosomeTypes);
 	}
 
 	@Override

@@ -5,6 +5,8 @@ import java.util.List;
 
 import magicbees.bees.BeeManager;
 import net.minecraft.item.ItemStack;
+
+import magicbees.bees.BeeSpecies;
 import vazkii.botania.api.recipe.RecipeElvenTrade;
 import forestry.api.apiculture.EnumBeeType;
 import forestry.api.apiculture.IAlleleBeeSpecies;
@@ -14,10 +16,10 @@ public class SpeciesRecipeElvenTrade extends RecipeElvenTrade {
 
 	private IAlleleBeeSpecies inputSpecies;
 	
-	public SpeciesRecipeElvenTrade(IAlleleBeeSpecies inSpecies, IAlleleBeeSpecies outSpecies) {
-		super(BeeManager.getDefaultItemStackForSpecies(outSpecies, EnumBeeType.DRONE),
-				BeeManager.getDefaultItemStackForSpecies(inSpecies, EnumBeeType.DRONE));
-		inputSpecies = inSpecies;
+	public SpeciesRecipeElvenTrade(BeeSpecies inSpecies, BeeSpecies outSpecies) {
+		super(BeeManager.getDefaultItemStackForSpecies(outSpecies.getSpecies(), EnumBeeType.DRONE),
+				BeeManager.getDefaultItemStackForSpecies(inSpecies.getSpecies(), EnumBeeType.DRONE));
+		inputSpecies = inSpecies.getSpecies();
 	}
 
 	@Override

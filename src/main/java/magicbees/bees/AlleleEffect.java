@@ -3,10 +3,12 @@ package magicbees.bees;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 
+import forestry.api.apiculture.EnumBeeChromosome;
 import forestry.api.apiculture.IAlleleBeeEffect;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
@@ -19,7 +21,7 @@ public abstract class AlleleEffect extends Allele implements IAlleleBeeEffect
 
 	public AlleleEffect(String id, boolean isDominant, int timeout)
 	{
-		super("effect" + id, isDominant);
+		super("effect" + id, isDominant, EnumBeeChromosome.EFFECT);
 		this.throttle = timeout;
 		combinable = false;
 	}
@@ -68,7 +70,7 @@ public abstract class AlleleEffect extends Allele implements IAlleleBeeEffect
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected List<Entity> getEntitiesWithinRange(IBeeGenome genome, IBeeHousing housing)
+	protected <T extends Entity> List<T> getEntitiesWithinRange(IBeeGenome genome, IBeeHousing housing, Class<T> entityClass)
 	{
 		// Get the size of the affected area
 		int[] area = genome.getTerritory();
@@ -87,7 +89,7 @@ public abstract class AlleleEffect extends Allele implements IAlleleBeeEffect
 		max[2] = coords.posZ + area[2] / 2;
 		
 		AxisAlignedBB bounds = AxisAlignedBB.getBoundingBox(min[0], min[1], min[2], max[0], max[1], max[2]);
-		return (List<Entity>)housing.getWorld().getEntitiesWithinAABB(EntityPlayer.class, bounds);
+		return (List<T>)housing.getWorld().getEntitiesWithinAABB(entityClass, bounds);
 	}
 
 }

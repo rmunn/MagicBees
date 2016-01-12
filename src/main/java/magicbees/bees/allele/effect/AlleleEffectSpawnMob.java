@@ -4,10 +4,10 @@ import java.util.List;
 
 import magicbees.bees.AlleleEffect;
 import magicbees.bees.BeeManager;
-import magicbees.item.ItemArmorApiarist;
-import net.minecraft.entity.Entity;
+
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
@@ -102,21 +102,15 @@ public class AlleleEffectSpawnMob extends AlleleEffect {
 	}
 
 	private EntityPlayer findPlayerTarget(IBeeGenome genome, IBeeHousing housing) {
-		List<Entity> entities = getEntitiesWithinRange(genome, housing);
-		EntityPlayer target = null;
-		for (Entity e : entities) {
-			if (e instanceof EntityPlayer) {
-				target = (EntityPlayer) e;
-				// Check for wearing armor & cancel
-				if (ItemArmorApiarist.getNumberPiecesWorn(target) >= 4) {
-					// Full armor suit is treated as "invisible."
-					target = null;
-				} else {
-					break;
-				}
+		List<EntityPlayer> entities = getEntitiesWithinRange(genome, housing, EntityPlayer.class);
+		for (EntityPlayer e : entities) {
+			// Check for wearing armor & cancel
+			// Full armor suit is treated as "invisible."
+			if (forestry.api.apiculture.BeeManager.armorApiaristHelper.wearsItems((EntityLivingBase) e, getUID(), true) < 4) {
+				return e;
 			}
 		}
-		return target;
+		return null;
 	}
 
 	protected boolean spawnMob(IBeeGenome bee, EntityPlayer player, World world, IBeeHousing housing, boolean spawnAlternate) {
@@ -142,7 +136,7 @@ public class AlleleEffectSpawnMob extends AlleleEffect {
 			if (entitiesCount < maxMobsInArea && mob.getCanSpawnHere()) {
 				spawnedFlag = world.spawnEntityInWorld(mob);
 				if (aggosOnPlayer && player != null) {
-					if (ItemArmorApiarist.getNumberPiecesWorn(player) < 4) {
+					if (forestry.api.apiculture.BeeManager.armorApiaristHelper.wearsItems((EntityLivingBase) player, getUID(), true) < 4) {
 						// Protect fully suited player from initial murder intent.
 						mob.setAttackTarget(player);
 					}

@@ -1,9 +1,5 @@
 package magicbees.bees;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import magicbees.main.utils.LocalizationManager;
 import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.MoonPhase;
 import magicbees.main.utils.compat.AppliedEnergisticsHelper;
@@ -16,28 +12,22 @@ import magicbees.main.utils.compat.ForestryHelper;
 import magicbees.main.utils.compat.RedstoneArsenalHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import magicbees.main.utils.compat.ThermalModsHelper;
-import net.minecraft.block.Block;
+
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChunkCoordinates;
 
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.oredict.OreDictionary;
 import forestry.api.apiculture.IAlleleBeeSpecies;
-import forestry.api.apiculture.IBeeGenome;
-import forestry.api.apiculture.IBeeHousing;
-import forestry.api.apiculture.IBeeModifier;
-import forestry.api.apiculture.IBeeMutation;
-import forestry.api.apiculture.IBeeRoot;
-import forestry.api.genetics.IAllele;
-import forestry.api.genetics.IAlleleSpecies;
+import forestry.api.apiculture.IBeeMutationCustom;
+import forestry.api.apiculture.IBeeMutationFactory;
 
-public class BeeMutation implements IBeeMutation {
-	
+public class BeeMutation {
+	private static IBeeMutationFactory beeMutationFactory = forestry.api.apiculture.BeeManager.beeMutationFactory;
+
 	public static void setupMutations() {
 		IAlleleBeeSpecies baseA, baseB;
-		BeeMutation mutation;
+		IBeeMutationCustom mutation;
 		
 		// Forestry + These -> Common
 		
@@ -47,631 +37,351 @@ public class BeeMutation implements IBeeMutation {
 		
 		for (BeeSpecies species : magicMundane) {
 			for (String str : forestryMundane) {
-				new BeeMutation(species, Allele.getBaseSpecies(str), ForestryHelper.getTemplateForestryForSpecies("Common"), 15);
+				beeMutationFactory.createMutation(species.getSpecies(), Allele.getBaseSpecies(str), ForestryHelper.getTemplateForestryForSpecies("Common"), 15);
 			}
 			if (ExtraBeesHelper.isActive()) {
 				for (String str : binnieMundane) {
 					LogHelper.info("Registering " + str);
 					try {
-						new BeeMutation(species, Allele.getExtraSpecies(str), ForestryHelper.getTemplateForestryForSpecies("Common"), 15);
+						beeMutationFactory.createMutation(species.getSpecies(), Allele.getExtraSpecies(str), ForestryHelper.getTemplateForestryForSpecies("Common"), 15);
 					}
 					catch (Exception e) {
 						LogHelper.info("Unable to register! This mutation will not be available.");
 					}
 				}
 			}
-			new BeeMutation(species, Allele.getBaseSpecies("Common"), ForestryHelper.getTemplateForestryForSpecies("Cultivated"), 12);
-			new BeeMutation(species, Allele.getBaseSpecies("Cultivated"), BeeSpecies.ELDRITCH, 12);
+			beeMutationFactory.createMutation(species.getSpecies(), Allele.getBaseSpecies("Common"), ForestryHelper.getTemplateForestryForSpecies("Cultivated"), 12);
+			beeMutationFactory.createMutation(species.getSpecies(), Allele.getBaseSpecies("Cultivated"), BeeSpecies.ELDRITCH.getGenome(), 12);
 		}
 		
-		new BeeMutation(Allele.getBaseSpecies("Cultivated"), BeeSpecies.ELDRITCH, BeeSpecies.ESOTERIC, 10);
-		new BeeMutation(BeeSpecies.ELDRITCH, BeeSpecies.ESOTERIC, BeeSpecies.MYSTERIOUS, 8);
-		new BeeMutation(BeeSpecies.ESOTERIC, BeeSpecies.MYSTERIOUS, BeeSpecies.ARCANE, 8)
-				.setMoonPhaseBonus(MoonPhase.WAXING_CRESCENT, MoonPhase.WAXING_GIBBOUS, 1.2f);
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Cultivated"), BeeSpecies.ELDRITCH.getSpecies(), BeeSpecies.ESOTERIC.getGenome(), 10);
+		beeMutationFactory.createMutation(BeeSpecies.ELDRITCH.getSpecies(), BeeSpecies.ESOTERIC.getSpecies(), BeeSpecies.MYSTERIOUS.getGenome(), 8);
+		beeMutationFactory.createMutation(BeeSpecies.ESOTERIC.getSpecies(), BeeSpecies.MYSTERIOUS.getSpecies(), BeeSpecies.ARCANE.getGenome(), 8)
+				.addMutationCondition(new MoonPhaseMutationBonus(MoonPhase.WAXING_CRESCENT, MoonPhase.WAXING_GIBBOUS, 1.2f));
 		
-		new BeeMutation(Allele.getBaseSpecies("Cultivated"), BeeSpecies.ELDRITCH, BeeSpecies.CHARMED, 10);
-		new BeeMutation(BeeSpecies.ELDRITCH, BeeSpecies.CHARMED, BeeSpecies.ENCHANTED, 8);
-		new BeeMutation(BeeSpecies.CHARMED, BeeSpecies.ENCHANTED, BeeSpecies.SUPERNATURAL, 8)
-				.setMoonPhaseBonus(MoonPhase.WANING_GIBBOUS, MoonPhase.WANING_CRESCENT, 1.2f);
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Cultivated"), BeeSpecies.ELDRITCH.getSpecies(), BeeSpecies.CHARMED.getGenome(), 10);
+		beeMutationFactory.createMutation(BeeSpecies.ELDRITCH.getSpecies(), BeeSpecies.CHARMED.getSpecies(), BeeSpecies.ENCHANTED.getGenome(), 8);
+		beeMutationFactory.createMutation(BeeSpecies.CHARMED.getSpecies(), BeeSpecies.ENCHANTED.getSpecies(), BeeSpecies.SUPERNATURAL.getGenome(), 8)
+				.addMutationCondition(new MoonPhaseMutationBonus(MoonPhase.WANING_GIBBOUS, MoonPhase.WANING_CRESCENT, 1.2f));
 		
-		new BeeMutation(BeeSpecies.ARCANE, BeeSpecies.SUPERNATURAL, BeeSpecies.ETHEREAL, 7);
+		beeMutationFactory.createMutation(BeeSpecies.ARCANE.getSpecies(), BeeSpecies.SUPERNATURAL.getSpecies(), BeeSpecies.ETHEREAL.getGenome(), 7);
 		
-		new BeeMutation(BeeSpecies.SUPERNATURAL, BeeSpecies.ETHEREAL, BeeSpecies.WINDY, 14)
-				.setBlockRequired(Blocks.leaves);
-		new BeeMutation(BeeSpecies.SUPERNATURAL, BeeSpecies.ETHEREAL, BeeSpecies.WATERY, 14)
-				.setBlockRequired(Blocks.water);
-		new BeeMutation(BeeSpecies.SUPERNATURAL, BeeSpecies.ETHEREAL, BeeSpecies.EARTHY, 14)
-				.setBlockRequired(Blocks.brick_block);
-		new BeeMutation(BeeSpecies.SUPERNATURAL, BeeSpecies.ETHEREAL, BeeSpecies.FIREY, 14)
-				.setBlockRequired(Blocks.lava);
+		beeMutationFactory.createMutation(BeeSpecies.SUPERNATURAL.getSpecies(), BeeSpecies.ETHEREAL.getSpecies(), BeeSpecies.WINDY.getGenome(), 14)
+				.requireResource("treeLeaves");
+		beeMutationFactory.createMutation(BeeSpecies.SUPERNATURAL.getSpecies(), BeeSpecies.ETHEREAL.getSpecies(), BeeSpecies.WATERY.getGenome(), 14)
+				.requireResource(Blocks.water, 0);
+		beeMutationFactory.createMutation(BeeSpecies.SUPERNATURAL.getSpecies(), BeeSpecies.ETHEREAL.getSpecies(), BeeSpecies.EARTHY.getGenome(), 14)
+				.requireResource(Blocks.brick_block, 0);
+		beeMutationFactory.createMutation(BeeSpecies.SUPERNATURAL.getSpecies(), BeeSpecies.ETHEREAL.getSpecies(), BeeSpecies.FIREY.getGenome(), 14)
+				.requireResource(Blocks.lava, 0);
 		
-		new BeeMutation(BeeSpecies.ETHEREAL, BeeSpecies.ATTUNED, BeeSpecies.AWARE, 10);
-		new BeeMutation(BeeSpecies.ETHEREAL, BeeSpecies.AWARE, BeeSpecies.SPIRIT, 8);
-		new BeeMutation(BeeSpecies.ATTUNED, BeeSpecies.AWARE, BeeSpecies.SPIRIT, 8);
-		new BeeMutation(BeeSpecies.AWARE, BeeSpecies.SPIRIT, BeeSpecies.SOUL, 7);
+		beeMutationFactory.createMutation(BeeSpecies.ETHEREAL.getSpecies(), BeeSpecies.ATTUNED.getSpecies(), BeeSpecies.AWARE.getGenome(), 10);
+		beeMutationFactory.createMutation(BeeSpecies.ETHEREAL.getSpecies(), BeeSpecies.AWARE.getSpecies(), BeeSpecies.SPIRIT.getGenome(), 8);
+		beeMutationFactory.createMutation(BeeSpecies.ATTUNED.getSpecies(), BeeSpecies.AWARE.getSpecies(), BeeSpecies.SPIRIT.getGenome(), 8);
+		beeMutationFactory.createMutation(BeeSpecies.AWARE.getSpecies(), BeeSpecies.SPIRIT.getSpecies(), BeeSpecies.SOUL.getGenome(), 7);
 		
-		new BeeMutation(Allele.getBaseSpecies("Monastic"), BeeSpecies.ARCANE, BeeSpecies.PUPIL, 10);
-		new BeeMutation(BeeSpecies.ARCANE, BeeSpecies.PUPIL, BeeSpecies.SCHOLARLY, 8);
-		new BeeMutation(BeeSpecies.PUPIL, BeeSpecies.SCHOLARLY, BeeSpecies.SAVANT, 6);
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Monastic"), BeeSpecies.ARCANE.getSpecies(), BeeSpecies.PUPIL.getGenome(), 10);
+		beeMutationFactory.createMutation(BeeSpecies.ARCANE.getSpecies(), BeeSpecies.PUPIL.getSpecies(), BeeSpecies.SCHOLARLY.getGenome(), 8);
+		beeMutationFactory.createMutation(BeeSpecies.PUPIL.getSpecies(), BeeSpecies.SCHOLARLY.getSpecies(), BeeSpecies.SAVANT.getGenome(), 6);
 		
-		new BeeMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.ETHEREAL, BeeSpecies.TIMELY, 8);
-		new BeeMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.TIMELY, BeeSpecies.LORDLY, 8);
-		new BeeMutation(BeeSpecies.TIMELY, BeeSpecies.LORDLY, BeeSpecies.DOCTORAL, 7);
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.ETHEREAL.getSpecies(), BeeSpecies.TIMELY.getGenome(), 8);
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.TIMELY.getSpecies(), BeeSpecies.LORDLY.getGenome(), 8);
+		beeMutationFactory.createMutation(BeeSpecies.TIMELY.getSpecies(), BeeSpecies.LORDLY.getSpecies(), BeeSpecies.DOCTORAL.getGenome(), 7);
 		
-		new BeeMutation(BeeSpecies.INFERNAL, BeeSpecies.ELDRITCH, BeeSpecies.HATEFUL, 9)
-				.setBiomeRequired(BiomeDictionary.Type.NETHER);
-		new BeeMutation(BeeSpecies.INFERNAL, BeeSpecies.HATEFUL, BeeSpecies.SPITEFUL, 7)
-				.setBiomeRequired(BiomeDictionary.Type.NETHER);
-		new BeeMutation(Allele.getBaseSpecies("Demonic"), BeeSpecies.SPITEFUL, BeeSpecies.WITHERING, 6)
-				.setBiomeRequired(BiomeDictionary.Type.NETHER);
+		beeMutationFactory.createMutation(BeeSpecies.INFERNAL.getSpecies(), BeeSpecies.ELDRITCH.getSpecies(), BeeSpecies.HATEFUL.getGenome(), 9)
+				.restrictBiomeType(BiomeDictionary.Type.NETHER);
+		beeMutationFactory.createMutation(BeeSpecies.INFERNAL.getSpecies(), BeeSpecies.HATEFUL.getSpecies(), BeeSpecies.SPITEFUL.getGenome(), 7)
+				.restrictBiomeType(BiomeDictionary.Type.NETHER);
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Demonic"), BeeSpecies.SPITEFUL.getSpecies(), BeeSpecies.WITHERING.getGenome(), 6)
+				.restrictBiomeType(BiomeDictionary.Type.NETHER);
 
-		new BeeMutation(Allele.getBaseSpecies("Modest"), BeeSpecies.ELDRITCH, BeeSpecies.SKULKING, 12);
-		new BeeMutation(Allele.getBaseSpecies("Tropical"), BeeSpecies.SKULKING, BeeSpecies.SPIDERY, 10);
-		new BeeMutation(BeeSpecies.BATTY, BeeSpecies.ETHEREAL, BeeSpecies.GHASTLY, 9);
-		new BeeMutation(BeeSpecies.GHASTLY, BeeSpecies.HATEFUL, BeeSpecies.SMOULDERING, 7)
-				.setBiomeRequired(BiomeDictionary.Type.NETHER);
-		new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.MYSTERIOUS, BeeSpecies.BIGBAD, 7)
-				.setMoonPhaseRestricted(MoonPhase.FULL);			
-		new BeeMutation(Allele.getBaseSpecies("Common"), BeeSpecies.SKULKING, BeeSpecies.CHICKEN, 12)
-				.setBiomeRequired(Type.FOREST);
-		new BeeMutation(Allele.getBaseSpecies("Common"), BeeSpecies.SKULKING, BeeSpecies.BEEF, 12)
-				.setBiomeRequired(Type.PLAINS);
-		new BeeMutation(Allele.getBaseSpecies("Common"), BeeSpecies.SKULKING, BeeSpecies.PORK, 12)
-				.setBiomeRequired(Type.MOUNTAIN);
-		new BeeMutation(BeeSpecies.PORK, BeeSpecies.SKULKING, BeeSpecies.SHEEPISH, 13)
-				.setBiomeRequired(Type.PLAINS);
-		new BeeMutation(BeeSpecies.BEEF, BeeSpecies.SHEEPISH, BeeSpecies.HORSE, 12)
-				.setBiomeRequired(Type.PLAINS);
-		new BeeMutation(BeeSpecies.CHICKEN, BeeSpecies.SPIDERY, BeeSpecies.CATTY, 15)
-				.setBiomeRequired(Type.JUNGLE);
-		new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.WINDY, BeeSpecies.BATTY, 9);
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Modest"), BeeSpecies.ELDRITCH.getSpecies(), BeeSpecies.SKULKING.getGenome(), 12);
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Tropical"), BeeSpecies.SKULKING.getSpecies(), BeeSpecies.SPIDERY.getGenome(), 10);
+		beeMutationFactory.createMutation(BeeSpecies.BATTY.getSpecies(), BeeSpecies.ETHEREAL.getSpecies(), BeeSpecies.GHASTLY.getGenome(), 9);
+		beeMutationFactory.createMutation(BeeSpecies.GHASTLY.getSpecies(), BeeSpecies.HATEFUL.getSpecies(), BeeSpecies.SMOULDERING.getGenome(), 7)
+				.restrictBiomeType(BiomeDictionary.Type.NETHER);
+		beeMutationFactory.createMutation(BeeSpecies.SKULKING.getSpecies(), BeeSpecies.MYSTERIOUS.getSpecies(), BeeSpecies.BIGBAD.getGenome(), 7)
+				.addMutationCondition(new MoonPhaseMutationRestriction(MoonPhase.FULL));
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Common"), BeeSpecies.SKULKING.getSpecies(), BeeSpecies.CHICKEN.getGenome(), 12)
+				.restrictBiomeType(Type.FOREST);
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Common"), BeeSpecies.SKULKING.getSpecies(), BeeSpecies.BEEF.getGenome(), 12)
+				.restrictBiomeType(Type.PLAINS);
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Common"), BeeSpecies.SKULKING.getSpecies(), BeeSpecies.PORK.getGenome(), 12)
+				.restrictBiomeType(Type.MOUNTAIN);
+		beeMutationFactory.createMutation(BeeSpecies.PORK.getSpecies(), BeeSpecies.SKULKING.getSpecies(), BeeSpecies.SHEEPISH.getGenome(), 13)
+				.restrictBiomeType(Type.PLAINS);
+		beeMutationFactory.createMutation(BeeSpecies.BEEF.getSpecies(), BeeSpecies.SHEEPISH.getSpecies(), BeeSpecies.HORSE.getGenome(), 12)
+				.restrictBiomeType(Type.PLAINS);
+		beeMutationFactory.createMutation(BeeSpecies.CHICKEN.getSpecies(), BeeSpecies.SPIDERY.getSpecies(), BeeSpecies.CATTY.getGenome(), 15)
+				.restrictBiomeType(Type.JUNGLE);
+		beeMutationFactory.createMutation(BeeSpecies.SKULKING.getSpecies(), BeeSpecies.WINDY.getSpecies(), BeeSpecies.BATTY.getGenome(), 9);
 		if (ThaumcraftHelper.isActive()) {
-			new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.PUPIL, BeeSpecies.BRAINY, 9);
+			beeMutationFactory.createMutation(BeeSpecies.SKULKING.getSpecies(), BeeSpecies.PUPIL.getSpecies(), BeeSpecies.BRAINY.getGenome(), 9);
 		}
 		else {
-			new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.MUTABLE, BeeSpecies.BRAINY, 14);
+			beeMutationFactory.createMutation(BeeSpecies.SKULKING.getSpecies(), BeeSpecies.MUTABLE.getSpecies(), BeeSpecies.BRAINY.getGenome(), 14);
 		}
 		
-		new BeeMutation(BeeSpecies.ETHEREAL, BeeSpecies.OBLIVION, BeeSpecies.NAMELESS, 10);
-		new BeeMutation(BeeSpecies.OBLIVION, BeeSpecies.NAMELESS, BeeSpecies.ABANDONED, 8);
-		new BeeMutation(BeeSpecies.NAMELESS, BeeSpecies.ABANDONED, BeeSpecies.FORLORN, 6);
-		new BeeMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.ABANDONED, BeeSpecies.DRACONIC, 6)
-				.setBiomeRequired(BiomeDictionary.Type.END);
+		beeMutationFactory.createMutation(BeeSpecies.ETHEREAL.getSpecies(), BeeSpecies.OBLIVION.getSpecies(), BeeSpecies.NAMELESS.getGenome(), 10);
+		beeMutationFactory.createMutation(BeeSpecies.OBLIVION.getSpecies(), BeeSpecies.NAMELESS.getSpecies(), BeeSpecies.ABANDONED.getGenome(), 8);
+		beeMutationFactory.createMutation(BeeSpecies.NAMELESS.getSpecies(), BeeSpecies.ABANDONED.getSpecies(), BeeSpecies.FORLORN.getGenome(), 6);
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.ABANDONED.getSpecies(), BeeSpecies.DRACONIC.getGenome(), 6)
+				.restrictBiomeType(BiomeDictionary.Type.END);
 		
-		new BeeMutation(BeeSpecies.UNUSUAL, BeeSpecies.ELDRITCH, BeeSpecies.MUTABLE, 12);
-		new BeeMutation(BeeSpecies.UNUSUAL, BeeSpecies.MUTABLE, BeeSpecies.TRANSMUTING, 9);
-		new BeeMutation(BeeSpecies.UNUSUAL, BeeSpecies.MUTABLE, BeeSpecies.CRUMBLING, 9);
+		beeMutationFactory.createMutation(BeeSpecies.UNUSUAL.getSpecies(), BeeSpecies.ELDRITCH.getSpecies(), BeeSpecies.MUTABLE.getGenome(), 12);
+		beeMutationFactory.createMutation(BeeSpecies.UNUSUAL.getSpecies(), BeeSpecies.MUTABLE.getSpecies(), BeeSpecies.TRANSMUTING.getGenome(), 9);
+		beeMutationFactory.createMutation(BeeSpecies.UNUSUAL.getSpecies(), BeeSpecies.MUTABLE.getSpecies(), BeeSpecies.CRUMBLING.getGenome(), 9);
 		
-		new BeeMutation(BeeSpecies.MYSTICAL, BeeSpecies.MUTABLE, BeeSpecies.INVISIBLE, 15);
+		beeMutationFactory.createMutation(BeeSpecies.MYSTICAL.getSpecies(), BeeSpecies.MUTABLE.getSpecies(), BeeSpecies.INVISIBLE.getGenome(), 15);
 		
 		if (BeeSpecies.COPPER.isActive()) {
-			new BeeMutation(Allele.getBaseSpecies("Industrious"), Allele.getBaseSpecies("Meadows"), BeeSpecies.COPPER, 12)
-					.setBlockRequired("blockCopper");
+			beeMutationFactory.createMutation(Allele.getBaseSpecies("Industrious"), Allele.getBaseSpecies("Meadows"), BeeSpecies.COPPER.getGenome(), 12)
+					.requireResource("blockCopper");
 		}
 		
 		if (BeeSpecies.TIN.isActive()) {
-			new BeeMutation(Allele.getBaseSpecies("Industrious"), Allele.getBaseSpecies("Forest"), BeeSpecies.TIN, 12)
-					.setBlockRequired("blockTin");
+			beeMutationFactory.createMutation(Allele.getBaseSpecies("Industrious"), Allele.getBaseSpecies("Forest"), BeeSpecies.TIN.getGenome(), 12)
+					.requireResource("blockTin");
 		}
 		
-		new BeeMutation(Allele.getBaseSpecies("Common"), Allele.getBaseSpecies("Industrious"), BeeSpecies.IRON, 12)
-				.setBlockRequired(Blocks.iron_block);
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Common"), Allele.getBaseSpecies("Industrious"), BeeSpecies.IRON.getGenome(), 12)
+				.requireResource(Blocks.iron_block, 0);
 		
 		if (BeeSpecies.LEAD.isActive()) {
-			baseA = (BeeSpecies.TIN.isActive()) ? BeeSpecies.TIN : (BeeSpecies.COPPER.isActive()) ? BeeSpecies.COPPER : BeeSpecies.IRON;
-			mutation = new BeeMutation(baseA, Allele.getBaseSpecies("Common"), BeeSpecies.LEAD, 10);
+			baseA = (BeeSpecies.TIN.isActive()) ? BeeSpecies.TIN.getSpecies() : (BeeSpecies.COPPER.isActive()) ? BeeSpecies.COPPER.getSpecies() : BeeSpecies.IRON.getSpecies();
+			mutation = beeMutationFactory.createMutation(baseA, Allele.getBaseSpecies("Common"), BeeSpecies.LEAD.getGenome(), 10);
 			if (OreDictionary.getOres("blockLead").size() > 0) {
-				mutation.setBlockRequired("blockLead");
+				mutation.requireResource("blockLead");
 			}
 		}
 
 		if (BeeSpecies.SILVER.isActive()) {
-			mutation = new BeeMutation(Allele.getBaseSpecies("Imperial"), Allele.getBaseSpecies("Modest"), BeeSpecies.SILVER, 8);
+			mutation = beeMutationFactory.createMutation(Allele.getBaseSpecies("Imperial"), Allele.getBaseSpecies("Modest"), BeeSpecies.SILVER.getGenome(), 8);
 			if (OreDictionary.getOres("blockSilver").size() > 0) {
-				mutation.setBlockRequired("blockSilver");
+				mutation.requireResource("blockSilver");
 			}
 		}
 		
-		baseA = (BeeSpecies.EE_MINIUM.isActive()) ? BeeSpecies.EE_MINIUM : Allele.getBaseSpecies("Imperial");
-		baseB = (BeeSpecies.LEAD.isActive()) ? BeeSpecies.LEAD : BeeSpecies.IRON;
-		new BeeMutation(baseA, baseB, BeeSpecies.GOLD, 8)
-				.setBlockRequired(Blocks.gold_block);
+		baseA = (BeeSpecies.EE_MINIUM.isActive()) ? BeeSpecies.EE_MINIUM.getSpecies() : Allele.getBaseSpecies("Imperial");
+		baseB = (BeeSpecies.LEAD.isActive()) ? BeeSpecies.LEAD.getSpecies() : BeeSpecies.IRON.getSpecies();
+		beeMutationFactory.createMutation(baseA, baseB, BeeSpecies.GOLD.getGenome(), 8)
+				.requireResource(Blocks.gold_block, 0);
 		
 		if (BeeSpecies.ALUMINUM.isActive()) {
-			new BeeMutation(Allele.getBaseSpecies("Industrious"), Allele.getBaseSpecies("Cultivated"), BeeSpecies.ALUMINUM, 10)
-					.setBlockRequired("blockAluminum");
+			beeMutationFactory.createMutation(Allele.getBaseSpecies("Industrious"), Allele.getBaseSpecies("Cultivated"), BeeSpecies.ALUMINUM.getGenome(), 10)
+					.requireResource("blockAluminum");
 		}
 		
 		if (BeeSpecies.ARDITE.isActive()) {
-			new BeeMutation(Allele.getBaseSpecies("Industrious"), BeeSpecies.INFERNAL, BeeSpecies.ARDITE, 9)
-					.setBlockRequired("blockArdite");
+			beeMutationFactory.createMutation(Allele.getBaseSpecies("Industrious"), BeeSpecies.INFERNAL.getSpecies(), BeeSpecies.ARDITE.getGenome(), 9)
+					.requireResource("blockArdite");
 		}
 		
 		if (BeeSpecies.COBALT.isActive()) {
 			boolean hasTConCobalt = OreDictionary.getOres("nuggetCobalt").size() > 0 && OreDictionary.getOres("blockCobalt").size() > 0;
 			boolean hasNaturalCobalt = OreDictionary.getOres("nuggetNaturalCobalt").size() > 0 && OreDictionary.getOres("blockNaturalCobalt").size() > 0;
 			if (hasTConCobalt) {
-				new BeeMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.INFERNAL, BeeSpecies.COBALT, 11)
-					.setBlockRequired("blockCobalt");
+				beeMutationFactory.createMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.INFERNAL.getSpecies(), BeeSpecies.COBALT.getGenome(), 11)
+					.requireResource("blockCobalt");
 			}
 			if (hasNaturalCobalt) {
-				new BeeMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.INFERNAL, BeeSpecies.COBALT, 11)
-					.setBlockRequired("blockNaturalCobalt");
+				beeMutationFactory.createMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.INFERNAL.getSpecies(), BeeSpecies.COBALT.getGenome(), 11)
+					.requireResource("blockNaturalCobalt");
 			}
 			if (!(hasTConCobalt || hasNaturalCobalt)) {
-				new BeeMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.INFERNAL, BeeSpecies.COBALT, 7);
+				beeMutationFactory.createMutation(Allele.getBaseSpecies("Imperial"), BeeSpecies.INFERNAL.getSpecies(), BeeSpecies.COBALT.getGenome(), 7);
 			}
 		}
 		
 		if (BeeSpecies.MANYULLYN.isActive()) {
-			new BeeMutation(BeeSpecies.ARDITE, BeeSpecies.COBALT, BeeSpecies.MANYULLYN, 9)
-					.setBlockRequired("blockManyullyn");
+			beeMutationFactory.createMutation(BeeSpecies.ARDITE.getSpecies(), BeeSpecies.COBALT.getSpecies(), BeeSpecies.MANYULLYN.getGenome(), 9)
+					.requireResource("blockManyullyn");
 		}
 		
 		if (BeeSpecies.OSMIUM.isActive()) {
-			baseA = (BeeSpecies.SILVER.isActive()) ? BeeSpecies.SILVER : Allele.getBaseSpecies("Imperial");
-			baseB = (BeeSpecies.COBALT.isActive()) ? BeeSpecies.COBALT : BeeSpecies.INFERNAL;
-			mutation = new BeeMutation(baseA, baseB, BeeSpecies.OSMIUM, 11);
+			baseA = (BeeSpecies.SILVER.isActive()) ? BeeSpecies.SILVER.getSpecies() : Allele.getBaseSpecies("Imperial");
+			baseB = (BeeSpecies.COBALT.isActive()) ? BeeSpecies.COBALT.getSpecies() : BeeSpecies.INFERNAL.getSpecies();
+			mutation = beeMutationFactory.createMutation(baseA, baseB, BeeSpecies.OSMIUM.getGenome(), 11);
 			if (OreDictionary.getOres("blockOsmium").size() > 0) {
-				mutation.setBlockRequired("blockOsmium");
+				mutation.requireResource("blockOsmium");
 			}
 		}
 		
-		new BeeMutation(Allele.getBaseSpecies("Austere"), BeeSpecies.GOLD, BeeSpecies.DIAMOND, 7)
-				.setBlockRequired(Blocks.diamond_block);
-		baseA = (BeeSpecies.SILVER.isActive()) ? BeeSpecies.SILVER : Allele.getBaseSpecies("Imperial");
-		new BeeMutation(Allele.getBaseSpecies("Austere"), baseA, BeeSpecies.EMERALD, 6)
-				.setBlockRequired(Blocks.emerald_block);
-		new BeeMutation(Allele.getBaseSpecies("Rural"), BeeSpecies.COPPER, BeeSpecies.APATITE, 12)
-				.setBlockRequired("blockApatite");
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Austere"), BeeSpecies.GOLD.getSpecies(), BeeSpecies.DIAMOND.getGenome(), 7)
+				.requireResource("blockDiamond");
+		baseA = (BeeSpecies.SILVER.isActive()) ? BeeSpecies.SILVER.getSpecies() : Allele.getBaseSpecies("Imperial");
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Austere"), baseA, BeeSpecies.EMERALD.getGenome(), 6)
+				.requireResource("blockEmerald");
+		beeMutationFactory.createMutation(Allele.getBaseSpecies("Rural"), BeeSpecies.COPPER.getSpecies(), BeeSpecies.APATITE.getGenome(), 12)
+				.requireResource("blockApatite");
 		
 		if (BeeSpecies.SILICON.isActive()) {
-			baseA = (BeeSpecies.AE_SKYSTONE.isActive()) ? BeeSpecies.AE_SKYSTONE : BeeSpecies.EARTHY;
-			new BeeMutation(baseA, BeeSpecies.IRON, BeeSpecies.SILICON, 17);
+			baseA = (BeeSpecies.AE_SKYSTONE.isActive()) ? BeeSpecies.AE_SKYSTONE.getSpecies() : BeeSpecies.EARTHY.getSpecies();
+			beeMutationFactory.createMutation(baseA, BeeSpecies.IRON.getSpecies(), BeeSpecies.SILICON.getGenome(), 17);
 		}
 		
 		if (BeeSpecies.CERTUS.isActive()) {
-			baseA = (BeeSpecies.SILICON.isActive()) ? BeeSpecies.SILICON : BeeSpecies.IRON;
-			baseB = (BeeSpecies.AE_SKYSTONE.isActive()) ? BeeSpecies.AE_SKYSTONE : BeeSpecies.EARTHY;
-			new BeeMutation(baseA, baseB, BeeSpecies.CERTUS, 13);
+			baseA = (BeeSpecies.SILICON.isActive()) ? BeeSpecies.SILICON.getSpecies() : BeeSpecies.IRON.getSpecies();
+			baseB = (BeeSpecies.AE_SKYSTONE.isActive()) ? BeeSpecies.AE_SKYSTONE.getSpecies() : BeeSpecies.EARTHY.getSpecies();
+			beeMutationFactory.createMutation(baseA, baseB, BeeSpecies.CERTUS.getGenome(), 13);
 		}
 		
 		if (BeeSpecies.FLUIX.isActive()) {
 			if (BeeSpecies.CERTUS.isActive()) {
-				baseA = BeeSpecies.CERTUS;
+				baseA = BeeSpecies.CERTUS.getSpecies();
 			}
 			else if (BeeSpecies.SILICON.isActive()) {
-				baseA = BeeSpecies.SILICON;
+				baseA = BeeSpecies.SILICON.getSpecies();
 			}
 			else {
-				baseA = BeeSpecies.IRON;
+				baseA = BeeSpecies.IRON.getSpecies();
 			}
-			baseB = (BeeSpecies.AE_SKYSTONE.isActive()) ? BeeSpecies.AE_SKYSTONE : BeeSpecies.EARTHY;
-			new BeeMutation(baseA, baseB, BeeSpecies.FLUIX, 17);
+			baseB = (BeeSpecies.AE_SKYSTONE.isActive()) ? BeeSpecies.AE_SKYSTONE.getSpecies() : BeeSpecies.EARTHY.getSpecies();
+			beeMutationFactory.createMutation(baseA, baseB, BeeSpecies.FLUIX.getGenome(), 17);
 		}
 		
 		if (ThaumcraftHelper.isActive()) {
-			new BeeMutation(BeeSpecies.WINDY, BeeSpecies.WINDY, BeeSpecies.TC_AIR, 8)
-					.setBlockAndMetaRequired(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.AIR.ordinal());
-			new BeeMutation(BeeSpecies.FIREY, BeeSpecies.FIREY, BeeSpecies.TC_FIRE, 8)
-					.setBlockAndMetaRequired(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.FIRE.ordinal());
-			new BeeMutation(BeeSpecies.WATERY, BeeSpecies.WATERY, BeeSpecies.TC_WATER, 8)
-					.setBlockAndMetaRequired(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.WATER.ordinal());
-			new BeeMutation(BeeSpecies.EARTHY, BeeSpecies.EARTHY, BeeSpecies.TC_EARTH, 8)
-					.setBlockAndMetaRequired(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.EARTH.ordinal());
-			new BeeMutation(BeeSpecies.ETHEREAL, BeeSpecies.ARCANE, BeeSpecies.TC_ORDER, 8)
-					.setBlockAndMetaRequired(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.ORDER.ordinal());
-			new BeeMutation(BeeSpecies.ETHEREAL, BeeSpecies.SUPERNATURAL, BeeSpecies.TC_CHAOS, 8)
-					.setBlockAndMetaRequired(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.CHAOS.ordinal());
+			beeMutationFactory.createMutation(BeeSpecies.WINDY.getSpecies(), BeeSpecies.WINDY.getSpecies(), BeeSpecies.TC_AIR.getGenome(), 8)
+					.requireResource(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.AIR.ordinal());
+			beeMutationFactory.createMutation(BeeSpecies.FIREY.getSpecies(), BeeSpecies.FIREY.getSpecies(), BeeSpecies.TC_FIRE.getGenome(), 8)
+					.requireResource(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.FIRE.ordinal());
+			beeMutationFactory.createMutation(BeeSpecies.WATERY.getSpecies(), BeeSpecies.WATERY.getSpecies(), BeeSpecies.TC_WATER.getGenome(), 8)
+					.requireResource(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.WATER.ordinal());
+			beeMutationFactory.createMutation(BeeSpecies.EARTHY.getSpecies(), BeeSpecies.EARTHY.getSpecies(), BeeSpecies.TC_EARTH.getGenome(), 8)
+					.requireResource(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.EARTH.ordinal());
+			beeMutationFactory.createMutation(BeeSpecies.ETHEREAL.getSpecies(), BeeSpecies.ARCANE.getSpecies(), BeeSpecies.TC_ORDER.getGenome(), 8)
+					.requireResource(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.ORDER.ordinal());
+			beeMutationFactory.createMutation(BeeSpecies.ETHEREAL.getSpecies(), BeeSpecies.SUPERNATURAL.getSpecies(), BeeSpecies.TC_CHAOS.getGenome(), 8)
+					.requireResource(ThaumcraftHelper.crystal, ThaumcraftHelper.ShardType.CHAOS.ordinal());
 			
-			new BeeMutation(BeeSpecies.ETHEREAL, BeeSpecies.INFERNAL, BeeSpecies.TC_VIS, 9)
-					.setMoonPhaseRestricted(MoonPhase.WAXING_HALF, MoonPhase.WANING_HALF);
-			new BeeMutation(BeeSpecies.ATTUNED, BeeSpecies.TC_VIS, BeeSpecies.TC_REJUVENATING, 8);
-			new BeeMutation(BeeSpecies.TC_VIS, BeeSpecies.TC_REJUVENATING, BeeSpecies.TC_EMPOWERING, 6)
-					.setMoonPhaseBonus(MoonPhase.FULL, MoonPhase.FULL, 1.322f);
-			new BeeMutation(BeeSpecies.TC_REJUVENATING, BeeSpecies.TC_EMPOWERING, BeeSpecies.TC_NEXUS, 10)
-					.setBiomeRequired(Type.MAGICAL)
-					.setBlockAndMetaRequired(ThaumcraftHelper.airy, ThaumcraftHelper.AiryBlockType.NODE.ordinal());
+			beeMutationFactory.createMutation(BeeSpecies.ETHEREAL.getSpecies(), BeeSpecies.INFERNAL.getSpecies(), BeeSpecies.TC_VIS.getGenome(), 9)
+					.addMutationCondition(new MoonPhaseMutationRestriction(MoonPhase.WAXING_HALF, MoonPhase.WANING_HALF));
+			beeMutationFactory.createMutation(BeeSpecies.ATTUNED.getSpecies(), BeeSpecies.TC_VIS.getSpecies(), BeeSpecies.TC_REJUVENATING.getGenome(), 8);
+			beeMutationFactory.createMutation(BeeSpecies.TC_VIS.getSpecies(), BeeSpecies.TC_REJUVENATING.getSpecies(), BeeSpecies.TC_EMPOWERING.getGenome(), 6)
+					.addMutationCondition(new MoonPhaseMutationBonus(MoonPhase.FULL, 1.322f));
+			beeMutationFactory.createMutation(BeeSpecies.TC_REJUVENATING.getSpecies(), BeeSpecies.TC_EMPOWERING.getSpecies(), BeeSpecies.TC_NEXUS.getGenome(), 10)
+					.restrictBiomeType(Type.MAGICAL)
+					.requireResource(ThaumcraftHelper.airy, ThaumcraftHelper.AiryBlockType.NODE.ordinal());
 			
-			new BeeMutation(BeeSpecies.TRANSMUTING, BeeSpecies.TC_EMPOWERING, BeeSpecies.TC_TAINT, 11)
-					.setMoonPhaseRestricted(MoonPhase.NEW);
-			new BeeMutation(BeeSpecies.TRANSMUTING, BeeSpecies.TC_REJUVENATING, BeeSpecies.TC_PURE, 8)
-					.setBiomeRequired(Type.MAGICAL)
-					.setMoonPhaseRestricted(MoonPhase.NEW);
-			new BeeMutation(BeeSpecies.BIGBAD, BeeSpecies.TC_VIS, BeeSpecies.TC_HUNGRY, 20);
+			beeMutationFactory.createMutation(BeeSpecies.TRANSMUTING.getSpecies(), BeeSpecies.TC_EMPOWERING.getSpecies(), BeeSpecies.TC_TAINT.getGenome(), 11)
+					.addMutationCondition(new MoonPhaseMutationRestriction(MoonPhase.NEW));
+			beeMutationFactory.createMutation(BeeSpecies.TRANSMUTING.getSpecies(), BeeSpecies.TC_REJUVENATING.getSpecies(), BeeSpecies.TC_PURE.getGenome(), 8)
+					.restrictBiomeType(Type.MAGICAL)
+					.addMutationCondition(new MoonPhaseMutationRestriction(MoonPhase.NEW));
+			beeMutationFactory.createMutation(BeeSpecies.BIGBAD.getSpecies(), BeeSpecies.TC_VIS.getSpecies(), BeeSpecies.TC_HUNGRY.getGenome(), 20);
 			
-			new BeeMutation(BeeSpecies.ETHEREAL, BeeSpecies.GHASTLY, BeeSpecies.TC_WISPY, 9)
-					.setMoonPhaseRestricted(MoonPhase.WANING_CRESCENT, MoonPhase.WAXING_CRESCENT);
+			beeMutationFactory.createMutation(BeeSpecies.ETHEREAL.getSpecies(), BeeSpecies.GHASTLY.getSpecies(), BeeSpecies.TC_WISPY.getGenome(), 9)
+					.addMutationCondition(new MoonPhaseMutationRestriction(MoonPhase.WANING_CRESCENT, MoonPhase.WAXING_CRESCENT));
 			
-			new BeeMutation(BeeSpecies.IRON, BeeSpecies.TC_TAINT, BeeSpecies.TC_VOID, 5)
-					.setBiomeRequired(Type.MAGICAL)
-					.setRequiresNight();
+			beeMutationFactory.createMutation(BeeSpecies.IRON.getSpecies(), BeeSpecies.TC_TAINT.getSpecies(), BeeSpecies.TC_VOID.getGenome(), 5)
+					.restrictBiomeType(Type.MAGICAL)
+					.requireNight();
 		}
 		
 		if (ArsMagicaHelper.isActive()) {
-			new BeeMutation(BeeSpecies.ARCANE, BeeSpecies.ETHEREAL, BeeSpecies.AM_ESSENCE, 10);
-			new BeeMutation(BeeSpecies.ARCANE, BeeSpecies.AM_ESSENCE, BeeSpecies.AM_QUINTESSENCE, 7);
+			beeMutationFactory.createMutation(BeeSpecies.ARCANE.getSpecies(), BeeSpecies.ETHEREAL.getSpecies(), BeeSpecies.AM_ESSENCE.getGenome(), 10);
+			beeMutationFactory.createMutation(BeeSpecies.ARCANE.getSpecies(), BeeSpecies.AM_ESSENCE.getSpecies(), BeeSpecies.AM_QUINTESSENCE.getGenome(), 7);
 			
-			new BeeMutation(BeeSpecies.AM_ESSENCE, BeeSpecies.WINDY, BeeSpecies.AM_AIR, 10);
-			new BeeMutation(BeeSpecies.AM_ESSENCE, BeeSpecies.EARTHY, BeeSpecies.AM_EARTH, 10);
-			new BeeMutation(BeeSpecies.AM_ESSENCE, BeeSpecies.FIREY, BeeSpecies.AM_FIRE, 10);
-			new BeeMutation(BeeSpecies.AM_ESSENCE, BeeSpecies.WATERY, BeeSpecies.AM_WATER, 10);
-			new BeeMutation(BeeSpecies.AM_ESSENCE, BeeSpecies.ETHEREAL, BeeSpecies.AM_ARCANE, 10);
+			beeMutationFactory.createMutation(BeeSpecies.AM_ESSENCE.getSpecies(), BeeSpecies.WINDY.getSpecies(), BeeSpecies.AM_AIR.getGenome(), 10);
+			beeMutationFactory.createMutation(BeeSpecies.AM_ESSENCE.getSpecies(), BeeSpecies.EARTHY.getSpecies(), BeeSpecies.AM_EARTH.getGenome(), 10);
+			beeMutationFactory.createMutation(BeeSpecies.AM_ESSENCE.getSpecies(), BeeSpecies.FIREY.getSpecies(), BeeSpecies.AM_FIRE.getGenome(), 10);
+			beeMutationFactory.createMutation(BeeSpecies.AM_ESSENCE.getSpecies(), BeeSpecies.WATERY.getSpecies(), BeeSpecies.AM_WATER.getGenome(), 10);
+			beeMutationFactory.createMutation(BeeSpecies.AM_ESSENCE.getSpecies(), BeeSpecies.ETHEREAL.getSpecies(), BeeSpecies.AM_ARCANE.getGenome(), 10);
 			
-			new BeeMutation(BeeSpecies.WINDY, BeeSpecies.AM_AIR, BeeSpecies.AM_LIGHTNING, 8);
-			new BeeMutation(BeeSpecies.EARTHY, BeeSpecies.AM_EARTH, BeeSpecies.AM_PLANT, 8);
-			new BeeMutation(BeeSpecies.WATERY, BeeSpecies.AM_WATER, BeeSpecies.AM_ICE, 8);
+			beeMutationFactory.createMutation(BeeSpecies.WINDY.getSpecies(), BeeSpecies.AM_AIR.getSpecies(), BeeSpecies.AM_LIGHTNING.getGenome(), 8);
+			beeMutationFactory.createMutation(BeeSpecies.EARTHY.getSpecies(), BeeSpecies.AM_EARTH.getSpecies(), BeeSpecies.AM_PLANT.getGenome(), 8);
+			beeMutationFactory.createMutation(BeeSpecies.WATERY.getSpecies(), BeeSpecies.AM_WATER.getSpecies(), BeeSpecies.AM_ICE.getGenome(), 8);
 			
-			new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.AM_ESSENCE, BeeSpecies.AM_VORTEX, 8);
-			new BeeMutation(BeeSpecies.SKULKING, BeeSpecies.GHASTLY, BeeSpecies.AM_WIGHT, 8);
+			beeMutationFactory.createMutation(BeeSpecies.SKULKING.getSpecies(), BeeSpecies.AM_ESSENCE.getSpecies(), BeeSpecies.AM_VORTEX.getGenome(), 8);
+			beeMutationFactory.createMutation(BeeSpecies.SKULKING.getSpecies(), BeeSpecies.GHASTLY.getSpecies(), BeeSpecies.AM_WIGHT.getGenome(), 8);
 		}
 		
 		if (EquivalentExchangeHelper.isActive()) {
-			new BeeMutation(Allele.getBaseSpecies("Frugal"), BeeSpecies.MUTABLE, BeeSpecies.EE_MINIUM, 8);
+			beeMutationFactory.createMutation(Allele.getBaseSpecies("Frugal"), BeeSpecies.MUTABLE.getSpecies(), BeeSpecies.EE_MINIUM.getGenome(), 8);
 		}
 		
 		if (BloodMagicHelper.isActive()) {
-			new BeeMutation(BeeSpecies.ELDRITCH, BeeSpecies.EARTHY, BeeSpecies.BM_BLOODY, 13)
-				.setMoonPhaseBonus(MoonPhase.WANING_CRESCENT, MoonPhase.WAXING_CRESCENT, 0.85f)
-				.setBlockRequired(BloodMagicHelper.bloodStoneBrick);
+			beeMutationFactory.createMutation(BeeSpecies.ELDRITCH.getSpecies(), BeeSpecies.EARTHY.getSpecies(), BeeSpecies.BM_BLOODY.getGenome(), 13)
+				.addMutationCondition(new MoonPhaseMutationBonus(MoonPhase.WANING_CRESCENT, 0.85f))
+				.requireResource(BloodMagicHelper.bloodStoneBrick, 0);
 			
-			new BeeMutation(BeeSpecies.BM_BLOODY, BeeSpecies.ARCANE, BeeSpecies.BM_BOUND, 8);
+			beeMutationFactory.createMutation(BeeSpecies.BM_BLOODY.getSpecies(), BeeSpecies.ARCANE.getSpecies(), BeeSpecies.BM_BOUND.getGenome(), 8);
 		}
 		
 		if (RedstoneArsenalHelper.isActive()) {
-			new BeeMutation(BeeSpecies.TE_ELECTRUM, BeeSpecies.TE_DESTABILIZED, BeeSpecies.RSA_FLUXED, 10)
-					.setBlockRequired("blockElectrumFlux");
+			beeMutationFactory.createMutation(BeeSpecies.TE_ELECTRUM.getSpecies(), BeeSpecies.TE_DESTABILIZED.getSpecies(), BeeSpecies.RSA_FLUXED.getGenome(), 10)
+					.requireResource("blockElectrumFlux");
 		}
 		
 		if (ThermalModsHelper.isActive()) {
-			new BeeMutation(BeeSpecies.TIN, BeeSpecies.COPPER, BeeSpecies.TE_BRONZE, 12)
-					.setBlockRequired("blockBronze");
+			beeMutationFactory.createMutation(BeeSpecies.TIN.getSpecies(), BeeSpecies.COPPER.getSpecies(), BeeSpecies.TE_BRONZE.getGenome(), 12)
+					.requireResource("blockBronze");
 			
-			new BeeMutation(BeeSpecies.GOLD, BeeSpecies.SILVER, BeeSpecies.TE_ELECTRUM, 10)
-					.setBlockRequired("blockElectrum");
+			beeMutationFactory.createMutation(BeeSpecies.GOLD.getSpecies(), BeeSpecies.SILVER.getSpecies(), BeeSpecies.TE_ELECTRUM.getGenome(), 10)
+					.requireResource("blockElectrum");
 			
-			new BeeMutation(BeeSpecies.IRON, BeeSpecies.ESOTERIC, BeeSpecies.TE_NICKEL, 14)
-					.setBlockRequired("blockNickel");
+			beeMutationFactory.createMutation(BeeSpecies.IRON.getSpecies(), BeeSpecies.ESOTERIC.getSpecies(), BeeSpecies.TE_NICKEL.getGenome(), 14)
+					.requireResource("blockNickel");
 			
-			new BeeMutation(BeeSpecies.IRON, BeeSpecies.TE_NICKEL, BeeSpecies.TE_INVAR, 14)
-					.setBlockRequired("blockInvar");
+			beeMutationFactory.createMutation(BeeSpecies.IRON.getSpecies(), BeeSpecies.TE_NICKEL.getSpecies(), BeeSpecies.TE_INVAR.getGenome(), 14)
+					.requireResource("blockInvar");
 			
-			new BeeMutation(BeeSpecies.TE_NICKEL, BeeSpecies.TE_INVAR, BeeSpecies.TE_PLATINUM, 10)
-					.setBlockRequired("blockPlatinum");
+			beeMutationFactory.createMutation(BeeSpecies.TE_NICKEL.getSpecies(), BeeSpecies.TE_INVAR.getSpecies(), BeeSpecies.TE_PLATINUM.getGenome(), 10)
+					.requireResource("blockPlatinum");
 			
-			new BeeMutation(BeeSpecies.TIN, BeeSpecies.COPPER, BeeSpecies.TE_BRONZE, 12)
-					.setBlockRequired("blockBronze");
+			beeMutationFactory.createMutation(BeeSpecies.TIN.getSpecies(), BeeSpecies.COPPER.getSpecies(), BeeSpecies.TE_BRONZE.getGenome(), 12)
+					.requireResource("blockBronze");
 			
-			new BeeMutation(BeeSpecies.SPITEFUL, BeeSpecies.TIN, BeeSpecies.TE_COAL, 12)
-					.setBlockRequired(Blocks.coal_ore);
+			beeMutationFactory.createMutation(BeeSpecies.SPITEFUL.getSpecies(), BeeSpecies.TIN.getSpecies(), BeeSpecies.TE_COAL.getGenome(), 12)
+					.requireResource(Blocks.coal_ore, 0);
 			
-			new BeeMutation(BeeSpecies.SPITEFUL, Allele.getBaseSpecies("Industrious"), BeeSpecies.TE_DESTABILIZED, 12)
-					.setBlockRequired(Blocks.redstone_ore);
+			beeMutationFactory.createMutation(BeeSpecies.SPITEFUL.getSpecies(), Allele.getBaseSpecies("Industrious"), BeeSpecies.TE_DESTABILIZED.getGenome(), 12)
+					.requireResource(Blocks.redstone_ore, 0);
 			
-			new BeeMutation(BeeSpecies.SMOULDERING, BeeSpecies.INFERNAL, BeeSpecies.TE_LUX, 12)
-					.setBlockRequired(Blocks.glowstone);
+			beeMutationFactory.createMutation(BeeSpecies.SMOULDERING.getSpecies(), BeeSpecies.INFERNAL.getSpecies(), BeeSpecies.TE_LUX.getGenome(), 12)
+					.requireResource(Blocks.glowstone, 0);
 			
-			new BeeMutation(BeeSpecies.SMOULDERING, Allele.getBaseSpecies("Austere"), BeeSpecies.TE_DANTE, 12)
-					.setBiomeRequired(BiomeDictionary.Type.NETHER);
+			beeMutationFactory.createMutation(BeeSpecies.SMOULDERING.getSpecies(), Allele.getBaseSpecies("Austere"), BeeSpecies.TE_DANTE.getGenome(), 12)
+					.restrictBiomeType(BiomeDictionary.Type.NETHER);
 			
-			new BeeMutation(BeeSpecies.TE_DANTE, BeeSpecies.TE_COAL, BeeSpecies.TE_PYRO, 8)
-					.setBiomeRequired(BiomeDictionary.Type.NETHER);
+			beeMutationFactory.createMutation(BeeSpecies.TE_DANTE.getSpecies(), BeeSpecies.TE_COAL.getSpecies(), BeeSpecies.TE_PYRO.getGenome(), 8)
+					.restrictBiomeType(BiomeDictionary.Type.NETHER);
 			
-			new BeeMutation(BeeSpecies.SKULKING, Allele.getBaseSpecies("Wintry"), BeeSpecies.TE_BLIZZY, 12);
-			new BeeMutation(BeeSpecies.TE_BLIZZY, Allele.getBaseSpecies("Icy"), BeeSpecies.TE_GELID, 8);
+			beeMutationFactory.createMutation(BeeSpecies.SKULKING.getSpecies(), Allele.getBaseSpecies("Wintry"), BeeSpecies.TE_BLIZZY.getGenome(), 12);
+			beeMutationFactory.createMutation(BeeSpecies.TE_BLIZZY.getSpecies(), Allele.getBaseSpecies("Icy"), BeeSpecies.TE_GELID.getGenome(), 8);
 			
-			new BeeMutation(BeeSpecies.SMOULDERING, BeeSpecies.WINDY, BeeSpecies.TE_SHOCKING, 13);
-			new BeeMutation(BeeSpecies.TE_SHOCKING, BeeSpecies.WINDY, BeeSpecies.TE_AMPED, 8);
+			beeMutationFactory.createMutation(BeeSpecies.SMOULDERING.getSpecies(), BeeSpecies.WINDY.getSpecies(), BeeSpecies.TE_SHOCKING.getGenome(), 13);
+			beeMutationFactory.createMutation(BeeSpecies.TE_SHOCKING.getSpecies(), BeeSpecies.WINDY.getSpecies(), BeeSpecies.TE_AMPED.getGenome(), 8);
 			
-			new BeeMutation(BeeSpecies.SMOULDERING, BeeSpecies.EARTHY, BeeSpecies.TE_GROUNDED, 12);
-			new BeeMutation(BeeSpecies.TE_GROUNDED, BeeSpecies.EARTHY, BeeSpecies.TE_ROCKING, 9);
+			beeMutationFactory.createMutation(BeeSpecies.SMOULDERING.getSpecies(), BeeSpecies.EARTHY.getSpecies(), BeeSpecies.TE_GROUNDED.getGenome(), 12);
+			beeMutationFactory.createMutation(BeeSpecies.TE_GROUNDED.getSpecies(), BeeSpecies.EARTHY.getSpecies(), BeeSpecies.TE_ROCKING.getGenome(), 9);
 
-			new BeeMutation(BeeSpecies.TE_PLATINUM, BeeSpecies.OBLIVION, BeeSpecies.TE_WINSOME, 12);
+			beeMutationFactory.createMutation(BeeSpecies.TE_PLATINUM.getSpecies(), BeeSpecies.OBLIVION.getSpecies(), BeeSpecies.TE_WINSOME.getGenome(), 12);
 
-			new BeeMutation(BeeSpecies.TE_WINSOME, BeeSpecies.TE_COAL, BeeSpecies.TE_ENDEARING, 8)
-					.setBlockRequired("blockEnderium");
+			beeMutationFactory.createMutation(BeeSpecies.TE_WINSOME.getSpecies(), BeeSpecies.TE_COAL.getSpecies(), BeeSpecies.TE_ENDEARING.getGenome(), 8)
+					.requireResource("blockEnderium");
 		}
 		
 		if (BotaniaHelper.isActive()) {
-			new BeeMutation(BeeSpecies.ELDRITCH, Allele.getBaseSpecies("Forest"), BeeSpecies.BOT_ROOTED, 15)
-				.setBlockRequired(BotaniaHelper.blockLivingWood);
+			beeMutationFactory.createMutation(BeeSpecies.ELDRITCH.getSpecies(), Allele.getBaseSpecies("Forest"), BeeSpecies.BOT_ROOTED.getGenome(), 15)
+				.requireResource(BotaniaHelper.blockLivingWood, 0);
 			
-			new BeeMutation(BeeSpecies.BOT_ROOTED, BeeSpecies.WATERY, BeeSpecies.BOT_SOMNOLENT, 16)
-				.setRequiresNight();
-			new BeeMutation(BeeSpecies.WINDY, BeeSpecies.BOT_SOMNOLENT, BeeSpecies.BOT_DREAMING, 8)
-				.setRequiresNight();
+			beeMutationFactory.createMutation(BeeSpecies.BOT_ROOTED.getSpecies(), BeeSpecies.WATERY.getSpecies(), BeeSpecies.BOT_SOMNOLENT.getGenome(), 16)
+				.requireNight();
+			beeMutationFactory.createMutation(BeeSpecies.WINDY.getSpecies(), BeeSpecies.BOT_SOMNOLENT.getSpecies(), BeeSpecies.BOT_DREAMING.getGenome(), 8)
+				.requireNight();
 			
-			new BeeMutation(BeeSpecies.BOT_BOTANIC, BeeSpecies.EARTHY, BeeSpecies.BOT_BLOSSOM, 12);
-			new BeeMutation(BeeSpecies.BOT_BOTANIC, BeeSpecies.BOT_BLOSSOM, BeeSpecies.BOT_FLORAL, 8);
+			beeMutationFactory.createMutation(BeeSpecies.BOT_BOTANIC.getSpecies(), BeeSpecies.EARTHY.getSpecies(), BeeSpecies.BOT_BLOSSOM.getGenome(), 12);
+			beeMutationFactory.createMutation(BeeSpecies.BOT_BOTANIC.getSpecies(), BeeSpecies.BOT_BLOSSOM.getSpecies(), BeeSpecies.BOT_FLORAL.getGenome(), 8);
 		}
 		
 		if (AppliedEnergisticsHelper.isActive()) {
 			if (BeeSpecies.AE_SKYSTONE.isActive()) {
-				new BeeMutation(BeeSpecies.EARTHY, BeeSpecies.WINDY, BeeSpecies.AE_SKYSTONE, 20)
-					.setBlockRequired(AppliedEnergisticsHelper.skystone);
+				beeMutationFactory.createMutation(BeeSpecies.EARTHY.getSpecies(), BeeSpecies.WINDY.getSpecies(), BeeSpecies.AE_SKYSTONE.getGenome(), 20)
+					.requireResource(AppliedEnergisticsHelper.skystone, 0);
 			}
 		}
 	}
 
-	private IAlleleSpecies parent1;
-	private IAlleleSpecies parent2;
-	private IAllele mutationTemplate[];
-	private int baseChance;
-	private boolean isSecret;
-	private boolean isMoonRestricted;
-	private MoonPhase moonPhaseStart;
-	private MoonPhase moonPhaseEnd;
-	private float moonPhaseMutationBonus;
-	private boolean requiresNight;
-	private boolean requiresBlock;
-	private Block requiredBlock;
-	private int requiredBlockMeta;
-	private String requiredBlockOreDictEntry;
-	private String requiredBlockName;
-	private BiomeDictionary.Type requiredBiomeType;
 	
-	public BeeMutation(IAlleleBeeSpecies species0, IAlleleBeeSpecies species1, BeeSpecies resultSpecies, int percentChance) {
-		this(species0, species1, resultSpecies.getGenome(), percentChance);
-	}
-
-	public BeeMutation(IAlleleBeeSpecies species0, IAlleleBeeSpecies species1, IAllele[] resultSpeciesGenome, int percentChance) {
-		this.parent1 = species0;
-		this.parent2 = species1;
-		this.mutationTemplate = resultSpeciesGenome;
-		this.baseChance = percentChance;
-		this.isSecret = false;
-		this.isMoonRestricted = false;
-		this.moonPhaseMutationBonus = -1f;
-		this.requiresNight = false;
-		this.requiresBlock = false;
-		this.requiredBlockMeta = OreDictionary.WILDCARD_VALUE;
-		this.requiredBlockOreDictEntry = null;
-		this.requiredBiomeType = null;
-		this.requiredBlockName = null;
-		
-		BeeManager.beeRoot.registerMutation(this);
-	}
-
-	@Override
-	public float getChance(IBeeHousing housing, IAlleleBeeSpecies allele0, IAlleleBeeSpecies allele1, IBeeGenome genome0, IBeeGenome genome1) {
-		float finalChance = 0f;
-		float chance = this.baseChance * 1f;
-		ChunkCoordinates housingCoords = housing.getCoordinates();
-		
-		if (this.arePartners(allele0, allele1)) {
-			// This mutation applies. Continue calculation.
-			if (this.moonPhaseStart != null && this.moonPhaseEnd != null) {
-				// Only occurs during the phases.
-				if (this.isMoonRestricted && !MoonPhase.getMoonPhase(housing.getWorld()).isBetween(this.moonPhaseStart, this.moonPhaseEnd)) {
-					chance = 0;
-				}
-				else if (this.moonPhaseMutationBonus != -1f) {
-					// There is a bonus to this mutation during moon phases...
-					if (MoonPhase.getMoonPhase(housing.getWorld()).isBetween(this.moonPhaseStart, this.moonPhaseEnd)) {
-						chance = (int)(chance * this.moonPhaseMutationBonus);
-					}
-				}
-			}
-			
-			if (this.requiresBlock) {
-				Block blockBelow;
-				int blockMeta;
-				int i = 1;
-				do {
-					blockBelow = housing.getWorld().getBlock(housingCoords.posX, housingCoords.posY - i, housingCoords.posZ);
-					blockMeta = housing.getWorld().getBlockMetadata(housingCoords.posX, housingCoords.posY - i, housingCoords.posZ);
-					++i;
-				}
-				while (blockBelow != null && (blockBelow instanceof IBeeHousing || blockBelow == ForestryHelper.alvearyBlock));
-				
-				if (this.requiredBlockOreDictEntry != null) {
-					int[] dicId = OreDictionary.getOreIDs(new ItemStack(blockBelow, 1, blockMeta));
-					if (dicId.length != 0) {
-						if (!OreDictionary.getOreName(dicId[0]).equals(this.requiredBlockOreDictEntry)) {
-							chance = 0;
-						}
-					}
-					else {
-						chance = 0;
-					}
-				}
-				else if (this.requiredBlock != blockBelow ||
-						(this.requiredBlockMeta != OreDictionary.WILDCARD_VALUE && this.requiredBlockMeta != blockMeta)) {
-					chance = 0;
-				}
-			}
-			
-			if (this.requiredBiomeType != null) {
-				BiomeDictionary.Type[] types = BiomeDictionary.getTypesForBiome(housing.getWorld().getBiomeGenForCoords(housingCoords.posX, housingCoords.posZ));
-				boolean found = false;
-				for (Type type : types) {
-					if (this.requiredBiomeType == type) {
-						found = true;
-						break;
-					}
-				}
-				if (!found) {
-					chance = 0;
-				}
-			}
-			
-			if (this.requiresNight) {
-				if (!housing.getWorld().isDaytime()) {
-					chance = 0;
-				}
-			}
-
-			IBeeModifier housingBeeModifier = BeeManager.beeRoot.createBeeHousingModifier(housing);
-			IBeeModifier modeBeeModifier = BeeManager.beeRoot.getBeekeepingMode(housing.getWorld()).getBeeModifier();
-
-			finalChance = Math.round(chance
-					* housingBeeModifier.getMutationModifier(genome0, genome1, chance)
-					* modeBeeModifier.getMutationModifier(genome0, genome1, chance));
-		}
-		
-		return finalChance;
-	}
-
-	@Override
-	public IAlleleSpecies getAllele0() {
-		return parent1;
-	}
-
-	@Override
-	public IAlleleSpecies getAllele1() {
-		return parent2;
-	}
-
-	@Override
-	public IAllele[] getTemplate() {
-		return mutationTemplate;
-	}
-
-	@Override
-	public float getBaseChance() {
-		return baseChance;
-	}
-
-	@Override
-	public boolean isPartner(IAllele allele) {
-		return parent1.getUID().equals(allele.getUID()) || parent2.getUID().equals(allele.getUID());
-	}
-
-	@Override
-	public IAllele getPartner(IAllele allele) {
-		IAllele val = parent1;
-		if (val.getUID().equals(allele.getUID()))
-			val = parent2;
-		return val;
-	}
-
-	@Override
-	public Collection<String> getSpecialConditions() {
-		ArrayList<String> conditions = new ArrayList<String>();
-		
-		if (this.isMoonRestricted && moonPhaseStart != null && moonPhaseEnd != null) {
-			if (moonPhaseStart != moonPhaseEnd) {
-				conditions.add(String.format(LocalizationManager.getLocalizedString("research.requiresPhase"),
-						moonPhaseStart.getLocalizedNameAlt(), moonPhaseEnd.getLocalizedNameAlt()));
-			}
-			else {
-				conditions.add(String.format(LocalizationManager.getLocalizedString("research.requiresPhaseSingle"),
-						moonPhaseStart.getLocalizedName()));
-			}
-		}
-		
-		if (this.requiresBlock) {
-			if (this.requiredBlockName != null) {
-				conditions.add(String.format(LocalizationManager.getLocalizedString("research.requiresBlock"),
-						LocalizationManager.getLocalizedString(this.requiredBlockName)));
-			}
-			else if (this.requiredBlockOreDictEntry != null) {
-				ArrayList<ItemStack> ores = OreDictionary.getOres(this.requiredBlockOreDictEntry);
-				if (ores != null && 0 < ores.size()) {
-					String displayName = ores.get(0).getDisplayName();
-					conditions.add(String.format(LocalizationManager.getLocalizedString("research.requiresBlock"), displayName));
-				}
-			}
-			else if (this.requiredBlock != null) {
-				int meta = OreDictionary.WILDCARD_VALUE;
-				if (this.requiredBlockMeta != OreDictionary.WILDCARD_VALUE) {
-					meta = this.requiredBlockMeta;
-				}
-				String displayName = new ItemStack(this.requiredBlock, 1, meta).getDisplayName();
-				conditions.add(String.format(LocalizationManager.getLocalizedString("research.requiresBlock"), displayName));
-			}
-		}
-		
-		if (this.requiredBiomeType != null) {
-			String biomeName = this.requiredBiomeType.name().substring(0, 1) + this.requiredBiomeType.name().substring(1).toLowerCase();
-			conditions.add(String.format(LocalizationManager.getLocalizedString("research.requiresBiome"), biomeName));
-		}
-		
-		if (this.requiresNight) {
-			conditions.add(LocalizationManager.getLocalizedString("research.requiresNight"));
-		}
-		
-		return conditions;
-	}
-
-	@Override
-	public IBeeRoot getRoot() {
-		return BeeManager.beeRoot;
-	}
-	
-	public boolean arePartners(IAllele alleleA, IAllele alleleB) {
-		return (this.parent1.getUID().equals(alleleA.getUID())) && this.parent2.getUID().equals(alleleB.getUID()) ||
-				this.parent1.getUID().equals(alleleB.getUID()) && this.parent2.getUID().equals(alleleA.getUID());
-	}
-	
-	public BeeMutation setSecret() {
-		this.isSecret = true;
-		
-		return this;
-	}
-
-	public boolean isSecret() {
-		return isSecret;
-	}
-	
-	public BeeMutation setBlockRequired(Block block) {
-		this.requiresBlock = true;
-		this.requiredBlock = block;
-		
-		return this;
-	}
-	
-	public BeeMutation setBlockAndMetaRequired(Block block, int meta) {
-		this.requiresBlock = true;
-		this.requiredBlock = block;
-		this.requiredBlockMeta = meta;
-		
-		return this;
-	}
-	
-	public BeeMutation setBlockRequired(String oreDictEntry) {
-		this.requiresBlock = true;
-		this.requiredBlockOreDictEntry = oreDictEntry;
-		
-		return this;
-	}
-	
-	public BeeMutation setBlockRequiredNameOverride(String blockName) {
-		this.requiredBlockName = blockName;
-		
-		return this;
-	}
-	
-	public BeeMutation setMoonPhaseRestricted(MoonPhase phase) {
-		setMoonPhaseRestricted(phase, phase);
-		return this;
-	}
-	
-	public BeeMutation setMoonPhaseRestricted(MoonPhase begin, MoonPhase end) {
-		this.isMoonRestricted = true;
-		this.moonPhaseStart = begin;
-		this.moonPhaseEnd = end;
-		
-		return this;
-	}
-	
-	public BeeMutation setMoonPhaseBonus(MoonPhase begin, MoonPhase end, float mutationBonus) {
-		this.moonPhaseMutationBonus = mutationBonus;
-		this.moonPhaseStart = begin;
-		this.moonPhaseEnd = end;
-		
-		return this;
-	}
-	
-	public BeeMutation setBiomeRequired(BiomeDictionary.Type biomeType) {
-		this.requiredBiomeType = biomeType;
-		
-		return this;
-	}
-	
-	public BeeMutation setRequiresNight() {
-		this.requiresNight = true;
-		
-		return this;
-	}
 }

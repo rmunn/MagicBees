@@ -2,13 +2,15 @@ package magicbees.bees.allele.effect;
 
 import java.lang.reflect.Field;
 
-import magicbees.item.ItemArmorApiarist;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+
+import forestry.api.apiculture.BeeManager;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
 
@@ -61,7 +63,7 @@ public class AlleleEffectSpawnWisp extends AlleleEffectSpawnMob {
 
 				spawnedFlag = world.spawnEntityInWorld(mob);
 				if (this.aggosOnPlayer && player != null) {
-					if (ItemArmorApiarist.getNumberPiecesWorn(player) < 4) {
+					if (BeeManager.armorApiaristHelper.wearsItems((EntityLivingBase) player, getUID(), true) < 4) {
 						// Protect fully suited player from initial murder
 						// intent.
 						mob.setAttackTarget(player);

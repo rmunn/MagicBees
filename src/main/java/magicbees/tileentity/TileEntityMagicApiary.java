@@ -130,6 +130,11 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
 
     @Override
+    public Vec3 getBeeFXCoordinates() {
+        return Vec3.createVectorHelper(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5);
+    }
+
+    @Override
     public BiomeGenBase getBiome() {
         if (biome == null) {
             biome = worldObj.getBiomeGenForCoordsBody(xCoord, zCoord);

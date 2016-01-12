@@ -3,11 +3,13 @@ package magicbees.bees.allele.effect;
 import java.util.List;
 
 import magicbees.bees.AlleleEffect;
-import magicbees.item.ItemArmorApiarist;
-import net.minecraft.entity.Entity;
+
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+
+import forestry.api.apiculture.BeeManager;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
 import forestry.api.genetics.IEffectData;
@@ -40,19 +42,18 @@ public class AlleleEffectPotion extends AlleleEffect {
 
 	@Override
 	public IEffectData doEffectThrottled(IBeeGenome genome, IEffectData storedData, IBeeHousing housing) {
-		List<Entity> entityList = this.getEntitiesWithinRange(genome, housing);
+		List<EntityLivingBase> entityList = this.getEntitiesWithinRange(genome, housing, EntityLivingBase.class);
 
-		for (Entity e : entityList) {
-			if (e instanceof EntityPlayer) {
-				EntityPlayer player = (EntityPlayer) e;
-				if (this.isMalicious) {
-					int armorPieces = ItemArmorApiarist.getNumberPiecesWorn(player);
-					int finalDuration = this.duration / 4 * (4 - armorPieces);
-					if (finalDuration > 0) {
-						player.addPotionEffect(new PotionEffect(this.potionId, finalDuration, 0));
-					}
-				} else {
-					player.addPotionEffect(new PotionEffect(this.potionId, this.duration, 0));
+		for (EntityLivingBase e : entityList) {
+			if (this.isMalicious) {
+				int armorPieces = BeeManager.armorApiaristHelper.wearsItems(e, getUID(), true);
+				int finalDuration = this.duration / 4 * (4 - armorPieces);
+				if (finalDuration > 0) {
+					e.addPotionEffect(new PotionEffect(this.potionId, finalDuration, 0));
+				}
+			} else {
+				if (e instanceof EntityPlayer) {
+					e.addPotionEffect(new PotionEffect(this.potionId, this.duration, 0));
 				}
 			}
 		}
