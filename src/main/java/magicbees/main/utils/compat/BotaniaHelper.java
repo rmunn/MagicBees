@@ -50,6 +50,13 @@ public class BotaniaHelper implements IModHelper {
 		GAIA_INGOT,
 		ENDER_AIR_BOTTLE,
 		MANA_STRING,
+		MANASTEEL_NUGGET,
+		TERRASTEEL_NUGGET,
+		ELEMENTIUM_NUGGET,
+		ROOT,
+		PEBBLE,
+		MANAWEAVE_CLOTH,
+		MANA_POWDER
 		;
 	}
 	
@@ -86,7 +93,6 @@ public class BotaniaHelper implements IModHelper {
 	public static Block blockDreamWood;
 	
 	public static Item itemPetal;
-	public static Item itemManaPetal;
 	public static Item itemManaResource;
 	public static Item itemPastureSeed;
 	public static Item itemRune;
@@ -152,7 +158,7 @@ public class BotaniaHelper implements IModHelper {
 					's', blockLivingRock,
 					'm', new ItemStack(itemManaResource, 1, ManaResource.MANASTEEL.ordinal()),
 					'p', Config.pollen.getStackForType(PollenType.UNUSUAL),
-					'l', new ItemStack(itemManaPetal, 1, OreDictionary.WILDCARD_VALUE)
+					'l', new ItemStack(BotaniaHelper.itemManaResource, 1, ManaResource.MANA_POWDER.ordinal())
 			});
 			manaBoosterRecipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(CraftingManager.getInstance().getRecipeList().size() - 1);
 			
@@ -175,7 +181,6 @@ public class BotaniaHelper implements IModHelper {
 
 	public static void getItems() {
 		itemPetal = ItemInterface.getItem(Name, "petal");
-		itemManaPetal = ItemInterface.getItem(Name, "manaPetal");
 		itemManaResource = ItemInterface.getItem(Name, "manaResource");
 		itemPastureSeed = ItemInterface.getItem(Name, "grassSeeds");
 		itemRune = ItemInterface.getItem(Name, "rune");

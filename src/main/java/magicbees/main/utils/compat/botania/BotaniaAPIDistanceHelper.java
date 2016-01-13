@@ -70,12 +70,12 @@ public class BotaniaAPIDistanceHelper {
 		
 		RecipePetals beegoniaRecipe = BotaniaAPI.registerPetalRecipe(BotaniaAPI.internalHandler.getSubTileAsStack(SubTileBeegonia.NAME),
 				new ItemStack(BotaniaHelper.itemPetal),
-				new ItemStack(BotaniaHelper.itemManaPetal),
 				new ItemStack(BotaniaHelper.itemPetal, 1, 4),
 				new ItemStack(BotaniaHelper.itemPetal, 1, 4),
-				new ItemStack(BotaniaHelper.itemPetal, 1, 4),
-				new ItemStack(BotaniaHelper.itemManaPetal, 1, 4),
-				new ItemStack(BotaniaHelper.itemManaPetal, 1, 15)
+				new ItemStack(BotaniaHelper.itemPetal, 1, 15),
+        new ItemStack(BotaniaHelper.itemManaResource, 1, ManaResource.MANA_POWDER.ordinal()),
+        new ItemStack(BotaniaHelper.itemManaResource, 1, ManaResource.MANA_POWDER.ordinal()),
+				new ItemStack(BotaniaHelper.itemManaResource, 1, ManaResource.MANA_POWDER.ordinal())
 			);
 		entryBeegonia = new BotaniaLexiconEntry("tile.botania:flower." + SubTileBeegonia.NAME + ".name", BotaniaAPI.categoryGenerationFlowers);
 		entryBeegonia.setLexiconPages(
@@ -87,14 +87,14 @@ public class BotaniaAPIDistanceHelper {
 		
 		RecipePetals hiveacynthRecipe = BotaniaAPI.registerPetalRecipe(BotaniaAPI.internalHandler.getSubTileAsStack(SubTileHiveacynth.NAME),
 				new ItemStack(BotaniaHelper.itemPetal, 1, 3),
-				new ItemStack(BotaniaHelper.itemManaPetal, 1, 3),
 				new ItemStack(BotaniaHelper.itemPetal, 1, 9),
 				new ItemStack(BotaniaHelper.itemPetal, 1, 9),
-				new ItemStack(BotaniaHelper.itemManaPetal, 1, 9),
 				new ItemStack(BotaniaHelper.itemPetal, 1, 11),
-				new ItemStack(BotaniaHelper.itemManaPetal, 1, 11),
-				new ItemStack(BotaniaHelper.itemManaPetal, 1, 11),
-				new ItemStack(BotaniaHelper.itemManaResource, 1, ManaResource.REDSTONE_ROOT.ordinal())
+				new ItemStack(BotaniaHelper.itemManaResource, 1, ManaResource.MANA_POWDER.ordinal()),
+        new ItemStack(BotaniaHelper.itemManaResource, 1, ManaResource.MANA_POWDER.ordinal()),
+        new ItemStack(BotaniaHelper.itemManaResource, 1, ManaResource.MANA_POWDER.ordinal()),
+        new ItemStack(BotaniaHelper.itemManaResource, 1, ManaResource.MANA_POWDER.ordinal()),
+        new ItemStack(BotaniaHelper.itemManaResource, 1, ManaResource.REDSTONE_ROOT.ordinal())
 			);
 		entryHiveacynth = new BotaniaLexiconEntry("tile.botania:flower." + SubTileHiveacynth.NAME + ".name", BotaniaAPI.categoryFunctionalFlowers);
 		entryHiveacynth.setLexiconPages(BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.hiveacynth.0"),
@@ -104,15 +104,11 @@ public class BotaniaAPIDistanceHelper {
 		
 		RecipePetals hibeescusRecipe = BotaniaAPI.registerPetalRecipe(BotaniaAPI.internalHandler.getSubTileAsStack(SubTileHibeescus.NAME),
 				new ItemStack(BotaniaHelper.itemPetal, 1, 1),
-				new ItemStack(BotaniaHelper.itemManaPetal, 1, 1),
 				new ItemStack(BotaniaHelper.itemPetal, 1, 2),
 				new ItemStack(BotaniaHelper.itemPetal, 1, 2),
 				new ItemStack(BotaniaHelper.itemPetal, 1, 2),
-				new ItemStack(BotaniaHelper.itemManaPetal, 1, 2),
-				new ItemStack(BotaniaHelper.itemManaPetal, 1, 2),
 				new ItemStack(BotaniaHelper.itemPetal, 1, 14),
-				new ItemStack(BotaniaHelper.itemManaPetal, 1, 12),
-				new ItemStack(BotaniaHelper.itemManaPetal, 1, 10),
+        new ItemStack(BotaniaHelper.itemManaResource, 1, ManaResource.MANA_POWDER.ordinal()),
 				BotaniaHelper.getRune(Rune.AIR, 1),
 				BotaniaHelper.getRune(Rune.SUMMER, 1),
 				BotaniaHelper.getRune(Rune.ENVY, 1),
