@@ -105,6 +105,7 @@ public class ThaumcraftHelper implements IModHelper {
 		BELLOWS,
 		EAR,
 		PRESSURE_PLATE,
+		PRESSURE_PLATE_B,
 		BORE_BASE,
 		BORE,
 		PLANKS_GREATWOOD,
