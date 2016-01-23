@@ -71,7 +71,6 @@ comb.TEcarbon=Carbon Comb
 comb.TEelectric=Electric Comb
 comb.TElux=Lux Comb
 comb.TEendearing=Endearing Comb
-comb.BMSanguine=Sanguine Comb
 
 #Waxes
 wax.magic=Magic Wax
@@ -474,10 +473,6 @@ magicbees.speciesTEEndearing=Endearing
 magicbees.speciesTEEndearing.description="Hypnotic powers and vicious temperment aside, these bees are the cutest!"|Jadedcat, maker of packs
 magicbees.speciesRSAFluxed=Fluxed
 magicbees.speciesRSAFluxed.description="What? Bees are OP."|Marquis Muskrat
-magicbees.speciesBMBloody=Bloody
-magicbees.speciesBMBloody.description=Infused with the power of blood, they now seek additional power.|Apinomicon
-magicbees.speciesBMBound=Bound
-magicbees.speciesBMBound.description="You're... CERTAIN to like these ones!"|WayOfFlowingTime, terrible punster
 magicbees.speciesBotRooted=Rooted
 magicbees.speciesBotRooted.description="If you square these bees, they won't be rooted anymore."|MysteriousAges, bad at math jokes
 magicbees.speciesBotBotanic=Botanic

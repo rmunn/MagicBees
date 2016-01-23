@@ -14,7 +14,6 @@ import magicbees.item.types.ResourceType;
 import magicbees.item.types.WaxType;
 import magicbees.main.Config;
 import magicbees.main.utils.compat.ArsMagicaHelper;
-import magicbees.main.utils.compat.BloodMagicHelper;
 import magicbees.main.utils.compat.ForestryHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import magicbees.main.utils.compat.ThermalModsHelper;
@@ -572,13 +571,6 @@ public class CraftingManager {
 			output.put(ItemInterface.getItemStack("refractoryWax"),  0.5f);
 			output.put(ItemInterface.getItemStack("honeydew"),  0.65f);
 			RecipeManagers.centrifugeManager.addRecipe(20, Config.combs.getStackForType(CombType.AM_POTENT), output);
-		}
-		
-		if (BloodMagicHelper.isActive()) {
-			output = newMap();
-			output.put(Config.wax.getStackForType(WaxType.SOUL),  0.9f);
-			output.put(BloodMagicHelper.bloodShard,  0.08f);
-			RecipeManagers.centrifugeManager.addRecipe(20, Config.combs.getStackForType(CombType.BM_SANGUINE), output);
 		}
 		
 		if (ThermalModsHelper.isActive()) {

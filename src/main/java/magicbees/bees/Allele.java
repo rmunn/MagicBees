@@ -262,6 +262,8 @@ public class Allele implements IAllele {
 		registry.registerDeprecatedAlleleReplacement("magicbees.effectNodeFlux", effectNodeConversionTaint);
 		registry.registerDeprecatedAlleleReplacement("magicbees.effectNodeCharge", effectNodeEmpower);
 		registry.registerDeprecatedAlleleReplacement("magicbees.speciesTCAttractive", BeeSpecies.TC_EMPOWERING.getSpecies());
+		registry.registerDeprecatedAlleleReplacement("magicbees.speciesBMBloodyBMBloody", BeeSpecies.EARTHY.getSpecies());
+		registry.registerDeprecatedAlleleReplacement("magicbees.speciesBMBloodyBMBound", BeeSpecies.ARCANE.getSpecies());
 	}
 
 	public static IAlleleBeeSpecies getBaseSpecies(String name) {

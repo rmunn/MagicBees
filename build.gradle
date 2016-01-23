@@ -45,7 +45,6 @@ dependencies {
     compile "net.sengir.forestry:forestry_${project.version_mc}:${project.version_forestry}:api"
     runtime "net.sengir.forestry:forestry_${project.version_mc}:${project.version_forestry}:dev"
 	compile name: "Baubles", version: "${version_baubles}", ext: "jar"
-	compile files("/libs/BloodMagic-${project.version_mc}-${project.version_bloodmagic}.jar")
 	compile files("/libs/Botania ${project.version_botania}-deobf.jar")
 }
 

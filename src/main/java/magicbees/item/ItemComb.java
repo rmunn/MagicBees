@@ -2,9 +2,6 @@ package magicbees.item;
 
 import java.util.List;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.item.types.CombType;
 import magicbees.main.Config;
 import magicbees.main.utils.compat.ForestryHelper;
@@ -13,10 +10,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import forestry.api.core.Tabs;
 
 public class ItemComb extends Item
-{
+{	
 	public ItemComb()
 	{
 		super();
@@ -100,4 +100,13 @@ public class ItemComb extends Item
 		return CombType.values()[stack.getItemDamage()].getName();
 	}
 
+	@Override
+	public int getDamage(ItemStack stack) {
+		if (CombType.values().length < super.getDamage(stack)) {
+			stack.setItemDamage(0);
+		}
+		return super.getDamage(stack);
+	}
+
+	
 }

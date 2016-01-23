@@ -37,7 +37,6 @@ public class ModHelperManager {
 		helpers.add(new ArsMagicaHelper());
 		helpers.add(new ThermalModsHelper());
 		helpers.add(new RedstoneArsenalHelper());
-		helpers.add(new BloodMagicHelper());
 		helpers.add(new BotaniaHelper());
 		helpers.add(new AppliedEnergisticsHelper());
 	}

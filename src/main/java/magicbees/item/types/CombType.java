@@ -38,8 +38,6 @@ public enum CombType {
 	TE_CARBON("TEcarbon", false),
 	TE_LUX("TElux", false),
 	TE_ENDEARING("TEendearing", false),
-	
-	BM_SANGUINE("BMSanguine", false),
 	;
 	
 	private static int[][] colours = new int[][] {
@@ -75,8 +73,6 @@ public enum CombType {
 			{ 0x454545, 0x0F0F0F },
 			{ 0xF5F3A4, 0xC9C87D },
 			{ 0x12E3D9, 0x069E97 },
-			
-			{ 0x7F3228, 0xBE1900 },
 	};
 	
 	private CombType(String pName, boolean show) {

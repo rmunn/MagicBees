@@ -1403,37 +1403,6 @@ public class BeeGenomeManager {
 		
 		return genome;
 	}
-
-	private static IAllele[] getTemplateBMBase() {
-		IAllele[] genome = getTemplateModBase();
-
-		genome[EnumBeeChromosome.TEMPERATURE_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceBoth2");
-		genome[EnumBeeChromosome.HUMIDITY_TOLERANCE.ordinal()] = Allele.getBaseAllele("toleranceBoth2");
-		genome[EnumBeeChromosome.TOLERANT_FLYER.ordinal()] = Allele.getBaseAllele("boolTrue");
-		genome[EnumBeeChromosome.SPEED.ordinal()] = Allele.getBaseAllele("speedFast");
-		genome[EnumBeeChromosome.FERTILITY.ordinal()] = Allele.getBaseAllele("fertilityHigh");
-		genome[EnumBeeChromosome.LIFESPAN.ordinal()] = Allele.getBaseAllele("lifespanLonger");
-		genome[EnumBeeChromosome.FLOWER_PROVIDER.ordinal()] = Allele.getBaseAllele("flowersVanilla");
-
-
-		return genome;
-	}
-
-	public static IAllele[] getTemplateBMBloody() {
-		IAllele[] genome = getTemplateBMBase();
-
-		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BM_BLOODY.getSpecies();
-
-		return genome;
-	}
-
-	public static IAllele[] getTemplateBMBound() {
-		IAllele[] genome = getTemplateBMBase();
-
-		genome[EnumBeeChromosome.SPECIES.ordinal()] = BeeSpecies.BM_BOUND.getSpecies();
-
-		return genome;
-	}
 	
 	public static IAllele[] getTemplateBotaniaBase() {
 		IAllele[] genome = getTemplateModBase();

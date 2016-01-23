@@ -1,7 +1,13 @@
 package magicbees.bees;
 
+import magicbees.main.utils.compat.AppliedEnergisticsHelper;
+import magicbees.main.utils.compat.ArsMagicaHelper;
+import magicbees.main.utils.compat.BotaniaHelper;
+import magicbees.main.utils.compat.EquivalentExchangeHelper;
+import magicbees.main.utils.compat.RedstoneArsenalHelper;
+import magicbees.main.utils.compat.ThaumcraftHelper;
+import magicbees.main.utils.compat.ThermalModsHelper;
 import net.minecraft.item.ItemStack;
-
 import forestry.api.apiculture.EnumBeeChromosome;
 import forestry.api.apiculture.EnumBeeType;
 import forestry.api.apiculture.IAlleleBeeSpecies;
@@ -16,15 +22,6 @@ import forestry.api.genetics.EnumTolerance;
 import forestry.api.genetics.IAllele;
 import forestry.api.genetics.IAlleleTolerance;
 import forestry.api.genetics.IClassification;
-
-import magicbees.main.utils.compat.AppliedEnergisticsHelper;
-import magicbees.main.utils.compat.ArsMagicaHelper;
-import magicbees.main.utils.compat.BloodMagicHelper;
-import magicbees.main.utils.compat.BotaniaHelper;
-import magicbees.main.utils.compat.EquivalentExchangeHelper;
-import magicbees.main.utils.compat.RedstoneArsenalHelper;
-import magicbees.main.utils.compat.ThaumcraftHelper;
-import magicbees.main.utils.compat.ThermalModsHelper;
 
 public enum BeeSpecies
 {
@@ -289,13 +286,6 @@ public enum BeeSpecies
 	RSA_FLUXED("RSAFluxed", "Thermametallic electroflux", BeeClassification.THERMAL,
 			0x9E060D, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
 
-	// ----------------------Bloodmagic Bees---------------------------------
-	BM_BLOODY("BMBloody", "sanguis", BeeClassification.BLOODY,
-			0xb7102f, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
-
-	BM_BOUND("BMBound", "obligatus", BeeClassification.BLOODY,
-			0xb7102f, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, false),
-
 	// ----------------------Botania Bees---------------------------------------
 	BOT_ROOTED("BotRooted", "truncus", BeeClassification.BOTANICAL,
 			0x00A800, BodyColours.BOTANIA, EnumTemperature.NORMAL, EnumHumidity.NORMAL, false, true),
@@ -453,8 +443,6 @@ public enum BeeSpecies
 		TE_WINSOME.registerGenomeTemplate(BeeGenomeManager.getTemplateTEWinsome());
 		TE_ENDEARING.registerGenomeTemplate(BeeGenomeManager.getTemplateTEEndearing());
 		RSA_FLUXED.registerGenomeTemplate(BeeGenomeManager.getTemplateRSAFluxed());
-		BM_BLOODY.registerGenomeTemplate(BeeGenomeManager.getTemplateBMBloody());
-		BM_BOUND.registerGenomeTemplate(BeeGenomeManager.getTemplateBMBound());
 		BOT_ROOTED.registerGenomeTemplate(BeeGenomeManager.getTemplateBotRooted());
 		BOT_BOTANIC.registerGenomeTemplate(BeeGenomeManager.getTemplateBotBotanic());
 		BOT_BLOSSOM.registerGenomeTemplate(BeeGenomeManager.getTemplateBotBlossom());
@@ -529,12 +517,6 @@ public enum BeeSpecies
 		BeeProductHelper.initRedstoneArsenelProducts();
 		if (!RedstoneArsenalHelper.isActive()) {
 			RSA_FLUXED.setInactive();
-		}
-
-		BeeProductHelper.initBloodMagicProducts();
-		if (!BloodMagicHelper.isActive()) {
-			BM_BLOODY.setInactive();
-			BM_BOUND.setInactive();
 		}
 
 		BeeProductHelper.initBotaniaProducts();

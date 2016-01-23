@@ -4,7 +4,6 @@ import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.MoonPhase;
 import magicbees.main.utils.compat.AppliedEnergisticsHelper;
 import magicbees.main.utils.compat.ArsMagicaHelper;
-import magicbees.main.utils.compat.BloodMagicHelper;
 import magicbees.main.utils.compat.BotaniaHelper;
 import magicbees.main.utils.compat.EquivalentExchangeHelper;
 import magicbees.main.utils.compat.ExtraBeesHelper;
@@ -12,9 +11,7 @@ import magicbees.main.utils.compat.ForestryHelper;
 import magicbees.main.utils.compat.RedstoneArsenalHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import magicbees.main.utils.compat.ThermalModsHelper;
-
 import net.minecraft.init.Blocks;
-
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.oredict.OreDictionary;
@@ -298,14 +295,6 @@ public class BeeMutation {
 		
 		if (EquivalentExchangeHelper.isActive()) {
 			beeMutationFactory.createMutation(Allele.getBaseSpecies("Frugal"), BeeSpecies.MUTABLE.getSpecies(), BeeSpecies.EE_MINIUM.getGenome(), 8);
-		}
-		
-		if (BloodMagicHelper.isActive()) {
-			beeMutationFactory.createMutation(BeeSpecies.ELDRITCH.getSpecies(), BeeSpecies.EARTHY.getSpecies(), BeeSpecies.BM_BLOODY.getGenome(), 13)
-				.addMutationCondition(new MoonPhaseMutationBonus(MoonPhase.WANING_CRESCENT, 0.85f))
-				.requireResource(BloodMagicHelper.bloodStoneBrick, 0);
-			
-			beeMutationFactory.createMutation(BeeSpecies.BM_BLOODY.getSpecies(), BeeSpecies.ARCANE.getSpecies(), BeeSpecies.BM_BOUND.getGenome(), 8);
 		}
 		
 		if (RedstoneArsenalHelper.isActive()) {

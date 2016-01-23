@@ -31,21 +31,27 @@ public class RedstoneArsenalHelper implements IModHelper {
 	}
 
 	public void init() {
-		// if (isActive()) { }
-	}
-
-	public void postInit() {
-		if (isActive()) {
+		if (isActive()) {			
 			getBlocks();
 			getItems();
 		}
 	}
 
+	public void postInit() {
+		//if (isActive()) { }
+	}
+
 	private static void getBlocks() {
-		fluxBlock = ItemInterface.getItemStack(Name, "blockElectrumFlux");
+		fluxBlock = ItemInterface.getItemStack(Name.toLowerCase(), "blockElectrumFlux");
+		if (fluxNugget == null) {
+			throw new RuntimeException("Can't find " + Name + ".blockElectrumFlux");
+		}
 	}
 
 	private static void getItems() {
-		fluxNugget = ItemInterface.getItemStack(Name, "nuggetElectrumFlux");
+		fluxNugget = ItemInterface.getItemStack(Name.toLowerCase(), "nuggetElectrumFlux");
+		if (fluxNugget == null) {
+			throw new RuntimeException("Can't find " + Name + ".nuggetElectrumFlux");
+		}
 	}
 }

@@ -391,13 +391,6 @@ public class BeeProductHelper {
 		}
 	}
 	
-	public static void initBloodMagicProducts() {
-		BM_BLOODY.addProduct(Config.combs.getStackForType(CombType.OCCULT), 0.12f)
-				.addSpecialty(Config.combs.getStackForType(CombType.BM_SANGUINE), 0.8f);
-		BM_BOUND.addProduct(Config.combs.getStackForType(CombType.BM_SANGUINE), 0.8f)
-				.addProduct(Config.combs.getStackForType(CombType.OCCULT), 0.16f);
-	}
-	
 	public static void initBotaniaProducts() {
 		BOT_ROOTED.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 0.10f);
 		BOT_BOTANIC.addProduct(Config.combs.getStackForType(CombType.MUNDANE), 0.10f)
