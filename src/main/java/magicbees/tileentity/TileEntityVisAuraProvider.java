@@ -65,7 +65,7 @@ public class TileEntityVisAuraProvider extends TileEntity implements IMagicApiar
 			VisAuraCharge auraCharge = currentCharge.getValue();
 
 			if (auraCharge.charges < MAX_CHARGES && (tick % type.tickRate) == 0) {
-				auraCharge.vis += getVisFromNet(aspectMap.get(type));
+				auraCharge.vis += getVisFromNet(aspectMap.get(type.type));
 				if (auraCharge.vis >= VIS_PER_CHARGE) {
 					auraCharge.vis -= VIS_PER_CHARGE;
 					auraCharge.charges++;
