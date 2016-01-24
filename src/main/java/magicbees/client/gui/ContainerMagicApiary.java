@@ -77,11 +77,11 @@ public class ContainerMagicApiary extends ContainerMB {
                     if (BeeManager.beeRoot.isMember(srcStack)){
                             if (!BeeManager.beeRoot.isDrone(srcStack)){
                                 if (this.getSlot(SLOT_QUEEN).getHasStack() == false) {
-                                    clearSlot = this.mergeItemStack(srcStack, SLOT_QUEEN, SLOT_QUEEN, false);
+                                    clearSlot = this.mergeItemStack(srcStack, SLOT_QUEEN, SLOT_QUEEN + 1, false);
                                 }
                             }else{
                                 if (this.getSlot(SLOT_DRONE).isItemValid(srcStack)){
-                                    clearSlot = this.mergeItemStack(srcStack, SLOT_DRONE, SLOT_DRONE, false);
+                                    clearSlot = this.mergeItemStack(srcStack, SLOT_DRONE, SLOT_DRONE + 1, false);
                                 }
                             }
                     }else if(srcStack.getItem() instanceof IHiveFrame){
