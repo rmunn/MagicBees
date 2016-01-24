@@ -20,10 +20,6 @@ repositories {
         name = "forestry"
         url = "http://maven.ic2.player.to/"
     }
-	ivy {
-		name = "Baubles"
-		artifactPattern "http://addons-origin.cursecdn.com/files/2224/857/[module]-1.7.10-[revision].[ext]"
-	}
 }
 
 apply plugin: 'forge'
@@ -44,7 +40,7 @@ minecraft {
 dependencies {
     compile "net.sengir.forestry:forestry_${project.version_mc}:${project.version_forestry}:api"
     runtime "net.sengir.forestry:forestry_${project.version_mc}:${project.version_forestry}:dev"
-	compile name: "Baubles", version: "${version_baubles}", ext: "jar"
+	compile files("/libs/Baubles-deobf-${project.version_mc}-${project.version_baubles}.jar")
 	compile files("/libs/Botania ${project.version_botania}-deobf.jar")
 }
 
