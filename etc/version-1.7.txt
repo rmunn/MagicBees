@@ -1,3 +1,3 @@
-2.3.5
+2.4.1
 false
-Thaumcraft 4 high-tier bees are back.
+Bugfixes aplenty! You'll probably want them.
