@@ -60,13 +60,13 @@ public class ArsMagicaHelper implements IModHelper {
 	}
 
 	public void init() {
-	}
-
-	public void postInit() {
 		if (isActive()) {
 			getBlocks();
 			getItems();
 		}
+	}
+
+	public void postInit() {
 	}
 
 	private static void getBlocks() {
