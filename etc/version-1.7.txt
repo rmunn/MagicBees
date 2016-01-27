@@ -1,3 +1,3 @@
-2.4.1
+2.4.2
 false
 Bugfixes aplenty! You'll probably want them.
