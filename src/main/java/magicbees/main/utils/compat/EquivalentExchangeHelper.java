@@ -35,6 +35,6 @@ public class EquivalentExchangeHelper implements IModHelper {
 	}
 
 	private static void getItems() {
-		minuimShard = ItemInterface.getItem("EE3", "miniumShard");
+		minuimShard = ItemInterface.getItem("EE3", "shardMinium");
 	}
 }
