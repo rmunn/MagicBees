@@ -49,7 +49,7 @@ minecraft {
 }
 
 dependencies {
-    compile "net.sengir.forestry:forestry_${project.version_mc}:${project.version_forestry}:api"
+    deobfCompile "net.sengir.forestry:forestry_${project.version_mc}:${project.version_forestry}:api"
     runtime "net.sengir.forestry:forestry_${project.version_mc}:${project.version_forestry}"
     compile name: 'Botania', version: "${project.version_botania}", ext: 'jar'
     compile name: 'Baubles', version: "${project.version_mc}-${project.version_baubles}", ext: 'jar'
