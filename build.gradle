@@ -1,56 +1,58 @@
 buildscript {
     repositories {
-        mavenCentral()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
     }
 }
+apply plugin: 'net.minecraftforge.gradle.forge'
 
 repositories {
     maven {
         name = "forestry"
         url = "http://maven.ic2.player.to/"
     }
-    ivy {
-        name "Thaumcraft"
-        artifactPattern "https://dl.dropboxusercontent.com/u/47135879/[module]-deobf-${project.version_mc}-[revision].[ext]"
+    maven {
+        name = "jei"
+        url = "http://dvs1.progwml6.com/files/maven"
     }
     ivy {
-        name "Botania"
+        name = "Baubles"
+        // To find the correct URL, download the mod from CurseForge,
+        // and look in your browser's download history to find the URL it came from.
+        artifactPattern "https://addons-origin.cursecdn.com/files/2341/549/[module]-[revision].[ext]"
+    }
+    ivy {
+        name = "Botania"
         artifactPattern "http://botaniamod.net/files/deobf/[module] [revision]-deobf.[ext]"
     }
 }
-
-apply plugin: 'forge'
 
 ext.version_mod = "${project.version_major}.${project.version_minor}.${project.version_rev}"
 version = project.version_mc + "-" + project.version_mod
 group= "magicbees" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "magicbees"
 
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8 // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 minecraft {
     version = project.version_mc + "-" + project.version_forge
-	runDir = "."
-	
+	runDir = "run"
 	replace '@VERSION@', project.version_mod
 	replace '@MCVERSION@', project.version_mc
+    mappings = mcp_mappings
 }
-    
+
 dependencies {
     compile "net.sengir.forestry:forestry_${project.version_mc}:${project.version_forestry}:api"
-    runtime "net.sengir.forestry:forestry_${project.version_mc}:${project.version_forestry}:dev"
+    runtime "net.sengir.forestry:forestry_${project.version_mc}:${project.version_forestry}"
     compile name: 'Botania', version: "${project.version_botania}", ext: 'jar'
-    compile name: 'Baubles', version: "${project.version_baubles}", ext: 'jar'
-    compile name: 'Thaumcraft', version: "${project.version_thaumcraft}", ext: 'jar'
+    compile name: 'Baubles', version: "${project.version_mc}-${project.version_baubles}", ext: 'jar'
 }
 
 processResources
@@ -71,18 +73,4 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-}
-
-idea {
-    module {
-        inheritOutputDirs = true
-    }
-}
-
-task deobfJar(type: Jar) { // Generate deobfuscated
-    from sourceSets.main.output
-    classifier = 'deobf'
-}
-
-task fullBuild(dependsOn: ['build', 'deobfJar']) {
 }
