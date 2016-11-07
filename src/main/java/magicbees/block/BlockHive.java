@@ -27,7 +27,7 @@ public class BlockHive extends Block
 		this.setLightLevel(0.8f);
 		setHardness(1f);
 		setCreativeTab(Tabs.tabApiculture);
-		setBlockName("hive");
+		setRegistryName("hive");
 	}
 
 	@Override

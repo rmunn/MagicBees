@@ -25,7 +25,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.Vec3;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -50,7 +53,7 @@ import forestry.api.core.EnumTemperature;
 import forestry.api.core.ForestryAPI;
 import forestry.api.core.IErrorLogic;
 
-public class TileEntityMagicApiary extends TileEntity implements ISidedInventory, IBeeHousing, ITileEntityAuraCharged {
+public class TileEntityMagicApiary extends TileEntity implements ISidedInventory, IBeeHousing, ITileEntityAuraCharged, ITickable {
 
     // Constants
     private static final int AURAPROVIDER_SEARCH_RADIUS = 6;
@@ -125,26 +128,26 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
 
     @Override
-    public ChunkCoordinates getCoordinates() {
-        return new ChunkCoordinates(xCoord, yCoord, zCoord);
+    public BlockPos getCoordinates() {
+        return getPos();
     }
 
     @Override
-    public Vec3 getBeeFXCoordinates() {
-        return Vec3.createVectorHelper(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5);
+    public Vec3d getBeeFXCoordinates() {
+        return new Vec3d(getPos().add(0.5, 0.5, 0.5));
     }
 
     @Override
     public Biome getBiome() {
         if (biome == null) {
-            biome = worldObj.getBiomeGenForCoordsBody(xCoord, zCoord);
+            biome = worldObj.getBiome(getPos());
         }
         return biome;
     }
 
     @Override
     public EnumTemperature getTemperature() {
-        return EnumTemperature.getFromBiome(getBiome(), xCoord, yCoord, zCoord);
+        return EnumTemperature.getFromBiome(getBiome(), getWorld(), getPos());
     }
 
     @Override
@@ -154,12 +157,12 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
 
     @Override
     public int getBlockLightValue() {
-        return worldObj.getBlockLightValue(xCoord, yCoord + 1, zCoord);
+        return worldObj.getLight(getPos().up());
     }
 
     @Override
     public boolean canBlockSeeTheSky() {
-        return worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord);
+        return worldObj.canBlockSeeSky(getPos().up());
     }
 
     @Override
@@ -218,7 +221,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
-        return entityPlayer.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) <= 64;
+        return entityPlayer.getDistanceSq(getPos().add(0.5, 0.5, 0.5)) <= 64;
     }
 
     @Override
@@ -250,13 +253,14 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
 
     /* Saving and loading */
     @Override
-    public void writeToNBT(NBTTagCompound compound) {
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
 
         inventory.writeToNBT(compound);
         beeLogic.writeToNBT(compound);
         ChunkCoords.writeToNBT(auraProviderPosition, compound);
         auraCharges.writeToNBT(compound);
+        return compound;
     }
 
     @Override
@@ -277,15 +281,15 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
 
     public float getExactTemperature() {
-        return getBiome().getFloatTemperature(xCoord, yCoord, zCoord);
+        return getBiome().getFloatTemperature(getPos());
     }
 
     public float getExactHumidity() {
-        return getBiome().rainfall;
+        return getBiome().getRainfall();
     }
 
     @Override
-    public void updateEntity() {
+    public void update() {
         if (worldObj.isRemote) {
             updateClientSide();
         }
@@ -433,7 +437,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
 	}
 	
 	private void saveAuraProviderPosition(int x, int y, int z) {
-		auraProviderPosition = new ChunkCoords(worldObj.provider.dimensionId, x, y, z);
+		auraProviderPosition = new ChunkCoords(worldObj.provider.getDimension(), x, y, z);
 	}
 
     private IMagicApiaryAuraProvider getAuraProvider(ChunkCoords coords) {

@@ -27,7 +27,10 @@ import magicbees.main.utils.compat.ArsMagicaHelper;
 import magicbees.main.utils.compat.BotaniaHelper;
 import magicbees.main.utils.compat.ThaumcraftHelper;
 import magicbees.main.utils.compat.ThermalModsHelper;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionUtils;
 import thaumcraft.api.nodes.NodeType;
 
 import forestry.api.apiculture.EnumBeeChromosome;
@@ -116,10 +119,10 @@ public class Allele implements IAllele {
 		flowerBookshelf = new AlleleFlower("Bookshelf", new FlowerProviderBookshelf(), true);
 
 		effectCleansing = new AlleleEffectCure("Curative", false);
-		effectDigSpeed = new AlleleEffectPotion("DigSpeed", Potion.digSpeed, 15, false);
-		effectMoveSpeed = new AlleleEffectPotion("MoveSpeed", Potion.moveSpeed, 10, false);
-		effectSlowSpeed = new AlleleEffectPotion("SlowSpeed", Potion.moveSlowdown, 3, false).setMalicious();
-		effectWithering = new AlleleEffectPotion("Withering", Potion.wither, 10, false).setMalicious();
+		effectDigSpeed = new AlleleEffectPotion("DigSpeed", MobEffects.HASTE, 15, false);
+		effectMoveSpeed = new AlleleEffectPotion("MoveSpeed", MobEffects.SPEED, 10, false);
+		effectSlowSpeed = new AlleleEffectPotion("SlowSpeed", MobEffects.SLOWNESS, 3, false).setMalicious();
+		effectWithering = new AlleleEffectPotion("Withering", MobEffects.WITHER, 10, false).setMalicious();
 
 		TransmutationEffectController controller = new TransmutationEffectController(
 				new TransmutationEffectRailcraft(),
@@ -129,7 +132,7 @@ public class Allele implements IAllele {
 		effectTransmuting = new AlleleEffectTransmuting("Transmuting", true, controller, 200);
 		effectCrumbling = new AlleleEffectCrumbling("Crumbling", true);
 
-		effectInvisibility = new AlleleEffectPotion("Invisibility", Potion.invisibility, 10, false);
+		effectInvisibility = new AlleleEffectPotion("Invisibility", MobEffects.INVISIBILITY, 10, false);
 
 		spawnGhast = new AlleleEffectSpawnMob("Ghastly", false, "Ghast", "mob.ghast.moan")
 				.setThrottle(2060)

@@ -2,9 +2,6 @@ package magicbees.item;
 
 import java.util.List;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import magicbees.item.types.DropType;
 import magicbees.main.utils.compat.ForestryHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,6 +10,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import forestry.api.core.Tabs;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemDrop extends Item
 {
@@ -22,7 +22,8 @@ public class ItemDrop extends Item
 		this.setCreativeTab(Tabs.tabApiculture);
 		this.setHasSubtypes(true);
 		this.setUnlocalizedName("drop");
-		GameRegistry.registerItem(this, "drop");
+		setRegistryName("drop");
+		GameRegistry.register(this);
 	}
 	
 	public ItemStack getStackForType(DropType type)

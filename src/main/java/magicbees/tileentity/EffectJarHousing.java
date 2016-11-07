@@ -9,6 +9,7 @@ import java.io.IOException;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
@@ -47,14 +48,14 @@ public class EffectJarHousing implements IBeeHousing {
 
 	public EffectJarHousing(TileEntityEffectJar entity) {
 		this.jarEntity = entity;
-		this.biome = entity.getWorldObj().getBiomeGenForCoords(entity.xCoord, entity.zCoord);
+		this.biome = entity.getWorld().getBiome(entity.getPos());
 		this.inventory = new JarBeeHousingInventory(entity);
 		this.beekeepingLogic = BeeManager.beeRoot.createBeekeepingLogic(this);
 	}
 
 	@Override
-	public ChunkCoordinates getCoordinates() {
-		return new ChunkCoordinates(jarEntity.xCoord, jarEntity.yCoord, jarEntity.zCoord);
+	public BlockPos getCoordinates() {
+		return jarEntity.getPos();
 	}
 
 	@Override
