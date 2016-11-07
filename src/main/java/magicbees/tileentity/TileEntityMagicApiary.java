@@ -28,7 +28,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.Constants;
 
@@ -59,7 +59,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     private GameProfile ownerProfile;
     private IMagicApiaryAuraProvider auraProvider;
     private ChunkCoords auraProviderPosition;
-    private BiomeGenBase biome;
+    private Biome biome;
     private int breedingProgressPercent = 0;
 
     private final IBeekeepingLogic beeLogic;
@@ -135,7 +135,7 @@ public class TileEntityMagicApiary extends TileEntity implements ISidedInventory
     }
 
     @Override
-    public BiomeGenBase getBiome() {
+    public Biome getBiome() {
         if (biome == null) {
             biome = worldObj.getBiomeGenForCoordsBody(xCoord, zCoord);
         }

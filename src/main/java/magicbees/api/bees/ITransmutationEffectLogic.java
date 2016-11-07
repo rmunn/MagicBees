@@ -2,7 +2,7 @@ package magicbees.api.bees;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 
 /**
  * Class to control plugin logic for the Transmutation bee effect. Turns blocks
@@ -29,5 +29,5 @@ public interface ITransmutationEffectLogic
 	 * @param z Current Z coordinate to attempt a transmute
 	 * @return true if a block was changed.
 	 */
-	public boolean tryTransmutation(World world, BiomeGenBase biome, ItemStack sourceBlock, int x, int y, int z);
+	public boolean tryTransmutation(World world, Biome biome, ItemStack sourceBlock, int x, int y, int z);
 }

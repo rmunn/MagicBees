@@ -15,13 +15,13 @@ import forestry.api.apiculture.IBeeHousing;
 import forestry.api.genetics.IEffectData;
 
 public class AlleleEffectPotion extends AlleleEffect {
-	private int potionId;
+	private Potion potion;
 	private int duration;
 	private boolean isMalicious;
 
 	public AlleleEffectPotion(String name, Potion potionApplied, int effectDuration, boolean isDominant) {
 		super(name, isDominant, 200);
-		this.potionId = potionApplied.id;
+		this.potion = potionApplied;
 		this.duration = 20 * effectDuration;
 		this.isMalicious = false;
 	}
@@ -49,11 +49,11 @@ public class AlleleEffectPotion extends AlleleEffect {
 				int armorPieces = BeeManager.armorApiaristHelper.wearsItems(e, getUID(), true);
 				int finalDuration = this.duration / 4 * (4 - armorPieces);
 				if (finalDuration > 0) {
-					e.addPotionEffect(new PotionEffect(this.potionId, finalDuration, 0));
+					e.addPotionEffect(new PotionEffect(this.potion, finalDuration, 0));
 				}
 			} else {
 				if (e instanceof EntityPlayer) {
-					e.addPotionEffect(new PotionEffect(this.potionId, this.duration, 0));
+					e.addPotionEffect(new PotionEffect(this.potion, this.duration, 0));
 				}
 			}
 		}

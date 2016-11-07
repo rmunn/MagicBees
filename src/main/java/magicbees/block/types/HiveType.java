@@ -2,21 +2,23 @@ package magicbees.block.types;
 
 import java.util.ArrayList;
 
+import forestry.api.apiculture.EnumBeeType;
+import forestry.api.apiculture.IBee;
 import magicbees.bees.BeeGenomeManager;
+import magicbees.bees.BeeManager;
 import magicbees.bees.BeeSpecies;
 import magicbees.bees.HiveDrop;
 import magicbees.item.types.CombType;
 import magicbees.main.CommonProxy;
 import magicbees.main.Config;
 import magicbees.main.utils.compat.ForestryHelper;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import forestry.api.apiculture.IHiveDrop;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public enum HiveType
 {
@@ -72,12 +74,12 @@ public enum HiveType
 		DEEP.drops.add(new HiveDrop(BeeGenomeManager.addRainResist(BeeSpecies.ATTUNED.getGenome()), combs, 20));
 		DEEP.drops.add(valiantDrop);
 
-		combs = new ItemStack[] { Config.combs.getStackForType(CombType.MOLTEN), new ItemStack(Items.glowstone_dust, 6) };
+		combs = new ItemStack[] { Config.combs.getStackForType(CombType.MOLTEN), new ItemStack(Items.GLOWSTONE_DUST, 6) };
 
 		INFERNAL.drops.add(new HiveDrop(BeeSpecies.INFERNAL.getGenome(), combs, 80).setIgnoblePercentage(0.5f));
 		INFERNAL.drops.add(new HiveDrop(ForestryHelper.getTemplateForestryForSpecies("Steadfast"), combs, 3));
 
-		combs = new ItemStack[] { Config.combs.getStackForType(CombType.FORGOTTEN), new ItemStack(Items.ender_pearl, 1) };
+		combs = new ItemStack[] { Config.combs.getStackForType(CombType.FORGOTTEN), new ItemStack(Items.ENDER_PEARL, 1) };
 
 		OBLIVION.drops.add(new HiveDrop(BeeSpecies.OBLIVION.getGenome(), combs, 80));
 		OBLIVION.drops.add(new HiveDrop(ForestryHelper.getTemplateForestryForSpecies("Steadfast"), combs, 9));
@@ -122,7 +124,7 @@ public enum HiveType
 		return this.lightLevel;
 	}
 
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int fortune)
+	public ArrayList<ItemStack> getDrops(World world, BlockPos pos, int fortune)
 	{
 		ArrayList<ItemStack> hiveDrops = new ArrayList<ItemStack>();
 		int dart;
@@ -135,9 +137,15 @@ public enum HiveType
 			dart = world.rand.nextInt(100);
 			for (IHiveDrop drop : drops)
 			{
-				if (dart <= drop.getChance(world, x, y, z))
+				if (dart <= drop.getChance(world, pos, fortune))
 				{
-					hiveDrops.add(drop.getPrincess(world, x, y, z, fortune));
+					IBee bee = drop.getBeeType(world, pos);
+					if (world.rand.nextFloat() < drop.getIgnobleChance(world, pos, fortune)) {
+						bee.setIsNatural(false);
+					}
+
+					ItemStack princess = forestry.api.apiculture.BeeManager.beeRoot.getMemberStack(bee, EnumBeeType.PRINCESS);
+					hiveDrops.add(princess);
 					break;
 				}
 			}
@@ -147,20 +155,19 @@ public enum HiveType
 		dart = world.rand.nextInt(100);
 		for (IHiveDrop drop : drops)
 		{
-			if (dart <= drop.getChance(world, x, y, z))
-			{
-				hiveDrops.addAll(drop.getDrones(world, x, y, z, fortune));
+			if (dart < drop.getChance(world, pos, fortune)) {
+				IBee bee = drop.getBeeType(world, pos);
+				ItemStack drone = BeeManager.beeRoot.getMemberStack(bee, EnumBeeType.DRONE);
+				hiveDrops.add(drone);
 				break;
 			}
 		}
 		
 		// Get additional drops.
-		dart = world.rand.nextInt(100);
-		for (IHiveDrop drop : drops)
-		{
-			if (dart <= drop.getChance(world, x, y, z))
-			{
-				hiveDrops.addAll(drop.getAdditional(world, x, y, z, fortune));
+		for (IHiveDrop drop : drops) {
+			if (dart < drop.getChance(world, pos, fortune)) {
+				hiveDrops.addAll(drop.getExtraItems(world, pos, fortune));
+				break;
 			}
 		}
 		

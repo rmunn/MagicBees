@@ -9,7 +9,7 @@ import magicbees.api.bees.ITransmutationEffectLogic;
 import magicbees.main.utils.LogHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 
 public class TransmutationEffectController implements ITransmutationEffectController {
 	private List<ITransmutationEffectLogic> logicObjects;
@@ -21,7 +21,7 @@ public class TransmutationEffectController implements ITransmutationEffectContro
 		}
 	}
 
-	public void attemptTransmutations(World world, BiomeGenBase biome, ItemStack sourceBlock, int x, int y, int z) {
+	public void attemptTransmutations(World world, Biome biome, ItemStack sourceBlock, int x, int y, int z) {
 		Collections.shuffle(logicObjects);
 		for (ITransmutationEffectLogic logic : logicObjects) {
 			try {

@@ -7,7 +7,7 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 import forestry.api.apiculture.BeeManager;
@@ -44,7 +44,7 @@ public class AlleleEffectSpawnWisp extends AlleleEffectSpawnMob {
 
 			int entitiesCount = world.getEntitiesWithinAABB(
 					mob.getClass(),
-					AxisAlignedBB.getBoundingBox((int) pos[0], (int) pos[1], (int) pos[2], (int) pos[0] + 1, (int) pos[1] + 1, (int) pos[2] + 1).expand(8.0D,
+					new AxisAlignedBB((int) pos[0], (int) pos[1], (int) pos[2], (int) pos[0] + 1, (int) pos[1] + 1, (int) pos[2] + 1).expand(8.0D,
 							4.0D, 8.0D)).size();
 
 			mob.setPositionAndRotation(pos[0], pos[1], pos[2], world.rand.nextFloat() * 360f, 0f);

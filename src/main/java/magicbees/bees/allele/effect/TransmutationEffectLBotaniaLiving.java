@@ -4,13 +4,13 @@ import magicbees.api.bees.ITransmutationEffectLogic;
 import magicbees.main.utils.compat.BotaniaHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class TransmutationEffectLBotaniaLiving implements ITransmutationEffectLogic {
 
 	@Override
-	public boolean tryTransmutation(World world, BiomeGenBase biome, ItemStack sourceBlock, int x, int y, int z) {
+	public boolean tryTransmutation(World world, Biome biome, ItemStack sourceBlock, int x, int y, int z) {
 		int[] oreIDs = OreDictionary.getOreIDs(sourceBlock);
 		for (int oreId : oreIDs) {
 			if (oreId == OreDictionary.getOreID("logWood")) {

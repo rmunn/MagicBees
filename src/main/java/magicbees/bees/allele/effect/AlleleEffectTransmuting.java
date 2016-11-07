@@ -6,7 +6,7 @@ import magicbees.bees.BeeManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
 import forestry.api.apiculture.IBeeModifier;
@@ -44,7 +44,7 @@ public class AlleleEffectTransmuting extends AlleleEffect {
 		int yCoord = coords.posY + world.rand.nextInt(yRange) - yRange / 2;
 		int zCoord = coords.posZ + world.rand.nextInt(zRange) - zRange / 2;
 
-		BiomeGenBase biome = world.getBiomeGenForCoords(xCoord, zCoord);
+		Biome biome = world.getBiomeGenForCoords(xCoord, zCoord);
 		transmutationController.attemptTransmutations(world, biome, 
 				new ItemStack(world.getBlock(xCoord, yCoord, zCoord), 1, world.getBlockMetadata(xCoord, yCoord, zCoord)), xCoord, yCoord, zCoord);
 

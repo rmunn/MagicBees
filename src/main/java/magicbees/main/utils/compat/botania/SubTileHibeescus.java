@@ -12,7 +12,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import vazkii.botania.api.BotaniaAPI;
@@ -130,7 +130,7 @@ public class SubTileHibeescus extends SubTileFunctional {
 	}
 	
 	private AxisAlignedBB getSearchBoundingBox() {
-		return AxisAlignedBB.getBoundingBox(supertile.xCoord - RANGE, supertile.yCoord, supertile.zCoord - RANGE,
+		return new AxisAlignedBB(supertile.xCoord - RANGE, supertile.yCoord, supertile.zCoord - RANGE,
 						supertile.xCoord + RANGE + 1, supertile.yCoord + 1, supertile.zCoord + RANGE + 1);
 	}
 

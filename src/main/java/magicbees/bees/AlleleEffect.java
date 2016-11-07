@@ -2,17 +2,15 @@ package magicbees.bees;
 
 import java.util.List;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChunkCoordinates;
-
 import forestry.api.apiculture.EnumBeeChromosome;
 import forestry.api.apiculture.IAlleleBeeEffect;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
 import forestry.api.genetics.IEffectData;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3i;
 
 public abstract class AlleleEffect extends Allele implements IAlleleBeeEffect
 {
@@ -69,27 +67,26 @@ public abstract class AlleleEffect extends Allele implements IAlleleBeeEffect
 		return Allele.forestryBaseEffect.doFX(genome, storedData, housing);
 	}
 	
-	@SuppressWarnings("unchecked")
 	protected <T extends Entity> List<T> getEntitiesWithinRange(IBeeGenome genome, IBeeHousing housing, Class<T> entityClass)
 	{
 		// Get the size of the affected area
-		int[] area = genome.getTerritory();
-		ChunkCoordinates coords = housing.getCoordinates();
+		Vec3i area = genome.getTerritory();
+		BlockPos coords = housing.getCoordinates();
 		
 		// Calculate offset
 		int[] min = new int[3];
 		int[] max = new int[3];
-		min[0] = coords.posX - area[0] / 2;
-		max[0] = coords.posX + area[0] / 2;
+		min[0] = coords.getX() - area.getX() / 2;
+		max[0] = coords.getX() + area.getX() / 2;
 		
-		min[1] = coords.posY - area[1] / 2;
-		max[1] = coords.posY + area[1] / 2;
+		min[1] = coords.getY() - area.getY() / 2;
+		max[1] = coords.getY() + area.getY() / 2;
 		
-		min[2] = coords.posZ - area[2] / 2;
-		max[2] = coords.posZ + area[2] / 2;
+		min[2] = coords.getZ() - area.getZ() / 2;
+		max[2] = coords.getZ() + area.getZ() / 2;
 		
-		AxisAlignedBB bounds = AxisAlignedBB.getBoundingBox(min[0], min[1], min[2], max[0], max[1], max[2]);
-		return (List<T>)housing.getWorld().getEntitiesWithinAABB(entityClass, bounds);
+		AxisAlignedBB bounds = new AxisAlignedBB(min[0], min[1], min[2], max[0], max[1], max[2]);
+		return housing.getWorldObj().getEntitiesWithinAABB(entityClass, bounds);
 	}
 
 }

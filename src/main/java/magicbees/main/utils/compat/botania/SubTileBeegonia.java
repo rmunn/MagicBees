@@ -7,7 +7,7 @@ import magicbees.main.utils.compat.BotaniaHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.subtile.SubTileGenerating;
@@ -32,7 +32,7 @@ public class SubTileBeegonia extends SubTileGenerating {
 			
 			@SuppressWarnings("unchecked")
 			List<EntityItem> items = supertile.getWorldObj().getEntitiesWithinAABB(EntityItem.class,
-					AxisAlignedBB.getBoundingBox(supertile.xCoord - RANGE, supertile.yCoord - RANGE, supertile.zCoord - RANGE,
+					new AxisAlignedBB(supertile.xCoord - RANGE, supertile.yCoord - RANGE, supertile.zCoord - RANGE,
 												supertile.xCoord + RANGE + 1, supertile.yCoord + RANGE + 1, supertile.zCoord + RANGE + 1));
 			for (EntityItem item : items) {
 				if (item.age >= ITEM_STACK_AGE_THRESHOLD && !item.isDead) {

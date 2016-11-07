@@ -8,7 +8,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 
 import net.minecraftforge.common.BiomeDictionary;
 
@@ -148,7 +148,7 @@ public enum HiveDescription implements IHiveDescription {
 	}
 
 	@Override
-	public boolean isGoodBiome(BiomeGenBase biome)
+	public boolean isGoodBiome(Biome biome)
 	{
 		BiomeDictionary.Type[] types = BiomeDictionary.getTypesForBiome(biome);
 		for (BiomeDictionary.Type type : types)

@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 
 import com.mojang.authlib.GameProfile;
 
@@ -42,7 +42,7 @@ public class EffectJarHousing implements IBeeHousing {
 
 	private final IBeekeepingLogic beekeepingLogic;
 	private final TileEntityEffectJar jarEntity;
-	private final BiomeGenBase biome;
+	private final Biome biome;
 	private final IBeeHousingInventory inventory;
 
 	public EffectJarHousing(TileEntityEffectJar entity) {
@@ -58,7 +58,7 @@ public class EffectJarHousing implements IBeeHousing {
 	}
 
 	@Override
-	public BiomeGenBase getBiome() {
+	public Biome getBiome() {
 		return biome;
 	}
 

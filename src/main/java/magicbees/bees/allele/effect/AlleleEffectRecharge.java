@@ -2,18 +2,17 @@ package magicbees.bees.allele.effect;
 
 import java.util.List;
 
-import magicbees.bees.AlleleEffect;
-import magicbees.bees.BeeManager;
-import magicbees.main.utils.BlockUtil;
-import magicbees.main.utils.compat.thaumcraft.NodeHelper;
-
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
 import forestry.api.apiculture.IBeeModifier;
 import forestry.api.genetics.IEffectData;
+import magicbees.bees.AlleleEffect;
+import magicbees.bees.BeeManager;
+import magicbees.main.utils.BlockUtil;
+import magicbees.main.utils.compat.thaumcraft.NodeHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 public class AlleleEffectRecharge extends AlleleEffect {
 	
@@ -32,13 +31,13 @@ public class AlleleEffectRecharge extends AlleleEffect {
 
 	@Override
 	protected IEffectData doEffectThrottled(IBeeGenome genome, IEffectData storedData, IBeeHousing housing) {
-		World world = housing.getWorld();
-		ChunkCoordinates coords = housing.getCoordinates();
+		World world = housing.getWorldObj();
+		BlockPos coords = housing.getCoordinates();
 		IBeeModifier beeModifier = BeeManager.beeRoot.createBeeHousingModifier(housing);
-		int range = (int)Math.ceil(genome.getTerritory()[0] * beeModifier.getTerritoryModifier(genome, 1f));
-		List<Chunk> chunks = BlockUtil.getChunksInSearchRange(world, coords.posX, coords.posZ, range);
+		int range = (int)Math.ceil(genome.getTerritory().getX() * beeModifier.getTerritoryModifier(genome, 1f));
+		List<Chunk> chunks = BlockUtil.getChunksInSearchRange(world, coords.getX(), coords.getZ(), range);
 		
-        if (NodeHelper.rechargeNodeInRange(chunks, world, coords.posX, coords.posY, coords.posZ, range)) {
+        if (NodeHelper.rechargeNodeInRange(chunks, world, coords.getX(), coords.getY(), coords.getZ(), range)) {
         	storedData.setInteger(0, storedData.getInteger(0) - throttle);
         }
 

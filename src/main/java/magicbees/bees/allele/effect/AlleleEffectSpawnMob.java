@@ -9,8 +9,8 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
@@ -53,7 +53,7 @@ public class AlleleEffectSpawnMob extends AlleleEffect {
 		// Check if we're ready to spawn the mob.
 		boolean didSpawn = false;
 		if (storedData.getBoolean(0)) {
-			World w = housing.getWorld();
+			World w = housing.getWorldObj();
 	
 			int roll = w.rand.nextInt(100);
 	
@@ -89,14 +89,14 @@ public class AlleleEffectSpawnMob extends AlleleEffect {
 
 	private void playMobLiveSound(IBeeGenome genome, IBeeHousing housing, World w) {
 		if (mobSound != null && w.rand.nextInt(100) < 35) {
-			ChunkCoordinates coords = housing.getCoordinates();
+			BlockPos coords = housing.getCoordinates();
 
-			int range = genome.getTerritory()[0];
-			double x = coords.posX + w.rand.nextDouble() * (range * 2) - range;
-			range = genome.getTerritory()[1];
-			double y = coords.posY + w.rand.nextDouble() * (range * 2) - range;
-			range = genome.getTerritory()[2];
-			double z = coords.posZ + w.rand.nextDouble() * (range * 2) - range;
+			int range = genome.getTerritory().getX();
+			double x = coords.getX() + w.rand.nextDouble() * (range * 2) - range;
+			range = genome.getTerritory().getY();
+			double y = coords.getY() + w.rand.nextDouble() * (range * 2) - range;
+			range = genome.getTerritory().getZ();
+			double z = coords.getZ() + w.rand.nextDouble() * (range * 2) - range;
 			w.playSoundEffect(x, y, z, this.mobSound, 0.5f, (w.rand.nextFloat() - w.rand.nextFloat()) * 0.2f + 1.0f);
 		}
 	}
@@ -127,7 +127,7 @@ public class AlleleEffectSpawnMob extends AlleleEffect {
 			double pos[] = this.randomMobSpawnCoords(world, bee, housing);
 
 			int entitiesCount = world.getEntitiesWithinAABB(mob.getClass(), 
-					AxisAlignedBB.getBoundingBox((int) pos[0], (int) pos[1], (int) pos[2],
+					new AxisAlignedBB((int) pos[0], (int) pos[1], (int) pos[2],
 							(int) pos[0] + 1, (int) pos[1] + 1, (int) pos[2] + 1)
 						.expand(8.0D,4.0D, 8.0D)).size();
 
@@ -174,13 +174,13 @@ public class AlleleEffectSpawnMob extends AlleleEffect {
 	}
 
 	protected double[] randomMobSpawnCoords(World world, IBeeGenome bee, IBeeHousing housing) {
-		ChunkCoordinates coords = housing.getCoordinates();
+		BlockPos coords = housing.getCoordinates();
 		IBeeModifier beeModifier = BeeManager.beeRoot.createBeeHousingModifier(housing);
 
 		double pos[] = new double[3];
-		pos[0] = coords.posX + (world.rand.nextDouble() * (bee.getTerritory()[0] * beeModifier.getTerritoryModifier(bee, 1f)) - bee.getTerritory()[0] / 2);
-		pos[1] = coords.posY + world.rand.nextInt(3) - 1;
-		pos[2] = coords.posZ + (world.rand.nextDouble() * (bee.getTerritory()[2] * beeModifier.getTerritoryModifier(bee, 1f)) - bee.getTerritory()[2] / 2);
+		pos[0] = coords.getX() + (world.rand.nextDouble() * (bee.getTerritory().getX() * beeModifier.getTerritoryModifier(bee, 1f)) - bee.getTerritory().getX() / 2);
+		pos[1] = coords.getY() + world.rand.nextInt(3) - 1;
+		pos[2] = coords.getZ() + (world.rand.nextDouble() * (bee.getTerritory().getZ() * beeModifier.getTerritoryModifier(bee, 1f)) - bee.getTerritory().getZ() / 2);
 		return pos;
 	}
 }
