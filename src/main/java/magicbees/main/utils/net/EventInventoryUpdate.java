@@ -4,7 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import cpw.mods.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import magicbees.main.utils.ChunkCoords;
 import magicbees.main.utils.LogHelper;
 import net.minecraft.entity.player.EntityPlayerMP;

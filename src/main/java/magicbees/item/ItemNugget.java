@@ -2,8 +2,8 @@ package magicbees.item;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import magicbees.item.types.NuggetType;
 import magicbees.main.CommonProxy;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -20,7 +20,7 @@ public class ItemNugget extends Item
 	public ItemNugget()
 	{
 		super();
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.MATERIALS);
 		this.setHasSubtypes(true);
 		this.setUnlocalizedName("beeNugget");
 	}

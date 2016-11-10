@@ -1,7 +1,7 @@
 package magicbees.main.utils.compat;
 
 import magicbees.main.Config;
-import cpw.mods.fml.common.Loader;
+import net.minecraftforge.fml.common.Loader;
 
 public class ExtraBeesHelper implements IModHelper {
 	

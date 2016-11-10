@@ -1,6 +1,6 @@
 package magicbees.main.utils;
 
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 /**
@@ -43,7 +43,7 @@ public enum MoonPhase {
 	}
 	
 	public String getLocalizedNameAlt() {
-		if (StatCollector.canTranslate("moon.alt." + this.phaseName)) {
+		if (I18n.canTranslate("moon.alt." + this.phaseName)) {
 			return LocalizationManager.getLocalizedString("moon.alt." + this.phaseName);
 		}
 		return getLocalizedName();

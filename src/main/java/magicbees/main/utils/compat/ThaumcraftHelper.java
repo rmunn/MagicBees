@@ -2,8 +2,8 @@ package magicbees.main.utils.compat;
 
 import java.util.ArrayList;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import magicbees.api.MagicBeesAPI;
 import magicbees.item.types.PollenType;
 import magicbees.item.types.PropolisType;

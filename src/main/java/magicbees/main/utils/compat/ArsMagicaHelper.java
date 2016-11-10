@@ -2,7 +2,7 @@ package magicbees.main.utils.compat;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import cpw.mods.fml.common.Loader;
+import net.minecraftforge.fml.common.Loader;
 import magicbees.main.Config;
 import magicbees.main.utils.BlockInterface;
 import magicbees.main.utils.ItemInterface;

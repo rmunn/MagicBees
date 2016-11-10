@@ -6,9 +6,10 @@ import magicbees.bees.AlleleEffect;
 import magicbees.bees.BeeManager;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import forestry.api.apiculture.IBeeGenome;
@@ -35,12 +36,12 @@ public class AlleleEffectCrumbling extends AlleleEffect {
 	public AlleleEffectCrumbling(String id, boolean isDominant) {
 		super(id, isDominant, 600);
 
-		addPairToMap(new ItemStack(Blocks.stone), new ItemStack(Blocks.cobblestone));
-		addPairToMap(new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.mossy_cobblestone));
-		addPairToMap(new ItemStack(Blocks.stonebrick, 1, 0), new ItemStack(Blocks.stonebrick, 1, 2));
-		addPairToMap(new ItemStack(Blocks.stonebrick, 1, 2), new ItemStack(Blocks.stonebrick, 1, 1));
-		addPairToMap(new ItemStack(Blocks.cobblestone_wall), new ItemStack(Blocks.cobblestone_wall, 1, 1));
-		addPairToMap(new ItemStack(Blocks.gravel), new ItemStack(Blocks.sand));
+		addPairToMap(new ItemStack(Blocks.STONE), new ItemStack(Blocks.COBBLESTONE));
+		addPairToMap(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.MOSSY_COBBLESTONE));
+		addPairToMap(new ItemStack(Blocks.STONEBRICK, 1, 0), new ItemStack(Blocks.STONEBRICK, 1, 2));
+		addPairToMap(new ItemStack(Blocks.STONEBRICK, 1, 2), new ItemStack(Blocks.STONEBRICK, 1, 1));
+		addPairToMap(new ItemStack(Blocks.COBBLESTONE_WALL), new ItemStack(Blocks.COBBLESTONE_WALL, 1, 1));
+		addPairToMap(new ItemStack(Blocks.GRAVEL), new ItemStack(Blocks.SAND));
 	}
 
 	@Override
@@ -53,26 +54,26 @@ public class AlleleEffectCrumbling extends AlleleEffect {
 
 	@Override
 	protected IEffectData doEffectThrottled(IBeeGenome genome, IEffectData storedData, IBeeHousing housing) {
-		World world = housing.getWorld();
-		ChunkCoordinates coords = housing.getCoordinates();
+		World world = housing.getWorldObj();
+		BlockPos coords = housing.getCoordinates();
 		IBeeModifier beeModifier = BeeManager.beeRoot.createBeeHousingModifier(housing);
 
 		// Get random coords within territory
-		int xRange = (int) (beeModifier.getTerritoryModifier(genome, 1f) * genome.getTerritory()[0]);
-		int yRange = (int) (beeModifier.getTerritoryModifier(genome, 1f) * genome.getTerritory()[1]);
-		int zRange = (int) (beeModifier.getTerritoryModifier(genome, 1f) * genome.getTerritory()[2]);
+		int xRange = (int) (beeModifier.getTerritoryModifier(genome, 1f) * genome.getTerritory().getX());
+		int yRange = (int) (beeModifier.getTerritoryModifier(genome, 1f) * genome.getTerritory().getY());
+		int zRange = (int) (beeModifier.getTerritoryModifier(genome, 1f) * genome.getTerritory().getZ());
 
-		int xCoord = coords.posX + world.rand.nextInt(xRange) - xRange / 2;
-		int yCoord = coords.posY + world.rand.nextInt(yRange) - yRange / 2;
-		int zCoord = coords.posZ + world.rand.nextInt(zRange) - zRange / 2;
-
-		Block block = world.getBlock(xCoord, yCoord, zCoord);
+		int xCoord = coords.getX() + world.rand.nextInt(xRange) - xRange / 2;
+		int yCoord = coords.getY() + world.rand.nextInt(yRange) - yRange / 2;
+		int zCoord = coords.getZ() + world.rand.nextInt(zRange) - zRange / 2;
+		BlockPos pos = new BlockPos(xCoord, yCoord, zCoord);
+		IBlockState block = world.getBlockState(pos);
 		if (block != null) {
-			ItemStack source = new ItemStack(block, 1, world.getBlockMetadata(xCoord, yCoord, zCoord));
+			ItemStack source = new ItemStack(block.getBlock(), 1, block.getBlock().getMetaFromState(block));
 			for (ItemStack key : crumbleMap.keySet()) {
 				if (OreDictionary.itemMatches(source, key, false)) {
 					ItemStack target = crumbleMap.get(key);
-					world.setBlock(xCoord, yCoord, zCoord, Block.getBlockFromItem(target.getItem()), target.getItemDamage(), 2);
+					world.setBlockState(pos, Block.getBlockFromItem(target.getItem()).getStateFromMeta(target.getItemDamage()), 2);
 
 					break;
 				}

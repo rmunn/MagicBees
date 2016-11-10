@@ -1,12 +1,11 @@
 package magicbees.client.gui;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import magicbees.tileentity.TileEntityEffectJar;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
@@ -20,7 +19,8 @@ public class ContainerEffectJar extends Container
 	public ContainerEffectJar(TileEntityEffectJar tileEntityEffectJar, EntityPlayer player)
 	{
 		this.jar = tileEntityEffectJar;
-		this.addSlotToContainer(new SlotCustomItems(this.jar, 0, 80, 22, GameRegistry.findItemStack("Forestry", "beeDroneGE", 1)));
+		//TODO check ItemStack
+		this.addSlotToContainer(new SlotCustomItems(this.jar, 0, 80, 22, GameRegistry.makeItemStack("Forestry:beeDroneGE", 0, 1, null)));
 
 		for (int i = 0; i < 3; ++i)
 		{
@@ -35,7 +35,7 @@ public class ContainerEffectJar extends Container
 			this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 132));
 		}
 	}
-	
+
 	@Override
 	public void addCraftingToCrafters(ICrafting crafting)
 	{

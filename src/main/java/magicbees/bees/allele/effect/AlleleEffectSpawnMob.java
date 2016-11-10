@@ -9,6 +9,9 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -22,7 +25,7 @@ public class AlleleEffectSpawnMob extends AlleleEffect {
 	protected boolean spawnsWhilePlayerNear;
 	protected String alternateMob;
 	protected String mobName;
-	protected String mobSound;
+	protected SoundEvent mobSound;
 	protected int chanceToSpawn;
 	protected int maxMobsInArea;
 
@@ -30,7 +33,7 @@ public class AlleleEffectSpawnMob extends AlleleEffect {
 		this(id, isDominant, mobToSpawn, null);
 	}
 
-	public AlleleEffectSpawnMob(String id, boolean isDominant, String mobToSpawn, String mobSoundFx) {
+	public AlleleEffectSpawnMob(String id, boolean isDominant, String mobToSpawn, SoundEvent mobSoundFx) {
 		super(id, isDominant, 200);
 		this.aggosOnPlayer = false;
 		this.mobName = mobToSpawn;
@@ -97,7 +100,7 @@ public class AlleleEffectSpawnMob extends AlleleEffect {
 			double y = coords.getY() + w.rand.nextDouble() * (range * 2) - range;
 			range = genome.getTerritory().getZ();
 			double z = coords.getZ() + w.rand.nextDouble() * (range * 2) - range;
-			w.playSoundEffect(x, y, z, this.mobSound, 0.5f, (w.rand.nextFloat() - w.rand.nextFloat()) * 0.2f + 1.0f);
+			w.playSound(x, y, z, this.mobSound, SoundCategory.NEUTRAL, 0.5f, (w.rand.nextFloat() - w.rand.nextFloat()) * 0.2f + 1.0f, false);
 		}
 	}
 

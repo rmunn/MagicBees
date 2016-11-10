@@ -14,8 +14,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
-import cpw.mods.fml.common.registry.GameData;
+import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
+import net.minecraftforge.fml.common.registry.GameData;
 
 public class EventBase {
 
@@ -69,7 +69,7 @@ public class EventBase {
 			itemstack = new ItemStack(item, stackSize, meta);
 
 			if (item.isDamageable() || item.getShareTag()) {
-				itemstack.stackTagCompound = this.readNBTTagCompound(data);
+				itemstack.setTagCompound(this.readNBTTagCompound(data));
 			}
 		}
 

@@ -11,9 +11,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemCapsule extends Item
 {
@@ -27,7 +27,8 @@ public class ItemCapsule extends Item
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(maxStackSize);
 		this.setUnlocalizedName("capsule." + type.toString().toLowerCase());
-		GameRegistry.registerItem(this, "capsule." + type.toString().toLowerCase());
+		setRegistryName("capsule." + type.toString().toLowerCase());
+		GameRegistry.registerItem(this);
 	}
 	
 	public CapsuleType getType()

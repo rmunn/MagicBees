@@ -7,9 +7,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.Vec3;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
@@ -54,6 +53,11 @@ public class EffectJarHousing implements IBeeHousing {
 	}
 
 	@Override
+	public World getWorldObj() {
+		return jarEntity.getWorld();
+	}
+
+	@Override
 	public BlockPos getCoordinates() {
 		return jarEntity.getPos();
 	}
@@ -65,27 +69,22 @@ public class EffectJarHousing implements IBeeHousing {
 
 	@Override
 	public EnumTemperature getTemperature() {
-		return EnumTemperature.getFromBiome(biome, jarEntity.xCoord, jarEntity.yCoord, jarEntity.zCoord);
+		return EnumTemperature.getFromBiome(biome, jarEntity.getWorld(), jarEntity.getPos());
 	}
 
 	@Override
 	public EnumHumidity getHumidity() {
-		return EnumHumidity.getFromValue(biome.rainfall);
+		return EnumHumidity.getFromValue(biome.getRainfall());
 	}
 
 	@Override
 	public int getBlockLightValue() {
-		return jarEntity.getWorldObj().getBlockLightValue(jarEntity.xCoord, jarEntity.yCoord + 1, jarEntity.zCoord);
+		return jarEntity.getWorld().getLight(jarEntity.getPos().up());
 	}
 
 	@Override
 	public boolean canBlockSeeTheSky() {
-		return jarEntity.getWorldObj().canBlockSeeTheSky(jarEntity.xCoord, jarEntity.yCoord + 1, jarEntity.zCoord);
-	}
-
-	@Override
-	public World getWorld() {
-		return jarEntity.getWorldObj();
+		return jarEntity.getWorld().canBlockSeeSky(jarEntity.getPos().up());
 	}
 
 	@Override
@@ -94,8 +93,9 @@ public class EffectJarHousing implements IBeeHousing {
 	}
 
 	@Override
-	public Vec3 getBeeFXCoordinates() {
-		return Vec3.createVectorHelper(jarEntity.xCoord + 0.5f, jarEntity.yCoord + 0.5f, jarEntity.zCoord + 0.5f);
+	public Vec3d getBeeFXCoordinates() {
+		BlockPos pos = jarEntity.getPos();
+		return new Vec3d(pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f);
 	}
 
 	@Override

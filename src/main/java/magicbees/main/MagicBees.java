@@ -8,16 +8,11 @@ import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.VersionInfo;
 import magicbees.main.utils.compat.ModHelperManager;
 import magicbees.main.utils.net.NetworkEventHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
-import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
-import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(
 		modid = VersionInfo.ModName,
@@ -86,14 +81,14 @@ public class MagicBees
 	}
 
 	@Mod.EventHandler
-	public void handleIMCMessage(IMCEvent event)
+	public void handleIMCMessage(FMLInterModComms.IMCEvent event)
 	{
 		IMCManager.handle(event);
 	}
 	
 	@Mod.EventHandler
 	public void handleMissingMapping(FMLMissingMappingsEvent event) {
-		for (MissingMapping mapping : event.get()) {
+		for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
 			// TODO: ... maybe not this.
 			LogHelper.info(String.format("Missing mapping: %s - ignoring.", mapping.name));
 			mapping.ignore();

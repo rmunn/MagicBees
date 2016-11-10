@@ -9,15 +9,15 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockVisAuraProvider extends BlockContainer {
 
 	public BlockVisAuraProvider() {
-		super(Material.glass);
+		super(Material.GLASS);
 		this.setCreativeTab(TabMagicBees.tabMagicBees);
-		this.setBlockName("visAuraProvider");
+		this.setRegistryName("visAuraProvider");
 		this.setHardness(0.5f);
 		this.setResistance(1.5f);
 		this.setLightLevel(8);

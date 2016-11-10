@@ -3,6 +3,7 @@ package magicbees.main.utils;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ChunkCoords
@@ -13,7 +14,7 @@ public class ChunkCoords
 	public final int z;
 	
 	public ChunkCoords(TileEntity entity) {
-		this(entity.getWorldObj(), entity.xCoord, entity.yCoord, entity.zCoord);
+		this(entity.getWorld(), entity.getPos().getX(), entity.getPos().getY(), entity.getPos().getZ());
 	}
 	
 	public ChunkCoords(Entity entity) {
@@ -22,7 +23,7 @@ public class ChunkCoords
 
 	public ChunkCoords(World world, int xCoord, int yCoord, int zCoord)
 	{
-		this(world.provider.dimensionId, xCoord, yCoord, zCoord);
+		this(world.provider.getDimension(), xCoord, yCoord, zCoord);
 	}
 	
 	public ChunkCoords(int dimId, int xCoord, int yCoord, int zCoord)
@@ -58,7 +59,7 @@ public class ChunkCoords
 	 * Returns a new ChunkCoords in the specified world.
 	 */
 	public ChunkCoords inDimension(World world) {
-		return new ChunkCoords(world.provider.dimensionId, x, y, z);
+		return new ChunkCoords(world.provider.getDimension(), x, y, z);
 	}
 	
 	/**

@@ -30,9 +30,9 @@ import magicbees.world.feature.HiveGenUnderground;
 public enum HiveDescription implements IHiveDescription {
 	CURIOUS(HiveType.CURIOUS, 3.0f, HiveManager.genHelper.tree(), false,
 			BiomeDictionary.Type.FOREST, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.HILLS),
-	UNUSUAL(HiveType.UNUSUAL, 1.0f, HiveManager.genHelper.ground(Blocks.dirt, Blocks.grass), false,
+	UNUSUAL(HiveType.UNUSUAL, 1.0f, HiveManager.genHelper.ground(Blocks.DIRT, Blocks.GRASS), false,
 			BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.RIVER),
-	RESONANT(HiveType.RESONANT, 0.9f, HiveManager.genHelper.ground(Blocks.sand, Blocks.sandstone), false,
+	RESONANT(HiveType.RESONANT, 0.9f, HiveManager.genHelper.ground(Blocks.SAND, Blocks.SANDSTONE), false,
 			BiomeDictionary.Type.SANDY, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.MAGICAL),
 	DEEP(HiveType.DEEP, 5.0f, new HiveGenUnderground(10, 15, 5), true,
 			BiomeDictionary.Type.HILLS, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.MAGICAL) {
@@ -71,12 +71,12 @@ public enum HiveDescription implements IHiveDescription {
 			FeatureOreVein.glowstoneGen.generateVein(world, random, x + 1, y, z, world.rand.nextInt(4) + 1);
 			FeatureOreVein.glowstoneGen.generateVein(world, random, x - 1, y, z, world.rand.nextInt(4) + 1);
 
-			if (BlockUtil.canBlockReplaceAt(world, x, y + 1, z, Blocks.stone)) {
-				world.setBlock(x, y + 1, z, Blocks.glowstone, 0, 3);
+			if (BlockUtil.canBlockReplaceAt(world, x, y + 1, z, Blocks.STONE)) {
+				world.setBlock(x, y + 1, z, Blocks.GLOWSTONE, 0, 3);
 			}
 
-			if (BlockUtil.canBlockReplaceAt(world, x, y - 1, z, Blocks.stone)) {
-				world.setBlock(x, y - 1, z, Blocks.glowstone, 0, 3);
+			if (BlockUtil.canBlockReplaceAt(world, x, y - 1, z, Blocks.STONE)) {
+				world.setBlock(x, y - 1, z, Blocks.GLOWSTONE, 0, 3);
 			}
 
 			FeatureOreVein.glowstoneGen.generateVein(world, random, x, y, z + 1, world.rand.nextInt(4) + 1);
@@ -91,7 +91,7 @@ public enum HiveDescription implements IHiveDescription {
 			int obsidianSpikeHeight = world.rand.nextInt(8) + 3;
 
 			for (int i = 1; i < obsidianSpikeHeight && y - i > 0; ++i) {
-				world.setBlock(x, y - i, z, Blocks.obsidian, 0, 2);
+				world.setBlock(x, y - i, z, Blocks.OBSIDIAN, 0, 2);
 			}
 		}
 	},

@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
-import cpw.mods.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import magicbees.main.utils.ChunkCoords;
 import magicbees.main.utils.LogHelper;
 import magicbees.main.utils.net.NetworkEventHandler.EventType;

@@ -49,7 +49,7 @@ public class BeeManager
 	
 	public static ItemStack getDefaultItemStackForSpecies(IAlleleBeeSpecies beeSpecies, EnumBeeType type) {
 		IBee bee = getBeeFromSpecies(beeSpecies, false);
-		return BeeManager.beeRoot.getMemberStack(bee, type.ordinal());
+		return BeeManager.beeRoot.getMemberStack(bee, type);
 	}
 	
 	public static IBee getBeeFromSpecies(IAlleleBeeSpecies beeSpecies, boolean applyRainResist) {
@@ -60,7 +60,7 @@ public class BeeManager
 		}
 		
 		IBeeGenome genome = BeeManager.beeRoot.templateAsGenome(speciesTemplate);
-		return BeeManager.beeRoot.getBee(null, genome);
+		return BeeManager.beeRoot.getBee(genome);
 	}
 	
 	public static IAlleleBeeSpecies getRandomWorldgenSpecies(Random r) {

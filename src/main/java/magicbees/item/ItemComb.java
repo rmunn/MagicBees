@@ -5,15 +5,14 @@ import java.util.List;
 import magicbees.item.types.CombType;
 import magicbees.main.Config;
 import magicbees.main.utils.compat.ForestryHelper;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import forestry.api.core.Tabs;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemComb extends Item
 {	
@@ -23,7 +22,8 @@ public class ItemComb extends Item
 		this.setCreativeTab(Tabs.tabApiculture);
 		this.setHasSubtypes(true);
 		this.setUnlocalizedName("comb");
-		GameRegistry.registerItem(this, "comb");
+		setRegistryName("comb");
+		GameRegistry.register(this);
 	}
 	
 	public ItemStack getStackForType(CombType type)

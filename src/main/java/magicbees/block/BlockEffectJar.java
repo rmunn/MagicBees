@@ -1,7 +1,7 @@
 package magicbees.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import magicbees.client.gui.UIScreens;
 import magicbees.main.CommonProxy;
 import magicbees.main.MagicBees;
@@ -22,9 +22,9 @@ public class BlockEffectJar extends BlockContainer
 {
 	public BlockEffectJar()
 	{
-		super(Material.glass);
+		super(Material.GLASS);
 		this.setCreativeTab(TabMagicBees.tabMagicBees);
-		this.setBlockName("effectJar");
+		this.setRegistryName("effectJar");
 		this.setBlockBounds(0.25f, 0f, 0.25f, 0.75f, 0.81f, 0.74f);
 		this.setHardness(0.1f);
 		this.setResistance(1.5f);

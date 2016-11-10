@@ -2,9 +2,9 @@ package magicbees.item;
 
 import java.util.List;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import magicbees.item.types.WaxType;
 import magicbees.main.CommonProxy;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -25,7 +25,8 @@ public class ItemWax extends Item
 		this.setCreativeTab(Tabs.tabApiculture);
 		this.setHasSubtypes(true);
 		this.setUnlocalizedName("wax");
-		GameRegistry.registerItem(this, "wax");
+		setRegistryName("wax");
+		GameRegistry.register(this);
 	}
 	
 	public ItemStack getStackForType(WaxType type)

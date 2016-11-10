@@ -47,13 +47,13 @@ public class ItemGrafter extends Item implements IToolGrafter {
 	}
 
 	protected void dropItem(World world, int x, int y, int z, ItemStack item) {
-		if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops")) {
+		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops")) {
 			float f = 0.7F;
 			double d0 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
 			double d1 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
 			double d2 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
 			EntityItem entityitem = new EntityItem(world, (double)x + d0, (double)y + d1, (double)z + d2, item);
-			entityitem.delayBeforeCanPickup = 10;
+			entityitem.setPickupDelay(10);
 			world.spawnEntityInWorld(entityitem);
 		}
 	}

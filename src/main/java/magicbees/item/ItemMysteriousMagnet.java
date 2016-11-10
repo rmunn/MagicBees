@@ -16,8 +16,10 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -40,6 +42,7 @@ public class ItemMysteriousMagnet extends Item implements IBauble {
 		this.setHasSubtypes(true);
 		this.setUnlocalizedName(CommonProxy.DOMAIN + ":mysteriousMagnet");
 		this.setCreativeTab(TabMagicBees.tabMagicBees);
+		setRegistryName("magnet");
 	}
 
 	@Override
@@ -159,7 +162,7 @@ public class ItemMysteriousMagnet extends Item implements IBauble {
 			EntityPlayer player = (EntityPlayer)entity;
 			World world = entity.worldObj;
 			float radius = getRadius(itemStack) - FUDGE_FACTOR;
-			AxisAlignedBB bounds = player.boundingBox.expand(radius, radius, radius);
+			AxisAlignedBB bounds = player.getEntityBoundingBox().expand(radius, radius, radius);
 			
 			if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 				bounds.expand(FUDGE_FACTOR, FUDGE_FACTOR, FUDGE_FACTOR);
@@ -168,10 +171,10 @@ public class ItemMysteriousMagnet extends Item implements IBauble {
 					List<EntityArrow> arrows = world.getEntitiesWithinAABB(EntityArrow.class, bounds);
 					
 					for (EntityArrow arrow : arrows) {
-						if ((arrow.canBePickedUp == 1 || world.rand.nextFloat() < 0.3f)
+						if ((arrow.pickupStatus == EntityArrow.PickupStatus.ALLOWED || world.rand.nextFloat() < 0.3f)
 								&& arrow.shootingEntity != entity) {
 							EntityItem replacement = new EntityItem(world, arrow.posX, arrow.posY, arrow.posZ,
-									new ItemStack(Items.arrow));
+									new ItemStack(Items.ARROW));
 							world.spawnEntityInWorld(replacement);
 						}
 						world.removeEntity(arrow);
@@ -182,7 +185,7 @@ public class ItemMysteriousMagnet extends Item implements IBauble {
 			List<EntityItem> list = world.getEntitiesWithinAABB(EntityItem.class, bounds);
 			
 			for (EntityItem e : list) {
-				if (e.age >= 10) {
+				if (e.getAge() >= 10) {
 					double x = player.posX - e.posX;
 					double y = player.posY - e.posY;
 					double z = player.posZ - e.posZ;
@@ -205,7 +208,7 @@ public class ItemMysteriousMagnet extends Item implements IBauble {
 					if (world.rand.nextFloat() < 0.2f) {
 						float pitch = 0.85f - world.rand.nextFloat() * 3f / 10f;
 						if(!Config.disableMagnetSound)
-							world.playSoundEffect(e.posX, e.posY, e.posZ, "mob.endermen.portal", 0.6f, pitch);
+							world.playSound(e.posX, e.posY, e.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.MASTER, 0.6f, pitch, false);
 					}
 				}
 			}

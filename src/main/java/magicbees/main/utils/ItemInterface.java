@@ -1,6 +1,6 @@
 package magicbees.main.utils;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -8,17 +8,17 @@ public class ItemInterface
 {
 	public static ItemStack getItemStack(String item)
 	{
-		return GameRegistry.findItemStack("Forestry", item, 1);
+		return GameRegistry.makeItemStack("Forestry:" + item, 0, 1, null);
 	}
 
 	public static ItemStack getItemStack(String modId, String item)
 	{
-		return GameRegistry.findItemStack(modId, item, 1);
+		return GameRegistry.makeItemStack(modId + ":" + item, 0, 1, null);
 	}
 
 	public static ItemStack getItemStack(String modId, String item, int stackSize)
 	{
-		return GameRegistry.findItemStack(modId, item, stackSize);
+		return GameRegistry.makeItemStack(modId + ":" + item, 0, stackSize, null);
 	}
 
 	public static Item getItem(String item)

@@ -1,6 +1,6 @@
 package magicbees.client.render;
 
-import cpw.mods.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import magicbees.client.model.ModelEffectJar;
 import magicbees.tileentity.TileEntityEffectJar;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

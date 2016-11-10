@@ -1,18 +1,17 @@
 package magicbees.main.utils;
 
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
-import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import magicbees.bees.allele.effect.AlleleEffectCrumbling;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.common.FMLLog;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 
 public class IMCManager
 {
-	public static void handle(IMCEvent event)
+	public static void handle(FMLInterModComms.IMCEvent event)
 	{
-		for (IMCMessage message : event.getMessages())
+		for (FMLInterModComms.IMCMessage message : event.getMessages())
 		{
 			try
 			{
@@ -37,7 +36,7 @@ public class IMCManager
 		}
 	}
 
-	private static void handleCrumbleBlock(IMCMessage message) throws Exception
+	private static void handleCrumbleBlock(FMLInterModComms.IMCMessage message) throws Exception
 	{
 		NBTTagCompound root = message.getNBTValue();
 		NBTBase source = root.getTag("source");

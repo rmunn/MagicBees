@@ -16,8 +16,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockMagicApiary extends BlockContainer
 {
@@ -28,7 +28,7 @@ public class BlockMagicApiary extends BlockContainer
     {
         super(Material.wood);
         this.setCreativeTab(TabMagicBees.tabMagicBees);
-        this.setBlockName("magicApiary");
+        this.setRegistryName("magicApiary");
         this.setHardness(1f);
         this.setResistance(1.5f);
         this.setHarvestLevel("axe", 0);

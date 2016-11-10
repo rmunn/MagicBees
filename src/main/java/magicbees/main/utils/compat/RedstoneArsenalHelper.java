@@ -3,7 +3,7 @@ package magicbees.main.utils.compat;
 import magicbees.main.Config;
 import magicbees.main.utils.ItemInterface;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.common.Loader;
+import net.minecraftforge.fml.common.Loader;
 
 public class RedstoneArsenalHelper implements IModHelper {
 	public enum MiscResource {

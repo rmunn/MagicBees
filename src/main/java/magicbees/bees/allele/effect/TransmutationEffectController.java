@@ -8,6 +8,7 @@ import magicbees.api.bees.ITransmutationEffectController;
 import magicbees.api.bees.ITransmutationEffectLogic;
 import magicbees.main.utils.LogHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
@@ -21,11 +22,11 @@ public class TransmutationEffectController implements ITransmutationEffectContro
 		}
 	}
 
-	public void attemptTransmutations(World world, Biome biome, ItemStack sourceBlock, int x, int y, int z) {
+	public void attemptTransmutations(World world, Biome biome, ItemStack sourceBlock, BlockPos blockPos) {
 		Collections.shuffle(logicObjects);
 		for (ITransmutationEffectLogic logic : logicObjects) {
 			try {
-				if (logic.tryTransmutation(world, biome, sourceBlock, x, y, z)) {
+				if (logic.tryTransmutation(world, biome, sourceBlock, blockPos)) {
 					break;
 				}
 			} catch (Exception e) {

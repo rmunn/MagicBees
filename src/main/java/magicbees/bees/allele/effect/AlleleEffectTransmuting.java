@@ -3,8 +3,9 @@ package magicbees.bees.allele.effect;
 import magicbees.bees.AlleleEffect;
 import magicbees.bees.BeeManager;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import forestry.api.apiculture.IBeeGenome;
@@ -31,22 +32,23 @@ public class AlleleEffectTransmuting extends AlleleEffect {
 
 	@Override
 	protected IEffectData doEffectThrottled(IBeeGenome genome, IEffectData storedData, IBeeHousing housing) {
-		World world = housing.getWorld();
-		ChunkCoordinates coords = housing.getCoordinates();
+		World world = housing.getWorldObj();
+		BlockPos coords = housing.getCoordinates();
 		IBeeModifier beeModifier = BeeManager.beeRoot.createBeeHousingModifier(housing);
 
 		// Get random coords within territory
-		int xRange = (int) (beeModifier.getTerritoryModifier(genome, 1f) * genome.getTerritory()[0]);
-		int yRange = (int) (beeModifier.getTerritoryModifier(genome, 1f) * genome.getTerritory()[1]);
-		int zRange = (int) (beeModifier.getTerritoryModifier(genome, 1f) * genome.getTerritory()[2]);
+		int xRange = (int) (beeModifier.getTerritoryModifier(genome, 1f) * genome.getTerritory().getX());
+		int yRange = (int) (beeModifier.getTerritoryModifier(genome, 1f) * genome.getTerritory().getY());
+		int zRange = (int) (beeModifier.getTerritoryModifier(genome, 1f) * genome.getTerritory().getZ());
 
-		int xCoord = coords.posX + world.rand.nextInt(xRange) - xRange / 2;
-		int yCoord = coords.posY + world.rand.nextInt(yRange) - yRange / 2;
-		int zCoord = coords.posZ + world.rand.nextInt(zRange) - zRange / 2;
-
-		Biome biome = world.getBiomeGenForCoords(xCoord, zCoord);
+		int xCoord = coords.getX() + world.rand.nextInt(xRange) - xRange / 2;
+		int yCoord = coords.getY() + world.rand.nextInt(yRange) - yRange / 2;
+		int zCoord = coords.getZ() + world.rand.nextInt(zRange) - zRange / 2;
+		BlockPos pos = new BlockPos(xCoord, yCoord, zCoord);
+		Biome biome = world.getBiome(pos);
+		IBlockState blockState = world.getBlockState(pos);
 		transmutationController.attemptTransmutations(world, biome, 
-				new ItemStack(world.getBlock(xCoord, yCoord, zCoord), 1, world.getBlockMetadata(xCoord, yCoord, zCoord)), xCoord, yCoord, zCoord);
+				new ItemStack(blockState.getBlock(), 1, blockState.getBlock().getMetaFromState(blockState)), xCoord, yCoord, zCoord);
 
 		storedData.setInteger(0, 0);
 

@@ -3,12 +3,9 @@ package magicbees.item;
 import java.util.List;
 
 import magicbees.item.types.DropType;
-import magicbees.main.utils.compat.ForestryHelper;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import forestry.api.core.Tabs;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -62,7 +59,7 @@ public class ItemDrop extends Item
 	
 	@SideOnly(Side.CLIENT)
 	private IIcon secondIcon;
-	
+
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
@@ -82,12 +79,12 @@ public class ItemDrop extends Item
 	{
 		int meta = Math.max(0, Math.min(DropType.values().length - 1, stack.getItemDamage()));
 		int colour = DropType.values()[meta].combColour[0];
-		
+
 		if (pass >= 1)
 		{
 			colour = DropType.values()[meta].combColour[1];
 		}
-		
+
 		return colour;
 	}
 

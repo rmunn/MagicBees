@@ -1,6 +1,7 @@
 package magicbees.api.bees;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
@@ -24,10 +25,8 @@ public interface ITransmutationEffectLogic
 	 * @param world World object
 	 * @param biome Biome information for current coordinates
 	 * @param sourceBlock ItemStack representing the block at current coordinates
-	 * @param x Current X coordinate to attempt a transmute
-	 * @param y Current Y coordinate to attempt a transmute
-	 * @param z Current Z coordinate to attempt a transmute
+	 * @param blockPos Current block coordinates to attempt a transmute
 	 * @return true if a block was changed.
 	 */
-	public boolean tryTransmutation(World world, Biome biome, ItemStack sourceBlock, int x, int y, int z);
+	public boolean tryTransmutation(World world, Biome biome, ItemStack sourceBlock, BlockPos blockPos);
 }

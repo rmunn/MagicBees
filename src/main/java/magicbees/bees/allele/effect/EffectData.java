@@ -22,8 +22,9 @@ public class EffectData implements IEffectData
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public NBTTagCompound writeToNBT(NBTTagCompound nbttagcompound)
 	{
+		return nbttagcompound;
 	}
 
 	@Override

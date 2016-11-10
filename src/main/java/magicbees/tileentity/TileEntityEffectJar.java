@@ -121,7 +121,7 @@ public class TileEntityEffectJar extends TileEntity implements IInventory {
 			}
 			else
 			{
-				queen.writeToNBT(this.beeSlots[QUEEN_SLOT].stackTagCompound);
+				queen.writeToNBT(this.beeSlots[QUEEN_SLOT].getTagCompound());
 			}
 			this.markDirty();
 		}

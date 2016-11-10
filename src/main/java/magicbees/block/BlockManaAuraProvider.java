@@ -10,8 +10,8 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockManaAuraProvider extends Block implements ITileEntityProvider {
 
@@ -19,9 +19,9 @@ public class BlockManaAuraProvider extends Block implements ITileEntityProvider 
 	private IIcon topIcon;
 	
 	public BlockManaAuraProvider() {
-		super(Material.rock);
+		super(Material.ROCK);
 		this.setCreativeTab(TabMagicBees.tabMagicBees);
-		this.setBlockName("manaAuraProvider");
+		this.setRegistryName("manaAuraProvider");
 		this.setHardness(2f);
 		this.setResistance(3f);
 		this.setHarvestLevel("pickaxe", 0);

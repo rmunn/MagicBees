@@ -33,7 +33,7 @@ public class HiveDrop implements IHiveDrop
 	
 	private IBee getBee(World w)
 	{
-		IBee bee = BeeManager.beeRoot.getBee(w, BeeManager.beeRoot.templateAsGenome(this.template));
+		IBee bee = BeeManager.beeRoot.getBee(BeeManager.beeRoot.templateAsGenome(this.template));
 		if (w.rand.nextFloat() < this.ignoblePercent)
 		{
 			bee.setIsNatural(false);
@@ -45,14 +45,14 @@ public class HiveDrop implements IHiveDrop
 	@Override
 	public ItemStack getPrincess(World world, int x, int y, int z, int fortune)
 	{
-		return BeeManager.beeRoot.getMemberStack(getBee(world), EnumBeeType.PRINCESS.ordinal());
+		return BeeManager.beeRoot.getMemberStack(getBee(world), EnumBeeType.PRINCESS);
 	}
 
 	@Override
 	public Collection<ItemStack> getDrones(World world, int x, int y, int z, int fortune)
 	{
 		ArrayList<ItemStack> value = new ArrayList<ItemStack>(1);
-		value.add(BeeManager.beeRoot.getMemberStack(getBee(world), EnumBeeType.DRONE.ordinal()));
+		value.add(BeeManager.beeRoot.getMemberStack(getBee(world), EnumBeeType.DRONE));
 		return value;
 	}
 

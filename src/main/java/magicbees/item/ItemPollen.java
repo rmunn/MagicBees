@@ -2,9 +2,9 @@ package magicbees.item;
 
 import java.util.List;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import magicbees.item.types.PollenType;
 import magicbees.main.utils.compat.ForestryHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -22,7 +22,8 @@ public class ItemPollen extends Item
 		this.setCreativeTab(Tabs.tabApiculture);
 		this.setHasSubtypes(true);
 		this.setUnlocalizedName("pollen");
-		GameRegistry.registerItem(this, "pollen");
+		setRegistryName("pollen");
+		GameRegistry.register(this);
 	}
 
 	public ItemStack getStackForType(PollenType type)

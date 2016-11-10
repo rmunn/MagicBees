@@ -5,6 +5,7 @@ import java.util.Random;
 import magicbees.main.CommonProxy;
 import magicbees.main.utils.TabMagicBees;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
@@ -12,8 +13,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockEnchantedEarth extends Block {
 	
@@ -21,12 +22,12 @@ public class BlockEnchantedEarth extends Block {
 	private IIcon top;
 
 	public BlockEnchantedEarth() {
-		super(Material.ground);
+		super(Material.GROUND);
 		setCreativeTab(TabMagicBees.tabMagicBees);
-		setBlockName("enchantedEarth");
+		setRegistryName("enchantedEarth");
 		setBlockTextureName(CommonProxy.DOMAIN + ":enchantedEarth");
 		setTickRandomly(true);
-		setStepSound(soundTypeGravel);
+		setSoundType(SoundType.GROUND);
 	}
 
 	@Override

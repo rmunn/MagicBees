@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -24,7 +25,7 @@ public class AlleleEffectSpawnWisp extends AlleleEffectSpawnMob {
 			41, 42, 43, 44, 45, 46, 47
 	};
 
-	public AlleleEffectSpawnWisp(String id, boolean isDominant, String mobToSpawn, String soundToPlay) {
+	public AlleleEffectSpawnWisp(String id, boolean isDominant, String mobToSpawn, SoundEvent soundToPlay) {
 		super(id, isDominant, mobToSpawn, soundToPlay);
 	}
 

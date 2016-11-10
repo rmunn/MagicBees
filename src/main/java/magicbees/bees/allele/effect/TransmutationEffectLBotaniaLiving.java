@@ -3,6 +3,7 @@ package magicbees.bees.allele.effect;
 import magicbees.api.bees.ITransmutationEffectLogic;
 import magicbees.main.utils.compat.BotaniaHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.oredict.OreDictionary;
@@ -10,19 +11,19 @@ import net.minecraftforge.oredict.OreDictionary;
 public class TransmutationEffectLBotaniaLiving implements ITransmutationEffectLogic {
 
 	@Override
-	public boolean tryTransmutation(World world, Biome biome, ItemStack sourceBlock, int x, int y, int z) {
+	public boolean tryTransmutation(World world, Biome biome, ItemStack sourceBlock, BlockPos blockPos) {
 		int[] oreIDs = OreDictionary.getOreIDs(sourceBlock);
 		for (int oreId : oreIDs) {
 			if (oreId == OreDictionary.getOreID("logWood")) {
-				world.setBlock(x, y, z, BotaniaHelper.blockLivingWood);
+				world.setBlockState(blockPos, BotaniaHelper.blockLivingWood.getDefaultState());
 				return true;
 			}
 			else if (oreId == OreDictionary.getOreID("stone")) {
-				world.setBlock(x, y, z, BotaniaHelper.blockLivingRock);
+				world.setBlockState(blockPos, BotaniaHelper.blockLivingRock.getDefaultState());
 				return true;
 			}
 			else if (oreId == OreDictionary.getOreID("livingwood")) {
-				world.setBlock(x, y, z, BotaniaHelper.blockDreamWood);
+				world.setBlockState(blockPos, BotaniaHelper.blockDreamWood.getDefaultState());
 				return true;
 			}
 		}

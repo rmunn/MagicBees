@@ -1,30 +1,30 @@
 package magicbees.main.utils;
 
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 
 public class LocalizationManager
 {
 	public static String getLocalizedString(String key)
 	{
-		if(StatCollector.canTranslate(key))
+		if(I18n.canTranslate(key))
 		{
-			return StatCollector.translateToLocal(key);
+			return I18n.translateToLocal(key);
 		}
 		else
 		{
-			return StatCollector.translateToFallback(key);
+			return I18n.translateToFallback(key);
 		}
 	}
 
 	public static String getLocalizedString(String key, Object... objects)
 	{
-		if(StatCollector.canTranslate(key))
+		if(I18n.canTranslate(key))
 		{
-			return String.format(StatCollector.translateToLocal(key), objects);
+			return String.format(I18n.translateToLocal(key), objects);
 		}
 		else
 		{
-			return String.format(StatCollector.translateToFallback(key), objects);
+			return String.format(I18n.translateToFallback(key), objects);
 		}
 	}
 }

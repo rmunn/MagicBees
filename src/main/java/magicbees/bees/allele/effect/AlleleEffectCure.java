@@ -31,7 +31,7 @@ public class AlleleEffectCure extends AlleleEffect {
 		List<EntityPlayer> entityList = this.getEntitiesWithinRange(genome, housing, EntityPlayer.class);
 
 		for (EntityPlayer player : entityList) {
-			player.curePotionEffects(new ItemStack(Items.milk_bucket));
+			player.curePotionEffects(new ItemStack(Items.MILK_BUCKET));
 		}
 		storedData.setInteger(0, 0);
 

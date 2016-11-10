@@ -1,8 +1,8 @@
 package magicbees.main.utils.compat;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import magicbees.item.types.DropType;
 import magicbees.main.Config;
 import net.minecraft.item.ItemStack;

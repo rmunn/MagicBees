@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import magicbees.main.utils.BlockUtil;
@@ -17,10 +18,10 @@ public class FeatureOreVein
 
 	static
 	{
-		redstoneGen = new FeatureOreVein(Blocks.redstone_ore, Blocks.stone);
-		netherQuartzGen = new FeatureOreVein(Blocks.quartz_ore, Blocks.netherrack);
-		glowstoneGen = new FeatureOreVein(Blocks.glowstone, Blocks.stone);
-		endStoneGen = new FeatureOreVein(Blocks.end_stone, Blocks.stone);
+		redstoneGen = new FeatureOreVein(Blocks.REDSTONE_ORE, Blocks.STONE);
+		netherQuartzGen = new FeatureOreVein(Blocks.QUARTZ_ORE, Blocks.NETHERRACK);
+		glowstoneGen = new FeatureOreVein(Blocks.GLOWSTONE, Blocks.STONE);
+		endStoneGen = new FeatureOreVein(Blocks.END_STONE, Blocks.STONE);
 	}
 
 	private final Block veinBlock;
@@ -51,9 +52,9 @@ public class FeatureOreVein
 		{
 			++spawnAttempts;
 
-			if (!world.isAirBlock(currentX, currentY, currentZ) && BlockUtil.canBlockReplaceAt(world, currentX, currentY, currentZ, replacesBlock))
+			if (!world.isAirBlock(new BlockPos(currentX, currentY, currentZ)) && BlockUtil.canBlockReplaceAt(world, currentX, currentY, currentZ, replacesBlock))
 			{
-				world.setBlock(currentX, currentY, currentZ, this.veinBlock, this.veinBlockMeta, 2);
+				world.setBlockState(new BlockPos(currentX, currentY, currentZ), this.veinBlock.getStateFromMeta(this.veinBlockMeta), 2);
 				++spawnCount;
 			}
 

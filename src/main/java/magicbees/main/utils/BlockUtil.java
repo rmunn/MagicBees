@@ -3,42 +3,46 @@ package magicbees.main.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.pattern.BlockStateMatcher;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 public class BlockUtil {
 
-	public static int getSurroundCount(World world, int x, int y, int z, Block blockType)
+	public static int getSurroundCount(World world, BlockPos pos, Block blockType)
 	{
 		int surroundCount = 0;
-
-		if (canBlockReplaceAt(world, x + 1, y, z, blockType))
+		if (canBlockReplaceAt(world, pos.add(1,0,0), blockType))
 		{
 			++surroundCount;
 		}
 
-		if (canBlockReplaceAt(world, x - 1, y, z, blockType))
+		if (canBlockReplaceAt(world, pos.add(-1,0,0), blockType))
 		{
 			++surroundCount;
 		}
 
-		if (canBlockReplaceAt(world, x, y + 1, z, blockType))
+		if (canBlockReplaceAt(world, pos.up(), blockType))
 		{
 			++surroundCount;
 		}
 
-		if (canBlockReplaceAt(world, x, y - 1, z, blockType))
+		if (canBlockReplaceAt(world, pos.down(), blockType))
 		{
 			++surroundCount;
 		}
 
-		if (canBlockReplaceAt(world, x, y, z + 1, blockType))
+		if (canBlockReplaceAt(world, pos.add(0,0,1), blockType))
 		{
 			++surroundCount;
 		}
 
-		if (canBlockReplaceAt(world, x, y, z - 1, blockType))
+		if (canBlockReplaceAt(world, pos.add(0,0,-1), blockType))
 		{
 			++surroundCount;
 		}
@@ -46,15 +50,15 @@ public class BlockUtil {
 		return surroundCount;
 	}
 
-	public static boolean canBlockReplaceAt(World world, int x, int y, int z, Block target)
+	public static boolean canBlockReplaceAt(World world, BlockPos pos, Block target)
 	{
 		// don't cause new chunks to load
-		if (!world.blockExists(x, y, z))
+		if (!world.isAreaLoaded(pos, 1))
 		{
 			return true;
 		}
-		Block block = world.getBlock(x, y, z);
-		return block.isReplaceableOreGen(world, x, y, z, target);
+		IBlockState block = world.getBlockState(pos);
+		return block.getBlock().isReplaceableOreGen(world.getBlockState(pos), world, pos, BlockStateMatcher.forBlock(target));
 	}
 
 	public static List<Chunk> getChunksInSearchRange(World world, int xCoord, int zCoord, int searchRadius) {
