@@ -8,6 +8,7 @@ import magicbees.bees.EnumBeeModifiers;
 import magicbees.bees.EnumBeeHives;
 import magicbees.item.ItemBeeFrames;
 import magicbees.item.types.EnumCombType;
+import magicbees.item.types.EnumDropType;
 import magicbees.util.MoreBeesResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
@@ -36,6 +37,7 @@ public class MagicBees {
 
     public static BlockHive<EnumBeeHives> hiveBlock;
     public static ItemEnumBased<EnumCombType> combItem;
+    public static ItemEnumBased<EnumDropType> dropItem;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
@@ -61,6 +63,7 @@ public class MagicBees {
         }.register(new ResourceLocation(modid, "hiveBlock"));
         GameRegistry.register(new ItemBeeFrames(EnumBeeModifiers.CREATIVE));
         combItem = GameRegistry.register(new ItemEnumBased<>(new MoreBeesResourceLocation("beeComb"), EnumCombType.class));
+        dropItem = GameRegistry.register(new ItemEnumBased<>(new MoreBeesResourceLocation("drop"), EnumDropType.class));
 
         loadTimer.endPhase(event);
     }

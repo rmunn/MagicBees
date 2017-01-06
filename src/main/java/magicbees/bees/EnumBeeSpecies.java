@@ -455,7 +455,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-
+            //todo, add mutations in from here
         }
 
     },
