@@ -8,6 +8,7 @@ import elec332.core.compat.forestry.bee.IBeeTemplate;
 import elec332.core.util.MoonPhase;
 import magicbees.MagicBees;
 import magicbees.bees.mutation.MoonPhaseMutationBonus;
+import magicbees.bees.mutation.MoonPhaseMutationRestriction;
 import magicbees.item.types.EnumCombType;
 import magicbees.util.IMoreBeesBranch;
 import forestry.api.apiculture.*;
@@ -19,6 +20,7 @@ import forestry.api.genetics.IAllele;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
@@ -455,7 +457,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-            //todo, add mutations in from here
+            registerMutation(EnumBeeSpecies.getForestrySpecies("Modest"), ELDRITCH, 12);
         }
 
     },
@@ -477,7 +479,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-
+            registerMutation(BATTY, ETHEREAL, 9);
         }
 
     },
@@ -497,7 +499,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-
+            registerMutation(EnumBeeSpecies.getForestrySpecies("Tropical"), SKULKING, 10);
         }
 
     },
@@ -517,7 +519,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-
+            //todo registerMutation(GHASTLY, HATEFUL, 7).restrictBiomeType(BiomeDictionary.Type.NETHER);
         }
 
     },
@@ -525,6 +527,8 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            template.setFertility(FERTILITY_LOW);
+            //todo template.setEffect(AlleleInit.spa)
         }
 
         @Override
@@ -534,7 +538,11 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-
+            if (EnumBeeBranches.THAUMIC.enabled()){
+                //todo
+            } else {
+                //registerMutation(SKULKING, MUTABLE, 12);
+            }
         }
 
         @Override //TODO: spawn zombies?
@@ -548,7 +556,8 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-
+            template.setCaveDwelling(TRUE_RECESSIVE);
+            template.setEffect(AlleleInit.spawnWolf);
         }
 
         @Override
@@ -558,7 +567,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-
+            registerMutation(SKULKING, MYSTERIOUS, 7).addMutationCondition(new MoonPhaseMutationRestriction(MoonPhase.FULL));
         }
 
     },
@@ -567,7 +576,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-
+            template.setEffect(AlleleInit.spawnChicken);
         }
 
         @Override
@@ -576,7 +585,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-
+            registerMutation(EnumBeeSpecies.getForestrySpecies("Common"), SKULKING, 12).restrictBiomeType(BiomeDictionary.Type.FOREST);
         }
 
     },
@@ -584,7 +593,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-
+            template.setEffect(AlleleInit.spawnCow);
         }
 
         @Override
@@ -593,7 +602,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-
+            registerMutation(EnumBeeSpecies.getForestrySpecies("Common"), SKULKING, 12).restrictBiomeType(BiomeDictionary.Type.PLAINS);
         }
 
     },
@@ -601,7 +610,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-
+            template.setEffect(AlleleInit.spawnPig);
         }
 
         @Override
@@ -610,7 +619,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-
+            registerMutation(EnumBeeSpecies.getForestrySpecies("Common"), SKULKING, 12).restrictBiomeType(BiomeDictionary.Type.MOUNTAIN);
         }
 
     },
@@ -618,7 +627,8 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-
+            template.setTerritory(TERRITORY_LARGE);
+            template.setEffect(AlleleInit.spawnBats);
         }
 
         @Override
@@ -627,7 +637,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-
+            registerMutation(SKULKING, WINDY, 9);
         }
 
     },
@@ -635,7 +645,9 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-
+            template.setCaveDwelling(TRUE_RECESSIVE);
+            template.setTemperatureTolerance(TOLERANCE_DOWN_2);
+            template.setEffect(AlleleInit.spawnSheep);
         }
 
         @Override
@@ -644,7 +656,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-
+            registerMutation(PORK, SKULKING, 13).restrictBiomeType(BiomeDictionary.Type.PLAINS);
         }
 
     },
@@ -652,7 +664,8 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-
+            template.setSpeed(SPEED_FASTEST);
+            template.setEffect(AlleleInit.spawnHorse);
         }
 
         @Override
@@ -661,7 +674,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-
+            registerMutation(BEEF, SHEEPISH, 12).restrictBiomeType(BiomeDictionary.Type.PLAINS);
         }
 
     },
@@ -669,7 +682,9 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-
+            template.setCaveDwelling(TRUE_RECESSIVE);
+            template.setTemperatureTolerance(TOLERANCE_BOTH_3);
+            template.setEffect(AlleleInit.spawnCat);
         }
 
         @Override
@@ -679,7 +694,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-
+            registerMutation(CHICKEN, SPIDERY, 15).restrictBiomeType(BiomeDictionary.Type.JUNGLE);
         }
 
     },
@@ -760,10 +775,16 @@ public enum EnumBeeSpecies implements IBeeTemplate {
     }
 
     protected final IBeeMutationBuilder registerMutation(EnumBeeSpecies bee1, EnumBeeSpecies bee2, int chance) {
+        if (!bee1.isActive()){
+            MagicBees.logger.info("Species "+bee1+" is not active, not registering mutation for bee: "+this);
+        }
         return registerMutation(bee1.getSpecies(), bee2, chance);
     }
 
     protected final IBeeMutationBuilder registerMutation(IAlleleBeeSpecies bee1, EnumBeeSpecies bee2, int chance) {
+        if (!bee2.isActive()){
+            MagicBees.logger.info("Species "+bee2+" is not active, not registering mutation for bee: "+this);
+        }
         return forestry.api.apiculture.BeeManager.beeMutationFactory.createMutation(bee1, bee2.getSpecies(), this.individual.getAlleles(), chance);
     }
 
@@ -795,7 +816,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         forestry.api.apiculture.BeeManager.beeMutationFactory.createMutation(getSpecies(), getForestrySpecies("Cultivated"), ELDRITCH.getAlleles(), 12);
     }
 
-    private static IAllele[] getForestrySpeciesTemplate(String speciesName) {
+    protected static IAllele[] getForestrySpeciesTemplate(String speciesName) {
         return BeeManager.beeRoot.getTemplate("forestry.species" + speciesName);
     }
 

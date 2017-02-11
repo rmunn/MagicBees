@@ -24,7 +24,7 @@ import javax.annotation.Nonnull;
 /**
  * Created by Elec332 on 16-8-2016.
  */
-@Mod(modid = MagicBees.modid, name = MagicBees.modName, dependencies = "required-after:ElecCore")
+@Mod(modid = MagicBees.modid, name = MagicBees.modName, dependencies = "required-after:elecCore")
 public class MagicBees {
 
     public static final String modid = "magicbees";

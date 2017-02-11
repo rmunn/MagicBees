@@ -9,6 +9,7 @@ import magicbees.util.MoreBeesResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Created by Elec332 on 25-8-2016.
@@ -39,7 +40,7 @@ public final class AlleleInit {
     }
 
     private static AlleleEffectSpawnMob newMobEffect(String name, boolean dominant, String mob){
-        return new AlleleEffectSpawnMob(new MoreBeesResourceLocation(name), mob);
+        return new AlleleEffectSpawnMob(new MoreBeesResourceLocation(name), new ResourceLocation(mob));
     }
 
 }
