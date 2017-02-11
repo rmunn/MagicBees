@@ -66,7 +66,7 @@ public enum EnumCombType implements IEnumItem {
 
     static {
         textures = new ResourceLocation[]{
-            new ResourceLocation("forestry", "items/beeCombs.0"), new ResourceLocation("forestry", "items/beeCombs.1")
+            new ResourceLocation("forestry", "items/bee_combs.0"), new ResourceLocation("forestry", "items/bee_combs.1")
         };
     }
 

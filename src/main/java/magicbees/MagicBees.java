@@ -1,11 +1,14 @@
 package magicbees;
 
+import elec332.core.compat.forestry.IndividualDefinitionRegistry;
 import elec332.core.compat.forestry.bee.BlockHive;
 import elec332.core.item.ItemEnumBased;
 import elec332.core.util.LoadTimer;
+import forestry.apiculture.genetics.alleles.AlleleEffects;
 import magicbees.bees.AlleleInit;
 import magicbees.bees.EnumBeeModifiers;
 import magicbees.bees.EnumBeeHives;
+import magicbees.bees.EnumBeeSpecies;
 import magicbees.item.ItemBeeFrames;
 import magicbees.item.types.EnumCombType;
 import magicbees.item.types.EnumDropType;
@@ -24,7 +27,7 @@ import javax.annotation.Nonnull;
 /**
  * Created by Elec332 on 16-8-2016.
  */
-@Mod(modid = MagicBees.modid, name = MagicBees.modName, dependencies = "required-after:elecCore")
+@Mod(modid = MagicBees.modid, name = MagicBees.modName, dependencies = "required-after:eleccore")
 public class MagicBees {
 
     public static final String modid = "magicbees";
@@ -52,6 +55,10 @@ public class MagicBees {
     public void init(FMLInitializationEvent event){
         loadTimer.startPhase(event);
         AlleleInit.init();
+        GameRegistry.register(new ItemBeeFrames(EnumBeeModifiers.CREATIVE));
+        combItem = GameRegistry.register(new ItemEnumBased<>(new MoreBeesResourceLocation("beeComb"), EnumCombType.class));
+        dropItem = GameRegistry.register(new ItemEnumBased<>(new MoreBeesResourceLocation("drop"), EnumDropType.class));
+        IndividualDefinitionRegistry.registerBees(EnumBeeSpecies.class);
         hiveBlock = new BlockHive<EnumBeeHives>() {
 
             @Nonnull
@@ -61,10 +68,6 @@ public class MagicBees {
             }
 
         }.register(new ResourceLocation(modid, "hiveBlock"));
-        GameRegistry.register(new ItemBeeFrames(EnumBeeModifiers.CREATIVE));
-        combItem = GameRegistry.register(new ItemEnumBased<>(new MoreBeesResourceLocation("beeComb"), EnumCombType.class));
-        dropItem = GameRegistry.register(new ItemEnumBased<>(new MoreBeesResourceLocation("drop"), EnumDropType.class));
-
         loadTimer.endPhase(event);
     }
 

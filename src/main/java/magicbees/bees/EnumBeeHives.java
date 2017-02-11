@@ -70,10 +70,10 @@ public enum EnumBeeHives implements IHiveEnum {
             return false;
         }
 
-    },
+    }
     ;
 
-    private EnumBeeHives(EnumBeeSpecies beeType, int light, boolean ignoreClimate, EnumHiveGen... genTypes){
+    EnumBeeHives(EnumBeeSpecies beeType, int light, boolean ignoreClimate, EnumHiveGen... genTypes){
         this.bee = beeType;
         this.ignoreClimate = ignoreClimate;
         this.light = light;
@@ -134,10 +134,7 @@ public enum EnumBeeHives implements IHiveEnum {
         addDrop(valiantDrop);
     }
 
-    static {
-        for (EnumBeeHives hive : values()){
-            HiveManager.hiveRegistry.registerHive(hive.getUid(), hive.getHiveDescription());
-        }
+    public static void dummyLoad(){
     }
 
     private class Desc implements IHiveDescription {
@@ -160,7 +157,7 @@ public enum EnumBeeHives implements IHiveEnum {
 
         @Override
         public boolean isGoodBiome(Biome biome) {
-            return JavaHelper.hasAtLeastOneMatch(Lists.newArrayList(BiomeDictionary.getTypesForBiome(biome)), gen.biomes);
+            return JavaHelper.hasAtLeastOneMatch(Lists.newArrayList(BiomeDictionary.getTypes(biome)), gen.biomes);
         }
 
         @Override

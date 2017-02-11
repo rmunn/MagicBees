@@ -49,7 +49,7 @@ public enum EnumDropType implements IEnumItem {
 
     static {
         textures = new ResourceLocation[]{
-                new ResourceLocation("forestry", "items/honeyDrop.0"), new ResourceLocation("forestry", "items/honeyDrop.1")
+                new ResourceLocation("forestry", "items/honey_drop.0"), new ResourceLocation("forestry", "items/honey_drop.1")
         };
     }
 

@@ -31,7 +31,7 @@ import static elec332.core.compat.forestry.ForestryAlleles.*;
 /**
  * Created by Elec332 on 15-8-2016.
  */
-@RegisteredForestryIndividual
+//@RegisteredForestryIndividual
 public enum EnumBeeSpecies implements IBeeTemplate {
 
     MYSTICAL("mysticum", EnumBeeBranches.VEILED, true, new Color(0xAFFFB7)) {

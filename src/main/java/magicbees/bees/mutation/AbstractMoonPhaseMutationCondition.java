@@ -2,7 +2,7 @@ package magicbees.bees.mutation;
 
 import elec332.core.util.MoonPhase;
 import elec332.core.util.StatCollector;
-import forestry.api.core.IClimateProvider;
+import forestry.api.climate.IClimateProvider;
 import forestry.api.genetics.IAllele;
 import forestry.api.genetics.IGenome;
 import forestry.api.genetics.IMutationCondition;

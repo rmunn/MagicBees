@@ -1,7 +1,7 @@
 package magicbees.bees.mutation;
 
 import elec332.core.util.MoonPhase;
-import forestry.api.core.IClimateProvider;
+import forestry.api.climate.IClimateProvider;
 import forestry.api.genetics.IAllele;
 import forestry.api.genetics.IGenome;
 import net.minecraft.util.math.BlockPos;
