@@ -11,12 +11,12 @@ import net.minecraft.util.ResourceLocation;
  */
 public enum EnumDropType implements IEnumItem {
 
-    ENCHANTED(7216237, 16748543),
-    INTELLECT(2462029, 1630322),
-    DESTABILIZED(13369388, 7012632),
-    CARBON(4539717, 986895),
-    LUX(16118692, 13224061),
-    ENDEARING(1237977, 433815);
+    ENCHANTED(0x6e1c6d, 0xff8fff),
+    INTELLECT(0x25914D, 0x18E072),
+    DESTABILIZED(0xCC002C, 0x6B0118),
+    CARBON(0x454545, 0x0F0F0F),
+    LUX(0xF5F3A4, 0xC9C87D),
+    ENDEARING(0x12E3D9, 0x069E97);
 
     EnumDropType(int c1, int c2){
         this.firstColor = c1;

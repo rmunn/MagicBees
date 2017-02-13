@@ -4,17 +4,14 @@ import elec332.core.compat.forestry.IndividualDefinitionRegistry;
 import elec332.core.compat.forestry.bee.BlockHive;
 import elec332.core.item.ItemEnumBased;
 import elec332.core.util.LoadTimer;
-import forestry.apiculture.genetics.alleles.AlleleEffects;
 import magicbees.api.ICrumblingHandler;
 import magicbees.api.ITransmutationController;
-import magicbees.bees.AlleleInit;
+import magicbees.init.AlleleRegister;
 import magicbees.bees.EnumBeeModifiers;
 import magicbees.bees.EnumBeeHives;
 import magicbees.bees.EnumBeeSpecies;
 import magicbees.item.ItemBeeFrames;
-import magicbees.item.types.EnumCombType;
-import magicbees.item.types.EnumDropType;
-import magicbees.item.types.EnumPollenType;
+import magicbees.item.types.*;
 import magicbees.util.DefaultCrumblingHandler;
 import magicbees.util.DefaultTransmutationController;
 import magicbees.util.MoreBeesResourceLocation;
@@ -47,6 +44,8 @@ public class MagicBees {
     public static ItemEnumBased<EnumCombType> combItem;
     public static ItemEnumBased<EnumDropType> dropItem;
     public static ItemEnumBased<EnumPollenType> pollenItem;
+    public static ItemEnumBased<EnumPropolisType> propolisItem;
+    public static ItemEnumBased<EnumWaxType> waxItem;
 
     public static ICrumblingHandler crumblingHandler;
     public static ITransmutationController transmutationController;
@@ -64,11 +63,15 @@ public class MagicBees {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event){
         loadTimer.startPhase(event);
-        AlleleInit.init();
+        AlleleRegister.init();
         GameRegistry.register(new ItemBeeFrames(EnumBeeModifiers.CREATIVE));
+
         combItem = GameRegistry.register(new ItemEnumBased<>(new MoreBeesResourceLocation("beeComb"), EnumCombType.class));
         dropItem = GameRegistry.register(new ItemEnumBased<>(new MoreBeesResourceLocation("drop"), EnumDropType.class));
         pollenItem = GameRegistry.register(new ItemEnumBased<>(new MoreBeesResourceLocation("pollen"), EnumPollenType.class));
+        propolisItem = GameRegistry.register(new ItemEnumBased<>(new MoreBeesResourceLocation("propolis"), EnumPropolisType.class));
+        waxItem = GameRegistry.register(new ItemEnumBased<>(new MoreBeesResourceLocation("wax"), EnumWaxType.class));
+
         IndividualDefinitionRegistry.registerBees(EnumBeeSpecies.class);
         hiveBlock = new BlockHive<EnumBeeHives>() {
 

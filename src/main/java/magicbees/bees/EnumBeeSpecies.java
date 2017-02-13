@@ -11,6 +11,7 @@ import forestry.apiculture.items.EnumHoneyComb;
 import magicbees.MagicBees;
 import magicbees.bees.mutation.MoonPhaseMutationBonus;
 import magicbees.bees.mutation.MoonPhaseMutationRestriction;
+import magicbees.init.AlleleRegister;
 import magicbees.item.types.EnumCombType;
 import magicbees.item.types.EnumDropType;
 import magicbees.item.types.EnumPollenType;
@@ -492,7 +493,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             template.setTemperatureTolerance(TOLERANCE_BOTH_1);
             template.setToleratesRain(TRUE_RECESSIVE);
             template.setFertility(FERTILITY_LOW);
-            template.setEffect(AlleleInit.spawnGhast);
+            template.setEffect(AlleleRegister.spawnGhast);
         }
 
         @Override
@@ -514,7 +515,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
             template.setCaveDwelling(TRUE_RECESSIVE);
             template.setTerritory(TERRITORY_LARGER);
-            template.setEffect(AlleleInit.spawnSpider);
+            template.setEffect(AlleleRegister.spawnSpider);
         }
 
         @Override
@@ -536,7 +537,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
             template.setCaveDwelling(TRUE_RECESSIVE);
-            template.setEffect(AlleleInit.spawnBlaze);
+            template.setEffect(AlleleRegister.spawnBlaze);
         }
 
         @Override
@@ -559,7 +560,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
             template.setFertility(FERTILITY_LOW);
-            //todo template.setEffect(AlleleInit.spa)
+            //todo template.setEffect(AlleleRegister.spa)
         }
 
         @Override
@@ -596,7 +597,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
             template.setCaveDwelling(TRUE_RECESSIVE);
-            template.setEffect(AlleleInit.spawnWolf);
+            template.setEffect(AlleleRegister.spawnWolf);
         }
 
         @Override
@@ -619,7 +620,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-            template.setEffect(AlleleInit.spawnChicken);
+            template.setEffect(AlleleRegister.spawnChicken);
         }
 
         @Override
@@ -639,7 +640,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-            template.setEffect(AlleleInit.spawnCow);
+            template.setEffect(AlleleRegister.spawnCow);
         }
 
         @Override
@@ -658,7 +659,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-            template.setEffect(AlleleInit.spawnPig);
+            template.setEffect(AlleleRegister.spawnPig);
         }
 
         @Override
@@ -678,7 +679,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
             template.setTerritory(TERRITORY_LARGE);
-            template.setEffect(AlleleInit.spawnBats);
+            template.setEffect(AlleleRegister.spawnBats);
         }
 
         @Override
@@ -699,7 +700,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
             template.setCaveDwelling(TRUE_RECESSIVE);
             template.setTemperatureTolerance(TOLERANCE_DOWN_2);
-            template.setEffect(AlleleInit.spawnSheep);
+            template.setEffect(AlleleRegister.spawnSheep);
         }
 
         @Override
@@ -721,7 +722,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
             template.setSpeed(SPEED_FASTEST);
-            template.setEffect(AlleleInit.spawnHorse);
+            template.setEffect(AlleleRegister.spawnHorse);
         }
 
         @Override
@@ -743,7 +744,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
             template.setCaveDwelling(TRUE_RECESSIVE);
             template.setTemperatureTolerance(TOLERANCE_BOTH_3);
-            template.setEffect(AlleleInit.spawnCat);
+            template.setEffect(AlleleRegister.spawnCat);
         }
 
         @Override
@@ -764,7 +765,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
             template.setLifeSpan(LIFESPAN_ELONGATED);
-            template.setEffect(AlleleInit.effectSlowSpeed);
+            template.setEffect(AlleleRegister.effectSlowSpeed);
         }
 
         @Override
@@ -888,7 +889,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
             template.setTerritory(TERRITORY_LARGEST);
             template.setFertility(FERTILITY_LOW);
-            template.setEffect(AlleleInit.effectWithering);
+            template.setEffect(AlleleRegister.effectWithering);
         }
 
         @Override
@@ -1029,7 +1030,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-            template.setEffect(AlleleInit.effectTransmuting);
+            template.setEffect(AlleleRegister.effectTransmuting);
         }
 
         @Override
@@ -1050,7 +1051,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-            template.setEffect(AlleleInit.effectCrumbling);
+            template.setEffect(AlleleRegister.effectCrumbling);
         }
 
         @Override
@@ -1076,7 +1077,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             template.setLifeSpan(LIFESPAN_SHORTEST);
             template.setHumidityTolerance(TOLERANCE_UP_1);
             template.setTemperatureTolerance(TOLERANCE_DOWN_2);
-            template.setEffect(AlleleInit.alleleInvisibility);
+            template.setEffect(AlleleRegister.alleleInvisibility);
         }
 
         @Override

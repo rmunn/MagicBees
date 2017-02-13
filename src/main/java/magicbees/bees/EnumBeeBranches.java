@@ -4,6 +4,7 @@ import elec332.core.compat.forestry.bee.BeeGenomeTemplate;
 import elec332.core.compat.forestry.bee.ForestryBeeEffects;
 import forestry.api.core.EnumTemperature;
 import magicbees.MagicBees;
+import magicbees.init.AlleleRegister;
 import magicbees.util.IMoreBeesBranch;
 import forestry.api.apiculture.BeeManager;
 import forestry.api.core.EnumHumidity;
@@ -74,7 +75,7 @@ public enum EnumBeeBranches implements IMoreBeesBranch {
             genomeTemplate.setTemperatureTolerance(TOLERANCE_UP_2);
             genomeTemplate.setCaveDwelling(TRUE_RECESSIVE);
             genomeTemplate.setNeverSleeps(TRUE_RECESSIVE);
-            genomeTemplate.setFlowerProvider(AlleleInit.flowersBookshelf);
+            genomeTemplate.setFlowerProvider(AlleleRegister.flowersBookshelf);
         }
 
         @Override

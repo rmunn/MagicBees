@@ -1,4 +1,4 @@
-package magicbees.bees;
+package magicbees.init;
 
 import elec332.core.compat.forestry.allele.AlleleEffect;
 import elec332.core.compat.forestry.allele.AlleleEffectPotion;
@@ -17,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 /**
  * Created by Elec332 on 25-8-2016.
  */
-public final class AlleleInit {
+public final class AlleleRegister {
 
 
 

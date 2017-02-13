@@ -13,8 +13,8 @@ import java.awt.*;
  */
 public enum EnumPollenType implements IEnumItem {
 
-    UNUSUAL(new Color(14172539), new Color(10498137)),
-    PHASED(new Color(4814004), new Color(4549541))
+    UNUSUAL(new Color(0xD8417B), new Color(0xA03059)),
+    PHASED(new Color(0x4974B4), new Color(0x456BA5))
     ;
 
     EnumPollenType(Color firstColor, Color secondColor){

@@ -26,10 +26,10 @@ public enum EnumCombType implements IEnumItem {
     TEMPORAL(false, new Color(0x2F9381), new Color(0x773C31)),
     FORGOTTEN(false, new Color(0xB191D8), new Color(0x35443B)),
 
-    AIRY(false),
-    FIREY(false),
-    WATERY(false),
-    EARTHY(false)
+    AIRY(false, new Color(0xffff7e), new Color(0x606308)),
+    FIREY(false, new Color(0xff3C01), new Color(0x5B0D10)),
+    WATERY(false, new Color(0x0090ff), new Color(0x102F6B)),
+    EARTHY(false, new Color(0x00a000), new Color(0x043004))
 
     ;
 
