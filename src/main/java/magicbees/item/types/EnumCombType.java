@@ -26,6 +26,11 @@ public enum EnumCombType implements IEnumItem {
     TEMPORAL(false, new Color(0x2F9381), new Color(0x773C31)),
     FORGOTTEN(false, new Color(0xB191D8), new Color(0x35443B)),
 
+    AIRY(false),
+    FIREY(false),
+    WATERY(false),
+    EARTHY(false)
+
     ;
 
     EnumCombType(boolean shouldShow, Color firstColor, Color secondColor){

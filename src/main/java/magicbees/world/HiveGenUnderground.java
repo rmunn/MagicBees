@@ -1,4 +1,4 @@
-package magicbees.util;
+package magicbees.world;
 
 import com.google.common.base.Predicate;
 import elec332.core.world.WorldHelper;
@@ -43,7 +43,7 @@ public class HiveGenUnderground implements IHiveGen {
     public boolean isValidLocation(World world, BlockPos blockPos) {
         int i = surroundCount;
         for (EnumFacing f : EnumFacing.VALUES){
-            if (isReplaceableOreGen(WorldHelper.getBlockState(world, blockPos.offset(f)), world, blockPos)){
+            if (isReplaceableOreGen(WorldHelper.getBlockState(world, blockPos.offset(f)), world, blockPos, replace)){
                 i--;
             }
             if (i <= 0){
@@ -55,10 +55,10 @@ public class HiveGenUnderground implements IHiveGen {
 
     @Override
     public boolean canReplace(IBlockState iBlockState, World world, BlockPos blockPos) {
-        return !world.isAirBlock(blockPos) && isReplaceableOreGen(iBlockState, world, blockPos);
+        return !world.isAirBlock(blockPos) && isReplaceableOreGen(iBlockState, world, blockPos, replace);
     }
 
-    protected final boolean isReplaceableOreGen(IBlockState iBlockState, World world, BlockPos blockPos){
+    protected static boolean isReplaceableOreGen(IBlockState iBlockState, World world, BlockPos blockPos, Block replace){
         return iBlockState.getBlock().isReplaceableOreGen(iBlockState, world, blockPos, new Predicate<IBlockState>() {
 
             @Override

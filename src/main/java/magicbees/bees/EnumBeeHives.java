@@ -19,6 +19,7 @@ import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
 import magicbees.item.types.EnumCombType;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -63,6 +64,40 @@ public enum EnumBeeHives implements IHiveEnum {
         @Override
         protected void registerDrops() {
             addDefaultDrops(20);
+        }
+
+        @Override
+        public boolean showInTab() {
+            return false;
+        }
+
+    },
+    INFERNAL(EnumBeeSpecies.INFERNAL, 15, true, EnumHiveGen.INFERNAL, EnumHiveGen.INFERNAL_OVERWORLD){
+
+        @Override
+        protected void registerDrops() {
+            ItemStack[] combs = new ItemStack[]{
+                    MagicBees.combItem.getStackFromType(EnumCombType.MOLTEN), new ItemStack(Items.GLOWSTONE_DUST, 6)
+            };
+            addDrop(new HiveDrop(getBeeType(), 80, combs).setIgnobleChance(0.5f));
+            addDrop(new HiveDrop(BeeManager.beeRoot.templateAsGenome(EnumBeeSpecies.getForestrySpeciesTemplate("Steadfast")), 3, combs));
+        }
+
+        @Override
+        public boolean showInTab() {
+            return false;
+        }
+
+    },
+    OBLIVION(EnumBeeSpecies.OBLIVION, 7, true, EnumHiveGen.OBLIVION, EnumHiveGen.OBLIVION_OVERWORLD){
+
+        @Override
+        protected void registerDrops() {
+            ItemStack[] combs = new ItemStack[]{
+                    MagicBees.combItem.getStackFromType(EnumCombType.FORGOTTEN), new ItemStack(Items.ENDER_PEARL)
+            };
+            addDrop(new HiveDrop(getBeeType(), 80, combs));
+            addDrop(new HiveDrop(BeeManager.beeRoot.templateAsGenome(EnumBeeSpecies.getForestrySpeciesTemplate("Steadfast")), 9, combs));
         }
 
         @Override

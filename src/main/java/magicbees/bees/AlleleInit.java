@@ -5,6 +5,9 @@ import elec332.core.compat.forestry.allele.AlleleEffectPotion;
 import elec332.core.compat.forestry.allele.AlleleEffectSpawnMob;
 import elec332.core.compat.forestry.allele.AlleleFlowerProvider;
 import elec332.core.compat.forestry.bee.FlowerProvider;
+import magicbees.MagicBees;
+import magicbees.bees.allele.AlleleEffectCrumbling;
+import magicbees.bees.allele.AlleleEffectTransmuting;
 import magicbees.util.MoreBeesResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
@@ -16,15 +19,22 @@ import net.minecraft.util.ResourceLocation;
  */
 public final class AlleleInit {
 
+
+
     public static AlleleFlowerProvider flowersBookshelf;
-    public static AlleleEffect slowSpeed;
+    public static AlleleEffect effectSlowSpeed, effectWithering, effectTransmuting, effectCrumbling, alleleInvisibility; //todo
     public static AlleleEffectSpawnMob spawnWolf, spawnBats, spawnCow, spawnChicken, spawnPig,
             spawnSheep, spawnCat, spawnHorse, spawnGhast, spawnSpider, spawnBlaze;
 
     public static void init(){
         flowersBookshelf = new AlleleFlowerProvider(new MoreBeesResourceLocation("flowersBookshelf"), new FlowerProvider("flowersBookshelf"));
         flowersBookshelf.registerAcceptableFlower(Blocks.BOOKSHELF);
-        slowSpeed = new AlleleEffectPotion(new MoreBeesResourceLocation("slowSpeed"), new PotionEffect(MobEffects.SLOWNESS, 60));
+        effectSlowSpeed = new AlleleEffectPotion(new MoreBeesResourceLocation("effectSlowSpeed"), new PotionEffect(MobEffects.SLOWNESS, 60));
+
+        effectWithering = new AlleleEffectPotion(new MoreBeesResourceLocation("effectWithering"), new PotionEffect(MobEffects.WITHER, 15));
+        alleleInvisibility = new AlleleEffectPotion(new MoreBeesResourceLocation("alleleInvisibility"), new PotionEffect(MobEffects.INVISIBILITY, 10)).setBypassesArmour();
+        effectCrumbling = new AlleleEffectCrumbling(new MoreBeesResourceLocation("crumbling"), MagicBees.crumblingHandler);
+        effectTransmuting = new AlleleEffectTransmuting(new MoreBeesResourceLocation("effectTransmuting"), MagicBees.transmutationController);
 
         spawnWolf = newMobEffect("Canine", false, "Wolf").setThrottle(650).setSpawnChance(40).setMaxMobsInArea(2);
         spawnBats = newMobEffect("Batty", false, "Bat").setThrottle(150);

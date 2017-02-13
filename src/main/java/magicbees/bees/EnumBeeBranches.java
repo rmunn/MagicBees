@@ -2,6 +2,7 @@ package magicbees.bees;
 
 import elec332.core.compat.forestry.bee.BeeGenomeTemplate;
 import elec332.core.compat.forestry.bee.ForestryBeeEffects;
+import forestry.api.core.EnumTemperature;
 import magicbees.MagicBees;
 import magicbees.util.IMoreBeesBranch;
 import forestry.api.apiculture.BeeManager;
@@ -116,8 +117,10 @@ public enum EnumBeeBranches implements IMoreBeesBranch {
 
         @Override
         public void setBranchProperties(BeeGenomeTemplate genomeTemplate) {
-            genomeTemplate.setLifeSpan(LIFESPAN_ELONGATED);
-            genomeTemplate.setEffect(AlleleInit.slowSpeed);
+            genomeTemplate.setHumidityTolerance(TOLERANCE_BOTH_1);
+            genomeTemplate.setFertility(FERTILITY_NORMAL);
+            genomeTemplate.setSpeed(SPEED_NORMAL);
+            genomeTemplate.setCaveDwelling(TRUE_RECESSIVE);
         }
 
     },
@@ -133,6 +136,13 @@ public enum EnumBeeBranches implements IMoreBeesBranch {
     ABOMINABLE("Detestabilapis") {
 
         @Override
+        public void setIndividualProperties(IAlleleSpeciesBuilder speciesBuilder) {
+            super.setIndividualProperties(speciesBuilder);
+            speciesBuilder.setTemperature(EnumTemperature.HELLISH);
+            speciesBuilder.setHumidity(EnumHumidity.ARID);
+        }
+
+        @Override
         public void setBranchProperties(BeeGenomeTemplate genomeTemplate) {
             genomeTemplate.setTemperatureTolerance(TOLERANCE_DOWN_2);
             genomeTemplate.setFlowerProvider(FLOWERS_NETHER);
@@ -142,8 +152,19 @@ public enum EnumBeeBranches implements IMoreBeesBranch {
             genomeTemplate.setLifeSpan(LIFESPAN_SHORT);
         }
 
+        @Override
+        public Color getSecondaryColor() {
+            return new Color(0x960F00);
+        }
+
     },
     EXTRINSIC("Extrarapis") {
+
+        @Override
+        public void setIndividualProperties(IAlleleSpeciesBuilder speciesBuilder) {
+            super.setIndividualProperties(speciesBuilder);
+            speciesBuilder.setTemperature(EnumTemperature.COLD);
+        }
 
         @Override
         public void setBranchProperties(BeeGenomeTemplate genomeTemplate) {
@@ -152,6 +173,11 @@ public enum EnumBeeBranches implements IMoreBeesBranch {
             genomeTemplate.setNeverSleeps(TRUE_RECESSIVE);
             genomeTemplate.setFlowerProvider(FLOWERS_END);
             genomeTemplate.setCaveDwelling(TRUE_RECESSIVE);
+        }
+
+        @Override
+        public Color getSecondaryColor() {
+            return new Color(0xF696FF);
         }
 
     },

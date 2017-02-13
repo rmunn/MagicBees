@@ -4,7 +4,9 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import forestry.api.apiculture.hives.HiveManager;
 import forestry.api.apiculture.hives.IHiveGen;
-import magicbees.util.HiveGenUnderground;
+import magicbees.world.HiveGenNether;
+import magicbees.world.HiveGenOblivion;
+import magicbees.world.HiveGenUnderground;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -23,7 +25,10 @@ public enum EnumHiveGen {
     RESONANT(0.9f, HiveManager.genHelper.ground(Blocks.SAND, Blocks.SANDSTONE), BiomeDictionary.Type.SANDY, BiomeDictionary.Type.MESA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.MAGICAL),
     //TODO: PostGen for all below
     DEEP(5.0f, new HiveGenUnderground(10, 15, 5), BiomeDictionary.Type.HILLS, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.MAGICAL),
-
+    INFERNAL(50.0f, new HiveGenNether(0, 175, 6), BiomeDictionary.Type.NETHER),
+    INFERNAL_OVERWORLD(0.95f, new HiveGenUnderground(5, 13, 6), BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.HOT),
+    OBLIVION(20.0f, new HiveGenOblivion(), BiomeDictionary.Type.END),
+    OBLIVION_OVERWORLD(0.87f, new HiveGenUnderground(5, 5, 5), BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.COLD)
 
 
     ;
