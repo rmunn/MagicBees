@@ -8,7 +8,7 @@ import elec332.core.compat.forestry.bee.FlowerProvider;
 import magicbees.MagicBees;
 import magicbees.bees.allele.AlleleEffectCrumbling;
 import magicbees.bees.allele.AlleleEffectTransmuting;
-import magicbees.util.MoreBeesResourceLocation;
+import magicbees.util.MagicBeesResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
@@ -27,14 +27,14 @@ public final class AlleleRegister {
             spawnSheep, spawnCat, spawnHorse, spawnGhast, spawnSpider, spawnBlaze;
 
     public static void init(){
-        flowersBookshelf = new AlleleFlowerProvider(new MoreBeesResourceLocation("flowersBookshelf"), new FlowerProvider("flowersBookshelf"));
+        flowersBookshelf = new AlleleFlowerProvider(new MagicBeesResourceLocation("flowersBookshelf"), new FlowerProvider("flowersBookshelf"));
         flowersBookshelf.registerAcceptableFlower(Blocks.BOOKSHELF);
-        effectSlowSpeed = new AlleleEffectPotion(new MoreBeesResourceLocation("effectSlowSpeed"), new PotionEffect(MobEffects.SLOWNESS, 60));
+        effectSlowSpeed = new AlleleEffectPotion(new MagicBeesResourceLocation("effectSlowSpeed"), new PotionEffect(MobEffects.SLOWNESS, 60));
 
-        effectWithering = new AlleleEffectPotion(new MoreBeesResourceLocation("effectWithering"), new PotionEffect(MobEffects.WITHER, 15));
-        alleleInvisibility = new AlleleEffectPotion(new MoreBeesResourceLocation("alleleInvisibility"), new PotionEffect(MobEffects.INVISIBILITY, 10)).setBypassesArmour();
-        effectCrumbling = new AlleleEffectCrumbling(new MoreBeesResourceLocation("crumbling"), MagicBees.crumblingHandler);
-        effectTransmuting = new AlleleEffectTransmuting(new MoreBeesResourceLocation("effectTransmuting"), MagicBees.transmutationController);
+        effectWithering = new AlleleEffectPotion(new MagicBeesResourceLocation("effectWithering"), new PotionEffect(MobEffects.WITHER, 15));
+        alleleInvisibility = new AlleleEffectPotion(new MagicBeesResourceLocation("alleleInvisibility"), new PotionEffect(MobEffects.INVISIBILITY, 10)).setBypassesArmour();
+        effectCrumbling = new AlleleEffectCrumbling(new MagicBeesResourceLocation("crumbling"), MagicBees.crumblingHandler);
+        effectTransmuting = new AlleleEffectTransmuting(new MagicBeesResourceLocation("effectTransmuting"), MagicBees.transmutationController);
 
         spawnWolf = newMobEffect("Canine", false, "Wolf").setThrottle(650).setSpawnChance(40).setMaxMobsInArea(2);
         spawnBats = newMobEffect("Batty", false, "Bat").setThrottle(150);
@@ -50,7 +50,7 @@ public final class AlleleRegister {
     }
 
     private static AlleleEffectSpawnMob newMobEffect(String name, boolean dominant, String mob){
-        return new AlleleEffectSpawnMob(new MoreBeesResourceLocation(name), new ResourceLocation(mob));
+        return new AlleleEffectSpawnMob(new MagicBeesResourceLocation(name), new ResourceLocation(mob));
     }
 
 }

@@ -3,7 +3,7 @@ package magicbees.item.types;
 import elec332.core.compat.forestry.ForestryCompatHandler;
 import elec332.core.item.IEnumItem;
 import elec332.core.item.ItemEnumBased;
-import magicbees.util.MoreBeesResourceLocation;
+import magicbees.util.MagicBeesResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -51,8 +51,8 @@ public enum EnumWaxType implements IEnumItem{
     private static final ResourceLocation TEXTURE, TEXTURE_S;
 
     static {
-        TEXTURE = new MoreBeesResourceLocation("items/wax.0");
-        TEXTURE_S = new MoreBeesResourceLocation("items/wax.1");
+        TEXTURE = new MagicBeesResourceLocation("items/wax.0");
+        TEXTURE_S = new MagicBeesResourceLocation("items/wax.1");
     }
 
 }

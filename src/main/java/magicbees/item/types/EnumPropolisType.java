@@ -14,6 +14,7 @@ import java.awt.*;
 public enum EnumPropolisType implements IEnumItem{
 
     UNSTABLE(new Color(0xEFB492)),
+
     AIR(new Color(0xA19E10)),
     FIRE(new Color(0x95132F)),
     WATER(new Color(0x1054A1)),

@@ -15,7 +15,7 @@ import magicbees.init.AlleleRegister;
 import magicbees.item.types.EnumCombType;
 import magicbees.item.types.EnumDropType;
 import magicbees.item.types.EnumPollenType;
-import magicbees.util.IMoreBeesBranch;
+import magicbees.util.IMagicBeesBranch;
 import forestry.api.apiculture.*;
 import forestry.api.apiculture.BeeManager;
 import forestry.api.core.EnumHumidity;
@@ -1095,11 +1095,11 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
     ;
 
-    EnumBeeSpecies(String binominalName, IMoreBeesBranch branch, boolean dominant, Color primaryColor){
+    EnumBeeSpecies(String binominalName, IMagicBeesBranch branch, boolean dominant, Color primaryColor){
         this(binominalName, branch, dominant, primaryColor, branch.getSecondaryColor());
     }
 
-    EnumBeeSpecies(String binomialName, IMoreBeesBranch branch, boolean dominant, Color primaryColor, Color secondaryColor){
+    EnumBeeSpecies(String binomialName, IMagicBeesBranch branch, boolean dominant, Color primaryColor, Color secondaryColor){
         this.branch = branch;
         this.primaryColor = primaryColor.getRGB();
         this.secondaryColor = secondaryColor.getRGB();
@@ -1109,7 +1109,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         this.unlocalisedName = uid;
     }
 
-    private final IMoreBeesBranch branch;
+    private final IMagicBeesBranch branch;
     private final int primaryColor, secondaryColor;
     private final String binominalName, uid, unlocalisedName;
     private final boolean dominant;

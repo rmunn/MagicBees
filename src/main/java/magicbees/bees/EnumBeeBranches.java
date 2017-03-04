@@ -5,7 +5,7 @@ import elec332.core.compat.forestry.bee.ForestryBeeEffects;
 import forestry.api.core.EnumTemperature;
 import magicbees.MagicBees;
 import magicbees.init.AlleleRegister;
-import magicbees.util.IMoreBeesBranch;
+import magicbees.util.IMagicBeesBranch;
 import forestry.api.apiculture.BeeManager;
 import forestry.api.core.EnumHumidity;
 import forestry.api.genetics.AlleleManager;
@@ -21,7 +21,7 @@ import static elec332.core.compat.forestry.ForestryAlleles.*;
 /**
  * Created by Elec332 on 15-8-2016.
  */
-public enum EnumBeeBranches implements IMoreBeesBranch {
+public enum EnumBeeBranches implements IMagicBeesBranch {
 
     VEILED("Velatapis") {
 
