@@ -7,7 +7,6 @@ import forestry.apiculture.PluginApiculture;
 import forestry.apiculture.items.EnumPropolis;
 import forestry.core.PluginCore;
 import forestry.core.fluids.Fluids;
-import magicbees.MagicBees;
 import magicbees.item.types.*;
 import magicbees.util.Config;
 import net.minecraft.init.Blocks;
@@ -238,16 +237,16 @@ public final class RecipeRegister {
                 getResource(EnumResourceType.ESSENCE_SCORNFUL_OBLIVION),
                 PluginApiculture.getItems().frameProven.getItemStack()
         );
-/* todo
 
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Config.effectJar),
+
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockRegister.effectJar),
                 "GSG", "QPQ", "GGG",
                 'G', Blocks.GLASS,
                 'S', "slabWood",
-                'P', Config.pollen.getStackForType(PollenType.UNUSUAL),
+                'P', getPollen(EnumPollenType.UNUSUAL),
                 'Q', Items.QUARTZ
         ));
-
+/* todo
         output = new ItemStack(Config.magicApiary);
         GameRegistry.addShapelessRecipe(output,
                 Config.pollen.getStackForType(PollenType.UNUSUAL, 2),

@@ -3,6 +3,7 @@ package magicbees.item.types;
 import elec332.core.compat.forestry.ForestryCompatHandler;
 import elec332.core.item.IEnumItem;
 import elec332.core.item.ItemEnumBased;
+import magicbees.MagicBees;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -32,7 +33,7 @@ public enum EnumDropType implements IEnumItem {
 
     @Override
     public void initializeItem(ItemEnumBased<? extends IEnumItem> itemEnumBased) {
-        itemEnumBased.setCreativeTab(ForestryCompatHandler.getForestryBeeTab());
+        itemEnumBased.setCreativeTab(MagicBees.creativeTab);
     }
 
     @Override

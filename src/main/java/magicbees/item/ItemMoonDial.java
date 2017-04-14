@@ -7,6 +7,7 @@ import elec332.core.api.client.model.IElecTemplateBakery;
 import elec332.core.item.AbstractTexturedItem;
 import elec332.core.util.ItemStackHelper;
 import elec332.core.util.MoonPhase;
+import magicbees.MagicBees;
 import magicbees.util.Config;
 import magicbees.util.MagicBeesResourceLocation;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -27,6 +28,7 @@ public class ItemMoonDial extends AbstractTexturedItem {
 
     public ItemMoonDial() {
         super(new MagicBeesResourceLocation("moondial"));
+        setCreativeTab(MagicBees.creativeTab);
     }
 
     @SideOnly(Side.CLIENT)

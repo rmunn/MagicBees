@@ -12,6 +12,7 @@ import magicbees.MagicBees;
 import magicbees.bees.mutation.MoonPhaseMutationBonus;
 import magicbees.bees.mutation.MoonPhaseMutationRestriction;
 import magicbees.init.AlleleRegister;
+import magicbees.init.ItemRegister;
 import magicbees.item.types.EnumCombType;
 import magicbees.item.types.EnumDropType;
 import magicbees.item.types.EnumPollenType;
@@ -1165,15 +1166,15 @@ public enum EnumBeeSpecies implements IBeeTemplate {
     public abstract void registerMutations();
 
     private static ItemStack getComb(EnumCombType combType){
-        return MagicBees.combItem.getStackFromType(combType);
+        return ItemRegister.combItem.getStackFromType(combType);
     }
 
     private static ItemStack getDrop(EnumDropType drop){
-        return MagicBees.dropItem.getStackFromType(drop);
+        return ItemRegister.dropItem.getStackFromType(drop);
     }
 
     private static ItemStack getPollen(EnumPollenType pollen){
-        return MagicBees.pollenItem.getStackFromType(pollen);
+        return ItemRegister.pollenItem.getStackFromType(pollen);
     }
 
     private static ItemStack getForestryComb(EnumHoneyComb type){

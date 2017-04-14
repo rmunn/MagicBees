@@ -3,6 +3,7 @@ package magicbees.item.types;
 import elec332.core.compat.forestry.ForestryCompatHandler;
 import elec332.core.item.IEnumItem;
 import elec332.core.item.ItemEnumBased;
+import magicbees.MagicBees;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -26,7 +27,7 @@ public enum EnumPollenType implements IEnumItem {
 
     @Override
     public void initializeItem(ItemEnumBased<? extends IEnumItem> item) {
-        item.setCreativeTab(ForestryCompatHandler.getForestryBeeTab());
+        item.setCreativeTab(MagicBees.creativeTab);
     }
 
     @Override

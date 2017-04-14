@@ -33,7 +33,7 @@ public abstract class AbstractMoonPhaseMutationCondition implements IMutationCon
     @Override
     public String getDescription() {
         if (two) {
-            return String.format(StatCollector.translateToLocal("research.bonusPhase"), moonPhaseStart.getLocalizedNameAlt(), moonPhaseEnd.getLocalizedNameAlt());
+            return String.format(StatCollector.translateToLocal("research.bonusPhase"), moonPhaseStart.getLocalizedName(), moonPhaseEnd.getLocalizedName());
         } else {
             return String.format(StatCollector.translateToLocal("research.bonusPhaseSingle"), moonPhaseStart.getLocalizedName());
         }

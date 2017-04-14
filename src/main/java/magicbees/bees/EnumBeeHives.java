@@ -17,6 +17,8 @@ import forestry.api.apiculture.hives.IHiveDescription;
 import forestry.api.apiculture.hives.IHiveGen;
 import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
+import magicbees.init.BlockRegister;
+import magicbees.init.ItemRegister;
 import magicbees.item.types.EnumCombType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
@@ -29,6 +31,8 @@ import net.minecraftforge.common.BiomeDictionary;
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created by Elec332 on 20-8-2016.
@@ -77,7 +81,7 @@ public enum EnumBeeHives implements IHiveEnum {
         @Override
         protected void registerDrops() {
             ItemStack[] combs = new ItemStack[]{
-                    MagicBees.combItem.getStackFromType(EnumCombType.MOLTEN), new ItemStack(Items.GLOWSTONE_DUST, 6)
+                    ItemRegister.combItem.getStackFromType(EnumCombType.MOLTEN), new ItemStack(Items.GLOWSTONE_DUST, 6)
             };
             addDrop(new HiveDrop(getBeeType(), 80, combs).setIgnobleChance(0.5f));
             addDrop(new HiveDrop(BeeManager.beeRoot.templateAsGenome(EnumBeeSpecies.getForestrySpeciesTemplate("Steadfast")), 3, combs));
@@ -94,7 +98,7 @@ public enum EnumBeeHives implements IHiveEnum {
         @Override
         protected void registerDrops() {
             ItemStack[] combs = new ItemStack[]{
-                    MagicBees.combItem.getStackFromType(EnumCombType.FORGOTTEN), new ItemStack(Items.ENDER_PEARL)
+                    ItemRegister.combItem.getStackFromType(EnumCombType.FORGOTTEN), new ItemStack(Items.ENDER_PEARL)
             };
             addDrop(new HiveDrop(getBeeType(), 80, combs));
             addDrop(new HiveDrop(BeeManager.beeRoot.templateAsGenome(EnumBeeSpecies.getForestrySpeciesTemplate("Steadfast")), 9, combs));
@@ -112,34 +116,30 @@ public enum EnumBeeHives implements IHiveEnum {
         this.bee = beeType;
         this.ignoreClimate = ignoreClimate;
         this.light = light;
-        this.genTypes = Preconditions.checkNotNull(genTypes);
+        this.genTypes = Lists.newArrayList(Preconditions.checkNotNull(genTypes)).stream().map((Function<EnumHiveGen, IHiveDescription>) Desc::new).collect(Collectors.toList());
     }
 
     private final EnumBeeSpecies bee;
     private final boolean ignoreClimate;
     private final int light;
-    private final EnumHiveGen[] genTypes;
+    private final List<IHiveDescription> genTypes;
 
 
     @Override
     @SuppressWarnings("all")
     public IHiveDescription getHiveDescription() {
-        return null;
+        return genTypes.get(0);
     }
 
     @Nonnull
     @Override
     public List<IHiveDescription> getHiveDescriptions() {
-        List<IHiveDescription> ret = Lists.newArrayList();
-        for (EnumHiveGen gen : genTypes){
-            ret.add(new Desc(gen));
-        }
-        return ret;
+        return genTypes;
     }
 
     @Override
-    public String getUid() {
-        return MagicBees.modid + ".hive." + name();
+    public String getUid(IHiveDescription desc) {
+        return MagicBees.modid + ".hive." + ((Desc) desc).gen.name();
     }
 
     @Override
@@ -187,7 +187,7 @@ public enum EnumBeeHives implements IHiveEnum {
 
         @Override
         public IBlockState getBlockState() {
-            return MagicBees.hiveBlock.getStateFromHive(EnumBeeHives.this);
+            return BlockRegister.hiveBlock.getStateFromHive(EnumBeeHives.this);
         }
 
         @Override
@@ -229,7 +229,7 @@ public enum EnumBeeHives implements IHiveEnum {
 
     }
 
-    private static final ItemStack comb = MagicBees.combItem.getStackFromType(EnumCombType.MUNDANE);
+    private static final ItemStack comb = ItemRegister.combItem.getStackFromType(EnumCombType.MUNDANE);
     private static final IHiveDrop valiantDrop = new HiveDrop(addRainResist(EnumBeeSpecies.getForestrySpeciesTemplate("Valiant")), 5, comb);
 
     private static IBeeGenome addRainResist(IAllele[] alleles){
