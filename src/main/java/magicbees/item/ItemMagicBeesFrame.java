@@ -7,6 +7,7 @@ import magicbees.MagicBees;
 import magicbees.bees.EnumBeeModifiers;
 import forestry.api.apiculture.IBeeModifier;
 import magicbees.util.MagicBeesResourceLocation;
+import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
@@ -30,4 +31,8 @@ public class ItemMagicBeesFrame extends AbstractTexturedItem implements IDefault
         return modifier;
     }
 
+    @Override
+    protected ResourceLocation getTextureLocation() {
+        return new ResourceLocation(super.getTextureLocation().toString().replace(".", "/"));
+    }
 }

@@ -70,7 +70,7 @@ public class ItemMoonDial extends AbstractTexturedItem {
     static {
         textureLocs = new ResourceLocation[MoonPhase.values().length];
         for (int i = 0; i < textureLocs.length; i++) {
-            textureLocs[i] = new MagicBeesResourceLocation("moonDial."+i);
+            textureLocs[i] = new MagicBeesResourceLocation("items/moonDial."+i);
         }
     }
 
