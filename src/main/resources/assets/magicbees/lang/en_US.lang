@@ -276,7 +276,7 @@ magicbees.speciesSmouldering.description=The Skulking bees have become alight wi
 magicbees.speciesBigbad=Big Bad
 magicbees.speciesBigbad.description="Who is afraid of the Big Bad Chris?"|Pahimar, last words
 magicbees.speciesTCBrainy=Brainy
-magicbees.speciesTCBrainy.description=Their item.magicbees.beecomb. may be fetid and foul-smelling, but their intelligence is well-developed.|Apinomicon
+magicbees.speciesTCBrainy.description=Their combs may be fetid and foul-smelling, but their intelligence is well-developed.|Apinomicon
 magicbees.speciesTCBatty=Batty
 magicbees.speciesTCBatty.description=They tend to attract bats to their hives through means unknown.|Apinomicon
 magicbees.speciesTCChicken=Poultry
@@ -324,7 +324,7 @@ magicbees.speciesIron.description=Having absorbed some of the base metal, these 
 magicbees.speciesGold=Auric
 magicbees.speciesGold.description=Not all that glitters is gold.|Ancient Aphorism
 magicbees.speciesCopper=Cuprum
-magicbees.speciesCopper.description=A base metal common in many applications; these bees are helpful for item.magicbees.resource.starved magicians.|Apinomicon
+magicbees.speciesCopper.description=A base metal common in many applications; these bees are helpful for resource-starved magicians.|Apinomicon
 magicbees.speciesTin=Stannum
 magicbees.speciesTin.description=While metalic, these bees are suprisingly fragile.|Apinomicon
 magicbees.speciesSilver=Argentum
@@ -374,7 +374,7 @@ magicbees.speciesTCWater.description="I tried to breed them once, but that was a
 magicbees.speciesTCEarth=Solum
 magicbees.speciesTCEarth.description="You're really gonna dig these bees, but watch out - they bore quite easily."|MysteriousAges, Apprentice Comedian
 magicbees.speciesTCOrder=Ordered
-magicbees.speciesTCOrder.description=Their item.magicbees.beecomb. are nearly perfect, each part mirroring the pattern of the whole.|Apinomicon
+magicbees.speciesTCOrder.description=Their combs are nearly perfect, each part mirroring the pattern of the whole.|Apinomicon
 magicbees.speciesTCChaos=Chaotic
 magicbees.speciesTCChaos.description=The social structure of their hives seems to vary day by day, making it more flexible and resillient than others, but significantly more unpredictable.|Apinomicon
 magicbees.speciesTCVis=Vis
@@ -382,7 +382,7 @@ magicbees.speciesTCVis.description="They can feel changes in the aura, but are n
 magicbees.speciesTCRejuvenating=Rejuvenating
 magicbees.speciesTCRejuvenating.description=The hum of the hive is magical, and over time is absorbed by nearby nodes.|Apinomicon
 magicbees.speciesTCEmpowering=Empowering
-magicbees.speciesTCEmpowering.description=So charged with aura are they, that nodes seem to item.magicbees.wax.in their presence.|Apinomicon
+magicbees.speciesTCEmpowering.description=So charged with aura are they, that nodes seem to wax in their presence.|Apinomicon
 magicbees.speciesTCNexus=Nexus
 magicbees.speciesTCNexus.description=Spoken only of in hushed whispers, their abilities to pass through nodes into the other side is scoffed at as imagined and fantasy.|Apinomicon
 magicbees.speciesTCFlux=Flux
@@ -409,7 +409,7 @@ magicbees.speciesAMAir.description=Swift as the wind, and lighter than air.|Apin
 magicbees.speciesAMFire=Igneous
 magicbees.speciesAMFire.description=Their colony can reach temperatures that boil water and melt metals.|Apinomicon
 magicbees.speciesAMWater=Aqueous
-magicbees.speciesAMWater.description=Through prolonged exposure to liquids, their item.magicbees.beecomb. are quite wet and heavy.|Apinomicon
+magicbees.speciesAMWater.description=Through prolonged exposure to liquids, their combs are quite wet and heavy.|Apinomicon
 magicbees.speciesAMLightning=Fulguric
 magicbees.speciesAMLightning.description=They can travel vast distances in a blink, and are known for starting many wildfires.|Apinomicon
 magicbees.speciesAMPlant=Fruticic
@@ -579,9 +579,9 @@ classification.abominable.description=Spawned in the firey depths of the Nether,
 classification.Extrinsic=Extrinsic
 classification.Extrinsic.description=It is unknown whether these creatures gave rise to the family Apidae in this universe, or if these evolved seperately.|Apinomicon
 classification.metallic=Metallic
-classification.metallic.description=They collect fragments of metal and item.magicbees.beecomb.ne them into larger portions.|Apinomicon
+classification.metallic.description=They collect fragments of metal and combine them into larger portions.|Apinomicon
 classification.gem=Gem
-classification.gem.description=They collect fragments of precious gems in their item.magicbees.beecomb..|Apinomicon
+classification.gem.description=They collect fragments of precious gems in their combs.|Apinomicon
 classification.transmuting=Polymorphic
 classification.transmuting.description=Reality seems to be somewhat volatile around bees of this family.|Apinomicon
 classification.thaumic=Thaumic
@@ -606,7 +606,7 @@ tc.research_page.MB_Root.2=of your former, nonmagical colleagues. Also take note
 
 tc.research_name.MB_LoreFragment=Lore Fragments
 tc.research_text.MB_LoreFragment=[MB] Research? More like BEEsearch!
-tc.research_page.MB_LoreFragment.1=While experimenting with bee breeds, you may run accross a strain whose intellectual capabilities are a match for your own. Well, maybe, however unlikely that is. It's possible that they may unearth some obscure reference or a snippet of information that your great intellect may have missed while exploiting the greater mysteries of the universe. <BR> Should your helpful buzzing friends happen to locate this sort of item.magicbees.for you, it may be possible to item.magicbees.beecomb.ne the scraps together into something a little more cohesive.
+tc.research_page.MB_LoreFragment.1=While experimenting with bee breeds, you may run accross a strain whose intellectual capabilities are a match for your own. Well, maybe, however unlikely that is. It's possible that they may unearth some obscure reference or a snippet of information that your great intellect may have missed while exploiting the greater mysteries of the universe. <BR> Should your helpful buzzing friends happen to locate this sort of item for you, it may be possible to combine the scraps together into something a little more cohesive.
 
 tc.research_name.MB_FrameMagic=Magic Frame
 tc.research_text.MB_FrameMagic=[MB] Putting magic into beekeeping contexts
@@ -622,7 +622,7 @@ tc.research_page.MB_Grafter.1=Simple grafters are almost uselessly fragile, and 
 
 tc.research_name.MB_EssenceLife=Essence of False Life
 tc.research_text.MB_EssenceLife=[MB] A rose by any other name. . .
-tc.research_page.MB_EssenceLife.1=Simple to create by means of magic, this essence has unusual properties when exposed to bees. When item.magicbees.beecomb.ned with an everyday apiary frame, it has the effect of greatly extending the lifespan of a working hive.
+tc.research_page.MB_EssenceLife.1=Simple to create by means of magic, this essence has unusual properties when exposed to bees. When combined with an everyday apiary frame, it has the effect of greatly extending the lifespan of a working hive.
 
 tc.research_name.MB_EssenceDeath=Essence of a Shallow Grave
 tc.research_text.MB_EssenceDeath=[MB] Not quite six feet under.
@@ -630,7 +630,7 @@ tc.reseacrh_page.MB_EssenceDeath.1=The Essence of a Shallow Grave channels the d
 
 tc.research_name.MB_EssenceArmor=Essence of Everlasting Durability
 tc.research_text.MB_EssenceArmor=[MB] The rubber to your glue
-tc.research_page.MB_EssenceArmor.1=This is the distilled essence of protection, bound to last forever, or until the magics stored within it weaken and eventually break. But until then, it's invincible. Mostly. <BR> While Magic Frames are useful, they are a tad fragile. This essence takes the enchantments you weave into Magic frames to an entirely new level. item.magicbees.beecomb.ne the essence with a magic frame, and it should have a vastly extended lifespan.
+tc.research_page.MB_EssenceArmor.1=This is the distilled essence of protection, bound to last forever, or until the magics stored within it weaken and eventually break. But until then, it's invincible. Mostly. <BR> While Magic Frames are useful, they are a tad fragile. This essence takes the enchantments you weave into Magic frames to an entirely new level. Combine the essence with a magic frame, and it should have a vastly extended lifespan.
 
 tc.research_name.MB_EssenceUnstable=Essence of Fickle Permanence
 tc.research_text.MB_EssenceUnstable=[MB] Assured in unsurity
@@ -638,7 +638,7 @@ tc.research_page.MB_EssenceUnstable.1=Unstable by nature, the Essence of Fickle 
 
 tc.research_name.MB_EssenceTime=Essence of Lost Time
 tc.research_text.MB_EssenceTime=[MB] No time like the unmoment
-tc.research_page.MB_EssenceTime.1=Time is a fickle thing. It comes and it goes, but where exactly does it go to? As a respectable thaumaturge, it has become possible to trap these wasted moments and save them in a magical form. So, now that it is possible to collect extra time from the world, it seems only appropriate that they are used in a place that would be useful. It would be too dangerous to attempt to access these moments yourself for the moment, but perhaps it would be simple to allow your bees access to this untapped lump of time. <BR> By item.magicbees.beecomb.ning the essence with a Magic Frame as usual will suffice to extend the lifespan of bees in your keeping by several times.
+tc.research_page.MB_EssenceTime.1=Time is a fickle thing. It comes and it goes, but where exactly does it go to? As a respectable thaumaturge, it has become possible to trap these wasted moments and save them in a magical form. So, now that it is possible to collect extra time from the world, it seems only appropriate that they are used in a place that would be useful. It would be too dangerous to attempt to access these moments yourself for the moment, but perhaps it would be simple to allow your bees access to this untapped lump of time. <BR> By combining the essence with a Magic Frame as usual will suffice to extend the lifespan of bees in your keeping by several times.
 
 tc.research_name.MB_DimensionalSingularity=Dimensional Singularity
 tc.research_text.MB_DimensionalSingularity=[MB] Quantum flux for them, unlimited storage for you
@@ -650,13 +650,13 @@ tc.research_page.MB_EssenceOblivion.1=Breeding bees for mutations can be aggriva
 
 tc.research_name.MB_VisAuraProvider=Vis Apiary Booster
 tc.research_text.MB_VisAuraProvider=[MB] Vis? What about Bis?
-tc.research_page.MB_VisAuraProvider.1=Infusing Unusual item.magicbees.pollen.with vis and item.magicbees.beecomb.ning it with gold creates an unusual crystal that, when fed vis from an aura node, creates an energizing aura that bees are naturally attracted to when attuned to the environment within a Magic Apiary.
+tc.research_page.MB_VisAuraProvider.1=Infusing Unusual Pollen with vis and combining it with gold creates an unusual crystal that, when fed vis from an aura node, creates an energizing aura that bees are naturally attracted to when attuned to the environment within a Magic Apiary.
 
 #Botania Lexicon entries
 magicbees.botania.lexicon.subtitle=[Magic Bees]
 
 magicbees.botania.lexicon.manasteelTools.title=Manasteel Naturalist's Tools
-magicbees.botania.lexicon.manasteelTools.0=Manasteel's unusual properties lends itself well to Naturalist's tools. The &1Manasteel Scoop&0 can be used to effectively harvest hives, and the &1Manasteel Grafter&0 is a durable subsitute for the generic bronze grafters. Of course, both tools have the ability to regenerate with mana. For best results, item.magicbees.beecomb.ne the tool with Living Wood.
+magicbees.botania.lexicon.manasteelTools.0=Manasteel's unusual properties lends itself well to Naturalist's tools. The &1Manasteel Scoop&0 can be used to effectively harvest hives, and the &1Manasteel Grafter&0 is a durable subsitute for the generic bronze grafters. Of course, both tools have the ability to regenerate with mana. For best results, combine the tool with Living Wood.
 magicbees.botania.lexicon.manasteelScoop=The &1Manasteel Scoop&0
 magicbees.botania.lexicon.manasteelGrafter=The &1Manasteel Grafter&0
 
