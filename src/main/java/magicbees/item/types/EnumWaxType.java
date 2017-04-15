@@ -24,7 +24,7 @@ public enum EnumWaxType implements IEnumItem{
         }
 
     },
-    AMNESTIC(new Color(0x856DFF))
+    AMNESIC(new Color(0x856DFF))
 
     ;
 

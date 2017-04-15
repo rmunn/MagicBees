@@ -2,12 +2,12 @@ language.name=Russian
 language.region=RU
 language.code=ru_RU
 
-#Items
-item.magicbees:jellyBabies.name=Горсть маленького желе
-item.thaumiumScoop.name=Таумический сачок
-item.thaumiumGrafter.name=Таумический садовый нож
-item.magicbees:mysteriousMagnet.name=Таинственный магнит
-item.moonDial.name=Нефритовый набор луны
+#item.magicbees.
+item.magicbees.jellyBabies.name=Горсть маленького желе
+item.magicbees.thaumiumScoop.name=Таумический сачок
+item.magicbees.thaumiumGrafter.name=Таумический садовый нож
+item.magicbees.mysteriousMagnet.name=Таинственный магнит
+item.magicbees.moonDial.name=Нефритовый набор луны
 
 #Tiles
 tile.planks.greatwood.name=Доски из великого дерева
@@ -22,51 +22,51 @@ tile.hive.resonant.name=Резонирующий улей
 tile.hive.infernal.name=Адский улей
 tile.hive.oblivion.name=Забвенный улей
 
-#Combs
-comb.mundane=Мирские соты
-comb.molten=Расплавленные соты
-comb.occult=Оккультные соты
-comb.otherworldly=Потусторонние соты
-comb.transmuted=Трансмутирующие соты
-comb.paper=Бумажные соты
-comb.soul=Душевные соты
-comb.furtive=Незаметные соты
-comb.aware=Памятные соты
-comb.time=Временные соты
-comb.forgotten=Забытые соты
-comb.air=Ветреные соты
-comb.fire=Огненные соты
-comb.water=Водяные соты
-comb.earth=Земляные соты
-comb.TCair=Блестящие ветреные соты
-comb.TCfire=Блестящие огненные соты
-comb.TCwater=Блестящие водяные соты
-comb.TCearth=Блестящие земляные соты
-comb.TCorder=Блестящие упорядоченные соты
-comb.TCchaos=Блестящие энтропийные соты
-comb.essence=Соты эссенции
-comb.potent=Крепкие соты
-comb.TEcarbon=Углеродные соты
-comb.TEelectric=Электрические соты
-comb.TElux=Соты света
-comb.TEendearing=Покоряющие соты
+#item.magicbees.beecomb.
+item.magicbees.beecomb.mundane=Мирские соты
+item.magicbees.beecomb.molten=Расплавленные соты
+item.magicbees.beecomb.occult=Оккультные соты
+item.magicbees.beecomb.otherworldly=Потусторонние соты
+item.magicbees.beecomb.transmuted=Трансмутирующие соты
+item.magicbees.beecomb.paper=Бумажные соты
+item.magicbees.beecomb.soul=Душевные соты
+item.magicbees.beecomb.furtive=Незаметные соты
+item.magicbees.beecomb.aware=Памятные соты
+item.magicbees.beecomb.time=Временные соты
+item.magicbees.beecomb.forgotten=Забытые соты
+item.magicbees.beecomb.air=Ветреные соты
+item.magicbees.beecomb.fire=Огненные соты
+item.magicbees.beecomb.water=Водяные соты
+item.magicbees.beecomb.earth=Земляные соты
+item.magicbees.beecomb.TCair=Блестящие ветреные соты
+item.magicbees.beecomb.TCfire=Блестящие огненные соты
+item.magicbees.beecomb.TCwater=Блестящие водяные соты
+item.magicbees.beecomb.TCearth=Блестящие земляные соты
+item.magicbees.beecomb.TCorder=Блестящие упорядоченные соты
+item.magicbees.beecomb.TCchaos=Блестящие энтропийные соты
+item.magicbees.beecomb.essence=Соты эссенции
+item.magicbees.beecomb.potent=Крепкие соты
+item.magicbees.beecomb.TEcarbon=Углеродные соты
+item.magicbees.beecomb.TEelectric=Электрические соты
+item.magicbees.beecomb.TElux=Соты света
+item.magicbees.beecomb.TEendearing=Покоряющие соты
 
-#Waxes
-wax.magic=Магический воск
-wax.soul=Душевный воск
-wax.amnesic=Амнезийный воск
+#item.magicbees.wax.s
+item.magicbees.wax.magic=Магический воск
+item.magicbees.wax.soul=Душевный воск
+item.magicbees.wax.amnesic=Амнезийный воск
 
-#Drops
-drop.enchanting=Зачарованная капля
-drop.intellect=Интеллектуальная капля
-drop.destabilized=Нестабильная капля
-drop.carbon=Углеродная капля
-drop.lux=Капля света
-drop.endearing=Покоряющая капля
+#item.magicbees.drop.
+item.magicbees.drop.enchanting=Зачарованная капля
+item.magicbees.drop.intellect=Интеллектуальная капля
+item.magicbees.drop.destabilized=Нестабильная капля
+item.magicbees.drop.carbon=Углеродная капля
+item.magicbees.drop.lux=Капля света
+item.magicbees.drop.endearing=Покоряющая капля
 
-#Pollens
-pollen.unusual=Необычная пыльца
-pollen.phased=Поэтапная пыльца
+#item.magicbees.pollen.
+item.magicbees.pollen.unusual=Необычная пыльца
+item.magicbees.pollen.phased=Поэтапная пыльца
 
 #Nuggets
 nugget.iron=Железный самородок
@@ -80,46 +80,46 @@ nugget.emerald=Изумрудный осколок
 nugget.apatite=Апатитовый осколок
 
 #Propolises
-propolis.dull=Упорядоченный прополис
-propolis.air=Свежий прополис
-propolis.fire=Горящий прополис
-propolis.water=Текучий прополис
-propolis.earth=Каменный прополис
-propolis.magic=Хаотический прополис
-propolis.unstable=Нестабильный прополис
+item.magicbees.propolis.dull=Упорядоченный прополис
+item.magicbees.propolis.air=Свежий прополис
+item.magicbees.propolis.fire=Горящий прополис
+item.magicbees.propolis.water=Текучий прополис
+item.magicbees.propolis.earth=Каменный прополис
+item.magicbees.propolis.magic=Хаотический прополис
+item.magicbees.propolis.unstable=Нестабильный прополис
 
-#Misc resources
-resource.fragment=Фрагмент знаний
-resource.lump=Ароматический кусок
-resource.fertilizer=Концентрированные соединения
-resource.skullChip=Обломок кости скелета-иссушителя
-resource.skullFragment=Фрагмент черепа скелета-иссушителя
-resource.dragonDust=Драконья пыль
-resource.dragonChunk=Драконий кусок
-resource.essenceLife=Эссенция ложной жизни
-resource.essenceDeath=Эссенция неглубокой могилы
-resource.essenceTime=Эссенция утраченного времени
-resource.essenceDurability=Эссенция вечной прочности
-resource.essenceOblivion=Эссенция бесконечного равнодушия
-resource.essenceMutable=Эссенция изменчивого постоянства
-resource.TCairDust=Наполненная воздухом пыль
-resource.TCfireDust=Наполненная огнём пыль
-resource.TCwaterDust=Наполненная водой пыль
-resource.TCearthDust=Наполненная землёй пыль
-resource.TCorderDust=Наполненная порядком пыль
-resource.TCchaosDust=Наполненная хаосом пыль
-resource.dimensionalSingularity=Пространственная сингулярность
-resource.startNode=Пчёлы и магия
-resource.crystalAspect=Кристаллизованный %s аспект
+#Misc item.magicbees.resource.
+item.magicbees.resource.fragment=Фрагмент знаний
+item.magicbees.resource.lump=Ароматический кусок
+item.magicbees.resource.fertilizer=Концентрированные соединения
+item.magicbees.resource.skullChip=Обломок кости скелета-иссушителя
+item.magicbees.resource.skullFragment=Фрагмент черепа скелета-иссушителя
+item.magicbees.resource.dragonDust=Драконья пыль
+item.magicbees.resource.dragonChunk=Драконий кусок
+item.magicbees.resource.essenceLife=Эссенция ложной жизни
+item.magicbees.resource.essenceDeath=Эссенция неглубокой могилы
+item.magicbees.resource.essenceTime=Эссенция утраченного времени
+item.magicbees.resource.essenceDurability=Эссенция вечной прочности
+item.magicbees.resource.essenceOblivion=Эссенция бесконечного равнодушия
+item.magicbees.resource.essenceMutable=Эссенция изменчивого постоянства
+item.magicbees.resource.TCairDust=Наполненная воздухом пыль
+item.magicbees.resource.TCfireDust=Наполненная огнём пыль
+item.magicbees.resource.TCwaterDust=Наполненная водой пыль
+item.magicbees.resource.TCearthDust=Наполненная землёй пыль
+item.magicbees.resource.TCorderDust=Наполненная порядком пыль
+item.magicbees.resource.TCchaosDust=Наполненная хаосом пыль
+item.magicbees.resource.dimensionalSingularity=Пространственная сингулярность
+item.magicbees.resource.startNode=Пчёлы и магия
+item.magicbees.resource.crystalAspect=Кристаллизованный %s аспект
 
 #Frames
-item.frameMagic.name=Магическая рамка
-item.frameResilient.name=Эластичная рамка
-item.frameGentle.name=Лёгкая рамка
-item.frameMetabolic.name=Метаболическая рамка
-item.frameNecrotic.name=Некротическая рамка
-item.frameTemporal.name=Временная рамка
-item.frameOblivion.name=Забвенная рамка
+item.magicbees.frameMagic.name=Магическая рамка
+item.magicbees.frameResilient.name=Эластичная рамка
+item.magicbees.frameGentle.name=Лёгкая рамка
+item.magicbees.frameMetabolic.name=Метаболическая рамка
+item.magicbees.frameNecrotic.name=Некротическая рамка
+item.magicbees.frameTemporal.name=Временная рамка
+item.magicbees.frameOblivion.name=Забвенная рамка
 
 #Capsules
 capsule.magic=Магическая капсула %s
@@ -148,18 +148,18 @@ liquid.steam=пара
 #Moondial
 moon.full=Полнолуние
 moon.gibbousWaning=Выпуклая луна
-moon.gibbousWaxing=Рассеивающая луна
+moon.gibbousitem.magicbees.wax.ng=Рассеивающая луна
 moon.halfWaning=Последняя четверть луны
-moon.halfWaxing=Первая четверть луны
+moon.halfitem.magicbees.wax.ng=Первая четверть луны
 moon.crescentWaning=Серповидная луна
-moon.crescentWaxing=Бальзамическая луна
+moon.crescentitem.magicbees.wax.ng=Бальзамическая луна
 moon.new=Новолуние
 
 #Backpack
 backpack.thaumaturge=Рюкзак тауматурга
 
-#Itemgroups
-itemGroup.magicBees=Magic Bees
+#item.magicbees.roups
+item.magicbees.roup.magicBees=Magic Bees
 
 #Misc
 misc.level=Уровень %s
@@ -352,7 +352,7 @@ magicbees.speciesAMAir.description=Swift as the wind, and lighter than air.|Apin
 magicbees.speciesAMFire=Feuer
 magicbees.speciesAMFire.description=Their colony can reach temperatures that boil water and melt metals.|Apinomicon
 magicbees.speciesAMWater=Wasser
-magicbees.speciesAMWater.description=Through prolonged exposure to liquids, their combs are quite wet and heavy.|Apinomicon
+magicbees.speciesAMWater.description=Through prolonged exposure to liquids, their item.magicbees.beecomb. are quite wet and heavy.|Apinomicon
 magicbees.speciesAMLightning=Blitz
 magicbees.speciesAMLightning.description=They can travel vast distances in a blink, and are known for starting many wildfires.|Apinomicon
 magicbees.speciesAMPlant=Staude
@@ -475,7 +475,7 @@ tc.research_page.MB_Root.2=of your former, nonmagical colleagues. Also take note
 
 tc.research_name.MB_LoreFragment=Фрагменты знаний
 tc.research_text.MB_LoreFragment=[MB] Исследование? Скорее всего пчелиное исследование!
-tc.research_page.MB_LoreFragment.1=While experimenting with bee breeds, you may run accross a strain whose intellectual capabilities are a match for your own. Well, maybe, however unlikely that is. It's possible that they may unearth some obscure reference or a snippet of information that your great intellect may have missed while exploiting the greater mysteries of the universe. <BR> Should your helpful buzzing friends happen to locate this sort of item for you, it may be possible to combine the scraps together into something a little more cohesive.
+tc.research_page.MB_LoreFragment.1=While experimenting with bee breeds, you may run accross a strain whose intellectual capabilities are a match for your own. Well, maybe, however unlikely that is. It's possible that they may unearth some obscure reference or a snippet of information that your great intellect may have missed while exploiting the greater mysteries of the universe. <BR> Should your helpful buzzing friends happen to locate this sort of item.magicbees.for you, it may be possible to item.magicbees.beecomb.ne the scraps together into something a little more cohesive.
 
 tc.research_name.MB_FrameMagic=Магическая рамка
 tc.research_text.MB_FrameMagic=[MB] Появление магии в контекстах пчеловодства
@@ -491,7 +491,7 @@ tc.research_page.MB_Grafter.1=Simple grafters are almost uselessly fragile, and 
 
 tc.research_name.MB_EssenceLife=Эссенция ложной жизни
 tc.research_text.MB_EssenceLife=[MB] Роза с другим названием. . .
-tc.research_page.MB_EssenceLife.1=Simple to create by means of magic, this essence has unusual properties when exposed to bees. When combined with an everyday apiary frame, it has the effect of greatly extending the lifespan of a working hive.
+tc.research_page.MB_EssenceLife.1=Simple to create by means of magic, this essence has unusual properties when exposed to bees. When item.magicbees.beecomb.ned with an everyday apiary frame, it has the effect of greatly extending the lifespan of a working hive.
 
 tc.research_name.MB_EssenceDeath=Эссенция неглубокой могилы
 tc.research_text.MB_EssenceDeath=[MB] Не совсем шесть футов под килем.
@@ -499,7 +499,7 @@ tc.reseacrh_page.MB_EssenceDeath.1=The Essence of a Shallow Grave channels the d
 
 tc.research_name.MB_EssenceArmor=Эссенция вечной прочности
 tc.research_text.MB_EssenceArmor=[MB] Резина для Вашего клея
-tc.research_page.MB_EssenceArmor.1=This is the distilled essence of protection, bound to last forever, or until the magics stored within it weaken and eventually break. But until then, it's invincible. Mostly. <BR> While Magic Frames are useful, they are a tad fragile. This essence takes the enchantments you weave into Magic frames to an entirely new level. Combine the essence with a magic frame, and it should have a vastly extended lifespan.
+tc.research_page.MB_EssenceArmor.1=This is the distilled essence of protection, bound to last forever, or until the magics stored within it weaken and eventually break. But until then, it's invincible. Mostly. <BR> While Magic Frames are useful, they are a tad fragile. This essence takes the enchantments you weave into Magic frames to an entirely new level. item.magicbees.beecomb.ne the essence with a magic frame, and it should have a vastly extended lifespan.
 
 tc.research_name.MB_EssenceUnstable=Эссенция изменчивого постоянства
 tc.research_text.MB_EssenceUnstable=[MB] Гарантированная неуверенность
@@ -507,7 +507,7 @@ tc.research_page.MB_EssenceUnstable.1=Unstable by nature, the Essence of Fickle 
 
 tc.research_name.MB_EssenceTime=Эссенция утраченного времени
 tc.research_text.MB_EssenceTime=[MB] No time like the unmoment
-tc.research_page.MB_EssenceTime.1=Time is a fickle thing. It comes and it goes, but where exactly does it go to? As a respectable thaumaturge, it has become possible to trap these wasted moments and save them in a magical form. So, now that it is possible to collect extra time from the world, it seems only appropriate that they are used in a place that would be useful. It would be too dangerous to attempt to access these moments yourself for the moment, but perhaps it would be simple to allow your bees access to this untapped lump of time. <BR> By combining the essence with a Magic Frame as usual will suffice to extend the lifespan of bees in your keeping by several times.
+tc.research_page.MB_EssenceTime.1=Time is a fickle thing. It comes and it goes, but where exactly does it go to? As a respectable thaumaturge, it has become possible to trap these wasted moments and save them in a magical form. So, now that it is possible to collect extra time from the world, it seems only appropriate that they are used in a place that would be useful. It would be too dangerous to attempt to access these moments yourself for the moment, but perhaps it would be simple to allow your bees access to this untapped lump of time. <BR> By item.magicbees.beecomb.ning the essence with a Magic Frame as usual will suffice to extend the lifespan of bees in your keeping by several times.
 
 tc.research_name.MB_DimensionalSingularity=Пространственная сингулярность
 tc.research_text.MB_DimensionalSingularity=[MB] Quantum flux for them, unlimited storage for you

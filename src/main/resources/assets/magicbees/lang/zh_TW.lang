@@ -2,12 +2,12 @@
 language.region=TW
 language.code=zh_TW
 
-#Items
-item.magicbees:jellyBabies.name=膠糖娃娃
-item.thaumiumScoop.name=奧法捕蜂網
-item.thaumiumGrafter.name=奧法剪枝器
-item.magicbees:mysteriousMagnet.name=神秘磁鐵
-item.moonDial.name=翡翠月相盤
+#item.magicbees.
+item.magicbees.jellyBabies.name=膠糖娃娃
+item.magicbees.thaumiumScoop.name=奧法捕蜂網
+item.magicbees.thaumiumGrafter.name=奧法剪枝器
+item.magicbees.mysteriousMagnet.name=神秘磁鐵
+item.magicbees.moonDial.name=翡翠月相盤
 
 #Tiles
 tile.effectJar.name=蜜蜂收集者的罐子
@@ -20,51 +20,51 @@ tile.hive.resonant.name=共鳴蜂巢
 tile.hive.infernal.name=地獄蜂巢
 tile.hive.oblivion.name=湮沒蜂巢
 
-#Combs
-comb.mundane=平凡蜂巢
-comb.molten=熔融蜂巢
-comb.occult=神秘蜂巢
-comb.otherworldly=異域蜂巢
-comb.transmuted=蛻變蜂巢
-comb.paper=紙質蜂巢
-comb.soul=靈魂蜂巢
-comb.furtive=詭秘蜂巢
-comb.aware=回憶蜂巢
-comb.time=瞬息蜂巢
-comb.forgotten=遺忘蜂巢
-comb.air=風之蜂巢
-comb.fire=火之蜂巢
-comb.water=水之蜂巢
-comb.earth=地之蜂巢
-comb.TCair=閃耀的風之蜂巢
-comb.TCfire=閃耀的火之蜂巢
-comb.TCwater=閃耀的水之蜂巢
-comb.TCearth=閃耀的地之蜂巢
-comb.TCorder=閃耀的秩序蜂巢
-comb.TCchaos=閃耀的混沌蜂巢
-comb.essence=源質蜂巢
-comb.potent=強力蜂巢
-comb.TEcarbon=煤碳蜂巢
-comb.TEelectric=電氣蜂巢
-comb.TElux=勒克斯蜂巢
-comb.TEendearing=可愛蜂巢
+#item.magicbees.beecomb.
+item.magicbees.beecomb.mundane=平凡蜂巢
+item.magicbees.beecomb.molten=熔融蜂巢
+item.magicbees.beecomb.occult=神秘蜂巢
+item.magicbees.beecomb.otherworldly=異域蜂巢
+item.magicbees.beecomb.transmuted=蛻變蜂巢
+item.magicbees.beecomb.paper=紙質蜂巢
+item.magicbees.beecomb.soul=靈魂蜂巢
+item.magicbees.beecomb.furtive=詭秘蜂巢
+item.magicbees.beecomb.aware=回憶蜂巢
+item.magicbees.beecomb.time=瞬息蜂巢
+item.magicbees.beecomb.forgotten=遺忘蜂巢
+item.magicbees.beecomb.air=風之蜂巢
+item.magicbees.beecomb.fire=火之蜂巢
+item.magicbees.beecomb.water=水之蜂巢
+item.magicbees.beecomb.earth=地之蜂巢
+item.magicbees.beecomb.TCair=閃耀的風之蜂巢
+item.magicbees.beecomb.TCfire=閃耀的火之蜂巢
+item.magicbees.beecomb.TCwater=閃耀的水之蜂巢
+item.magicbees.beecomb.TCearth=閃耀的地之蜂巢
+item.magicbees.beecomb.TCorder=閃耀的秩序蜂巢
+item.magicbees.beecomb.TCchaos=閃耀的混沌蜂巢
+item.magicbees.beecomb.essence=源質蜂巢
+item.magicbees.beecomb.potent=強力蜂巢
+item.magicbees.beecomb.TEcarbon=煤碳蜂巢
+item.magicbees.beecomb.TEelectric=電氣蜂巢
+item.magicbees.beecomb.TElux=勒克斯蜂巢
+item.magicbees.beecomb.TEendearing=可愛蜂巢
 
-#Waxes
-wax.magic=魔力蜜蠟
-wax.soul=靈魂蜜蠟
-wax.amnesic=遺忘蜜蠟
+#item.magicbees.wax.s
+item.magicbees.wax.magic=魔力蜜蠟
+item.magicbees.wax.soul=靈魂蜜蠟
+item.magicbees.wax.amnesic=遺忘蜜蠟
 
-#Drops
-drop.enchanting=藴魔液滴
-drop.intellect=智慧液滴
-drop.destabilized=不穩定液滴
-drop.carbon=煤炭液滴
-drop.lux=勒克斯液滴
-drop.endearing=可愛液滴
+#item.magicbees.drop.
+item.magicbees.drop.enchanting=藴魔液滴
+item.magicbees.drop.intellect=智慧液滴
+item.magicbees.drop.destabilized=不穩定液滴
+item.magicbees.drop.carbon=煤炭液滴
+item.magicbees.drop.lux=勒克斯液滴
+item.magicbees.drop.endearing=可愛液滴
 
-#Pollens
-pollen.unusual=罕見花粉
-pollen.phased=相位花粉
+#item.magicbees.pollen.
+item.magicbees.pollen.unusual=罕見花粉
+item.magicbees.pollen.phased=相位花粉
 
 #Nuggets
 nugget.iron=鐵粒
@@ -78,46 +78,46 @@ nugget.emerald=綠寶石碎片
 nugget.apatite=磷灰石碎片
 
 #Propolises
-propolis.dull=枯竭蜂膠
-propolis.air=和風蜂膠
-propolis.fire=熾熱蜂膠
-propolis.water=奔流蜂膠
-propolis.earth=石化蜂膠
-propolis.magic=藴魔蜂膠
-propolis.unstable=不穩定蜂膠
+item.magicbees.propolis.dull=枯竭蜂膠
+item.magicbees.propolis.air=和風蜂膠
+item.magicbees.propolis.fire=熾熱蜂膠
+item.magicbees.propolis.water=奔流蜂膠
+item.magicbees.propolis.earth=石化蜂膠
+item.magicbees.propolis.magic=藴魔蜂膠
+item.magicbees.propolis.unstable=不穩定蜂膠
 
-#Misc resources
-resource.fragment=卷章碎片
-resource.lump=芬芳塊
-resource.fertilizer=濃縮複合物
-resource.skullChip=凋靈骷髏骨片
-resource.skullFragment=凋靈骷髏頭骨碎片
-resource.dragonDust=龍之塵
-resource.dragonChunk=龍之塊
-resource.essenceLife=虛假之命源質
-resource.essenceDeath=暗影之墓源質
-resource.essenceTime=迷失之時源質
-resource.essenceDurability=恆久不滅源質
-resource.essenceOblivion=無盡漠視源質
-resource.essenceMutable=變換不定源質
-resource.TCairDust=風之塵
-resource.TCfireDust=火之塵
-resource.TCwaterDust=水之塵
-resource.TCearthDust=地之塵
-resource.TCorderDust=秩序之塵
-resource.TCchaosDust=混沌之塵
-resource.dimensionalSingularity=奇異維度
-resource.startNode=蜜蜂與魔法
-resource.crystalAspect=晶化 %s 要素
+#Misc item.magicbees.resource.
+item.magicbees.resource.fragment=卷章碎片
+item.magicbees.resource.lump=芬芳塊
+item.magicbees.resource.fertilizer=濃縮複合物
+item.magicbees.resource.skullChip=凋靈骷髏骨片
+item.magicbees.resource.skullFragment=凋靈骷髏頭骨碎片
+item.magicbees.resource.dragonDust=龍之塵
+item.magicbees.resource.dragonChunk=龍之塊
+item.magicbees.resource.essenceLife=虛假之命源質
+item.magicbees.resource.essenceDeath=暗影之墓源質
+item.magicbees.resource.essenceTime=迷失之時源質
+item.magicbees.resource.essenceDurability=恆久不滅源質
+item.magicbees.resource.essenceOblivion=無盡漠視源質
+item.magicbees.resource.essenceMutable=變換不定源質
+item.magicbees.resource.TCairDust=風之塵
+item.magicbees.resource.TCfireDust=火之塵
+item.magicbees.resource.TCwaterDust=水之塵
+item.magicbees.resource.TCearthDust=地之塵
+item.magicbees.resource.TCorderDust=秩序之塵
+item.magicbees.resource.TCchaosDust=混沌之塵
+item.magicbees.resource.dimensionalSingularity=奇異維度
+item.magicbees.resource.startNode=蜜蜂與魔法
+item.magicbees.resource.crystalAspect=晶化 %s 要素
 
 #Frames
-item.frameMagic.name=魔法框架
-item.frameResilient.name=彈力框架
-item.frameGentle.name=柔性框架
-item.frameMetabolic.name=代謝框架
-item.frameNecrotic.name=壞死框架
-item.frameTemporal.name=瞬息框架
-item.frameOblivion.name=湮滅框架
+item.magicbees.frameMagic.name=魔法框架
+item.magicbees.frameResilient.name=彈力框架
+item.magicbees.frameGentle.name=柔性框架
+item.magicbees.frameMetabolic.name=代謝框架
+item.magicbees.frameNecrotic.name=壞死框架
+item.magicbees.frameTemporal.name=瞬息框架
+item.magicbees.frameOblivion.name=湮滅框架
 
 #Capsules
 capsule.magic=%s魔力膠囊
@@ -146,18 +146,18 @@ liquid.steam=蒸汽
 #Moondial
 moon.full=滿月
 moon.gibbousWaning=虧凸月
-moon.gibbousWaxing=盈凸月
+moon.gibbousitem.magicbees.wax.ng=盈凸月
 moon.halfWaning=下弦月
-moon.halfWaxing=上弦月
+moon.halfitem.magicbees.wax.ng=上弦月
 moon.crescentWaning=虧娥眉月
-moon.crescentWaxing=盈娥眉月
+moon.crescentitem.magicbees.wax.ng=盈娥眉月
 moon.new=新月
 
 #Backpack
 backpack.thaumaturge=神秘使背包
 
-#Itemgroups
-itemGroup.magicbees=魔法蜜蜂
+#item.magicbees.roups
+item.magicbees.roup.magicbees=魔法蜜蜂
 
 #Misc
 misc.level=等級 %s
@@ -473,7 +473,7 @@ tc.research_page.MB_Root.2=of your former, nonmagical colleagues. Also take note
 
 tc.research_name.MB_LoreFragment=卷章碎片
 tc.research_text.MB_LoreFragment=[MB] Research? More like BEEsearch!
-tc.research_page.MB_LoreFragment.1=While experimenting with bee breeds, you may run accross a strain whose intellectual capabilities are a match for your own. Well, maybe, however unlikely that is. It's possible that they may unearth some obscure reference or a snippet of information that your great intellect may have missed while exploiting the greater mysteries of the universe. <BR> Should your helpful buzzing friends happen to locate this sort of item for you, it may be possible to combine the scraps together into something a little more cohesive.
+tc.research_page.MB_LoreFragment.1=While experimenting with bee breeds, you may run accross a strain whose intellectual capabilities are a match for your own. Well, maybe, however unlikely that is. It's possible that they may unearth some obscure reference or a snippet of information that your great intellect may have missed while exploiting the greater mysteries of the universe. <BR> Should your helpful buzzing friends happen to locate this sort of item.magicbees.for you, it may be possible to item.magicbees.beecomb.ne the scraps together into something a little more cohesive.
 
 tc.research_name.MB_FrameMagic=魔法框架
 tc.research_text.MB_FrameMagic=[MB] Putting magic into beekeeping contexts
@@ -489,7 +489,7 @@ tc.research_page.MB_Grafter.1=Simple grafters are almost uselessly fragile, and 
 
 tc.research_name.MB_EssenceLife=虛假之命源質
 tc.research_text.MB_EssenceLife=[MB] A rose by any other name. . .
-tc.research_page.MB_EssenceLife.1=Simple to create by means of magic, this essence has unusual properties when exposed to bees. When combined with an everyday apiary frame, it has the effect of greatly extending the lifespan of a working hive.
+tc.research_page.MB_EssenceLife.1=Simple to create by means of magic, this essence has unusual properties when exposed to bees. When item.magicbees.beecomb.ned with an everyday apiary frame, it has the effect of greatly extending the lifespan of a working hive.
 
 tc.research_name.MB_EssenceDeath=暗影之墓源質
 tc.research_text.MB_EssenceDeath=[MB] Not quite six feet under.
@@ -497,7 +497,7 @@ tc.reseacrh_page.MB_EssenceDeath.1=The Essence of a Shallow Grave channels the d
 
 tc.research_name.MB_EssenceArmor=恆久不滅源質
 tc.research_text.MB_EssenceArmor=[MB] The rubber to your glue
-tc.research_page.MB_EssenceArmor.1=This is the distilled essence of protection, bound to last forever, or until the magics stored within it weaken and eventually break. But until then, it's invincible. Mostly. <BR> While Magic Frames are useful, they are a tad fragile. This essence takes the enchantments you weave into Magic frames to an entirely new level. Combine the essence with a magic frame, and it should have a vastly extended lifespan.
+tc.research_page.MB_EssenceArmor.1=This is the distilled essence of protection, bound to last forever, or until the magics stored within it weaken and eventually break. But until then, it's invincible. Mostly. <BR> While Magic Frames are useful, they are a tad fragile. This essence takes the enchantments you weave into Magic frames to an entirely new level. item.magicbees.beecomb.ne the essence with a magic frame, and it should have a vastly extended lifespan.
 
 tc.research_name.MB_EssenceUnstable=變換不定源質
 tc.research_text.MB_EssenceUnstable=[MB] Assured in unsurity
@@ -505,7 +505,7 @@ tc.research_page.MB_EssenceUnstable.1=Unstable by nature, the Essence of Fickle 
 
 tc.research_name.MB_EssenceTime=迷失之時源質
 tc.research_text.MB_EssenceTime=[MB] No time like the unmoment
-tc.research_page.MB_EssenceTime.1=Time is a fickle thing. It comes and it goes, but where exactly does it go to? As a respectable thaumaturge, it has become possible to trap these wasted moments and save them in a magical form. So, now that it is possible to collect extra time from the world, it seems only appropriate that they are used in a place that would be useful. It would be too dangerous to attempt to access these moments yourself for the moment, but perhaps it would be simple to allow your bees access to this untapped lump of time. <BR> By combining the essence with a Magic Frame as usual will suffice to extend the lifespan of bees in your keeping by several times.
+tc.research_page.MB_EssenceTime.1=Time is a fickle thing. It comes and it goes, but where exactly does it go to? As a respectable thaumaturge, it has become possible to trap these wasted moments and save them in a magical form. So, now that it is possible to collect extra time from the world, it seems only appropriate that they are used in a place that would be useful. It would be too dangerous to attempt to access these moments yourself for the moment, but perhaps it would be simple to allow your bees access to this untapped lump of time. <BR> By item.magicbees.beecomb.ning the essence with a Magic Frame as usual will suffice to extend the lifespan of bees in your keeping by several times.
 
 tc.research_name.MB_DimensionalSingularity=Dimensional Singularity
 tc.research_text.MB_DimensionalSingularity=[MB] Quantum flux for them, unlimited storage for you

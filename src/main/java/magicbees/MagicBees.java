@@ -1,22 +1,21 @@
 package magicbees;
 
+import elec332.core.api.IElecCoreMod;
+import elec332.core.api.module.IModuleController;
 import elec332.core.client.model.RenderingRegistry;
-import elec332.core.compat.forestry.IGenomeTemplate;
-import elec332.core.compat.forestry.IIndividualDefinition;
-import elec332.core.compat.forestry.IIndividualTemplate;
 import elec332.core.compat.forestry.IndividualDefinitionRegistry;
-import elec332.core.inventory.window.*;
+import elec332.core.inventory.window.IWindowFactory;
+import elec332.core.inventory.window.IWindowHandler;
+import elec332.core.inventory.window.Window;
+import elec332.core.inventory.window.WindowManager;
 import elec332.core.item.AbstractTexturedItem;
-import elec332.core.main.ElecCore;
 import elec332.core.util.AbstractCreativeTab;
 import elec332.core.util.LoadTimer;
 import elec332.core.world.WorldHelper;
-import forestry.api.genetics.IAlleleSpecies;
-import forestry.api.genetics.IAlleleSpeciesBuilder;
 import magicbees.api.ICrumblingHandler;
 import magicbees.api.ITransmutationController;
-import magicbees.init.AlleleRegister;
 import magicbees.bees.EnumBeeSpecies;
+import magicbees.init.AlleleRegister;
 import magicbees.init.BlockRegister;
 import magicbees.init.ItemRegister;
 import magicbees.init.RecipeRegister;
@@ -42,7 +41,7 @@ import java.util.function.Supplier;
  * Created by Elec332 on 16-8-2016.
  */
 @Mod(modid = MagicBees.modid, name = MagicBees.modName, dependencies = "required-after:eleccore")
-public class MagicBees implements IWindowHandler {
+public class MagicBees implements IElecCoreMod, IModuleController, IWindowHandler {
 
     public static final String modid = "magicbees";
     public static final String modName = "MagicBees";
@@ -100,6 +99,11 @@ public class MagicBees implements IWindowHandler {
             return ((IWindowFactory) tile).createWindow();
         }
         return null;
+    }
+
+    @Override
+    public boolean isModuleEnabled(String s) {
+        return true;
     }
 
 }

@@ -21,14 +21,14 @@ misc.level=等级 %s
 misc.magnetActive=%s-激活
 misc.magnetInactive=%s-未激活
 
-#Items
-item.magicbees:jellyBabies.name=胶糖娃娃
-item.manasteelScoop.name=魔钢捕蜂网
-item.thaumiumScoop.name=奥法捕蜂网
-item.manasteelGrafter.name=魔钢剪枝器
-item.thaumiumGrafter.name=奥法剪枝器
-item.magicbees:mysteriousMagnet.name=神秘磁铁
-item.moonDial.name=翡翠色月相盘
+#item.magicbees.
+item.magicbees.jellyBabies.name=胶糖娃娃
+item.magicbees.manasteelScoop.name=魔钢捕蜂网
+item.magicbees.thaumiumScoop.name=奥法捕蜂网
+item.magicbees.manasteelGrafter.name=魔钢剪枝器
+item.magicbees.thaumiumGrafter.name=奥法剪枝器
+item.magicbees.mysteriousMagnet.name=神秘磁铁
+item.magicbees.moonDial.name=翡翠色月相盘
 
 #Tiles
 tile.effectJar.name=蜜蜂收集者的罐子
@@ -43,52 +43,52 @@ tile.hive.infernal.name=地狱蜂巢
 tile.hive.oblivion.name=湮没蜂巢
 tile.enchantedEarth.name=魔法泥土
 
-#Combs
-comb.mundane=平凡蜂窝
-comb.molten=熔融蜂窝
-comb.occult=神秘蜂窝
-comb.otherworldly=异域蜂窝
-comb.transmuted=蜕变蜂窝
-comb.paper=纸质蜂窝
-comb.soul=灵魂蜂窝
-comb.furtive=诡秘蜂窝
-comb.aware=回忆蜂窝
-comb.time=瞬息蜂窝
-comb.forgotten=遗忘蜂窝
-comb.air=风之蜂窝
-comb.fire=火之蜂窝
-comb.water=水之蜂窝
-comb.earth=地之蜂窝
-comb.TCair=闪耀的风之蜂窝
-comb.TCfire=闪耀的火之蜂窝
-comb.TCwater=闪耀的水之蜂窝
-comb.TCearth=闪耀的地之蜂窝
-comb.TCorder=闪耀的秩序蜂窝
-comb.TCchaos=闪耀的混沌蜂窝
-comb.essence=源质蜂窝
-comb.potent=强力蜂窝
-comb.TEcarbon=碳素蜂窝
-comb.TEelectric=电气蜂窝
-comb.TElux=流明蜂窝
-comb.TEendearing=可爱蜂窝
-comb.BMSanguine=鲜血蜂窝
+#item.magicbees.beecomb.
+item.magicbees.beecomb.mundane=平凡蜂窝
+item.magicbees.beecomb.molten=熔融蜂窝
+item.magicbees.beecomb.occult=神秘蜂窝
+item.magicbees.beecomb.otherworldly=异域蜂窝
+item.magicbees.beecomb.transmuted=蜕变蜂窝
+item.magicbees.beecomb.paper=纸质蜂窝
+item.magicbees.beecomb.soul=灵魂蜂窝
+item.magicbees.beecomb.furtive=诡秘蜂窝
+item.magicbees.beecomb.aware=回忆蜂窝
+item.magicbees.beecomb.time=瞬息蜂窝
+item.magicbees.beecomb.forgotten=遗忘蜂窝
+item.magicbees.beecomb.air=风之蜂窝
+item.magicbees.beecomb.fire=火之蜂窝
+item.magicbees.beecomb.water=水之蜂窝
+item.magicbees.beecomb.earth=地之蜂窝
+item.magicbees.beecomb.TCair=闪耀的风之蜂窝
+item.magicbees.beecomb.TCfire=闪耀的火之蜂窝
+item.magicbees.beecomb.TCwater=闪耀的水之蜂窝
+item.magicbees.beecomb.TCearth=闪耀的地之蜂窝
+item.magicbees.beecomb.TCorder=闪耀的秩序蜂窝
+item.magicbees.beecomb.TCchaos=闪耀的混沌蜂窝
+item.magicbees.beecomb.essence=源质蜂窝
+item.magicbees.beecomb.potent=强力蜂窝
+item.magicbees.beecomb.TEcarbon=碳素蜂窝
+item.magicbees.beecomb.TEelectric=电气蜂窝
+item.magicbees.beecomb.TElux=流明蜂窝
+item.magicbees.beecomb.TEendearing=可爱蜂窝
+item.magicbees.beecomb.BMSanguine=鲜血蜂窝
 
-#Waxes
-wax.magic=魔力蜜蜡
-wax.soul=灵魂蜜蜡
-wax.amnesic=遗忘蜜蜡
+#item.magicbees.wax.s
+item.magicbees.wax.magic=魔力蜜蜡
+item.magicbees.wax.soul=灵魂蜜蜡
+item.magicbees.wax.amnesic=遗忘蜜蜡
 
-#Drops
-drop.enchanting=蕴魔液滴
-drop.intellect=智慧液滴
-drop.destabilized=不稳定液滴
-drop.carbon=煤炭液滴
-drop.lux=流明液滴
-drop.endearing=可爱液滴
+#item.magicbees.drop.
+item.magicbees.drop.enchanting=蕴魔液滴
+item.magicbees.drop.intellect=智慧液滴
+item.magicbees.drop.destabilized=不稳定液滴
+item.magicbees.drop.carbon=煤炭液滴
+item.magicbees.drop.lux=流明液滴
+item.magicbees.drop.endearing=可爱液滴
 
-#Pollens
-pollen.unusual=罕见花粉
-pollen.phased=相位花粉
+#item.magicbees.pollen.
+item.magicbees.pollen.unusual=罕见花粉
+item.magicbees.pollen.phased=相位花粉
 
 #Nuggets
 nugget.iron=铁粒
@@ -102,46 +102,46 @@ nugget.emerald=绿宝石碎片
 nugget.apatite=磷灰石碎片
 
 #Propolises
-propolis.dull=秩序蜂胶
-propolis.air=和风蜂胶
-propolis.fire=炽热蜂胶
-propolis.water=奔流蜂胶
-propolis.earth=石化蜂胶
-propolis.magic=混沌蜂胶
-propolis.unstable=不稳定蜂胶
+item.magicbees.propolis.dull=秩序蜂胶
+item.magicbees.propolis.air=和风蜂胶
+item.magicbees.propolis.fire=炽热蜂胶
+item.magicbees.propolis.water=奔流蜂胶
+item.magicbees.propolis.earth=石化蜂胶
+item.magicbees.propolis.magic=混沌蜂胶
+item.magicbees.propolis.unstable=不稳定蜂胶
 
-#Misc resources
-resource.fragment=卷章碎片
-resource.lump=芬芳块
-resource.fertilizer=浓缩复合物
-resource.skullChip=凋灵骷髅骨片
-resource.skullFragment=凋灵骷髅头骨碎片
-resource.dragonDust=龙之尘
-resource.dragonChunk=龙之块
-resource.essenceLife=虚假之命源质
-resource.essenceDeath=暗影之墓源质
-resource.essenceTime=迷失之时源质
-resource.essenceDurability=恒久不灭源质
-resource.essenceOblivion=无尽漠视源质
-resource.essenceMutable=变换不定源质
-resource.TCairDust=风之尘
-resource.TCfireDust=火之尘
-resource.TCwaterDust=水之尘
-resource.TCearthDust=地之尘
-resource.TCorderDust=秩序之尘
-resource.TCchaosDust=混沌之尘
-resource.dimensionalSingularity=奇异维度
-resource.startNode=蜜蜂与魔法
-resource.crystalAspect=晶化%s要素
+#Misc item.magicbees.resource.
+item.magicbees.resource.fragment=卷章碎片
+item.magicbees.resource.lump=芬芳块
+item.magicbees.resource.fertilizer=浓缩复合物
+item.magicbees.resource.skullChip=凋灵骷髅骨片
+item.magicbees.resource.skullFragment=凋灵骷髅头骨碎片
+item.magicbees.resource.dragonDust=龙之尘
+item.magicbees.resource.dragonChunk=龙之块
+item.magicbees.resource.essenceLife=虚假之命源质
+item.magicbees.resource.essenceDeath=暗影之墓源质
+item.magicbees.resource.essenceTime=迷失之时源质
+item.magicbees.resource.essenceDurability=恒久不灭源质
+item.magicbees.resource.essenceOblivion=无尽漠视源质
+item.magicbees.resource.essenceMutable=变换不定源质
+item.magicbees.resource.TCairDust=风之尘
+item.magicbees.resource.TCfireDust=火之尘
+item.magicbees.resource.TCwaterDust=水之尘
+item.magicbees.resource.TCearthDust=地之尘
+item.magicbees.resource.TCorderDust=秩序之尘
+item.magicbees.resource.TCchaosDust=混沌之尘
+item.magicbees.resource.dimensionalSingularity=奇异维度
+item.magicbees.resource.startNode=蜜蜂与魔法
+item.magicbees.resource.crystalAspect=晶化%s要素
 
 #Frames
-item.frameMagic.name=魔力框架
-item.frameResilient.name=弹力框架
-item.frameGentle.name=柔性框架
-item.frameMetabolic.name=代谢框架
-item.frameNecrotic.name=坏死框架
-item.frameTemporal.name=瞬息框架
-item.frameOblivion.name=湮灭框架
+item.magicbees.frameMagic.name=魔力框架
+item.magicbees.frameResilient.name=弹力框架
+item.magicbees.frameGentle.name=柔性框架
+item.magicbees.frameMetabolic.name=代谢框架
+item.magicbees.frameNecrotic.name=坏死框架
+item.magicbees.frameTemporal.name=瞬息框架
+item.magicbees.frameOblivion.name=湮灭框架
 
 #Capsules
 capsule.magic=%s魔力胶囊
@@ -177,29 +177,29 @@ liquid.coal=液态煤炭
 #Moondial
 moon.full=满月
 moon.gibbousWaning=亏凸月
-moon.gibbousWaxing=盈凸月
+moon.gibbousitem.magicbees.wax.ng=盈凸月
 moon.halfWaning=下弦月
-moon.halfWaxing=上弦月
+moon.halfitem.magicbees.wax.ng=上弦月
 moon.crescentWaning=亏蛾眉月
-moon.crescentWaxing=凸娥眉月
+moon.crescentitem.magicbees.wax.ng=凸娥眉月
 moon.new=新月
 
 # Alternate moon names for languages that require a different kind of localization. Remove # to activate.
 # If missing, will fall back on the non-alternate versions. 
 #moon.alt.full=
 #moon.alt.gibbousWaning=
-#moon.alt.gibbousWaxing=
+#moon.alt.gibbousitem.magicbees.wax.ng=
 #moon.alt.halfWaning=
-#moon.alt.halfWaxing=
+#moon.alt.halfitem.magicbees.wax.ng=
 #moon.alt.crescentWaning=
-#moon.alt.crescentWaxing=
+#moon.alt.crescentitem.magicbees.wax.ng=
 #moon.alt.new=
 
 #Backpack
 backpack.thaumaturge=神秘使背包
 
-#Itemgroups
-itemGroup.magicBees=魔法蜜蜂
+#item.magicbees.roups
+item.magicbees.roup.magicBees=魔法蜜蜂
 
 #Botania flowers; Lexicon entries nearer the end.
 tile.botania:flower.beegonia.name=食蜂海棠

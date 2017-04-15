@@ -4,6 +4,7 @@ import elec332.core.item.IEnumItem;
 import elec332.core.item.ItemEnumBased;
 import magicbees.MagicBees;
 import magicbees.util.MagicBeesResourceLocation;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -48,6 +49,11 @@ public enum EnumResourceType implements IEnumItem {
     @Override
     public ResourceLocation getTextureLocation() {
         return new MagicBeesResourceLocation("items/"+name);
+    }
+
+    @Override
+    public String getUnlocalizedName(ItemStack stack) {
+        return stack.getItem().getUnlocalizedName(null)+"."+name;
     }
 
 }

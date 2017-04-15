@@ -28,6 +28,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
+import org.apache.commons.lang3.text.WordUtils;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
@@ -1106,7 +1107,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         this.secondaryColor = secondaryColor.getRGB();
         this.binominalName = binomialName;
         this.dominant = dominant;
-        this.uid = MagicBees.modid + ".beeSpecies." + name().toLowerCase(Locale.ENGLISH);
+        this.uid = MagicBees.modid + ".species" + WordUtils.capitalize(name().toLowerCase(Locale.ENGLISH));
         this.unlocalisedName = uid;
     }
 

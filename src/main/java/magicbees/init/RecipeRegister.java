@@ -395,7 +395,7 @@ public final class RecipeRegister {
         recipe.register(20);
 
         recipe = new CombCentrifugeRecipe(EnumCombType.FORGOTTEN);
-        recipe.addProduct(getWax(EnumWaxType.AMNESTIC), 0.5f);
+        recipe.addProduct(getWax(EnumWaxType.AMNESIC), 0.5f);
         recipe.addProduct(getPropolis(EnumPropolis.PULSATING), 0.5f);
         recipe.addProduct(honeyDrop, 0.4f);
         recipe.register(20);

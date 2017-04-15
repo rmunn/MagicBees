@@ -21,14 +21,14 @@ misc.level=Level %s
 misc.magnetActive=%s - Aktiv
 misc.magnetInactive=%s - Inaktiv
 
-#Items
-item.magicbees:jellyBabies.name=Handvoll Gummibärchen
-item.manasteelScoop.name=Manastahlkescher
-item.thaumiumScoop.name=Thaumiumkescher
-item.manasteelGrafter.name=Manastahlgartenschere
-item.thaumiumGrafter.name=Thaumiumgartenschere
-item.magicbees:mysteriousMagnet.name=Mysteriöser Magnet
-item.moonDial.name=Jade-Mondskala
+#item.magicbees.
+item.magicbees.jellyBabies.name=Handvoll Gummibärchen
+item.magicbees.manasteelScoop.name=Manastahlkescher
+item.magicbees.thaumiumScoop.name=Thaumiumkescher
+item.magicbees.manasteelGrafter.name=Manastahlgartenschere
+item.magicbees.thaumiumGrafter.name=Thaumiumgartenschere
+item.magicbees.mysteriousMagnet.name=Mysteriöser Magnet
+item.magicbees.moonDial.name=Jade-Mondskala
 
 #Tiles
 tile.effectJar.name=Glas des Bienensammlers
@@ -43,52 +43,52 @@ tile.hive.infernal.name=Höllischer Bienenstock
 tile.hive.oblivion.name=Vergessenheits-Bienenstock
 tile.enchantedEarth.name=Verzauberte Erde
 
-#Combs
-comb.mundane=Gewöhnliche Wabe
-comb.molten=Geschmolzene Wabe
-comb.occult=Okkulte Wabe
-comb.otherworldly=Jenseitige Wabe
-comb.transmuted=Transmutierende Wabe
-comb.paper=Papierwabe
-comb.soul=Seelenwabe
-comb.furtive=Verstohlene Wabe
-comb.aware=Gedächtniswabe
-comb.time=Zeitwabe
-comb.forgotten=Vergessenheitswabe
-comb.air=Luftige Wabe
-comb.fire=Feurige Wabe
-comb.water=Wässrige Wabe
-comb.earth=Irdene Wabe
-comb.TCair=Glitzernde Windige Wabe
-comb.TCfire=Glitzernde Feurige Wabe
-comb.TCwater=Glitzernde Wässrige Wabe
-comb.TCearth=Glitzernde Irdene Wabe
-comb.TCorder=Glitzernde Ordentliche Wabe
-comb.TCchaos=Glitzernde Entropische Wabe
-comb.essence=Essenzwabe
-comb.potent=Mächtige Wabe
-comb.TEcarbon=Kohlenstoffwabe
-comb.TEelectric=Electrische Wabe
-comb.TElux=Lux-Wabe
-comb.TEendearing=Enderwabe
-comb.BMSanguine=Blutrote Wabe
+#item.magicbees.beecomb.
+item.magicbees.beecomb.mundane=Gewöhnliche Wabe
+item.magicbees.beecomb.molten=Geschmolzene Wabe
+item.magicbees.beecomb.occult=Okkulte Wabe
+item.magicbees.beecomb.otherworldly=Jenseitige Wabe
+item.magicbees.beecomb.transmuted=Transmutierende Wabe
+item.magicbees.beecomb.paper=Papierwabe
+item.magicbees.beecomb.soul=Seelenwabe
+item.magicbees.beecomb.furtive=Verstohlene Wabe
+item.magicbees.beecomb.aware=Gedächtniswabe
+item.magicbees.beecomb.time=Zeitwabe
+item.magicbees.beecomb.forgotten=Vergessenheitswabe
+item.magicbees.beecomb.air=Luftige Wabe
+item.magicbees.beecomb.fire=Feurige Wabe
+item.magicbees.beecomb.water=Wässrige Wabe
+item.magicbees.beecomb.earth=Irdene Wabe
+item.magicbees.beecomb.TCair=Glitzernde Windige Wabe
+item.magicbees.beecomb.TCfire=Glitzernde Feurige Wabe
+item.magicbees.beecomb.TCwater=Glitzernde Wässrige Wabe
+item.magicbees.beecomb.TCearth=Glitzernde Irdene Wabe
+item.magicbees.beecomb.TCorder=Glitzernde Ordentliche Wabe
+item.magicbees.beecomb.TCchaos=Glitzernde Entropische Wabe
+item.magicbees.beecomb.essence=Essenzwabe
+item.magicbees.beecomb.potent=Mächtige Wabe
+item.magicbees.beecomb.TEcarbon=Kohlenstoffwabe
+item.magicbees.beecomb.TEelectric=Electrische Wabe
+item.magicbees.beecomb.TElux=Lux-Wabe
+item.magicbees.beecomb.TEendearing=Enderwabe
+item.magicbees.beecomb.BMSanguine=Blutrote Wabe
 
-#Waxes
-wax.magic=Magisches Wachs
-wax.soul=Seelenvolles Wachs
-wax.amnesic=Amnesisches Wachs
+#item.magicbees.wax.s
+item.magicbees.wax.magic=Magisches Wachs
+item.magicbees.wax.soul=Seelenvolles Wachs
+item.magicbees.wax.amnesic=Amnesisches Wachs
 
-#Drops
-drop.enchanting=Bezaubernder Tropfen
-drop.intellect=Verstandestropfen
-drop.destabilized=Destabilisierter Tropfen
-drop.carbon=Kohlenstofftropfen
-drop.lux=Lux-Tropfen
-drop.endearing=Endertropfen
+#item.magicbees.drop.
+item.magicbees.drop.enchanting=Bezaubernder Tropfen
+item.magicbees.drop.intellect=Verstandestropfen
+item.magicbees.drop.destabilized=Destabilisierter Tropfen
+item.magicbees.drop.carbon=Kohlenstofftropfen
+item.magicbees.drop.lux=Lux-Tropfen
+item.magicbees.drop.endearing=Endertropfen
 
-#Pollens
-pollen.unusual=Ungewöhnliche Pollen
-pollen.phased=Geschichtete Pollen
+#item.magicbees.pollen.
+item.magicbees.pollen.unusual=Ungewöhnliche Pollen
+item.magicbees.pollen.phased=Geschichtete Pollen
 
 #Nuggets
 nugget.iron=Eisennugget
@@ -102,46 +102,46 @@ nugget.emerald=Smaragdscherbe
 nugget.apatite=Apatitscherbe
 
 #Propolises
-propolis.dull=Geordnetes Bienenharz
-propolis.air=Hauchiges Bienenharz
-propolis.fire=Brennendes Bienenharz
-propolis.water=Fließendes Bienenharz
-propolis.earth=Steiniges Bienenharz
-propolis.magic=Chaotisches Bienenharz
-propolis.unstable=Instabiles Bienenharz
+item.magicbees.propolis.dull=Geordnetes Bienenharz
+item.magicbees.propolis.air=Hauchiges Bienenharz
+item.magicbees.propolis.fire=Brennendes Bienenharz
+item.magicbees.propolis.water=Fließendes Bienenharz
+item.magicbees.propolis.earth=Steiniges Bienenharz
+item.magicbees.propolis.magic=Chaotisches Bienenharz
+item.magicbees.propolis.unstable=Instabiles Bienenharz
 
-#Misc resources
-resource.fragment=Wissensfragment
-resource.lump=Aromatischer Klumpen
-resource.fertilizer=Konzentriertes Gemisch
-resource.skullChip=Witherskelett-Knochensplitter
-resource.skullFragment=Witherskelett-Schädelfragment
-resource.dragonDust=Drakonischer Staub
-resource.dragonChunk=Drakonischer Klumpen
-resource.essenceLife=Essenz des Falschen Lebens
-resource.essenceDeath=Essenz eines Flachen Grabes
-resource.essenceTime=Essenz der Verlorenen Zeit
-resource.essenceDurability=Essenz der Immerwährenden Haltbarkeit
-resource.essenceOblivion=Essenz der Verächtlichen Vergessenheit
-resource.essenceMutable=Essenz der Wankelnden Permanenz
-resource.TCairDust=Luft-durchdrungener Staub
-resource.TCfireDust=Feuer-durchdrungener Staub
-resource.TCwaterDust=Wasser-durchdrungener Staub
-resource.TCearthDust=Erd-durchdrungener Staub
-resource.TCorderDust=Ordnungs-durchdrungener Staub
-resource.TCchaosDust=Chaos-durchdrungener Staub
-resource.dimensionalSingularity=Dimensionalsingularität
-resource.startNode=Bienen und Magie
-resource.crystalAspect=Kristallisierter %s - Aspekt
+#Misc item.magicbees.resource.
+item.magicbees.resource.fragment=Wissensfragment
+item.magicbees.resource.lump=Aromatischer Klumpen
+item.magicbees.resource.fertilizer=Konzentriertes Gemisch
+item.magicbees.resource.skullChip=Witherskelett-Knochensplitter
+item.magicbees.resource.skullFragment=Witherskelett-Schädelfragment
+item.magicbees.resource.dragonDust=Drakonischer Staub
+item.magicbees.resource.dragonChunk=Drakonischer Klumpen
+item.magicbees.resource.essenceLife=Essenz des Falschen Lebens
+item.magicbees.resource.essenceDeath=Essenz eines Flachen Grabes
+item.magicbees.resource.essenceTime=Essenz der Verlorenen Zeit
+item.magicbees.resource.essenceDurability=Essenz der Immerwährenden Haltbarkeit
+item.magicbees.resource.essenceOblivion=Essenz der Verächtlichen Vergessenheit
+item.magicbees.resource.essenceMutable=Essenz der Wankelnden Permanenz
+item.magicbees.resource.TCairDust=Luft-durchdrungener Staub
+item.magicbees.resource.TCfireDust=Feuer-durchdrungener Staub
+item.magicbees.resource.TCwaterDust=Wasser-durchdrungener Staub
+item.magicbees.resource.TCearthDust=Erd-durchdrungener Staub
+item.magicbees.resource.TCorderDust=Ordnungs-durchdrungener Staub
+item.magicbees.resource.TCchaosDust=Chaos-durchdrungener Staub
+item.magicbees.resource.dimensionalSingularity=Dimensionalsingularität
+item.magicbees.resource.startNode=Bienen und Magie
+item.magicbees.resource.crystalAspect=Kristallisierter %s - Aspekt
 
 #Frames
-item.frameMagic.name=Magisches Rähmchen
-item.frameResilient.name=Elastisches Rähmchen
-item.frameGentle.name=Behutsames Rähmchen
-item.frameMetabolic.name=Metabolisches Rähmchen
-item.frameNecrotic.name=Nekrotisches Rähmchen
-item.frameTemporal.name=Zeiträhmchen
-item.frameOblivion.name=Vergessenheitsrähmchen
+item.magicbees.frameMagic.name=Magisches Rähmchen
+item.magicbees.frameResilient.name=Elastisches Rähmchen
+item.magicbees.frameGentle.name=Behutsames Rähmchen
+item.magicbees.frameMetabolic.name=Metabolisches Rähmchen
+item.magicbees.frameNecrotic.name=Nekrotisches Rähmchen
+item.magicbees.frameTemporal.name=Zeiträhmchen
+item.magicbees.frameOblivion.name=Vergessenheitsrähmchen
 
 #Capsules
 capsule.magic=Magische %s-Kapsel
@@ -177,29 +177,29 @@ liquid.coal=Verflüssigte Kohle
 #Moondial & Mutation moon phase conditions
 moon.full=Vollmond
 moon.gibbousWaning=Abnehmender Dreiviertelmond
-moon.gibbousWaxing=Zunehmender Dreiviertelmond
+moon.gibbousitem.magicbees.wax.ng=Zunehmender Dreiviertelmond
 moon.halfWaning=Abnehmender Halbmond
-moon.halfWaxing=Zunehmender Halbmond
+moon.halfitem.magicbees.wax.ng=Zunehmender Halbmond
 moon.crescentWaning=Abnehmender Sichelmond
-moon.crescentWaxing=Zunehmender Sichelmond
+moon.crescentitem.magicbees.wax.ng=Zunehmender Sichelmond
 moon.new=Neumond
 
 # Alternate moon names for languages that require a different kind of localization. Remove # to activate.
 #	If missing, will fall back on the non-alternate versions.
 #moon.alt.full=
 #moon.alt.gibbousWaning=
-#moon.alt.gibbousWaxing=
+#moon.alt.gibbousitem.magicbees.wax.ng=
 #moon.alt.halfWaning=
-#moon.alt.halfWaxing=
+#moon.alt.halfitem.magicbees.wax.ng=
 #moon.alt.crescentWaning=
-#moon.alt.crescentWaxing=
+#moon.alt.crescentitem.magicbees.wax.ng=
 #moon.alt.new=
 
 #Backpack
 backpack.thaumaturge=Rucksack des Thaumaturgen
 
-#Itemgroups
-itemGroup.magicBees=Magic Bees
+#item.magicbees.roups
+item.magicbees.roup.magicBees=Magic Bees
 
 #Botania flowers; Lexicon entries nearer the end.
 tile.botania:flower.beegonia.name=Biegonie
@@ -631,7 +631,7 @@ tc.research_page.MB_EssenceOblivion.1=Bienen für Mutationen zu züchten, kann n
 
 tc.research_name.MB_VisAuraProvider=Vis-Bienenkorb-Booster
 tc.research_text.MB_VisAuraProvider=[MB] Es ist wie Zauberei!
-tc.research_page.MB_VisAuraProvider.1=Die Infusion von Ungewöhnlichen Pollen mit Vis und Gold kreiert einen ungewöhnlichen Kristall, welcher, wird er mit Vis aus einer Auranodie gefüttert, eine energetisierende Aura schafft, die Bienen anzieht, wenn sie auf die Umgebung innerhalb eines Magischen Bienenkorbs gestimmt ist.
+tc.research_page.MB_VisAuraProvider.1=Die Infusion von Ungewöhnlichen item.magicbees.pollen.mit Vis und Gold kreiert einen ungewöhnlichen Kristall, welcher, wird er mit Vis aus einer Auranodie gefüttert, eine energetisierende Aura schafft, die Bienen anzieht, wenn sie auf die Umgebung innerhalb eines Magischen Bienenkorbs gestimmt ist.
 
 #Botania Lexicon entries
 magicbees.botania.lexicon.subtitle=[Magic Bees]

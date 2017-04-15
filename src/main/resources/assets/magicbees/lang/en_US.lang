@@ -21,73 +21,73 @@ misc.level=Level %s
 misc.magnetActive=%s - Active
 misc.magnetInactive=%s - Inactive
 
-#Items
-item.magicbees:jellyBabies.name=Handful of Jelly Babies
-item.manasteelScoop.name=Manasteel Scoop
-item.thaumiumScoop.name=Thaumium Scoop
-item.manasteelGrafter.name=Manasteel Grafter
-item.thaumiumGrafter.name=Thaumium Grafter
-item.magicbees:mysteriousMagnet.name=Mysterious Magnet
-item.moonDial.name=Jade Moon Dial
+#item.magicbees.
+item.magicbees.jellyBabies.name=Handful of Jelly Babies
+item.magicbees.manasteelScoop.name=Manasteel Scoop
+item.magicbees.thaumiumScoop.name=Thaumium Scoop
+item.magicbees.manasteelGrafter.name=Manasteel Grafter
+item.magicbees.thaumiumGrafter.name=Thaumium Grafter
+item.magicbees.mysteriousmagnet.name=Mysterious Magnet
+item.magicbees.moondial.name=Jade Moon Dial
 
 #Tiles
 tile.effectJar.name=Bee Collector's Jar
 tile.magicApiary.name=Magic Apiary
 tile.visAuraProvider.name=Vis Apiary Booster
 tile.manaAuraProvider.name=Mana Apiary Booster
-tile.hive.curious.name=Curious Hive
-tile.hive.unusual.name=Unusual Hive
-tile.hive.deep.name=Deep Hive
-tile.hive.resonant.name=Resonating Hive
-tile.hive.infernal.name=Infernal Hive
-tile.hive.oblivion.name=Oblivion Hive
+tile.magicbees.hiveblock.curious.name=Curious Hive
+tile.magicbees.hiveblock.unusual.name=Unusual Hive
+tile.magicbees.hiveblock.deep.name=Deep Hive
+tile.magicbees.hiveblock.resonant.name=Resonating Hive
+tile.magicbees.hiveblock.infernal.name=Infernal Hive
+tile.magicbees.hiveblock.oblivion.name=Oblivion Hive
 tile.enchantedEarth.name=Enchanted Earth
 
-#Combs
-comb.mundane=Mundane Comb
-comb.molten=Molten Comb
-comb.occult=Occult Comb
-comb.otherworldly=Otherworldy Comb
-comb.transmuted=Transmuting Comb
-comb.paper=Papery Comb
-comb.soul=Soul Comb
-comb.furtive=Furtive Comb
-comb.aware=Memory Comb
-comb.time=Temporal Comb
-comb.forgotten=Forgotten Comb
-comb.air=Windy Comb
-comb.fire=Firey Comb
-comb.water=Watery Comb
-comb.earth=Earthy Comb
-comb.TCair=Glittering Windy Comb
-comb.TCfire=Glittering Firey Comb
-comb.TCwater=Glittering Watery Comb
-comb.TCearth=Glittering Earthy Comb
-comb.TCorder=Glittering Ordered Comb
-comb.TCchaos=Glittering Entropic Comb
-comb.essence=Essence Comb
-comb.potent=Potent Comb
-comb.TEcarbon=Carbon Comb
-comb.TEelectric=Electric Comb
-comb.TElux=Lux Comb
-comb.TEendearing=Endearing Comb
+#item.magicbees.beecomb.
+item.magicbees.beecomb.mundane.name=Mundane Comb
+item.magicbees.beecomb.molten.name=Molten Comb
+item.magicbees.beecomb.occult.name=Occult Comb
+item.magicbees.beecomb.otherworldly.name=Otherworldy Comb
+item.magicbees.beecomb.transmuted.name=Transmuting Comb
+item.magicbees.beecomb.papery.name=Papery Comb
+item.magicbees.beecomb.soul.name=Soul Comb
+item.magicbees.beecomb.furtive.name=Furtive Comb
+item.magicbees.beecomb.aware.name=Memory Comb
+item.magicbees.beecomb.time.name=Temporal Comb
+item.magicbees.beecomb.forgotten.name=Forgotten Comb
+item.magicbees.beecomb.air.name=Windy Comb
+item.magicbees.beecomb.fire.name=Firey Comb
+item.magicbees.beecomb.water.name=Watery Comb
+item.magicbees.beecomb.earth.name=Earthy Comb
+item.magicbees.beecomb.TCair.name=Glittering Windy Comb
+item.magicbees.beecomb.TCfire.name=Glittering Firey Comb
+item.magicbees.beecomb.TCwater.name=Glittering Watery Comb
+item.magicbees.beecomb.TCearth.name=Glittering Earthy Comb
+item.magicbees.beecomb.TCorder.name=Glittering Ordered Comb
+item.magicbees.beecomb.TCchaos.name=Glittering Entropic Comb
+item.magicbees.beecomb.essence.name=Essence Comb
+item.magicbees.beecomb.potent.name=Potent Comb
+item.magicbees.beecomb.TEcarbon.name=Carbon Comb
+item.magicbees.beecomb.TEelectric.name=Electric Comb
+item.magicbees.beecomb.TElux.name=Lux Comb
+item.magicbees.beecomb.TEendearing.name=Endearing Comb
 
-#Waxes
-wax.magic=Magic Wax
-wax.soul=Soulful Wax
-wax.amnesic=Amnesic Wax
+#Wax
+item.magicbees.wax.magic.name=Magic Wax
+item.magicbees.wax.soul.name=Soulful Wax
+item.magicbees.wax.amnesic.name=Amnesic Wax
 
-#Drops
-drop.enchanting=Enchanting Drop
-drop.intellect=Intellect Drop
-drop.destabilized=Destabilized Drop
-drop.carbon=Carbon Drop
-drop.lux=Lux Drop
-drop.endearing=Endearing Drop
+#Drop
+item.magicbees.drop.enchanted.name=Enchanting Drop
+item.magicbees.drop.intellect.name=Intellect Drop
+item.magicbees.drop.destabilized.name=Destabilized Drop
+item.magicbees.drop.carbon.name=Carbon Drop
+item.magicbees.drop.lux.name=Lux Drop
+item.magicbees.drop.endearing.name=Endearing Drop
 
-#Pollens
-pollen.unusual=Unusual Pollen
-pollen.phased=Phased Pollen
+#Pollen
+item.magicbees.pollen.unusual.name=Unusual Pollen
+item.magicbees.pollen.phased.name=Phased Pollen
 
 #Nuggets
 nugget.iron=Iron Nugget
@@ -101,46 +101,46 @@ nugget.emerald=Emerald Shard
 nugget.apatite=Apatite Shard
 
 #Propolises
-propolis.dull=Ordered Propolis
-propolis.air=Breezey Propolis
-propolis.fire=Burning Propolis
-propolis.water=Flowing Propolis
-propolis.earth=Stony Propolis
-propolis.magic=Chaotic Propolis
-propolis.unstable=Unstable Propolis
+item.magicbees.propolis.order.name=Ordered Propolis
+item.magicbees.propolis.air.name=Breezey Propolis
+item.magicbees.propolis.fire.name=Burning Propolis
+item.magicbees.propolis.water.name=Flowing Propolis
+item.magicbees.propolis.earth.name=Stony Propolis
+item.magicbees.propolis.chaos.name=Chaotic Propolis
+item.magicbees.propolis.unstable.name=Unstable Propolis
 
-#Misc resources
-resource.fragment=Lore Fragment
-resource.lump=Aromatic Lump
-resource.fertilizer=Concentrated Compound
-resource.skullChip=Wither Skeleton Bone Chip
-resource.skullFragment=Wither Skeleton Skull Fragment
-resource.dragonDust=Draconic Dust
-resource.dragonChunk=Draconic Chunk
-resource.essenceLife=Essence of False Life
-resource.essenceDeath=Essence of a Shallow Grave
-resource.essenceTime=Essence of Lost Time
-resource.essenceDurability=Essence of Everlasting Durability
-resource.essenceOblivion=Essence of Scornful Oblivion
-resource.essenceMutable=Essence of Fickle Permanence
-resource.TCairDust=Air Infused Dust
-resource.TCfireDust=Fire Infused Dust
-resource.TCwaterDust=Water Infused Dust
-resource.TCearthDust=Earth Infused Dust
-resource.TCorderDust=Order Infused Dust
-resource.TCchaosDust=Chaos Infused Dust
-resource.dimensionalSingularity=Dimensional Singularity
-resource.startNode=Bees and Magic
-resource.crystalAspect=Crystalized %s Aspect
+#Misc item.magicbees.resource.
+item.magicbees.resource.fragment.name=Lore Fragment
+item.magicbees.resource.lump.name=Aromatic Lump
+item.magicbees.resource.fertilizer.name=Concentrated Compound
+item.magicbees.resource.skullChip.name=Wither Skeleton Bone Chip
+item.magicbees.resource.skullFragment.name=Wither Skeleton Skull Fragment
+item.magicbees.resource.dragonDust.name=Draconic Dust
+item.magicbees.resource.dragonChunk.name=Draconic Chunk
+item.magicbees.resource.essenceLife.name=Essence of False Life
+item.magicbees.resource.essenceDeath.name=Essence of a Shallow Grave
+item.magicbees.resource.essenceTime.name=Essence of Lost Time
+item.magicbees.resource.essenceDurability.name=Essence of Everlasting Durability
+item.magicbees.resource.essenceOblivion.name=Essence of Scornful Oblivion
+item.magicbees.resource.essenceMutable.name=Essence of Fickle Permanence
+item.magicbees.resource.TCairDust.name=Air Infused Dust
+item.magicbees.resource.TCfireDust.name=Fire Infused Dust
+item.magicbees.resource.TCwaterDust.name=Water Infused Dust
+item.magicbees.resource.TCearthDust.name=Earth Infused Dust
+item.magicbees.resource.TCorderDust.name=Order Infused Dust
+item.magicbees.resource.TCchaosDust.name=Chaos Infused Dust
+item.magicbees.resource.dimensionalSingularity.name=Dimensional Singularity
+item.magicbees.resource.startNode.name=Bees and Magic
+item.magicbees.resource.crysrtalAspect.name=Crystalized %s Aspect
 
 #Frames
-item.frameMagic.name=Magic Frame
-item.frameResilient.name=Resilient Frame
-item.frameGentle.name=Gentle Frame
-item.frameMetabolic.name=Metabolic Frame
-item.frameNecrotic.name=Necrotic Frame
-item.frameTemporal.name=Temporal Frame
-item.frameOblivion.name=Oblivion Frame
+item.magicbees.frames.magic.name=Magic Frame
+item.magicbees.frames.resilient.name=Resilient Frame
+item.magicbees.frames.gentle.name=Gentle Frame
+item.magicbees.frames.metabolic.name=Metabolic Frame
+item.magicbees.frames.necrotic.name=Necrotic Frame
+item.magicbees.frames.temporal.name=Temporal Frame
+item.magicbees.frames.oblivion.name=Oblivion Frame
 
 #Capsules
 capsule.magic=%s Magic Capsule
@@ -183,22 +183,11 @@ moon.crescentWaning=Waning Crescent
 moon.crescentWaxing=Waxing Crescent
 moon.new=New Moon
 
-# Alternate moon names for languages that require a different kind of localization. Remove # to activate.
-#	If missing, will fall back on the non-alternate versions.
-#moon.alt.full=
-#moon.alt.gibbousWaning=
-#moon.alt.gibbousWaxing=
-#moon.alt.halfWaning=
-#moon.alt.halfWaxing=
-#moon.alt.crescentWaning=
-#moon.alt.crescentWaxing=
-#moon.alt.new=
-
 #Backpack
 backpack.thaumaturge=Thaumaturge's Backpack
 
-#Itemgroups
-itemGroup.magicBees=Magic Bees
+#CTab
+itemGroup.magicbees=Magic Bees
 
 #Botania flowers; Lexicon entries nearer the end.
 tile.botania:flower.beegonia.name=Beegonia
@@ -284,10 +273,10 @@ magicbees.speciesSpidery=Spidery
 magicbees.speciesSpidery.description=Spiderbee; n. Does whatever a spider-bee does.|Unknown
 magicbees.speciesSmouldering=Smouldering
 magicbees.speciesSmouldering.description=The Skulking bees have become alight with the fire of the ever-burning Blazes.|Apinomicon
-magicbees.speciesBigBad=Big Bad
-magicbees.speciesBigBad.description="Who is afraid of the Big Bad Chris?"|Pahimar, last words
+magicbees.speciesBigbad=Big Bad
+magicbees.speciesBigbad.description="Who is afraid of the Big Bad Chris?"|Pahimar, last words
 magicbees.speciesTCBrainy=Brainy
-magicbees.speciesTCBrainy.description=Their combs may be fetid and foul-smelling, but their intelligence is well-developed.|Apinomicon
+magicbees.speciesTCBrainy.description=Their item.magicbees.beecomb. may be fetid and foul-smelling, but their intelligence is well-developed.|Apinomicon
 magicbees.speciesTCBatty=Batty
 magicbees.speciesTCBatty.description=They tend to attract bats to their hives through means unknown.|Apinomicon
 magicbees.speciesTCChicken=Poultry
@@ -335,7 +324,7 @@ magicbees.speciesIron.description=Having absorbed some of the base metal, these 
 magicbees.speciesGold=Auric
 magicbees.speciesGold.description=Not all that glitters is gold.|Ancient Aphorism
 magicbees.speciesCopper=Cuprum
-magicbees.speciesCopper.description=A base metal common in many applications; these bees are helpful for resource-starved magicians.|Apinomicon
+magicbees.speciesCopper.description=A base metal common in many applications; these bees are helpful for item.magicbees.resource.starved magicians.|Apinomicon
 magicbees.speciesTin=Stannum
 magicbees.speciesTin.description=While metalic, these bees are suprisingly fragile.|Apinomicon
 magicbees.speciesSilver=Argentum
@@ -385,7 +374,7 @@ magicbees.speciesTCWater.description="I tried to breed them once, but that was a
 magicbees.speciesTCEarth=Solum
 magicbees.speciesTCEarth.description="You're really gonna dig these bees, but watch out - they bore quite easily."|MysteriousAges, Apprentice Comedian
 magicbees.speciesTCOrder=Ordered
-magicbees.speciesTCOrder.description=Their combs are nearly perfect, each part mirroring the pattern of the whole.|Apinomicon
+magicbees.speciesTCOrder.description=Their item.magicbees.beecomb. are nearly perfect, each part mirroring the pattern of the whole.|Apinomicon
 magicbees.speciesTCChaos=Chaotic
 magicbees.speciesTCChaos.description=The social structure of their hives seems to vary day by day, making it more flexible and resillient than others, but significantly more unpredictable.|Apinomicon
 magicbees.speciesTCVis=Vis
@@ -393,7 +382,7 @@ magicbees.speciesTCVis.description="They can feel changes in the aura, but are n
 magicbees.speciesTCRejuvenating=Rejuvenating
 magicbees.speciesTCRejuvenating.description=The hum of the hive is magical, and over time is absorbed by nearby nodes.|Apinomicon
 magicbees.speciesTCEmpowering=Empowering
-magicbees.speciesTCEmpowering.description=So charged with aura are they, that nodes seem to wax in their presence.|Apinomicon
+magicbees.speciesTCEmpowering.description=So charged with aura are they, that nodes seem to item.magicbees.wax.in their presence.|Apinomicon
 magicbees.speciesTCNexus=Nexus
 magicbees.speciesTCNexus.description=Spoken only of in hushed whispers, their abilities to pass through nodes into the other side is scoffed at as imagined and fantasy.|Apinomicon
 magicbees.speciesTCFlux=Flux
@@ -420,7 +409,7 @@ magicbees.speciesAMAir.description=Swift as the wind, and lighter than air.|Apin
 magicbees.speciesAMFire=Igneous
 magicbees.speciesAMFire.description=Their colony can reach temperatures that boil water and melt metals.|Apinomicon
 magicbees.speciesAMWater=Aqueous
-magicbees.speciesAMWater.description=Through prolonged exposure to liquids, their combs are quite wet and heavy.|Apinomicon
+magicbees.speciesAMWater.description=Through prolonged exposure to liquids, their item.magicbees.beecomb. are quite wet and heavy.|Apinomicon
 magicbees.speciesAMLightning=Fulguric
 magicbees.speciesAMLightning.description=They can travel vast distances in a blink, and are known for starting many wildfires.|Apinomicon
 magicbees.speciesAMPlant=Fruticic
@@ -444,7 +433,7 @@ magicbees.speciesTEDante.description=Mixing bees in an inferno produces surprisi
 magicbees.speciesTEPyro=Pyro
 magicbees.speciesTEPyro.description=You Monster.|Everyone, to you.
 magicbees.speciesTEShocking=Shocking
-magicbees.speciesTEShocking.description=Their hives attract static charge through an unknown mechanism. Use caution when collecting combs.|Apinomicon
+magicbees.speciesTEShocking.description=Their hives attract static charge through an unknown mechanism. Use caution when collecting item.magicbees.beecomb..|Apinomicon
 magicbees.speciesTEAmped=Amped
 magicbees.speciesTEAmped.description="They're really excited. Like, CRAZY excited. You'd have to measure it in terms of electric current, that's how excited they are."|Marquis Muskrat
 magicbees.speciesTEGrounded=Grounded
@@ -590,9 +579,9 @@ classification.abominable.description=Spawned in the firey depths of the Nether,
 classification.Extrinsic=Extrinsic
 classification.Extrinsic.description=It is unknown whether these creatures gave rise to the family Apidae in this universe, or if these evolved seperately.|Apinomicon
 classification.metallic=Metallic
-classification.metallic.description=They collect fragments of metal and combine them into larger portions.|Apinomicon
+classification.metallic.description=They collect fragments of metal and item.magicbees.beecomb.ne them into larger portions.|Apinomicon
 classification.gem=Gem
-classification.gem.description=They collect fragments of precious gems in their combs.|Apinomicon
+classification.gem.description=They collect fragments of precious gems in their item.magicbees.beecomb..|Apinomicon
 classification.transmuting=Polymorphic
 classification.transmuting.description=Reality seems to be somewhat volatile around bees of this family.|Apinomicon
 classification.thaumic=Thaumic
@@ -617,7 +606,7 @@ tc.research_page.MB_Root.2=of your former, nonmagical colleagues. Also take note
 
 tc.research_name.MB_LoreFragment=Lore Fragments
 tc.research_text.MB_LoreFragment=[MB] Research? More like BEEsearch!
-tc.research_page.MB_LoreFragment.1=While experimenting with bee breeds, you may run accross a strain whose intellectual capabilities are a match for your own. Well, maybe, however unlikely that is. It's possible that they may unearth some obscure reference or a snippet of information that your great intellect may have missed while exploiting the greater mysteries of the universe. <BR> Should your helpful buzzing friends happen to locate this sort of item for you, it may be possible to combine the scraps together into something a little more cohesive.
+tc.research_page.MB_LoreFragment.1=While experimenting with bee breeds, you may run accross a strain whose intellectual capabilities are a match for your own. Well, maybe, however unlikely that is. It's possible that they may unearth some obscure reference or a snippet of information that your great intellect may have missed while exploiting the greater mysteries of the universe. <BR> Should your helpful buzzing friends happen to locate this sort of item.magicbees.for you, it may be possible to item.magicbees.beecomb.ne the scraps together into something a little more cohesive.
 
 tc.research_name.MB_FrameMagic=Magic Frame
 tc.research_text.MB_FrameMagic=[MB] Putting magic into beekeeping contexts
@@ -633,7 +622,7 @@ tc.research_page.MB_Grafter.1=Simple grafters are almost uselessly fragile, and 
 
 tc.research_name.MB_EssenceLife=Essence of False Life
 tc.research_text.MB_EssenceLife=[MB] A rose by any other name. . .
-tc.research_page.MB_EssenceLife.1=Simple to create by means of magic, this essence has unusual properties when exposed to bees. When combined with an everyday apiary frame, it has the effect of greatly extending the lifespan of a working hive.
+tc.research_page.MB_EssenceLife.1=Simple to create by means of magic, this essence has unusual properties when exposed to bees. When item.magicbees.beecomb.ned with an everyday apiary frame, it has the effect of greatly extending the lifespan of a working hive.
 
 tc.research_name.MB_EssenceDeath=Essence of a Shallow Grave
 tc.research_text.MB_EssenceDeath=[MB] Not quite six feet under.
@@ -641,7 +630,7 @@ tc.reseacrh_page.MB_EssenceDeath.1=The Essence of a Shallow Grave channels the d
 
 tc.research_name.MB_EssenceArmor=Essence of Everlasting Durability
 tc.research_text.MB_EssenceArmor=[MB] The rubber to your glue
-tc.research_page.MB_EssenceArmor.1=This is the distilled essence of protection, bound to last forever, or until the magics stored within it weaken and eventually break. But until then, it's invincible. Mostly. <BR> While Magic Frames are useful, they are a tad fragile. This essence takes the enchantments you weave into Magic frames to an entirely new level. Combine the essence with a magic frame, and it should have a vastly extended lifespan.
+tc.research_page.MB_EssenceArmor.1=This is the distilled essence of protection, bound to last forever, or until the magics stored within it weaken and eventually break. But until then, it's invincible. Mostly. <BR> While Magic Frames are useful, they are a tad fragile. This essence takes the enchantments you weave into Magic frames to an entirely new level. item.magicbees.beecomb.ne the essence with a magic frame, and it should have a vastly extended lifespan.
 
 tc.research_name.MB_EssenceUnstable=Essence of Fickle Permanence
 tc.research_text.MB_EssenceUnstable=[MB] Assured in unsurity
@@ -649,7 +638,7 @@ tc.research_page.MB_EssenceUnstable.1=Unstable by nature, the Essence of Fickle 
 
 tc.research_name.MB_EssenceTime=Essence of Lost Time
 tc.research_text.MB_EssenceTime=[MB] No time like the unmoment
-tc.research_page.MB_EssenceTime.1=Time is a fickle thing. It comes and it goes, but where exactly does it go to? As a respectable thaumaturge, it has become possible to trap these wasted moments and save them in a magical form. So, now that it is possible to collect extra time from the world, it seems only appropriate that they are used in a place that would be useful. It would be too dangerous to attempt to access these moments yourself for the moment, but perhaps it would be simple to allow your bees access to this untapped lump of time. <BR> By combining the essence with a Magic Frame as usual will suffice to extend the lifespan of bees in your keeping by several times.
+tc.research_page.MB_EssenceTime.1=Time is a fickle thing. It comes and it goes, but where exactly does it go to? As a respectable thaumaturge, it has become possible to trap these wasted moments and save them in a magical form. So, now that it is possible to collect extra time from the world, it seems only appropriate that they are used in a place that would be useful. It would be too dangerous to attempt to access these moments yourself for the moment, but perhaps it would be simple to allow your bees access to this untapped lump of time. <BR> By item.magicbees.beecomb.ning the essence with a Magic Frame as usual will suffice to extend the lifespan of bees in your keeping by several times.
 
 tc.research_name.MB_DimensionalSingularity=Dimensional Singularity
 tc.research_text.MB_DimensionalSingularity=[MB] Quantum flux for them, unlimited storage for you
@@ -661,13 +650,13 @@ tc.research_page.MB_EssenceOblivion.1=Breeding bees for mutations can be aggriva
 
 tc.research_name.MB_VisAuraProvider=Vis Apiary Booster
 tc.research_text.MB_VisAuraProvider=[MB] Vis? What about Bis?
-tc.research_page.MB_VisAuraProvider.1=Infusing Unusual Pollen with vis and combining it with gold creates an unusual crystal that, when fed vis from an aura node, creates an energizing aura that bees are naturally attracted to when attuned to the environment within a Magic Apiary.
+tc.research_page.MB_VisAuraProvider.1=Infusing Unusual item.magicbees.pollen.with vis and item.magicbees.beecomb.ning it with gold creates an unusual crystal that, when fed vis from an aura node, creates an energizing aura that bees are naturally attracted to when attuned to the environment within a Magic Apiary.
 
 #Botania Lexicon entries
 magicbees.botania.lexicon.subtitle=[Magic Bees]
 
 magicbees.botania.lexicon.manasteelTools.title=Manasteel Naturalist's Tools
-magicbees.botania.lexicon.manasteelTools.0=Manasteel's unusual properties lends itself well to Naturalist's tools. The &1Manasteel Scoop&0 can be used to effectively harvest hives, and the &1Manasteel Grafter&0 is a durable subsitute for the generic bronze grafters. Of course, both tools have the ability to regenerate with mana. For best results, combine the tool with Living Wood.
+magicbees.botania.lexicon.manasteelTools.0=Manasteel's unusual properties lends itself well to Naturalist's tools. The &1Manasteel Scoop&0 can be used to effectively harvest hives, and the &1Manasteel Grafter&0 is a durable subsitute for the generic bronze grafters. Of course, both tools have the ability to regenerate with mana. For best results, item.magicbees.beecomb.ne the tool with Living Wood.
 magicbees.botania.lexicon.manasteelScoop=The &1Manasteel Scoop&0
 magicbees.botania.lexicon.manasteelGrafter=The &1Manasteel Grafter&0
 

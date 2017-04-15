@@ -49,11 +49,11 @@ public class ItemMysteriousMagnet extends AbstractTexturedItem {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        String s = StatCollector.translateToLocal("misc.level") + " " + getMagnetLevel(stack);
+        String s = String.format(StatCollector.translateToLocal("misc.level"), getMagnetLevel(stack));
         if (isMagnetActive(stack)) {
-            tooltip.add(StatCollector.translateToLocal("misc.magnetActive") + " "+ s);
+            tooltip.add(String.format(StatCollector.translateToLocal("misc.magnetActive"), s));
         } else {
-            tooltip.add(StatCollector.translateToLocal("misc.magnetInactive") + " "+ s);
+            tooltip.add(String.format(StatCollector.translateToLocal("misc.magnetInactive"), s));
         }
     }
 
