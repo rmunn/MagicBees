@@ -19,8 +19,6 @@ import net.minecraft.util.ResourceLocation;
  */
 public final class AlleleRegister {
 
-
-
     public static AlleleFlowerProvider flowersBookshelf;
     public static AlleleEffect effectSlowSpeed, effectWithering, effectTransmuting, effectCrumbling, alleleInvisibility; //todo
     public static AlleleEffectSpawnMob spawnWolf, spawnBats, spawnCow, spawnChicken, spawnPig,

@@ -5,6 +5,7 @@ import elec332.core.compat.forestry.bee.ForestryBeeEffects;
 import forestry.api.core.EnumTemperature;
 import magicbees.MagicBees;
 import magicbees.init.AlleleRegister;
+import magicbees.util.Config;
 import magicbees.util.IMagicBeesBranch;
 import forestry.api.apiculture.BeeManager;
 import forestry.api.core.EnumHumidity;
@@ -179,6 +180,35 @@ public enum EnumBeeBranches implements IMagicBeesBranch {
         @Override
         public Color getSecondaryColor() {
             return new Color(0xF696FF);
+        }
+
+    },
+    METALLIC("Metalliapis"){
+
+        @Override
+        public void setBranchProperties(BeeGenomeTemplate genomeTemplate) {
+            genomeTemplate.setSpeed(SPEED_SLOWEST);
+            genomeTemplate.setFertility(FERTILITY_LOW);
+            genomeTemplate.setNeverSleeps(TRUE_RECESSIVE);
+            genomeTemplate.setCaveDwelling(TRUE_RECESSIVE);
+        }
+
+        @Override
+        public boolean enabled() {
+            return Config.Bees.enableGemBees;
+        }
+
+    },
+    GEM("Lapidapis"){
+
+        @Override
+        public void setBranchProperties(BeeGenomeTemplate genomeTemplate) {
+            METALLIC.setBranchProperties(genomeTemplate);
+        }
+
+        @Override
+        public boolean enabled() {
+            return Config.Bees.enableGemBees;
         }
 
     },
