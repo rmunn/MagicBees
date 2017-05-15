@@ -20,9 +20,9 @@ import net.minecraft.util.ResourceLocation;
 public final class AlleleRegister {
 
     public static AlleleFlowerProvider flowersBookshelf;
-    public static AlleleEffect effectSlowSpeed, effectWithering, effectTransmuting, effectCrumbling, alleleInvisibility; //todo
+    public static AlleleEffect effectSlowSpeed, effectWithering, effectTransmuting, effectCrumbling, alleleInvisibility;
     public static AlleleEffectSpawnMob spawnWolf, spawnBats, spawnCow, spawnChicken, spawnPig,
-            spawnSheep, spawnCat, spawnHorse, spawnGhast, spawnSpider, spawnBlaze;
+            spawnSheep, spawnCat, spawnHorse, spawnGhast, spawnSpider, spawnBlaze, spawnZombie;
 
     public static void init(){
         flowersBookshelf = new AlleleFlowerProvider(new MagicBeesResourceLocation("flowersBookshelf"), new FlowerProvider("flowersBookshelf"));
@@ -45,6 +45,7 @@ public final class AlleleRegister {
         spawnGhast = newMobEffect("Ghastly", false, "Ghast").setThrottle(2060).setSpawnChance(10).setMaxMobsInArea(1);
         spawnSpider = newMobEffect("Spidery", false, "Spider").setThrottle(400).setSpawnChance(70).setMaxMobsInArea(4);
         spawnBlaze = newMobEffect("Ablaze", false, "Blaze").setThrottle(800).setSpawnChance(60).setMaxMobsInArea(2);
+        spawnZombie = newMobEffect("Brainy", false, "Brainy").setAngryOnPlayers().setThrottle(800).setMaxMobsInArea(2);
     }
 
     private static AlleleEffectSpawnMob newMobEffect(String name, boolean dominant, String mob){

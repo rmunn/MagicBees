@@ -1,6 +1,7 @@
 package magicbees.util;
 
 import com.google.common.collect.Sets;
+import elec332.core.util.ItemStackHelper;
 import elec332.core.world.WorldHelper;
 import elec332.core.world.location.BlockStateWrapper;
 import magicbees.api.ITransmutationController;
@@ -33,6 +34,9 @@ public class DefaultTransmutationController implements ITransmutationController 
         if(!world.isAirBlock(pos)) {
             BlockStateWrapper bsw = new BlockStateWrapper(WorldHelper.getBlockState(world, pos));
             ItemStack source = bsw.toItemStack();
+            if (!ItemStackHelper.isStackValid(source)){
+                return false;
+            }
             Biome biome = WorldHelper.getBiome(world, pos);
 
             for (ITransmutationHandler transmutationHandler : transmutationHandlers){

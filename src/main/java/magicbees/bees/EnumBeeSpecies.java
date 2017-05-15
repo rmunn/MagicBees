@@ -6,7 +6,6 @@ import elec332.core.compat.forestry.IIndividualDefinition;
 import elec332.core.compat.forestry.bee.BeeGenomeTemplate;
 import elec332.core.compat.forestry.bee.IBeeTemplate;
 import elec332.core.util.MoonPhase;
-import elec332.core.util.OredictHelper;
 import forestry.api.genetics.IAlleleEffect;
 import forestry.apiculture.PluginApiculture;
 import forestry.apiculture.items.EnumHoneyComb;
@@ -565,7 +564,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
             template.setFertility(FERTILITY_LOW);
-            //todo template.setEffect(AlleleRegister.spa)
+            template.setEffect(AlleleRegister.spawnZombie);
         }
 
         @Override
@@ -1124,8 +1123,6 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
-            speciesBuilder.addSpecialty(new ItemStack(Items.GOLD_NUGGET), 0.16f);
-            speciesBuilder.addProduct(getForestryComb(EnumHoneyComb.HONEY), 0.1f);
             speciesBuilder.setHasEffect();
             addOreProduct(EnumOreResourceType.GOLD, speciesBuilder, 0.16f);
         }
@@ -1171,11 +1168,6 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             registerMutation(EnumBeeSpecies.getForestrySpecies("Industrious"), EnumBeeSpecies.getForestrySpecies("Forest"), 12).requireResource("blockTin");
         }
 
-        @Override
-        public boolean isActive() {
-            return super.isActive() && OredictHelper.getOres("nuggetTin").size() > 0;
-        }
-
     },
     SILVER("argenteus", EnumBeeBranches.METALLIC, false, new Color(0x747C81), new Color(0x96BFC4)) {
 
@@ -1191,11 +1183,6 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void registerMutations() {
             registerMutation(EnumBeeSpecies.getForestrySpecies("Imperial"), EnumBeeSpecies.getForestrySpecies("Modest"), 8).requireResource("blockSilver");
-        }
-
-        @Override
-        public boolean isActive() {
-            return super.isActive() && OredictHelper.getOres("nuggetSilver").size() > 0;
         }
 
     },
@@ -1216,11 +1203,6 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             registerMutation(EnumBeeSpecies.getForestrySpecies("Common"), bee2, 10).requireResource("blockLead");
         }
 
-        @Override
-        public boolean isActive() {
-            return super.isActive() && OredictHelper.getOres("nuggetLead").size() > 0;
-        }
-
     },
     ALUMINIUM("aluminium", EnumBeeBranches.METALLIC, true, new Color(0xEDEDED), new Color(0x767676)) {
 
@@ -1236,11 +1218,6 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void registerMutations() {
             registerMutation(EnumBeeSpecies.getForestrySpecies("Industrious"), EnumBeeSpecies.getForestrySpecies("Cultivated"), 10).requireResource("blockAluminium");
-        }
-
-        @Override
-        public boolean isActive() {
-            return super.isActive() && OredictHelper.getOres("nuggetAluminium").size() > 0;
         }
 
     },
@@ -1262,11 +1239,6 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             registerMutation(EnumBeeSpecies.getForestrySpecies("Industrious"), INFERNAL, 9).requireResource("blockArdite");
         }
 
-        @Override
-        public boolean isActive() {
-            return super.isActive() && OredictHelper.getOres("nuggetArdite").size() > 0;
-        }
-
     },
     COBALT("caeruleo", EnumBeeBranches.METALLIC, false, new Color(0x03265F), new Color(0x59AAEF)) {
 
@@ -1284,11 +1256,6 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void registerMutations() {
             registerMutation(EnumBeeSpecies.getForestrySpecies("Imperial"), INFERNAL, 11).requireResource("blockCobalt");
-        }
-
-        @Override
-        public boolean isActive() {
-            return super.isActive() && OredictHelper.getOres("nuggetCobalt").size() > 0;
         }
 
     },
@@ -1311,11 +1278,6 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             registerMutation(ARDITE, COBALT, 9).requireResource("blockManyullyn");
         }
 
-        @Override
-        public boolean isActive() {
-            return super.isActive() && OredictHelper.getOres("nuggetManyullyn").size() > 0;
-        }
-
     },
     OSMIUM("hyacintho", EnumBeeBranches.METALLIC, false, new Color(0x374B5B), new Color(0x6C7B89)) {
 
@@ -1334,11 +1296,6 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             IAlleleBeeSpecies bee1 = SILVER.isActive() ? SILVER.getSpecies() : EnumBeeSpecies.getForestrySpecies("Imperial");
             EnumBeeSpecies bee2 = COBALT.isActive() ? COBALT : INFERNAL;
             registerMutation(bee1, bee2, 11).requireResource("blockOsmium");
-        }
-
-        @Override
-        public boolean isActive() {
-            return super.isActive() && OredictHelper.getOres("nuggetOsmium").size() > 0;
         }
 
     },

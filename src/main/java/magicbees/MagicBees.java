@@ -81,6 +81,7 @@ public class MagicBees implements IElecCoreMod, IModuleController, IWindowHandle
         BlockRegister.init();
         RecipeRegister.init();
         WindowManager.INSTANCE.register(this);
+        logger.info("Registering " + EnumBeeSpecies.values().length + " new bee species!");
         IndividualDefinitionRegistry.registerBees(EnumBeeSpecies.class);
         loadTimer.endPhase(event);
     }
