@@ -2,6 +2,7 @@ package magicbees.bees;
 
 import elec332.core.compat.forestry.bee.BeeGenomeTemplate;
 import elec332.core.compat.forestry.bee.ForestryBeeEffects;
+import elec332.core.main.ElecCore;
 import forestry.api.core.EnumTemperature;
 import magicbees.MagicBees;
 import magicbees.init.AlleleRegister;
@@ -302,7 +303,9 @@ public enum EnumBeeBranches implements IMagicBeesBranch {
 
     @Override
     public void setIndividualProperties(IAlleleSpeciesBuilder speciesBuilder) {
-        speciesBuilder.setIsSecret();
+        if (!ElecCore.developmentEnvironment) {
+            speciesBuilder.setIsSecret();
+        }
     }
 
     @Nonnull

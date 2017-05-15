@@ -21,6 +21,7 @@ public final class ItemRegister {
     public static ItemEnumBased<EnumPropolisType> propolisItem;
     public static ItemEnumBased<EnumWaxType> waxItem;
     public static ItemEnumBased<EnumResourceType> resourceItem;
+    public static ItemEnumBased<EnumNuggetType> orePartItem;
     //frames
     public static Item magicFrame, resilientFrame, gentleFrame, metabolicFrame, necroticFrame, temporalFrame, oblivionFrame;
     public static Item mysteriousMagnet, moonDial;
@@ -32,6 +33,7 @@ public final class ItemRegister {
         propolisItem = GameRegistry.register(new ItemEnumBased<>(new MagicBeesResourceLocation("propolis"), EnumPropolisType.class));
         waxItem = GameRegistry.register(new ItemEnumBased<>(new MagicBeesResourceLocation("wax"), EnumWaxType.class));
         resourceItem = GameRegistry.register(new ItemEnumBased<>(new MagicBeesResourceLocation("resource"), EnumResourceType.class));
+        orePartItem = GameRegistry.register(new ItemEnumBased<>(new MagicBeesResourceLocation("orepart"), EnumNuggetType.class));
 
         magicFrame = GameRegistry.register(new ItemMagicBeesFrame(EnumBeeModifiers.MAGIC));
         resilientFrame = GameRegistry.register(new ItemMagicBeesFrame(EnumBeeModifiers.RESILIENT));

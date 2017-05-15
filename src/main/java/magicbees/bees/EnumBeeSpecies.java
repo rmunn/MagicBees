@@ -5,7 +5,6 @@ import elec332.core.compat.forestry.IIndividualBranch;
 import elec332.core.compat.forestry.IIndividualDefinition;
 import elec332.core.compat.forestry.bee.BeeGenomeTemplate;
 import elec332.core.compat.forestry.bee.IBeeTemplate;
-import elec332.core.util.InventoryHelper;
 import elec332.core.util.MoonPhase;
 import elec332.core.util.OredictHelper;
 import forestry.api.genetics.IAlleleEffect;
@@ -19,6 +18,8 @@ import magicbees.init.ItemRegister;
 import magicbees.item.types.EnumCombType;
 import magicbees.item.types.EnumDropType;
 import magicbees.item.types.EnumPollenType;
+import magicbees.item.types.EnumResourceType;
+import magicbees.util.EnumOreResourceType;
 import magicbees.util.IMagicBeesBranch;
 import forestry.api.apiculture.*;
 import forestry.api.apiculture.BeeManager;
@@ -29,15 +30,12 @@ import forestry.api.genetics.IAllele;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.text.WordUtils;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
-import java.util.List;
 import java.util.Locale;
 
 import static elec332.core.compat.forestry.ForestryAlleles.*;
@@ -288,7 +286,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.WATERY), 0.25f);
-            //todo: speciality
+            speciesBuilder.addSpecialty(new ItemStack(Blocks.ICE), 0.025f);
         }
 
         @Override
@@ -562,7 +560,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         }
 
     },
-    BRAINY("cerebrum", EnumBeeBranches.SKULKING, true, new Color(0x83FF70)) {
+    BRAINY("cerebrum", EnumBeeBranches.SKULKING, true, new Color(0x83FF70)) { //TODO: Fix the TODO fest
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
@@ -902,7 +900,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.setHasEffect();
-            //todo speciesBuilder.addSpecialty(skullChip, 0.15f);
+            speciesBuilder.addSpecialty(ItemRegister.resourceItem.getStackFromType(EnumResourceType.SKULL_CHIP), 0.15f);
         }
 
         @Override
@@ -1006,7 +1004,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.setHasEffect();
-            //todo speciesBuilder.addProduct(dragonDust, 0.15f);
+            speciesBuilder.addProduct(ItemRegister.resourceItem.getStackFromType(EnumResourceType.DRAGON_DUST), 0.15f);
         }
 
         @Override
@@ -1109,7 +1107,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
-
+            addOreProduct(EnumOreResourceType.IRON, speciesBuilder, 0.18f);
         }
 
         @Override
@@ -1126,7 +1124,10 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.addSpecialty(new ItemStack(Items.GOLD_NUGGET), 0.16f);
+            speciesBuilder.addProduct(getForestryComb(EnumHoneyComb.HONEY), 0.1f);
             speciesBuilder.setHasEffect();
+            addOreProduct(EnumOreResourceType.GOLD, speciesBuilder, 0.16f);
         }
 
         @Override
@@ -1145,17 +1146,12 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
-            addOreProduct("Copper", speciesBuilder, 0.2f);
+            addOreProduct(EnumOreResourceType.COPPER, speciesBuilder, 0.2f);
         }
 
         @Override
         public void registerMutations() {
             registerMutation(EnumBeeSpecies.getForestrySpecies("Industrious"), EnumBeeSpecies.getForestrySpecies("Meadows"), 12).requireResource("blockCopper");
-        }
-
-        @Override
-        public boolean isActive() {
-            return super.isActive() && OredictHelper.getOres("nuggetCopper").size() > 0;
         }
 
     },
@@ -1167,7 +1163,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
-            addOreProduct("Tin", speciesBuilder, 0.2f);
+            addOreProduct(EnumOreResourceType.TIN, speciesBuilder, 0.2f);
         }
 
         @Override
@@ -1189,7 +1185,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
-            addOreProduct("Silver", speciesBuilder, 0.16f);
+            addOreProduct(EnumOreResourceType.SILVER, speciesBuilder, 0.16f);
         }
 
         @Override
@@ -1211,7 +1207,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
-            addOreProduct("Lead", speciesBuilder, 0.17f);
+            addOreProduct(EnumOreResourceType.LEAD, speciesBuilder, 0.17f);
         }
 
         @Override
@@ -1234,7 +1230,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
-            addOreProduct("Aluminium", speciesBuilder, 0.2f);
+            addOreProduct(EnumOreResourceType.ALUMINIUM, speciesBuilder, 0.2f);
         }
 
         @Override
@@ -1258,7 +1254,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.setTemperature(EnumTemperature.HOT);
             speciesBuilder.setHumidity(EnumHumidity.ARID);
-            addOreProduct("Ardite", speciesBuilder, 0.18f);
+            addOreProduct(EnumOreResourceType.ARDITE, speciesBuilder, 0.18f);
         }
 
         @Override
@@ -1282,7 +1278,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.setTemperature(EnumTemperature.HOT);
             speciesBuilder.setHumidity(EnumHumidity.ARID);
-            addOreProduct("Cobalt", speciesBuilder, 0.18f);
+            addOreProduct(EnumOreResourceType.COBALT, speciesBuilder, 0.18f);
         }
 
         @Override
@@ -1307,7 +1303,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setTemperature(EnumTemperature.HOT);
             speciesBuilder.setHumidity(EnumHumidity.ARID);
             speciesBuilder.setHasEffect();
-            addOreProduct("Manyullyn", speciesBuilder, 0.16f);
+            addOreProduct(EnumOreResourceType.MANYULLYN, speciesBuilder, 0.16f);
         }
 
         @Override
@@ -1330,7 +1326,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
-            addOreProduct("Osmium", speciesBuilder, 0.16f);
+            addOreProduct(EnumOreResourceType.OSMIUM, speciesBuilder, 0.16f);
         }
 
         @Override
@@ -1343,6 +1339,118 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public boolean isActive() {
             return super.isActive() && OredictHelper.getOres("nuggetOsmium").size() > 0;
+        }
+
+    },
+    DIAMOND("diamond", EnumBeeBranches.GEM, false, new Color(0x209581), new Color(0x8DF5E3)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            addOreProduct(EnumOreResourceType.DIAMOND, speciesBuilder, 0.2f); //0.6
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(EnumBeeSpecies.getForestrySpecies("Austere"), GOLD, 7).requireResource("blockDiamond");
+        }
+
+    },
+    EMERALD("prasinus", EnumBeeBranches.GEM, false, new Color(0x005300), new Color(0x17DD62)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            addOreProduct(EnumOreResourceType.EMERALD, speciesBuilder, 0.17f); // 0.4
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(EnumBeeSpecies.getForestrySpecies("Austere"), SILVER.isActive() ? SILVER.getSpecies() : EnumBeeSpecies.getForestrySpecies("Imperial"), 6).requireResource("blockEmerald");
+        }
+
+    },
+    APATITE("apatite", EnumBeeBranches.GEM, false, new Color(0x2EA7EC), new Color(0x001D51)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            template.setSpeed(SPEED_NORMAL);
+            template.setLifeSpan(LIFESPAN_NORMAL);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            addOreProduct(EnumOreResourceType.APATITE, speciesBuilder, 0.2f); // 0.1
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(EnumBeeSpecies.getForestrySpecies("Rural"), COPPER, 12).requireResource("oreApatite");
+        }
+
+    },
+    SILICON("siliconisque", EnumBeeBranches.GEM, false, new Color(0xADA2A7), new Color(0x736675)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            template.setSpeed(SPEED_SLOW);
+            template.setTerritory(TERRITORY_LARGER);
+            template.setToleratesRain(TRUE_RECESSIVE);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            addOreProduct(EnumOreResourceType.SILICON, speciesBuilder, 0.16f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(EARTHY, IRON, 17); //TODO: prefer AE_SKYSTONE over iron if possible
+        }
+
+    },
+    CERTUS("alia cristallum", EnumBeeBranches.GEM, true, new Color(0x93C7FF), new Color(0xA6B8C7)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            template.setSpeed(SPEED_SLOWER);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            addOreProduct(EnumOreResourceType.CERTUS, speciesBuilder, 0.8f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(SILICON.isActive() ? SILICON : EARTHY, IRON, 17);
+        }
+
+    },
+    FLUIX("alia cristallum", EnumBeeBranches.GEM, true, new Color(0xFC639E), new Color(0x534797)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            template.setSpeed(SPEED_SLOWEST);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            addOreProduct(EnumOreResourceType.FLUIX, speciesBuilder, 0.6f);
+        }
+
+        @Override
+        @SuppressWarnings("all") //localVar
+        public void registerMutations() {
+            EnumBeeSpecies beeA = CERTUS.isActive() ? CERTUS : (SILICON.isActive() ? SILICON : IRON);
+            EnumBeeSpecies beeB = EARTHY; //todo: prefer AE skystone
+            registerMutation(beeA, beeB, 17);
         }
 
     };
@@ -1359,12 +1467,14 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         this.dominant = dominant;
         this.uid = MagicBees.modid + ".species" + WordUtils.capitalize(name().toLowerCase(Locale.ENGLISH));
         this.unlocalisedName = uid;
+        this.enabledOverride = true;
     }
 
     private final IMagicBeesBranch branch;
     private final int primaryColor, secondaryColor;
     private final String binominalName, uid, unlocalisedName;
     private final boolean dominant;
+    private boolean enabledOverride;
 
     private IIndividualDefinition<IBeeGenome, IBee, EnumBeeType> individual;
 
@@ -1432,9 +1542,11 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         return new ItemStack(PluginApiculture.getItems().beeComb, 1, type.ordinal());
     }
 
-    protected final void addOreProduct(String ore, IAlleleBeeSpeciesBuilder speciesBuilder, float speciality){
+    protected final void addOreProduct(EnumOreResourceType resource, IAlleleBeeSpeciesBuilder speciesBuilder, float speciality){
         speciesBuilder.addProduct(getForestryComb(EnumHoneyComb.HONEY), 0.1f);
-        speciesBuilder.addSpecialty(OredictHelper.getOres("nugget"+ore).get(0), speciality);
+        if (this.enabledOverride = resource.enabled()) {
+            speciesBuilder.addSpecialty(resource.getStack(), speciality);
+        }
     }
 
     protected final IBeeMutationBuilder registerMutation(EnumBeeSpecies bee1, EnumBeeSpecies bee2, int chance) {
@@ -1463,7 +1575,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
     @Override
     public boolean isActive() {
-        return branch.enabled();
+        return branch.enabled() && enabledOverride;
     }
 
     @Override
@@ -1495,17 +1607,6 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
     private static IAllele getForestryAllele(String name) {
         return AlleleManager.alleleRegistry.getAllele("forestry." + name);
-    }
-
-    private static IBlockState getRequiredBlock(String ore){
-        List<ItemStack> l = OredictHelper.getOres("block"+ore);
-        if (l.size() == 0){
-            l = OredictHelper.getOres("ore"+ore);
-            if (l.size() == 0){
-                return null;
-            }
-        }
-        return  ((ItemBlock) l.get(0).getItem()).block.getDefaultState();
     }
 
 }
