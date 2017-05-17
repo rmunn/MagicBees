@@ -13,6 +13,8 @@ import forestry.api.core.EnumHumidity;
 import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IAlleleSpeciesBuilder;
 import forestry.api.genetics.IClassification;
+import magicbees.util.ModNames;
+import net.minecraftforge.fml.common.Loader;
 
 import javax.annotation.Nonnull;
 
@@ -287,6 +289,11 @@ public enum EnumBeeBranches implements IMagicBeesBranch {
             genomeTemplate.setTemperatureTolerance(TOLERANCE_BOTH_1);
             genomeTemplate.setHumidityTolerance(TOLERANCE_BOTH_1);
             genomeTemplate.setSpeed(SPEED_SLOWER);
+        }
+
+        @Override
+        public boolean enabled() {
+            return Loader.isModLoaded(ModNames.BOTANIA);
         }
 
     };

@@ -4,6 +4,7 @@ import elec332.core.api.module.ElecModule;
 import elec332.core.world.WorldHelper;
 import magicbees.MagicBees;
 import magicbees.api.ITransmutationHandler;
+import magicbees.util.ModNames;
 import magicbees.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -16,16 +17,16 @@ import net.minecraftforge.oredict.OreDictionary;
 /**
  * Created by Elec332 on 15-5-2017.
  */
-@ElecModule(owner = MagicBees.modid, name = "Botania Integration")
+@ElecModule(owner = MagicBees.modid, name = "Botania Integration", modDependencies = ModNames.BOTANIA)
 public class IntegrationBotania {
 
 	private Block livingWood, livingRock, dreamWood;
 
 	@ElecModule.EventHandler
 	public void postInit(FMLPostInitializationEvent event){
-		livingWood = Utils.getBlock("botania", "livingwood");
-		livingRock = Utils.getBlock("botania", "livingrock");
-		dreamWood = Utils.getBlock("botania", "dreamwood");
+		livingWood = Utils.getBlock(ModNames.BOTANIA, "livingwood");
+		livingRock = Utils.getBlock(ModNames.BOTANIA, "livingrock");
+		dreamWood = Utils.getBlock(ModNames.BOTANIA, "dreamwood");
 		MagicBees.transmutationController.addTransmutationHandler(new ITransmutationHandler() {
 
 			@Override

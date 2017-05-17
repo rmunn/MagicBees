@@ -29,7 +29,13 @@ public enum EnumOreResourceType {
 	APATITE(EnumNuggetType.APATITE),
 	SILICON,
 	CERTUS,
-	FLUIX;
+	FLUIX,
+	PLATINUM("nuggetPlatinum"),
+	NICKEL("nuggetNickel", "nuggetFerrous"),
+	BRONZE("nuggetBronze"), //TODO: Add bronze nuggets? As bronze is a forestry resource?
+	INVAR("nuggetInvar"),
+	ELECTRUM("nuggetElectrum"),
+	;
 
 	EnumOreResourceType(EnumNuggetType nugget){
 		this(nugget.getStack());

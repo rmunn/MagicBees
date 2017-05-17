@@ -4,6 +4,7 @@ import elec332.core.api.module.ElecModule;
 import elec332.core.world.WorldHelper;
 import magicbees.MagicBees;
 import magicbees.api.ITransmutationHandler;
+import magicbees.util.ModNames;
 import magicbees.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStone;
@@ -11,7 +12,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -24,15 +24,15 @@ import javax.annotation.Nullable;
  * Created by Elec332 on 15-5-2017.
  */
 @SuppressWarnings("deprecation")
-@ElecModule(owner = MagicBees.modid, name = "Railcraft Integration")
+@ElecModule(owner = MagicBees.modid, name = "Railcraft Integration", modDependencies = ModNames.RAILCRAFT)
 public class IntegrationRailcraft {
 
 	private Block quarried, abyssal;
 
 	@ElecModule.EventHandler
 	public void init(FMLInitializationEvent event){
-		quarried = Utils.getBlock("railcraft", "brick_quarried");
-		abyssal = Utils.getBlock("railcraft", "brick_abyssal");
+		quarried = Utils.getBlock(ModNames.RAILCRAFT, "brick_quarried");
+		abyssal = Utils.getBlock(ModNames.RAILCRAFT, "brick_abyssal");
 		MagicBees.transmutationController.addTransmutationHandler(new ITransmutationHandler() {
 
 			@Override
@@ -61,7 +61,10 @@ public class IntegrationRailcraft {
 	}
 
 	private IBlockState trySpawnRC(Biome biome, @Nullable BlockStone.EnumType type){
-		int meta = type == null ? 5 : 2;
+		int meta = type == null ? 5 : type == BlockStone.EnumType.STONE ? 2 : -1;
+		if (meta < 0){
+			return null;
+		}
 		if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.SNOWY)){
 			return quarried.getStateFromMeta(meta);
 		}

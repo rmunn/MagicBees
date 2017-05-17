@@ -1299,6 +1299,95 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         }
 
     },
+    ELECTRUM("electrum", EnumBeeBranches.METALLIC, false, new Color(0xEAF79)){
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.setTemperature(EnumTemperature.HOT);
+            speciesBuilder.setHumidity(EnumHumidity.ARID);
+            addOreProduct(EnumOreResourceType.ELECTRUM, speciesBuilder, 0.18f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(SILVER, GOLD, 10).requireResource("blockElectrum");
+        }
+
+    },
+    PLATINUM("platinum", EnumBeeBranches.METALLIC, false, new Color(0x9EE7F7)){
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            addOreProduct(EnumOreResourceType.PLATINUM, speciesBuilder, 0.18f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(NICKEL, INVAR, 10).requireResource("blockPlatinum");
+        }
+
+    },
+    NICKEL("nickel", EnumBeeBranches.METALLIC, false, new Color(0xB4C989)){
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            addOreProduct(EnumOreResourceType.NICKEL, speciesBuilder, 0.18f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(IRON, ESOTERIC, 14).requireResource("blockNickel");
+        }
+
+    },
+    INVAR("invar", EnumBeeBranches.METALLIC, false, new Color(0xCDE3A1)){
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.setTemperature(EnumTemperature.HOT);
+            speciesBuilder.setHumidity(EnumHumidity.ARID);
+            addOreProduct(EnumOreResourceType.INVAR, speciesBuilder, 0.18f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(IRON, NICKEL, 14).requireResource("blockInvar");
+        }
+
+    },
+    BRONZE("bronze", EnumBeeBranches.METALLIC, false, new Color(0xB56D07)){
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            addOreProduct(EnumOreResourceType.BRONZE, speciesBuilder, 0.18f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(TIN, COPPER, 12).requireResource("blockBronze");
+        }
+
+    },
     DIAMOND("diamond", EnumBeeBranches.GEM, false, new Color(0x209581), new Color(0x8DF5E3)) {
 
         @Override
