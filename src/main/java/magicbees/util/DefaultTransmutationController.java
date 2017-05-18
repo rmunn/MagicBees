@@ -1,5 +1,6 @@
 package magicbees.util;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import elec332.core.util.ItemStackHelper;
 import elec332.core.world.WorldHelper;
@@ -18,15 +19,20 @@ import java.util.Set;
  */
 public class DefaultTransmutationController implements ITransmutationController {
 
-    public DefaultTransmutationController(){
+    public DefaultTransmutationController(ITransmutationHandler... handlers){
         this.transmutationHandlers = Sets.newHashSet();
+        if (handlers != null){
+            for (ITransmutationHandler handler : handlers){
+                addTransmutationHandler(handler);
+            }
+        }
     }
 
     private final Set<ITransmutationHandler> transmutationHandlers;
 
     @Override
     public boolean addTransmutationHandler(ITransmutationHandler transmutationHandler) {
-        return transmutationHandlers.add(transmutationHandler);
+        return transmutationHandlers.add(Preconditions.checkNotNull(transmutationHandler));
     }
 
     @Override

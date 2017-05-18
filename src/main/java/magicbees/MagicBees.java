@@ -1,6 +1,7 @@
 package magicbees;
 
 import elec332.core.api.IElecCoreMod;
+import elec332.core.api.module.ElecModule;
 import elec332.core.api.module.IModuleController;
 import elec332.core.client.model.RenderingRegistry;
 import elec332.core.compat.forestry.IndividualDefinitionRegistry;
@@ -11,6 +12,7 @@ import elec332.core.inventory.window.WindowManager;
 import elec332.core.item.AbstractTexturedItem;
 import elec332.core.util.AbstractCreativeTab;
 import elec332.core.util.LoadTimer;
+import elec332.core.util.RegistryHelper;
 import elec332.core.world.WorldHelper;
 import magicbees.api.ICrumblingHandler;
 import magicbees.api.ITransmutationController;
@@ -24,12 +26,15 @@ import magicbees.util.DefaultTransmutationController;
 import magicbees.util.MagicBeesResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
@@ -91,6 +96,16 @@ public class MagicBees implements IElecCoreMod, IModuleController, IWindowHandle
         loadTimer.startPhase(event);
 
         loadTimer.endPhase(event);
+    }
+
+    @Mod.EventHandler
+    @SuppressWarnings("all")
+    public void fixIronNugget(FMLMissingMappingsEvent event){
+        for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()){
+            if (mapping.resourceLocation.equals(new MagicBeesResourceLocation("iron_nugget"))){
+                mapping.remap(RegistryHelper.getItemRegistry().getObject(new ResourceLocation("iron_nugget")));
+            }
+        }
     }
 
     @Override

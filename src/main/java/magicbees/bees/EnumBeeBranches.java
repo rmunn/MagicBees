@@ -14,6 +14,7 @@ import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IAlleleSpeciesBuilder;
 import forestry.api.genetics.IClassification;
 import magicbees.util.ModNames;
+import magicbees.util.Utils;
 import net.minecraftforge.fml.common.Loader;
 
 import javax.annotation.Nonnull;
@@ -292,6 +293,15 @@ public enum EnumBeeBranches implements IMagicBeesBranch {
         }
 
         @Override
+        public Color getSecondaryColor() {
+            return new Color(0xFFB2BB);
+        }
+
+        @Override
+        public void setIndividualProperties(IAlleleSpeciesBuilder speciesBuilder) {
+        }
+
+        @Override
         public boolean enabled() {
             return Loader.isModLoaded(ModNames.BOTANIA);
         }
@@ -310,9 +320,7 @@ public enum EnumBeeBranches implements IMagicBeesBranch {
 
     @Override
     public void setIndividualProperties(IAlleleSpeciesBuilder speciesBuilder) {
-        if (!ElecCore.developmentEnvironment) {
-            speciesBuilder.setIsSecret();
-        }
+        Utils.setSecret(speciesBuilder);
     }
 
     @Nonnull

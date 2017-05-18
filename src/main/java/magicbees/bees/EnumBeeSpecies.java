@@ -26,6 +26,7 @@ import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
 import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IAllele;
+import magicbees.util.Utils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -1497,6 +1498,189 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             EnumBeeSpecies beeA = CERTUS.isActive() ? CERTUS : (SILICON.isActive() ? SILICON : IRON);
             EnumBeeSpecies beeB = EARTHY; //todo: prefer AE skystone
             registerMutation(beeA, beeB, 17);
+        }
+
+    },
+
+    //Botania
+    BOT_ROOTED("truncus", EnumBeeBranches.BOTANICAL, true, new Color(0x00A800)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            Utils.setSecret(speciesBuilder);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.MUNDANE), 0.1f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(EnumBeeSpecies.getForestrySpecies("Forest"), ELDRITCH, 15).requireResource(BeeIntegrationInterface.livingWood.getDefaultState());
+        }
+
+    },
+    BOT_BOTANIC("botanica", EnumBeeBranches.BOTANICAL, true, new Color(0x94C661)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            template.setFlowerProvider(BeeIntegrationInterface.flowersBotania);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            Utils.setSecret(speciesBuilder);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.MUNDANE), 0.1f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TRANSMUTED), 0.5f);
+            BeeIntegrationInterface.addPetals(speciesBuilder, 0.1f);
+        }
+
+        @Override
+        public void registerMutations() {
+
+        }
+
+    },
+    BOT_BLOSSOM("viridis", EnumBeeBranches.BOTANICAL, false, new Color(0xA4C193)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            BOT_BOTANIC.modifyGenomeTemplate(template);
+            template.setFertility(FERTILITY_MAXIMUM);
+            template.setFloweringSpeed(FLOWERING_FASTER);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            Utils.setSecret(speciesBuilder);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.MUNDANE), 0.2f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TRANSMUTED), 0.5f);
+            BeeIntegrationInterface.addPetals(speciesBuilder, 0.4f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(BOT_BOTANIC, EARTHY, 12);
+        }
+
+    },
+    BOT_FLORAL("florens", EnumBeeBranches.BOTANICAL, true, new Color(0x29D81A)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            BOT_BLOSSOM.modifyGenomeTemplate(template);
+            template.setFertility(FERTILITY_HIGH);
+            template.setFloweringSpeed(FLOWERING_MAXIMUM);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            Utils.setSecret(speciesBuilder);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.MUNDANE), 0.25f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TRANSMUTED), 0.5f);
+            BeeIntegrationInterface.addPetals(speciesBuilder, 0.16f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(BOT_BOTANIC, BOT_BLOSSOM, 8);
+        }
+
+    },
+    BOT_VAZBEE("vazbii", EnumBeeBranches.BOTANICAL, false, new Color(0xff6b9c)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            BOT_FLORAL.modifyGenomeTemplate(template);
+            template.setFertility(FERTILITY_LOW);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            Utils.setSecret(speciesBuilder);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.SOUL), 0.5f);
+            speciesBuilder.addProduct(new ItemStack(Items.DYE, 1, 9), 0.2f);
+            speciesBuilder.addProduct(new ItemStack(Blocks.WOOL, 1, 9), 0.2f);
+            speciesBuilder.addProduct(new ItemStack(Blocks.RED_FLOWER), 0.6f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TRANSMUTED), 0.15f);
+            if (BeeIntegrationInterface.itemPastureSeed == null){
+                return;
+            }
+            for (int i = 0; i < BeeIntegrationInterface.seedTypes; i++) {
+                speciesBuilder.addSpecialty(new ItemStack(BeeIntegrationInterface.itemPastureSeed, 1, i), 0.4f);
+            }
+        }
+
+        @Override
+        public void registerMutations() {
+        }
+
+    },
+    BOT_SOMNOLENT("soporatus", EnumBeeBranches.BOTANICAL, true, new Color(0x2978C6)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            template.setFlowerProvider(BeeIntegrationInterface.flowersBotania);
+            template.setTemperatureTolerance(TOLERANCE_UP_2);
+            template.setNeverSleeps(TRUE_RECESSIVE);
+            template.setCaveDwelling(TRUE_RECESSIVE);
+            template.setSpeed(SPEED_SLOWEST);
+            template.setEffect(AlleleRegister.effectSlowSpeed);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.setNocturnal();
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.WATERY), 0.8f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.SOUL), 0.15f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(BOT_ROOTED, WATERY, 16).requireNight();
+        }
+
+    },
+    BOT_DREAMING("somnior", EnumBeeBranches.BOTANICAL, true, new Color(0x123456)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            BOT_SOMNOLENT.modifyGenomeTemplate(template);
+            template.setSpeed(SPEED_NORMAL);
+            template.setTerritory(TERRITORY_LARGER);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.setNocturnal();
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.WATERY), 0.16f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.SOUL), 0.33f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(WINDY, BOT_SOMNOLENT, 8).requireNight();
+        }
+
+    },
+    BOT_ALFHEIM("alfheimis", EnumBeeBranches.BOTANICAL, false, new Color(-1), new Color(-1)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            BOT_DREAMING.modifyGenomeTemplate(template);
+            template.setEffect(BeeIntegrationInterface.effectDreaming);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            Utils.setSecret(speciesBuilder);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.OTHERWORLDLY), 0.28f);
+        }
+
+        @Override
+        public void registerMutations() {
+
         }
 
     };

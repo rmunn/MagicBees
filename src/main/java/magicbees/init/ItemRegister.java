@@ -1,14 +1,22 @@
 package magicbees.init;
 
+import elec332.core.item.AbstractTexturedItem;
 import elec332.core.item.ItemEnumBased;
+import elec332.core.util.RegistryHelper;
+import elec332.core.util.recipes.RecipeHelper;
 import magicbees.bees.EnumBeeModifiers;
 import magicbees.item.ItemMagicBeesFrame;
 import magicbees.item.ItemMoonDial;
 import magicbees.item.ItemMysteriousMagnet;
 import magicbees.item.types.*;
 import magicbees.util.MagicBeesResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Created by Elec332 on 4-3-2017.
@@ -24,7 +32,7 @@ public final class ItemRegister {
     public static ItemEnumBased<EnumNuggetType> orePartItem;
     //frames
     public static Item magicFrame, resilientFrame, gentleFrame, metabolicFrame, necroticFrame, temporalFrame, oblivionFrame;
-    public static Item mysteriousMagnet, moonDial;
+    public static Item mysteriousMagnet, moonDial, ironNugget;
 
     public static void init(){
         combItem = GameRegistry.register(new ItemEnumBased<>(new MagicBeesResourceLocation("beeComb"), EnumCombType.class));
@@ -45,6 +53,20 @@ public final class ItemRegister {
 
         mysteriousMagnet = GameRegistry.register(new ItemMysteriousMagnet());
         moonDial = GameRegistry.register(new ItemMoonDial());
+
+        fixIronNuggetStuff();
+
+    }
+
+    private static void fixIronNuggetStuff(){
+        if (RegistryHelper.getItemRegistry().containsKey(new ResourceLocation("iron_nugget"))){
+            ironNugget = RegistryHelper.getItemRegistry().getObject(new ResourceLocation("iron_nugget"));
+        }
+        if (ironNugget == null){
+            ironNugget = GameRegistry.register(new AbstractTexturedItem(new MagicBeesResourceLocation("iron_nugget")){}.setCreativeTab(CreativeTabs.MATERIALS));
+            OreDictionary.registerOre("nuggetIron", ironNugget);
+            RecipeHelper.getCraftingManager().addShapelessRecipe(new ItemStack(Items.IRON_INGOT), "xxx", "xxx", "xxx", 'x', ironNugget);
+        }
     }
 
 }

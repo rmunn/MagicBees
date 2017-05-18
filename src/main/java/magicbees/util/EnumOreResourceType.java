@@ -1,6 +1,7 @@
 package magicbees.util;
 
 import elec332.core.util.ItemStackHelper;
+import magicbees.init.ItemRegister;
 import magicbees.item.types.EnumNuggetType;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -13,12 +14,12 @@ import java.util.List;
  */
 public enum EnumOreResourceType {
 
-	IRON(EnumNuggetType.IRON),
-	GOLD(new ItemStack(Items.GOLD_NUGGET), "dustTinyGold"),
-	COPPER(EnumNuggetType.COPPER),
-	TIN(EnumNuggetType.TIN),
-	SILVER("dustTinySilver", "nuggetSilver"),
-	LEAD("dustTinyLead", "nuggetLead"),
+	IRON(new ItemStack(ItemRegister.ironNugget), "nuggetIron"),
+	GOLD(new ItemStack(Items.GOLD_NUGGET)),
+	COPPER(EnumNuggetType.COPPER, "nuggetCopper"),
+	TIN(EnumNuggetType.TIN, "nuggetTin"),
+	SILVER("nuggetSilver", "dustTinySilver"),
+	LEAD("nuggetLead", "dustTinyLead"),
 	ALUMINIUM("nuggetAluminium", "nuggetAluminum"),
 	ARDITE("nuggetArdite"),
 	COBALT("nuggetCobalt"),
@@ -32,13 +33,13 @@ public enum EnumOreResourceType {
 	FLUIX,
 	PLATINUM("nuggetPlatinum"),
 	NICKEL("nuggetNickel", "nuggetFerrous"),
-	BRONZE("nuggetBronze"), //TODO: Add bronze nuggets? As bronze is a forestry resource?
+	BRONZE(EnumNuggetType.BRONZE, "nuggetBronze"), //TODO: Add bronze nuggets? As bronze is a forestry resource?
 	INVAR("nuggetInvar"),
 	ELECTRUM("nuggetElectrum"),
 	;
 
-	EnumOreResourceType(EnumNuggetType nugget){
-		this(nugget.getStack());
+	EnumOreResourceType(EnumNuggetType nugget, String... oreDictA){
+		this(nugget.getStack(), oreDictA);
 	}
 
 	EnumOreResourceType(String... oreDictA){

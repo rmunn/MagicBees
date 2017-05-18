@@ -16,42 +16,15 @@ import java.util.List;
  */
 public enum EnumNuggetType implements IEnumItem {
 
-	IRON("dustTinyIron"),
 	DIAMOND,
 	EMERALD,
 	APATITE,
-	COPPER("dustTinyCopper"),
-	TIN("dustTinyTin")
-	;
-
-	EnumNuggetType(String... sA){
-		if (sA != null){
-			for (String s : sA) {
-				List<ItemStack> l = OreDictionary.getOres(s);
-				if (!l.isEmpty()) {
-					for (ItemStack stack : l) {
-						if (!stack.isEmpty()) {
-							replacement = stack.copy();
-							break;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	private ItemStack replacement;
+	COPPER,
+	TIN,
+	BRONZE;
 
 	public ItemStack getStack(){
-		if (replacement != null){
-			return replacement;
-		}
 		return ItemRegister.orePartItem.getStackFromType(this);
-	}
-
-	@Override
-	public boolean shouldShow() {
-		return replacement == null;
 	}
 
 	@Override

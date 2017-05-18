@@ -1,10 +1,14 @@
 package magicbees.init;
 
-import elec332.core.compat.forestry.allele.AlleleEffect;
-import elec332.core.compat.forestry.allele.AlleleEffectPotion;
-import elec332.core.compat.forestry.allele.AlleleEffectSpawnMob;
-import elec332.core.compat.forestry.allele.AlleleFlowerProvider;
+import elec332.core.compat.forestry.ForestryAlleles;
+import elec332.core.compat.forestry.allele.*;
 import elec332.core.compat.forestry.bee.FlowerProvider;
+import forestry.api.apiculture.IAlleleBeeEffect;
+import forestry.api.apiculture.IBeeGenome;
+import forestry.api.apiculture.IBeeHousing;
+import forestry.api.genetics.IAlleleEffect;
+import forestry.api.genetics.IAlleleFlowers;
+import forestry.api.genetics.IEffectData;
 import magicbees.MagicBees;
 import magicbees.bees.allele.AlleleEffectCrumbling;
 import magicbees.bees.allele.AlleleEffectTransmuting;
@@ -20,7 +24,7 @@ import net.minecraft.util.ResourceLocation;
 public final class AlleleRegister {
 
     public static AlleleFlowerProvider flowersBookshelf;
-    public static AlleleEffect effectSlowSpeed, effectWithering, effectTransmuting, effectCrumbling, alleleInvisibility;
+    public static IAlleleBeeEffect effectSlowSpeed, effectWithering, effectTransmuting, effectCrumbling, alleleInvisibility;
     public static AlleleEffectSpawnMob spawnWolf, spawnBats, spawnCow, spawnChicken, spawnPig,
             spawnSheep, spawnCat, spawnHorse, spawnGhast, spawnSpider, spawnBlaze, spawnZombie;
 
@@ -46,6 +50,7 @@ public final class AlleleRegister {
         spawnSpider = newMobEffect("Spidery", false, "Spider").setThrottle(400).setSpawnChance(70).setMaxMobsInArea(4);
         spawnBlaze = newMobEffect("Ablaze", false, "Blaze").setThrottle(800).setSpawnChance(60).setMaxMobsInArea(2);
         spawnZombie = newMobEffect("Brainy", false, "Brainy").setAngryOnPlayers().setThrottle(800).setMaxMobsInArea(2);
+
     }
 
     private static AlleleEffectSpawnMob newMobEffect(String name, boolean dominant, String mob){
