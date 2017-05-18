@@ -2,12 +2,12 @@ package magicbees.bees.allele;
 
 import elec332.core.compat.forestry.EffectData;
 import elec332.core.compat.forestry.allele.AlleleEffectThrottled;
+import forestry.api.apiculture.BeeManager;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
 import forestry.api.apiculture.IBeeModifier;
 import forestry.api.genetics.IEffectData;
 import magicbees.api.ICrumblingHandler;
-import magicbees.bees.BeeManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

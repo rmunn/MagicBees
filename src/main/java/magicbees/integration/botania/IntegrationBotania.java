@@ -1,18 +1,39 @@
 package magicbees.integration.botania;
 
+import com.google.common.collect.Lists;
 import elec332.core.api.module.ElecModule;
 import elec332.core.compat.forestry.allele.AlleleFlowerProvider;
+import elec332.core.util.recipes.RecipeHelper;
 import elec332.core.world.WorldHelper;
+import forestry.api.apiculture.BeeManager;
+import forestry.api.apiculture.EnumBeeType;
 import magicbees.MagicBees;
 import magicbees.api.ITransmutationHandler;
 import magicbees.bees.BeeIntegrationInterface;
+import magicbees.bees.EnumBeeSpecies;
 import magicbees.bees.allele.AlleleEffectTransmuting;
+import magicbees.init.ItemRegister;
 import magicbees.util.DefaultTransmutationController;
 import magicbees.util.ModNames;
 import magicbees.util.Utils;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import vazkii.botania.api.BotaniaAPI;
+import vazkii.botania.api.lexicon.LexiconEntry;
+import vazkii.botania.api.recipe.RecipeElvenTrade;
+import vazkii.botania.api.recipe.RecipeManaInfusion;
+import vazkii.botania.api.recipe.RecipePetals;
+import vazkii.botania.common.item.ModItems;
+import vazkii.botania.common.lib.LibItemNames;
 
 /**
  * Created by Elec332 on 15-5-2017.
@@ -21,6 +42,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class IntegrationBotania {
 
 	private Block livingWood, livingRock, dreamWood;
+	private Item itemPetal;
 
 	@ElecModule.EventHandler
 	public void preInit(FMLPreInitializationEvent event){
@@ -49,10 +71,124 @@ public class IntegrationBotania {
 		BeeIntegrationInterface.flowersBotania = new AlleleFlowerProvider(BeeIntegrationInterface.bot_flowers_name, new FlowerProviderBotania("flowersBotania", mysticalFlower));
 		BeeIntegrationInterface.flowersBotania.registerAcceptableFlower(mysticalFlower);
 
-		BeeIntegrationInterface.itemPetal = Utils.getItem(ModNames.BOTANIA, "petal");
+		BeeIntegrationInterface.itemPetal = itemPetal = Utils.getItem(ModNames.BOTANIA, "petal");
 		BeeIntegrationInterface.itemPastureSeed = Utils.getItem(ModNames.BOTANIA, "grassSeeds");
 		BeeIntegrationInterface.seedTypes = 9;
 
+	}
+
+	@ElecModule.EventHandler
+	public void init(FMLInitializationEvent event){
+		BotaniaAPI.registerSubTile(SubTileBeegonia.NAME, SubTileBeegonia.class);
+		BotaniaAPI.registerSubTileSignature(SubTileBeegonia.class, new BotaniaSignature(SubTileBeegonia.NAME));
+		BotaniaAPI.addSubTileToCreativeMenu(SubTileBeegonia.NAME);
+
+		BotaniaAPI.registerSubTile(SubTileHiveacynth.NAME, SubTileHiveacynth.class);
+		BotaniaAPI.registerSubTileSignature(SubTileHiveacynth.class, new BotaniaSignature(SubTileHiveacynth.NAME));
+		BotaniaAPI.addSubTileToCreativeMenu(SubTileHiveacynth.NAME);
+
+		BotaniaAPI.registerSubTile(SubTileHibeescus.NAME, SubTileHibeescus.class);
+		BotaniaAPI.registerSubTileSignature(SubTileHibeescus.class, new BotaniaSignature(SubTileHibeescus.NAME));
+		BotaniaAPI.addSubTileToCreativeMenu(SubTileHibeescus.NAME);
+	}
+
+	@ElecModule.EventHandler
+	public void postInit(FMLPostInitializationEvent event){
+
+		GameRegistry.addRecipe(new ItemStack(ItemRegister.manasteelScoop), "twt", "tmt", " t ", 'm', new ItemStack(ModItems.manaResource, 1, 0), 'w', Blocks.WOOL, 't', Items.STICK);
+		IRecipe manasteelScoopRecipe = RecipeHelper.getCraftingManager().getRecipeList().get(RecipeHelper.getCraftingManager().getRecipeList().size() - 1);
+
+		GameRegistry.addRecipe(new ItemStack(ItemRegister.manasteelgrafter), "  m", " t ", "t  ", 'm', new ItemStack(ModItems.manaResource, 1, 0), 't', Items.STICK);
+		IRecipe manasteelGrafterRecipe = RecipeHelper.getCraftingManager().getRecipeList().get(RecipeHelper.getCraftingManager().getRecipeList().size() - 1);
+
+
+		RecipeManaInfusion infusionBeeBotanical = new RecipeManaInfusionBeeSpecies(EnumBeeSpecies.BOT_BOTANIC, EnumBeeSpecies.BOT_ROOTED, 55000, EnumBeeType.DRONE);
+		BotaniaAPI.manaInfusionRecipes.add(infusionBeeBotanical);
+
+		RecipeManaInfusion infusionBeeVazbee = new RecipeManaInfusionBeeSpecies(EnumBeeSpecies.BOT_VAZBEE, EnumBeeSpecies.BOT_FLORAL, 167392, EnumBeeType.PRINCESS);
+		infusionBeeVazbee.setAlchemy(true);
+		BotaniaAPI.manaInfusionRecipes.add(infusionBeeVazbee);
+
+		RecipeElvenTrade tradeBeeAelfheim = new RecipeElvenTradeBeeSpecies(EnumBeeSpecies.BOT_DREAMING, EnumBeeSpecies.BOT_ALFHEIM);
+		BotaniaAPI.elvenTradeRecipes.add(tradeBeeAelfheim);
+
+		LexiconEntry entryManasteelForestryTools = new BotaniaLexiconEntry("magicbees.botania.lexicon.manasteelTools.title", BotaniaAPI.categoryTools);
+		entryManasteelForestryTools.setIcon(new ItemStack(ItemRegister.manasteelScoop));
+		entryManasteelForestryTools.addPage(BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.manasteelTools.0"));
+		entryManasteelForestryTools.addPage(BotaniaAPI.internalHandler.craftingRecipePage("magicbees.botania.lexicon.manasteelScoop", manasteelScoopRecipe));
+		entryManasteelForestryTools.addPage(BotaniaAPI.internalHandler.craftingRecipePage("magicbees.botania.lexicon.manasteelGrafter", manasteelGrafterRecipe));
+
+		LexiconEntry entryBeeTrade = new BotaniaLexiconEntry("magicbees.botania.lexicon.beeAlfheim.title", BotaniaAPI.categoryAlfhomancy);
+		entryBeeTrade.setIcon(BeeManager.beeRoot.getMemberStack(EnumBeeSpecies.BOT_ALFHEIM.getIndividual(), EnumBeeType.PRINCESS));
+		entryBeeTrade.setKnowledgeType(BotaniaAPI.elvenKnowledge);
+		entryBeeTrade.addPage(BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.beeAlfheim.0"));
+		entryBeeTrade.addPage(BotaniaAPI.internalHandler.elvenTradesPage("magicbees.botania.lexicon.beeAlfheim.trade", tradeBeeAelfheim));
+
+		int manaPowder = Lists.newArrayList(LibItemNames.MANA_RESOURCE_NAMES).indexOf("manaPowder");
+		int redstoneRoot = Lists.newArrayList(LibItemNames.MANA_RESOURCE_NAMES).indexOf("redstoneRoot");
+		Item itemManaResource = ModItems.manaResource;
+
+		RecipePetals beegoniaRecipe = BotaniaAPI.registerPetalRecipe(BotaniaAPI.internalHandler.getSubTileAsStack(SubTileBeegonia.NAME),
+				new ItemStack(itemPetal),
+				new ItemStack(itemPetal, 1, 4),
+				new ItemStack(itemPetal, 1, 4),
+				new ItemStack(itemPetal, 1, 15),
+				new ItemStack(itemManaResource, 1, manaPowder),
+				new ItemStack(itemManaResource, 1, manaPowder),
+				new ItemStack(itemManaResource, 1, manaPowder)
+		);
+		LexiconEntry entryBeegonia = new BotaniaLexiconEntry("tile.botania:flower." + SubTileBeegonia.NAME + ".name", BotaniaAPI.categoryGenerationFlowers);
+		entryBeegonia.setLexiconPages(
+				BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.beegonia.0"),
+				BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.beegonia.1"),
+				BotaniaAPI.internalHandler.petalRecipePage("magicbees.botania.lexicon.beegonia.crafting", beegoniaRecipe),
+				BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.beegonia.2")
+		);
+
+		RecipePetals hiveacynthRecipe = BotaniaAPI.registerPetalRecipe(BotaniaAPI.internalHandler.getSubTileAsStack(SubTileHiveacynth.NAME),
+				new ItemStack(itemPetal, 1, 3),
+				new ItemStack(itemPetal, 1, 9),
+				new ItemStack(itemPetal, 1, 9),
+				new ItemStack(itemPetal, 1, 11),
+				new ItemStack(itemManaResource, 1, manaPowder),
+				new ItemStack(itemManaResource, 1, manaPowder),
+				new ItemStack(itemManaResource, 1, manaPowder),
+				new ItemStack(itemManaResource, 1, manaPowder),
+				new ItemStack(itemManaResource, 1, redstoneRoot)
+		);
+		LexiconEntry entryHiveacynth = new BotaniaLexiconEntry("tile.botania:flower." + SubTileHiveacynth.NAME + ".name", BotaniaAPI.categoryFunctionalFlowers);
+		entryHiveacynth.setLexiconPages(BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.hiveacynth.0"),
+				BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.hiveacynth.1"),
+				BotaniaAPI.internalHandler.petalRecipePage("magicbees.botania.lexicon.hiveacynth.crafting", hiveacynthRecipe)
+		);
+
+		RecipePetals hibeescusRecipe = BotaniaAPI.registerPetalRecipe(BotaniaAPI.internalHandler.getSubTileAsStack(SubTileHibeescus.NAME),
+				new ItemStack(itemPetal, 1, 1),
+				new ItemStack(itemPetal, 1, 2),
+				new ItemStack(itemPetal, 1, 2),
+				new ItemStack(itemPetal, 1, 2),
+				new ItemStack(itemPetal, 1, 14),
+				new ItemStack(itemManaResource, 1, manaPowder),
+				new ItemStack(ModItems.rune, 1, 0),
+				new ItemStack(ModItems.rune, 1, 5),
+				new ItemStack(ModItems.rune, 1, 14),
+				new ItemStack(ModItems.rune, 1, 11),
+				new ItemStack(ModItems.rune, 1, 15),
+				new ItemStack(itemManaResource, 1, redstoneRoot)
+		);
+		LexiconEntry entryHibeescus = new BotaniaLexiconEntry("tile.botania:flower." + SubTileHibeescus.NAME + ".name", BotaniaAPI.categoryFunctionalFlowers);
+		entryHibeescus.setLexiconPages(BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.hibeescus.0"),
+				BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.hibeescus.1"),
+				BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.hibeescus.2"),
+				BotaniaAPI.internalHandler.petalRecipePage("magicbees.botania.lexicon.hibeescus.crafting", hibeescusRecipe)
+		);
+
+		//todo
+		//LexiconEntry entryManaApiaryBooster = new BotaniaLexiconEntry("tile.manaAuraProvider.name", BotaniaAPI.categoryDevices);
+		//entryManaApiaryBooster.setLexiconPages(
+		//		BotaniaAPI.internalHandler.textPage("magicbees.botania.lexicon.manaBooster.0"),
+		//		BotaniaAPI.internalHandler.craftingRecipePage("magicbees.botania.lexicon.manaBooster.crafting", manaBoosterRecipe)
+		//);
 	}
 
 }

@@ -1831,7 +1831,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         return BeeManager.beeRoot.getTemplate("forestry.species" + speciesName);
     }
 
-    private static IAlleleBeeSpecies getForestrySpecies(String name) {
+    public static IAlleleBeeSpecies getForestrySpecies(String name) {
         return (IAlleleBeeSpecies) AlleleManager.alleleRegistry.getAllele("forestry.species" + name);
     }
 

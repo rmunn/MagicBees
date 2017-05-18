@@ -1,10 +1,10 @@
 package magicbees;
 
 import elec332.core.api.IElecCoreMod;
-import elec332.core.api.module.ElecModule;
 import elec332.core.api.module.IModuleController;
 import elec332.core.client.model.RenderingRegistry;
 import elec332.core.compat.forestry.IndividualDefinitionRegistry;
+import elec332.core.config.ConfigWrapper;
 import elec332.core.inventory.window.IWindowFactory;
 import elec332.core.inventory.window.IWindowHandler;
 import elec332.core.inventory.window.Window;
@@ -21,17 +21,19 @@ import magicbees.init.AlleleRegister;
 import magicbees.init.BlockRegister;
 import magicbees.init.ItemRegister;
 import magicbees.init.RecipeRegister;
+import magicbees.integration.botania.BotaniaIntegrationConfig;
 import magicbees.util.DefaultCrumblingHandler;
 import magicbees.util.DefaultTransmutationController;
 import magicbees.util.MagicBeesResourceLocation;
+import magicbees.util.WorldGenBeeSpeciesCache;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
@@ -56,6 +58,7 @@ public class MagicBees implements IElecCoreMod, IModuleController, IWindowHandle
     public static Logger logger;
     private static LoadTimer loadTimer;
     public static CreativeTabs creativeTab;
+    public static ConfigWrapper config;
 
     public static ICrumblingHandler crumblingHandler;
     public static ITransmutationController transmutationController;
@@ -75,6 +78,8 @@ public class MagicBees implements IElecCoreMod, IModuleController, IWindowHandle
             }
 
         });
+        config = new ConfigWrapper(new Configuration(event.getSuggestedConfigurationFile()));
+        config.registerConfig(new BotaniaIntegrationConfig());
         loadTimer.endPhase(event);
     }
 
@@ -94,7 +99,7 @@ public class MagicBees implements IElecCoreMod, IModuleController, IWindowHandle
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event){
         loadTimer.startPhase(event);
-
+        WorldGenBeeSpeciesCache.populateSpeciesListRarity();
         loadTimer.endPhase(event);
     }
 

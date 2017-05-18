@@ -12,6 +12,7 @@ import elec332.core.inventory.window.Window;
 import elec332.core.util.BasicItemHandler;
 import elec332.core.util.InventoryHelper;
 import elec332.core.util.ItemStackHelper;
+import forestry.api.apiculture.BeeManager;
 import forestry.api.apiculture.IBee;
 import forestry.api.genetics.IEffectData;
 import magicbees.tile.logic.EffectJarHousing;
@@ -81,8 +82,8 @@ public class TileEntityEffectJar extends TileEntity implements ITickable, ISimpl
 
 	private void createQueenFromDrone() {
 		ItemStack droneStack = this.beeSlots.getStackInSlot(0);
-		if (magicbees.bees.BeeManager.beeRoot.isDrone(droneStack)) {
-			IBee bee = Preconditions.checkNotNull(magicbees.bees.BeeManager.beeRoot.getMember(droneStack));
+		if (BeeManager.beeRoot.isDrone(droneStack)) {
+			IBee bee = Preconditions.checkNotNull(BeeManager.beeRoot.getMember(droneStack));
 			if (droneStack.stackSize == 1) {
 				this.beeSlots.setStackInSlot(0, ItemStackHelper.NULL_STACK);
 			} else {
@@ -106,7 +107,7 @@ public class TileEntityEffectJar extends TileEntity implements ITickable, ISimpl
 
 	@SuppressWarnings("all")
 	private void tickQueen() {
-		IBee queen = magicbees.bees.BeeManager.beeRoot.getMember(queenStack);
+		IBee queen = BeeManager.beeRoot.getMember(queenStack);
 		if (queenStack == null || queen == null){
 			throw new RuntimeException();
 		}

@@ -5,9 +5,7 @@ import elec332.core.item.ItemEnumBased;
 import elec332.core.util.RegistryHelper;
 import elec332.core.util.recipes.RecipeHelper;
 import magicbees.bees.EnumBeeModifiers;
-import magicbees.item.ItemMagicBeesFrame;
-import magicbees.item.ItemMoonDial;
-import magicbees.item.ItemMysteriousMagnet;
+import magicbees.item.*;
 import magicbees.item.types.*;
 import magicbees.util.MagicBeesResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -33,6 +31,7 @@ public final class ItemRegister {
     //frames
     public static Item magicFrame, resilientFrame, gentleFrame, metabolicFrame, necroticFrame, temporalFrame, oblivionFrame;
     public static Item mysteriousMagnet, moonDial, ironNugget;
+    public static Item manasteelgrafter, manasteelScoop;
 
     public static void init(){
         combItem = GameRegistry.register(new ItemEnumBased<>(new MagicBeesResourceLocation("beeComb"), EnumCombType.class));
@@ -53,6 +52,9 @@ public final class ItemRegister {
 
         mysteriousMagnet = GameRegistry.register(new ItemMysteriousMagnet());
         moonDial = GameRegistry.register(new ItemMoonDial());
+
+        manasteelgrafter = GameRegistry.register(new ItemManaSteelGrafter());
+        manasteelScoop = GameRegistry.register(new ItemManaSteelScoop());
 
         fixIronNuggetStuff();
 

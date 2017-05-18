@@ -8,6 +8,8 @@ import forestry.api.genetics.IAlleleSpeciesBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nonnull;
 
@@ -30,6 +32,11 @@ public class Utils {
 		if (!ElecCore.developmentEnvironment) {
 			builder.setIsSecret();
 		}
+	}
+
+	public static AxisAlignedBB getAABB(BlockPos pos, int range, boolean y){
+		int xCoord = pos.getX(), yCoord = pos.getY(), zCoord = pos.getZ();
+		return new AxisAlignedBB(xCoord - range, yCoord - (y ? range : 0), zCoord - range, xCoord + range + 1, yCoord + 1 + (y ? range : 0), zCoord + range + 1);
 	}
 
 }

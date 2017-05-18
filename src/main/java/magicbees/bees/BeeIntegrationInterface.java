@@ -29,7 +29,7 @@ public final class BeeIntegrationInterface {
 	public static IAlleleEffect effectDreaming;
 
 	public static Block livingWood;
-	public static Item itemPetal, itemPastureSeed;
+	public static Item itemPetal, itemPastureSeed, itemManaResource;
 	public static int seedTypes;
 
 	public static void addPetals(IAlleleBeeSpeciesBuilder species, float chance){
