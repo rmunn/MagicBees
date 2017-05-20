@@ -14,20 +14,27 @@ import magicbees.bees.EnumBeeSpecies;
 import magicbees.bees.allele.AlleleEffectTransmuting;
 import magicbees.init.ItemRegister;
 import magicbees.util.DefaultTransmutationController;
+import magicbees.util.MagicBeesResourceLocation;
 import magicbees.util.ModNames;
 import magicbees.util.Utils;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import vazkii.botania.api.BotaniaAPI;
+import vazkii.botania.api.BotaniaAPIClient;
 import vazkii.botania.api.lexicon.LexiconEntry;
 import vazkii.botania.api.recipe.RecipeElvenTrade;
 import vazkii.botania.api.recipe.RecipeManaInfusion;
@@ -41,12 +48,37 @@ import vazkii.botania.common.lib.LibItemNames;
 @ElecModule(owner = MagicBees.modid, name = "Botania Integration", modDependencies = ModNames.BOTANIA)
 public class IntegrationBotania {
 
-	private Block livingWood, livingRock, dreamWood;
+	private Block livingRock, dreamWood;
 	private Item itemPetal;
 
 	@ElecModule.EventHandler
 	public void preInit(FMLPreInitializationEvent event){
-		BeeIntegrationInterface.livingWood = livingWood = Utils.getBlock(ModNames.BOTANIA, "livingwood");
+
+		BotaniaAPI.registerSubTile(SubTileBeegonia.NAME, SubTileBeegonia.class);
+		BotaniaAPI.registerSubTileSignature(SubTileBeegonia.class, new BotaniaSignature(SubTileBeegonia.NAME));
+		BotaniaAPI.addSubTileToCreativeMenu(SubTileBeegonia.NAME);
+
+		BotaniaAPI.registerSubTile(SubTileHiveacynth.NAME, SubTileHiveacynth.class);
+		BotaniaAPI.registerSubTileSignature(SubTileHiveacynth.class, new BotaniaSignature(SubTileHiveacynth.NAME));
+		BotaniaAPI.addSubTileToCreativeMenu(SubTileHiveacynth.NAME);
+
+		BotaniaAPI.registerSubTile(SubTileHibeescus.NAME, SubTileHibeescus.class);
+		BotaniaAPI.registerSubTileSignature(SubTileHibeescus.class, new BotaniaSignature(SubTileHibeescus.NAME));
+		BotaniaAPI.addSubTileToCreativeMenu(SubTileHibeescus.NAME);
+		if (FMLCommonHandler.instance().getSide().isClient()){
+			//cl(); MC iz broken...
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	private void cl(){
+		ModelResourceLocation mrl = new ModelResourceLocation(new MagicBeesResourceLocation("beegonia"), "normal");
+		BotaniaAPIClient.registerSubtileModel(SubTileBeegonia.class, mrl);
+	}
+
+	@ElecModule.EventHandler
+	public void init(FMLInitializationEvent event){
+		IBlockState livingWood = BeeIntegrationInterface.livingWood = Utils.getBlock(ModNames.BOTANIA, "livingwood").getDefaultState();
 		livingRock = Utils.getBlock(ModNames.BOTANIA, "livingrock");
 		dreamWood = Utils.getBlock(ModNames.BOTANIA, "dreamwood");
 		Block mysticalFlower = Utils.getBlock(ModNames.BOTANIA, "specialFlower");
@@ -55,7 +87,7 @@ public class IntegrationBotania {
 			int[] oreIDs = OreDictionary.getOreIDs(block);
 			for (int oreId : oreIDs) {
 				if (oreId == OreDictionary.getOreID("logWood")) {
-					WorldHelper.setBlockState(world, pos, livingWood.getDefaultState(), 3);
+					WorldHelper.setBlockState(world, pos, livingWood, 3);
 					return true;
 				} else if (oreId == OreDictionary.getOreID("stone")) {
 					WorldHelper.setBlockState(world, pos, livingRock.getDefaultState(), 3);
@@ -75,21 +107,8 @@ public class IntegrationBotania {
 		BeeIntegrationInterface.itemPastureSeed = Utils.getItem(ModNames.BOTANIA, "grassSeeds");
 		BeeIntegrationInterface.seedTypes = 9;
 
-	}
 
-	@ElecModule.EventHandler
-	public void init(FMLInitializationEvent event){
-		BotaniaAPI.registerSubTile(SubTileBeegonia.NAME, SubTileBeegonia.class);
-		BotaniaAPI.registerSubTileSignature(SubTileBeegonia.class, new BotaniaSignature(SubTileBeegonia.NAME));
-		BotaniaAPI.addSubTileToCreativeMenu(SubTileBeegonia.NAME);
 
-		BotaniaAPI.registerSubTile(SubTileHiveacynth.NAME, SubTileHiveacynth.class);
-		BotaniaAPI.registerSubTileSignature(SubTileHiveacynth.class, new BotaniaSignature(SubTileHiveacynth.NAME));
-		BotaniaAPI.addSubTileToCreativeMenu(SubTileHiveacynth.NAME);
-
-		BotaniaAPI.registerSubTile(SubTileHibeescus.NAME, SubTileHibeescus.class);
-		BotaniaAPI.registerSubTileSignature(SubTileHibeescus.class, new BotaniaSignature(SubTileHibeescus.NAME));
-		BotaniaAPI.addSubTileToCreativeMenu(SubTileHibeescus.NAME);
 	}
 
 	@ElecModule.EventHandler

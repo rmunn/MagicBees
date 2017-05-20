@@ -9,5 +9,7 @@ public final class ModNames {
 	public static final String BOTANIA = "botania";
 	public static final String RAILCRAFT = "railcraft";
 	public static final String THERMALEXPANSION = "thermalexpansion";
+	public static final String AE2 = "appliedenergistics2";
+	public static final String RSA = "redstonearsenal";
 
 }

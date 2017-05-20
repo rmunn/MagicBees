@@ -1,5 +1,6 @@
 package magicbees;
 
+import com.google.common.eventbus.Subscribe;
 import elec332.core.api.IElecCoreMod;
 import elec332.core.api.module.IModuleController;
 import elec332.core.client.model.RenderingRegistry;
@@ -11,11 +12,13 @@ import elec332.core.inventory.window.Window;
 import elec332.core.inventory.window.WindowManager;
 import elec332.core.item.AbstractTexturedItem;
 import elec332.core.util.AbstractCreativeTab;
+import elec332.core.util.FMLUtil;
 import elec332.core.util.LoadTimer;
 import elec332.core.util.RegistryHelper;
 import elec332.core.world.WorldHelper;
 import magicbees.api.ICrumblingHandler;
 import magicbees.api.ITransmutationController;
+import magicbees.bees.EnumBeeHives;
 import magicbees.bees.EnumBeeSpecies;
 import magicbees.init.AlleleRegister;
 import magicbees.init.BlockRegister;
@@ -47,7 +50,8 @@ import java.util.function.Supplier;
 /**
  * Created by Elec332 on 16-8-2016.
  */
-@Mod(modid = MagicBees.modid, name = MagicBees.modName, dependencies = "required-after:eleccore")
+@Mod(modid = MagicBees.modid, name = MagicBees.modName, dependencies = "required-after:eleccore;required-after:forestry",
+        acceptedMinecraftVersions = "[1.11.2,)", useMetadata = true)
 public class MagicBees implements IElecCoreMod, IModuleController, IWindowHandler {
 
     public static final String modid = "magicbees";
@@ -80,6 +84,17 @@ public class MagicBees implements IElecCoreMod, IModuleController, IWindowHandle
         });
         config = new ConfigWrapper(new Configuration(event.getSuggestedConfigurationFile()));
         config.registerConfig(new BotaniaIntegrationConfig());
+        FMLUtil.getMainModBus().register(new Object(){
+
+            @Subscribe
+            public void init(Object event){
+                if (event instanceof FMLInitializationEvent){
+                    logger.info("Registering " + EnumBeeSpecies.values().length + " new bee species!");
+                    IndividualDefinitionRegistry.registerBees(EnumBeeSpecies.class);
+                }
+            }
+
+        });
         loadTimer.endPhase(event);
     }
 
@@ -91,14 +106,15 @@ public class MagicBees implements IElecCoreMod, IModuleController, IWindowHandle
         BlockRegister.init();
         RecipeRegister.init();
         WindowManager.INSTANCE.register(this);
-        logger.info("Registering " + EnumBeeSpecies.values().length + " new bee species!");
-        IndividualDefinitionRegistry.registerBees(EnumBeeSpecies.class);
         loadTimer.endPhase(event);
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event){
         loadTimer.startPhase(event);
+        for (EnumBeeHives h : EnumBeeHives.values()){
+            h.registerDrops();
+        }
         WorldGenBeeSpeciesCache.populateSpeciesListRarity();
         loadTimer.endPhase(event);
     }

@@ -11,6 +11,7 @@ import forestry.api.apiculture.BeeManager;
 import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.EnumTolerance;
 import forestry.api.genetics.IAllele;
+import forestry.apiculture.worldgen.HiveRegistry;
 import magicbees.MagicBees;
 import forestry.api.apiculture.hives.HiveManager;
 import forestry.api.apiculture.hives.IHiveDescription;
@@ -24,11 +25,13 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 
 import javax.annotation.Nonnull;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
@@ -42,7 +45,7 @@ public enum EnumBeeHives implements IHiveEnum {
     CURIOUS(EnumBeeSpecies.MYSTICAL, 12, false, EnumHiveGen.CURIOUS){
 
         @Override
-        protected void registerDrops() {
+        public void registerDrops() {
             addDefaultDrops(15);
         }
 
@@ -50,7 +53,7 @@ public enum EnumBeeHives implements IHiveEnum {
     UNUSUAL(EnumBeeSpecies.UNUSUAL, 12, false, EnumHiveGen.UNUSUAL) {
 
         @Override
-        protected void registerDrops() {
+        public void registerDrops() {
             addDefaultDrops(15);
         }
 
@@ -58,7 +61,7 @@ public enum EnumBeeHives implements IHiveEnum {
     RESONANT(EnumBeeSpecies.SORCEROUS, 12, false, EnumHiveGen.RESONANT) {
 
         @Override
-        protected void registerDrops() {
+        public void registerDrops() {
             addDefaultDrops(20);
         }
 
@@ -66,7 +69,7 @@ public enum EnumBeeHives implements IHiveEnum {
     DEEP(EnumBeeSpecies.ATTUNED, 4, true, EnumHiveGen.DEEP){
 
         @Override
-        protected void registerDrops() {
+        public void registerDrops() {
             addDefaultDrops(20);
         }
 
@@ -79,7 +82,7 @@ public enum EnumBeeHives implements IHiveEnum {
     INFERNAL(EnumBeeSpecies.INFERNAL, 15, true, EnumHiveGen.INFERNAL, EnumHiveGen.INFERNAL_OVERWORLD){
 
         @Override
-        protected void registerDrops() {
+        public void registerDrops() {
             ItemStack[] combs = new ItemStack[]{
                     ItemRegister.combItem.getStackFromType(EnumCombType.MOLTEN), new ItemStack(Items.GLOWSTONE_DUST, 6)
             };
@@ -96,7 +99,7 @@ public enum EnumBeeHives implements IHiveEnum {
     OBLIVION(EnumBeeSpecies.OBLIVION, 7, true, EnumHiveGen.OBLIVION, EnumHiveGen.OBLIVION_OVERWORLD){
 
         @Override
-        protected void registerDrops() {
+        public void registerDrops() {
             ItemStack[] combs = new ItemStack[]{
                     ItemRegister.combItem.getStackFromType(EnumCombType.FORGOTTEN), new ItemStack(Items.ENDER_PEARL)
             };
@@ -157,7 +160,7 @@ public enum EnumBeeHives implements IHiveEnum {
         return light;
     }
 
-    protected abstract void registerDrops();
+    public abstract void registerDrops();
 
     protected final EnumBeeSpecies getBeeType(){
         return bee;

@@ -76,7 +76,7 @@ public class BlockHive extends elec332.core.compat.forestry.bee.BlockHive<EnumBe
 		int types = EnumBeeHives.values().length;
 		models = new IBakedModel[types];
 		for (int i = 0; i < types; i++) {
-			models[i] = modelBakery.forTemplate(templateBakery.newDefaultBlockTemplate(textures[i]));
+			models[i] = modelBakery.forTemplate(templateBakery.newDefaultBlockTemplate(textures[i]).setTexture(textures[i][3]));
 		}
 	}
 

@@ -262,8 +262,14 @@ public enum EnumBeeBranches implements IMagicBeesBranch {
     THERMAL("Thermametallic") {
 
         @Override
-        public void setBranchProperties(BeeGenomeTemplate genomeTemplate) {
-            throw new IllegalStateException();
+        public void setBranchProperties(BeeGenomeTemplate template) {
+            template.setNeverSleeps(TRUE_RECESSIVE);
+            template.setCaveDwelling(TRUE_RECESSIVE);
+            template.setSpeed(SPEED_FASTEST);
+            template.setFertility(FERTILITY_HIGH);
+            template.setLifeSpan(LIFESPAN_LONGEST);
+            template.setHumidityTolerance(TOLERANCE_BOTH_2);
+            template.setTemperatureTolerance(TOLERANCE_BOTH_2);
         }
 
     },

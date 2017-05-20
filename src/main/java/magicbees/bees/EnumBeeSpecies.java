@@ -1,10 +1,12 @@
 package magicbees.bees;
 
 import com.google.common.base.Preconditions;
+import elec332.core.compat.forestry.ForestryAlleles;
 import elec332.core.compat.forestry.IIndividualBranch;
 import elec332.core.compat.forestry.IIndividualDefinition;
 import elec332.core.compat.forestry.bee.BeeGenomeTemplate;
 import elec332.core.compat.forestry.bee.IBeeTemplate;
+import elec332.core.util.ItemStackHelper;
 import elec332.core.util.MoonPhase;
 import forestry.api.genetics.IAlleleEffect;
 import forestry.apiculture.PluginApiculture;
@@ -26,12 +28,14 @@ import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
 import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IAllele;
+import magicbees.util.ModNames;
 import magicbees.util.Utils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.fml.common.Loader;
 import org.apache.commons.lang3.text.WordUtils;
 
 import javax.annotation.Nonnull;
@@ -1323,6 +1327,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            BeeIntegrationInterface.specialMetalModifiy(template);
         }
 
         @Override
@@ -1357,6 +1362,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            BeeIntegrationInterface.specialMetalModifiy(template);
         }
 
         @Override
@@ -1458,7 +1464,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-            registerMutation(EARTHY, IRON, 17); //TODO: prefer AE_SKYSTONE over iron if possible
+            registerMutation(AE_SKYSTONE.isActive() ? AE_SKYSTONE : EARTHY, IRON, 17);
         }
 
     },
@@ -1476,7 +1482,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-            registerMutation(SILICON.isActive() ? SILICON : EARTHY, IRON, 17);
+            registerMutation(SILICON.isActive() ? SILICON : IRON, AE_SKYSTONE.isActive() ? AE_SKYSTONE : EARTHY, 17);
         }
 
     },
@@ -1496,8 +1502,34 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @SuppressWarnings("all") //localVar
         public void registerMutations() {
             EnumBeeSpecies beeA = CERTUS.isActive() ? CERTUS : (SILICON.isActive() ? SILICON : IRON);
-            EnumBeeSpecies beeB = EARTHY; //todo: prefer AE skystone
+            EnumBeeSpecies beeB = AE_SKYSTONE.isActive() ? AE_SKYSTONE : EARTHY;
             registerMutation(beeA, beeB, 17);
+        }
+
+    },
+
+    //Redstone Arsenal
+    RSA_FLUXED("Thermametallic electroflux", EnumBeeBranches.THERMAL, false, new Color(10356237)){
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            BeeIntegrationInterface.specialMetalModifiy(template);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.HONEY), 0.1f);
+            speciesBuilder.addSpecialty(ItemStackHelper.copyItemStack(BeeIntegrationInterface.itemRSAFluxedElectrumNugget), 0.9f);
+        }
+
+        @Override
+        public void registerMutations() {
+            //todo registerMutation(TE_ELECTRUM, TE_DESTABILIZED, 10).requireResource("blockElectrumFlux");
+        }
+
+        @Override
+        public boolean isActive() {
+            return Loader.isModLoaded(ModNames.RSA);
         }
 
     },
@@ -1517,7 +1549,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-            registerMutation(EnumBeeSpecies.getForestrySpecies("Forest"), ELDRITCH, 15).requireResource(BeeIntegrationInterface.livingWood.getDefaultState());
+            registerMutation(EnumBeeSpecies.getForestrySpecies("Forest"), ELDRITCH, 15).requireResource(BeeIntegrationInterface.livingWood);
         }
 
     },
@@ -1683,6 +1715,39 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         }
 
+    },
+
+    //AE2
+    AE_SKYSTONE("terra astris", EnumBeeBranches.TRANSMUTING, true, new Color(0x4B8381), new Color(0x252929)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            template.setCaveDwelling(TRUE_RECESSIVE);
+            template.setFertility(FERTILITY_LOW);
+            template.setLifeSpan(LIFESPAN_SHORTER);
+            template.setHumidityTolerance(TOLERANCE_NONE);
+            template.setTemperatureTolerance(TOLERANCE_NONE);
+            template.setEffect((IAlleleEffect) EnumBeeSpecies.getForestryAllele("effectIgnition"));
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.setTemperature(EnumTemperature.HOT);
+            speciesBuilder.setHumidity(EnumHumidity.ARID);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.EARTHY), 0.19f);
+            speciesBuilder.addSpecialty(new ItemStack(BeeIntegrationInterface.aeSkyStone.getBlock()), 0.2f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(EARTHY, WINDY, 20).requireResource(BeeIntegrationInterface.aeSkyStone);
+        }
+
+        @Override
+        public boolean isActive() {
+            return super.isActive() && Loader.isModLoaded(ModNames.AE2);
+        }
+
     };
 
     EnumBeeSpecies(String binominalName, IMagicBeesBranch branch, boolean dominant, Color primaryColor){
@@ -1695,7 +1760,16 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         this.secondaryColor = secondaryColor.getRGB();
         this.binominalName = binomialName;
         this.dominant = dominant;
-        this.uid = MagicBees.modid + ".species" + WordUtils.capitalize(name().toLowerCase(Locale.ENGLISH));
+        String nme;
+        String[] spl = name().split("_");
+        if (spl.length == 1){
+            nme = WordUtils.capitalize(spl[0].toLowerCase(Locale.ENGLISH));
+        } else if (spl.length == 2){
+            nme = spl[0] + WordUtils.capitalize(spl[1].toLowerCase(Locale.ENGLISH));
+        } else {
+            throw new RuntimeException();
+        }
+        this.uid = MagicBees.modid + ".species" + nme;
         this.unlocalisedName = uid;
         this.enabledOverride = true;
     }
@@ -1835,7 +1909,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         return (IAlleleBeeSpecies) AlleleManager.alleleRegistry.getAllele("forestry.species" + name);
     }
 
-    private static IAllele getForestryAllele(String name) {
+    public static IAllele getForestryAllele(String name) {
         return AlleleManager.alleleRegistry.getAllele("forestry." + name);
     }
 
