@@ -3,12 +3,12 @@ package magicbees.init;
 import com.google.common.collect.Maps;
 import elec332.core.util.ItemStackHelper;
 import forestry.api.recipes.RecipeManagers;
-import forestry.apiculture.PluginApiculture;
 import forestry.apiculture.items.EnumPropolis;
-import forestry.core.PluginCore;
+import forestry.apiculture.items.ItemRegistryApiculture;
 import forestry.core.fluids.Fluids;
 import magicbees.item.types.*;
 import magicbees.util.Config;
+import magicbees.util.Utils;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -29,13 +29,14 @@ public final class RecipeRegister {
     private static ItemStack beesWax, honeyDrop, honeyDew, magicWax, refractoryWax, pollen, royaljelly;
 
     public static void init(){
-        beesWax = PluginCore.getItems().beeswax.getItemStack();
-        honeyDrop = PluginApiculture.getItems().honeyDrop.getItemStack();
-        honeyDew = PluginApiculture.getItems().honeydew.getItemStack();
-        refractoryWax = PluginCore.getItems().refractoryWax.getItemStack();
+        ItemRegistryApiculture ai = Utils.getApicultureItems();
+        beesWax = Utils.getCoreItems().beeswax.getItemStack();
+        honeyDrop = ai.honeyDrop.getItemStack();
+        honeyDew = ai.honeydew.getItemStack();
+        refractoryWax = Utils.getCoreItems().refractoryWax.getItemStack();
         magicWax = getWax(EnumWaxType.MAGIC);
-        pollen = PluginApiculture.getItems().pollenCluster.getItemStack();
-        royaljelly = PluginApiculture.getItems().royalJelly.getItemStack();
+        pollen = ai.pollenCluster.getItemStack();
+        royaljelly = ai.royalJelly.getItemStack();
         registerRecipes();
         registerForestryRecipes();
     }
@@ -45,7 +46,7 @@ public final class RecipeRegister {
         ItemStack output;
 
         input = getResource(EnumResourceType.EXTENDED_FERTILIZER);
-        output = PluginCore.getItems().fertilizerCompound.getItemStack(6);
+        output = Utils.getCoreItems().fertilizerCompound.getItemStack(6);
         GameRegistry.addRecipe(output,
                 " S ", " F ", " S ",
                 'F', input,
@@ -63,7 +64,7 @@ public final class RecipeRegister {
         GameRegistry.addRecipe(output,
                 "aaa", "aFa", "aaa",
                 'F', input,
-                'a', PluginCore.getItems().ash
+                'a', Utils.getCoreItems().ash
         );
 
         GameRegistry.addRecipe(new ItemStack(Items.EXPERIENCE_BOTTLE),
@@ -197,7 +198,7 @@ public final class RecipeRegister {
         GameRegistry.addRecipe(new ItemStack(magicFrame),
                 "www", "wfw", "www",
                 'w', magicWax,
-                'f', PluginApiculture.getItems().frameUntreated
+                'f', Utils.getApicultureItems().frameUntreated
         );
 
         GameRegistry.addRecipe(new ItemStack(temporalFrame),
@@ -235,7 +236,7 @@ public final class RecipeRegister {
 
         GameRegistry.addShapelessRecipe(new ItemStack(oblivionFrame),
                 getResource(EnumResourceType.ESSENCE_SCORNFUL_OBLIVION),
-                PluginApiculture.getItems().frameProven.getItemStack()
+                Utils.getApicultureItems().frameProven.getItemStack()
         );
 
 
@@ -465,13 +466,33 @@ public final class RecipeRegister {
         recipe.addProduct(magicWax, 1);
         recipe.addProduct(new ItemStack(Items.CLAY_BALL), 0.6f);
         recipe.register(20);
+
+        recipe = new CombCentrifugeRecipe(EnumCombType.TE_DESTABILIZED);
+        recipe.addProduct(getWax(EnumWaxType.MAGIC), 0.55f);
+        recipe.addProduct(getDrop(EnumDropType.DESTABILIZED), 0.22f);
+        recipe.register(20);
+
+        recipe = new CombCentrifugeRecipe(EnumCombType.TE_CARBON);
+        recipe.addProduct(getWax(EnumWaxType.MAGIC), 0.55f);
+        recipe.addProduct(getDrop(EnumDropType.CARBON), 0.22f);
+        recipe.register(20);
+
+        recipe = new CombCentrifugeRecipe(EnumCombType.TE_LUX);
+        recipe.addProduct(getWax(EnumWaxType.MAGIC), 0.55f);
+        recipe.addProduct(getDrop(EnumDropType.LUX), 0.22f);
+        recipe.register(20);
+
+        recipe = new CombCentrifugeRecipe(EnumCombType.TE_ENDEARING);
+        recipe.addProduct(getWax(EnumWaxType.MAGIC), 0.55f);
+        recipe.addProduct(getDrop(EnumDropType.ENDEARING), 0.22f);
+        recipe.register(20);
     }
 
     private static void registerCarpenterRecipes(){
         ItemStack input;
         ItemStack output;
 
-        output = PluginApiculture.getBlocks().candle.getUnlitCandle(24);
+        output = Utils.getApicultureBlocks().candle.getUnlitCandle(24);
         RecipeManagers.carpenterManager.addRecipe(30, new FluidStack(FluidRegistry.WATER, 600), ItemStackHelper.NULL_STACK, output,
                 " S ", "WWW", "WWW",
                 'W', waxItem,
@@ -479,7 +500,7 @@ public final class RecipeRegister {
         );
 
         output.stackSize = 6;
-        input = PluginCore.getItems().craftingMaterial.getSilkWisp();
+        input = Utils.getCoreItems().craftingMaterial.getSilkWisp();
         RecipeManagers.carpenterManager.addRecipe(30, new FluidStack(FluidRegistry.WATER, 600), ItemStackHelper.NULL_STACK, output,
                 "WSW",
                 'W', waxItem,
@@ -517,12 +538,13 @@ public final class RecipeRegister {
     private static ItemStack getPropolis(EnumPropolisType propolis){
         return propolisItem.getStackFromType(propolis);
     }
+
     private static ItemStack getResource(EnumResourceType resource){
         return resourceItem.getStackFromType(resource);
     }
 
     private static ItemStack getPropolis(EnumPropolis propolis){
-        return PluginApiculture.getItems().propolis.get(propolis, 1);
+        return Utils.getApicultureItems().propolis.get(propolis, 1);
     }
 
     private static class CombCentrifugeRecipe {

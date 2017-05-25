@@ -3,9 +3,9 @@ package magicbees.item;
 import elec332.core.api.client.IColoredItem;
 import elec332.core.compat.forestry.bee.IDefaultHiveFrame;
 import elec332.core.item.AbstractTexturedItem;
+import forestry.api.apiculture.IBeeModifier;
 import magicbees.MagicBees;
 import magicbees.bees.EnumBeeModifiers;
-import forestry.api.apiculture.IBeeModifier;
 import magicbees.util.MagicBeesResourceLocation;
 import net.minecraft.util.ResourceLocation;
 

@@ -119,7 +119,7 @@ public enum EnumOreResourceType {
 		if (oreDictA != null){
 			primLoop:
 			for (String oreDict : oreDictA) {
-				List<ItemStack> l = OreDictionary.getOres(oreDict);
+				List<ItemStack> l = OredictHelper.getOres(oreDict);
 				if (!l.isEmpty()) {
 					for (ItemStack stack_ : l) {
 						if (ItemStackHelper.isStackValid(stack_)) {

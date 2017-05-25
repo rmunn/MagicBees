@@ -8,8 +8,13 @@ import elec332.core.compat.forestry.bee.BeeGenomeTemplate;
 import elec332.core.compat.forestry.bee.IBeeTemplate;
 import elec332.core.util.ItemStackHelper;
 import elec332.core.util.MoonPhase;
+import elec332.core.util.OredictHelper;
+import forestry.api.apiculture.*;
+import forestry.api.core.EnumHumidity;
+import forestry.api.core.EnumTemperature;
+import forestry.api.genetics.AlleleManager;
+import forestry.api.genetics.IAllele;
 import forestry.api.genetics.IAlleleEffect;
-import forestry.apiculture.PluginApiculture;
 import forestry.apiculture.items.EnumHoneyComb;
 import magicbees.MagicBees;
 import magicbees.bees.mutation.MoonPhaseMutationBonus;
@@ -22,12 +27,6 @@ import magicbees.item.types.EnumPollenType;
 import magicbees.item.types.EnumResourceType;
 import magicbees.util.EnumOreResourceType;
 import magicbees.util.IMagicBeesBranch;
-import forestry.api.apiculture.*;
-import forestry.api.apiculture.BeeManager;
-import forestry.api.core.EnumHumidity;
-import forestry.api.core.EnumTemperature;
-import forestry.api.genetics.AlleleManager;
-import forestry.api.genetics.IAllele;
 import magicbees.util.ModNames;
 import magicbees.util.Utils;
 import net.minecraft.block.state.IBlockState;
@@ -40,6 +39,7 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
+import java.util.List;
 import java.util.Locale;
 
 import static elec332.core.compat.forestry.ForestryAlleles.*;
@@ -1327,7 +1327,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-            BeeIntegrationInterface.specialMetalModifiy(template);
+            BeeIntegrationInterface.getTemplateTENether(template);
         }
 
         @Override
@@ -1362,7 +1362,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-            BeeIntegrationInterface.specialMetalModifiy(template);
+            BeeIntegrationInterface.getTemplateTENether(template);
         }
 
         @Override
@@ -1508,12 +1508,330 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
     },
 
-    //Redstone Arsenal
-    RSA_FLUXED("Thermametallic electroflux", EnumBeeBranches.THERMAL, false, new Color(10356237)){
+    //Thermal Expansion
+    TE_BLIZZY("blizzard", EnumBeeBranches.ABOMINABLE, false, new Color(0x0073C4), new Color(0xFF7C26)) {
 
         @Override
         public void modifyGenomeTemplate(BeeGenomeTemplate template) {
-            BeeIntegrationInterface.specialMetalModifiy(template);
+            BeeIntegrationInterface.getTemplateTEEnd(template);
+            template.setFlowerProvider(ForestryAlleles.FLOWERS_SNOW);
+            template.setEffect((IAlleleEffect) EnumBeeSpecies.getForestryAllele("effectGlacial"));
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.setTemperature(EnumTemperature.COLD);
+            speciesBuilder.setHumidity(EnumHumidity.NORMAL);
+            speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.FROZEN), 0.1f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(EnumBeeSpecies.getForestrySpecies("Wintry"), SKULKING, 12);
+        }
+
+        @Override
+        public boolean isActive() {
+            return super.isActive() && Loader.isModLoaded(ModNames.THERMALFOUNDATION);
+        }
+
+    },
+    TE_GELID("cyro", EnumBeeBranches.ABOMINABLE, true, new Color(0x4AAFF7), new Color(0xFF7C26)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            TE_BLIZZY.modifyGenomeTemplate(template);
+            template.setEffect(BeeIntegrationInterface.effectSpawnBlizz);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.setHasEffect();
+            speciesBuilder.setTemperature(EnumTemperature.COLD);
+            speciesBuilder.setHumidity(EnumHumidity.NORMAL);
+            speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.FROZEN), 0.1f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(EnumBeeSpecies.getForestrySpecies("Icy"), TE_BLIZZY, 8);
+        }
+
+        @Override
+        public boolean isActive() {
+            return super.isActive() && Loader.isModLoaded(ModNames.THERMALFOUNDATION);
+        }
+
+    },
+    TE_DANTE("inferno", EnumBeeBranches.ABOMINABLE, false, new Color(0xF7AC4A), new Color(0xFF7C26)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            BeeIntegrationInterface.getTemplateTENether(template);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.setTemperature(EnumTemperature.HELLISH);
+            speciesBuilder.setHumidity(EnumHumidity.ARID);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.FURTIVE), 0.1f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.MOLTEN), 0.1f);
+            speciesBuilder.addSpecialty(new ItemStack(Items.BLAZE_POWDER), 0.5f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(EnumBeeSpecies.getForestrySpecies("Austere"), SMOULDERING, 12).restrictBiomeType(BiomeDictionary.Type.NETHER);
+        }
+
+        @Override
+        public boolean isActive() {
+            return super.isActive() && Loader.isModLoaded(ModNames.THERMALFOUNDATION);
+        }
+
+    },
+    TE_PYRO("pyromania", EnumBeeBranches.ABOMINABLE, true, new Color(0xFA930C), new Color(0xFF7C26)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            BeeIntegrationInterface.getTemplateTEEnd(template);
+            template.setEffect((IAlleleEffect) EnumBeeSpecies.getForestryAllele("effectIgnition"));
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.setHasEffect();
+            speciesBuilder.setTemperature(EnumTemperature.HELLISH);
+            speciesBuilder.setHumidity(EnumHumidity.ARID);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.FURTIVE), 0.1f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.MOLTEN), 0.1f);
+            speciesBuilder.addSpecialty(new ItemStack(Items.BLAZE_POWDER), 0.5f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(TE_DANTE, TE_COAL, 8).restrictBiomeType(BiomeDictionary.Type.NETHER);
+        }
+
+        @Override
+        public boolean isActive() {
+            return super.isActive() && Loader.isModLoaded(ModNames.THERMALFOUNDATION);
+        }
+
+    },
+    TE_SHOCKING("horrendum", EnumBeeBranches.ABOMINABLE, false, new Color(0xC5FF26), new Color(0xF8EE00)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            BeeIntegrationInterface.getTemplateTEEnd(template);
+            template.setSpeed(SPEED_FAST);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.setTemperature(EnumTemperature.NORMAL);
+            speciesBuilder.setHumidity(EnumHumidity.NORMAL);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.AIRY), 0.16f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(SMOULDERING, WINDY, 12);
+        }
+
+        @Override
+        public boolean isActive() {
+            return super.isActive() && Loader.isModLoaded(ModNames.THERMALFOUNDATION);
+        }
+
+    },
+    TE_AMPED("concitatus", EnumBeeBranches.ABOMINABLE, false, new Color(0x8AFFFF), new Color(0xECE670)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            TE_SHOCKING.modifyGenomeTemplate(template);
+            template.setEffect(BeeIntegrationInterface.effectSpawnBlitz);
+            template.setSpeed(AlleleRegister.speedBlinding);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.setHasEffect();
+            speciesBuilder.setTemperature(EnumTemperature.NORMAL);
+            speciesBuilder.setHumidity(EnumHumidity.NORMAL);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.AIRY), 0.29f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(TE_SHOCKING, WINDY, 8);
+        }
+
+        @Override
+        public boolean isActive() {
+            return super.isActive() && Loader.isModLoaded(ModNames.THERMALFOUNDATION);
+        }
+
+    },
+    TE_GROUNDED("tellus", EnumBeeBranches.ABOMINABLE, true, new Color(0xCEC1C1), new Color(0x826767)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            BeeIntegrationInterface.getTemplateTEEnd(template);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.setTemperature(EnumTemperature.HOT);
+            speciesBuilder.setHumidity(EnumHumidity.ARID);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.EARTHY), 0.16f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(SMOULDERING, EARTHY, 12);
+        }
+
+        @Override
+        public boolean isActive() {
+            return super.isActive() && Loader.isModLoaded(ModNames.THERMALFOUNDATION);
+        }
+
+    },
+    TE_ROCKING("saxsous", EnumBeeBranches.ABOMINABLE, true, new Color(0x980000), new Color(0xAB9D9B)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            TE_GROUNDED.modifyGenomeTemplate(template);
+            template.setSpeed(SPEED_FASTER);
+            template.setEffect(BeeIntegrationInterface.effectSpawnBasalz);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.setHasEffect();
+            speciesBuilder.setTemperature(EnumTemperature.HOT);
+            speciesBuilder.setHumidity(EnumHumidity.ARID);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.EARTHY), 0.29f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(TE_GROUNDED, EARTHY, 9);
+        }
+
+        @Override
+        public boolean isActive() {
+            return super.isActive() && Loader.isModLoaded(ModNames.THERMALFOUNDATION);
+        }
+
+    },
+    TE_COAL("carbonis", EnumBeeBranches.THERMAL, false, new Color(0x2E2D2D)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.HONEY), 0.1f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TE_CARBON), 0.1f);
+            speciesBuilder.addSpecialty(new ItemStack(Items.COAL), 0.5f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(SPITEFUL, TIN, 12).requireResource(Blocks.COAL_ORE.getDefaultState());
+        }
+
+    },
+    TE_DESTABILIZED("electric", EnumBeeBranches.THERMAL, false, new Color(0x5E0203)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.OCCULT), 0.1f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TE_DESTABILIZED), 0.1f);
+            speciesBuilder.addSpecialty(new ItemStack(Items.REDSTONE), 0.5f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(EnumBeeSpecies.getForestrySpecies("Industrious"), SPITEFUL, 12).requireResource(Blocks.REDSTONE_ORE.getDefaultState());
+        }
+
+    },
+    TE_LUX("lux", EnumBeeBranches.THERMAL, false, new Color(0xF1FA89)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            BeeIntegrationInterface.getTemplateTENether(template);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.OCCULT), 0.1f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TE_LUX), 0.1f);
+            speciesBuilder.addSpecialty(new ItemStack(Items.GLOWSTONE_DUST), 0.5f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(SMOULDERING, INFERNAL, 12).requireResource(Blocks.GLOWSTONE.getDefaultState());
+        }
+
+    },
+    TE_WINSOME("cuniculus", EnumBeeBranches.THERMAL, false, new Color(0x096B67)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.FURTIVE), 0.1f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TE_ENDEARING), 0.1f);
+            addRequiredOreDictSpeciality("dustPlatinum", speciesBuilder, 0.9f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(PLATINUM, OBLIVION, 12);
+        }
+
+    },
+    TE_ENDEARING("cognito", EnumBeeBranches.THERMAL, true, new Color(0x069E97)) {
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            BeeIntegrationInterface.getTemplateTEEnd(template);
+        }
+
+        @Override
+        public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
+            speciesBuilder.setHasEffect();
+            speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.MYSTERIOUS), 0.1f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TE_ENDEARING), 0.5f);
+            speciesBuilder.addSpecialty(new ItemStack(Items.ENDER_PEARL), 0.5f);
+            addRequiredOreDictSpeciality("nuggetEnderium", speciesBuilder, 0.9f);
+        }
+
+        @Override
+        public void registerMutations() {
+            registerMutation(TE_WINSOME, TE_COAL, 8).requireResource("blockEnderium");
+        }
+
+    },
+
+    //Redstone Arsenal
+    RSA_FLUXED("Thermametallic electroflux", EnumBeeBranches.THERMAL, false, new Color(0x9E060D)){
+
+        @Override
+        public void modifyGenomeTemplate(BeeGenomeTemplate template) {
+            BeeIntegrationInterface.getTemplateTENether(template);
         }
 
         @Override
@@ -1524,7 +1842,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void registerMutations() {
-            //todo registerMutation(TE_ELECTRUM, TE_DESTABILIZED, 10).requireResource("blockElectrumFlux");
+            registerMutation(ELECTRUM, TE_DESTABILIZED, 10).requireResource("blockElectrumFlux");
         }
 
         @Override
@@ -1843,7 +2161,18 @@ public enum EnumBeeSpecies implements IBeeTemplate {
     }
 
     private static ItemStack getForestryComb(EnumHoneyComb type){
-        return new ItemStack(PluginApiculture.getItems().beeComb, 1, type.ordinal());
+        return new ItemStack(Utils.getApicultureItems().beeComb, 1, type.ordinal());
+    }
+
+    protected final void addRequiredOreDictSpeciality(String resource, IAlleleBeeSpeciesBuilder speciesBuilder, float speciality){
+        List<ItemStack> l = OredictHelper.getOres(resource);
+        for (ItemStack stack : l){
+            if (ItemStackHelper.isStackValid(stack)){
+                speciesBuilder.addSpecialty(stack, speciality);
+                return;
+            }
+        }
+        this.enabledOverride = false;
     }
 
     protected final void addOreProduct(EnumOreResourceType resource, IAlleleBeeSpeciesBuilder speciesBuilder, float speciality){

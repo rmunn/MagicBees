@@ -67,7 +67,7 @@ public final class ItemRegister {
         if (ironNugget == null){
             ironNugget = GameRegistry.register(new AbstractTexturedItem(new MagicBeesResourceLocation("iron_nugget")){}.setCreativeTab(CreativeTabs.MATERIALS));
             OreDictionary.registerOre("nuggetIron", ironNugget);
-            RecipeHelper.getCraftingManager().addShapelessRecipe(new ItemStack(Items.IRON_INGOT), "xxx", "xxx", "xxx", 'x', ironNugget);
+            RecipeHelper.getCraftingManager().addRecipe(new ItemStack(Items.IRON_INGOT), "xxx", "xxx", "xxx", 'x', ironNugget);
         }
     }
 

@@ -6,18 +6,19 @@ import elec332.core.compat.forestry.ForestryAlleles;
 import elec332.core.compat.forestry.bee.HiveDrop;
 import elec332.core.compat.forestry.bee.IHiveEnum;
 import elec332.core.java.JavaHelper;
-import forestry.api.apiculture.*;
+import elec332.core.world.WorldHelper;
 import forestry.api.apiculture.BeeManager;
-import forestry.api.genetics.AlleleManager;
-import forestry.api.genetics.EnumTolerance;
-import forestry.api.genetics.IAllele;
-import forestry.apiculture.worldgen.HiveRegistry;
-import magicbees.MagicBees;
-import forestry.api.apiculture.hives.HiveManager;
+import forestry.api.apiculture.EnumBeeChromosome;
+import forestry.api.apiculture.IBeeGenome;
+import forestry.api.apiculture.IHiveDrop;
 import forestry.api.apiculture.hives.IHiveDescription;
 import forestry.api.apiculture.hives.IHiveGen;
 import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
+import forestry.api.genetics.AlleleManager;
+import forestry.api.genetics.EnumTolerance;
+import forestry.api.genetics.IAllele;
+import magicbees.MagicBees;
 import magicbees.init.BlockRegister;
 import magicbees.init.ItemRegister;
 import magicbees.item.types.EnumCombType;
@@ -25,13 +26,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.BiomeDictionary;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
@@ -172,9 +170,6 @@ public enum EnumBeeHives implements IHiveEnum {
         addDrop(valiantDrop);
     }
 
-    public static void dummyLoad(){
-    }
-
     private class Desc implements IHiveDescription {
 
         private Desc(EnumHiveGen gen){
@@ -183,23 +178,25 @@ public enum EnumBeeHives implements IHiveEnum {
 
         private final EnumHiveGen gen;
 
+        @Nonnull
         @Override
         public IHiveGen getHiveGen() {
             return gen.hiveGen;
         }
 
+        @Nonnull
         @Override
         public IBlockState getBlockState() {
             return BlockRegister.hiveBlock.getStateFromHive(EnumBeeHives.this);
         }
 
         @Override
-        public boolean isGoodBiome(Biome biome) {
-            return JavaHelper.hasAtLeastOneMatch(Lists.newArrayList(BiomeDictionary.getTypes(biome)), gen.biomes);
+        public boolean isGoodBiome(@Nonnull Biome biome) {
+            return JavaHelper.hasAtLeastOneMatch(Lists.newArrayList(WorldHelper.getTypes(biome)), gen.biomes);
         }
 
         @Override
-        public boolean isGoodHumidity(EnumHumidity humidity) {
+        public boolean isGoodHumidity(@Nonnull EnumHumidity humidity) {
             if (ignoreClimate){
                 return true;
             }
@@ -210,7 +207,7 @@ public enum EnumBeeHives implements IHiveEnum {
         }
 
         @Override
-        public boolean isGoodTemperature(EnumTemperature temperature) {
+        public boolean isGoodTemperature(@Nonnull EnumTemperature temperature) {
             if (ignoreClimate){
                 return true;
             }
@@ -226,7 +223,7 @@ public enum EnumBeeHives implements IHiveEnum {
         }
 
         @Override
-        public void postGen(World world, Random random, BlockPos blockPos) {
+        public void postGen(@Nonnull World world, @Nonnull Random random, @Nonnull BlockPos blockPos) {
             gen.postGen(world, random, blockPos);
         }
 

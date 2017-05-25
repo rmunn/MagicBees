@@ -7,9 +7,6 @@ import magicbees.init.ItemRegister;
 import magicbees.util.MagicBeesResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.List;
 
 /**
  * Created by Elec332 on 15-5-2017.

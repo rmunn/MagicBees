@@ -1,6 +1,5 @@
 package magicbees.item.types;
 
-import elec332.core.compat.forestry.ForestryCompatHandler;
 import elec332.core.item.IEnumItem;
 import elec332.core.item.ItemEnumBased;
 import magicbees.MagicBees;
@@ -30,8 +29,12 @@ public enum EnumCombType implements IEnumItem {
     AIRY(false, new Color(0xffff7e), new Color(0x606308)),
     FIREY(false, new Color(0xff3C01), new Color(0x5B0D10)),
     WATERY(false, new Color(0x0090ff), new Color(0x102F6B)),
-    EARTHY(false, new Color(0x00a000), new Color(0x043004))
+    EARTHY(false, new Color(0x00a000), new Color(0x043004)),
 
+    TE_DESTABILIZED(false, new Color(0xCC002C), new Color(0x6B0118)),
+    TE_CARBON(false, new Color(0x454545), new Color(0x0F0F0F)),
+    TE_LUX(false, new Color(0xF5F3A4), new Color(0xC9C87D)),
+    TE_ENDEARING(false, new Color(0x12E3D9), new Color(0x069E97))
     ;
 
     EnumCombType(boolean shouldShow, Color firstColor, Color secondColor){

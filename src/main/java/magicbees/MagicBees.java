@@ -51,7 +51,7 @@ import java.util.function.Supplier;
  * Created by Elec332 on 16-8-2016.
  */
 @Mod(modid = MagicBees.modid, name = MagicBees.modName, dependencies = "required-after:eleccore;required-after:forestry",
-        acceptedMinecraftVersions = "[1.11.2,)", useMetadata = true)
+        acceptedMinecraftVersions = "[1.10.2,)", useMetadata = true)
 public class MagicBees implements IElecCoreMod, IModuleController, IWindowHandler {
 
     public static final String modid = "magicbees";

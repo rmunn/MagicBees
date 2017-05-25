@@ -1,6 +1,5 @@
 package magicbees.item.types;
 
-import elec332.core.compat.forestry.ForestryCompatHandler;
 import elec332.core.item.IEnumItem;
 import elec332.core.item.ItemEnumBased;
 import magicbees.MagicBees;

@@ -2,23 +2,21 @@ package magicbees.bees;
 
 import elec332.core.compat.forestry.bee.BeeGenomeTemplate;
 import elec332.core.compat.forestry.bee.ForestryBeeEffects;
-import elec332.core.main.ElecCore;
+import forestry.api.apiculture.BeeManager;
+import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
+import forestry.api.genetics.AlleleManager;
+import forestry.api.genetics.IAlleleSpeciesBuilder;
+import forestry.api.genetics.IClassification;
 import magicbees.MagicBees;
 import magicbees.init.AlleleRegister;
 import magicbees.util.Config;
 import magicbees.util.IMagicBeesBranch;
-import forestry.api.apiculture.BeeManager;
-import forestry.api.core.EnumHumidity;
-import forestry.api.genetics.AlleleManager;
-import forestry.api.genetics.IAlleleSpeciesBuilder;
-import forestry.api.genetics.IClassification;
 import magicbees.util.ModNames;
 import magicbees.util.Utils;
 import net.minecraftforge.fml.common.Loader;
 
 import javax.annotation.Nonnull;
-
 import java.awt.*;
 
 import static elec332.core.compat.forestry.ForestryAlleles.*;
@@ -263,13 +261,12 @@ public enum EnumBeeBranches implements IMagicBeesBranch {
 
         @Override
         public void setBranchProperties(BeeGenomeTemplate template) {
-            template.setNeverSleeps(TRUE_RECESSIVE);
-            template.setCaveDwelling(TRUE_RECESSIVE);
-            template.setSpeed(SPEED_FASTEST);
-            template.setFertility(FERTILITY_HIGH);
-            template.setLifeSpan(LIFESPAN_LONGEST);
-            template.setHumidityTolerance(TOLERANCE_BOTH_2);
-            template.setTemperatureTolerance(TOLERANCE_BOTH_2);
+            BeeIntegrationInterface.getTemplateTE(template);
+        }
+
+        @Override
+        public boolean enabled() {
+            return Loader.isModLoaded(ModNames.THERMALFOUNDATION);
         }
 
     },
