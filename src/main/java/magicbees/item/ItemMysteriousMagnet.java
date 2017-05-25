@@ -139,8 +139,8 @@ public class ItemMysteriousMagnet extends AbstractTexturedItem {
     @Override
     protected ResourceLocation[] getTextureLocations() {
         return new ResourceLocation[]{
-                new MagicBeesResourceLocation("items/magnetInactive"),
-                new MagicBeesResourceLocation("items/magnetActive")
+                new MagicBeesResourceLocation("items/magnetinactive"),
+                new MagicBeesResourceLocation("items/magnetactive")
         };
     }
 

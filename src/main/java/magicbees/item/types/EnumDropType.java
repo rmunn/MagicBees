@@ -2,6 +2,7 @@ package magicbees.item.types;
 
 import elec332.core.item.IEnumItem;
 import elec332.core.item.ItemEnumBased;
+import elec332.core.util.MCVersion;
 import magicbees.MagicBees;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -48,8 +49,9 @@ public enum EnumDropType implements IEnumItem {
     private static final ResourceLocation[] textures;
 
     static {
+        String drop = MCVersion.getCurrentVersion().isHigherThan(MCVersion.MC_1_10_2) ? "honey_drop" : "honeyDrop";
         textures = new ResourceLocation[]{
-                new ResourceLocation("forestry", "items/honey_drop.0"), new ResourceLocation("forestry", "items/honey_drop.1")
+                new ResourceLocation("forestry", "items/" + drop + ".0"), new ResourceLocation("forestry", "items/" + drop + ".1")
         };
     }
 

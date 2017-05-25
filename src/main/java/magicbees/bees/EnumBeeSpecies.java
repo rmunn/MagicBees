@@ -9,11 +9,6 @@ import elec332.core.compat.forestry.bee.IBeeTemplate;
 import elec332.core.util.ItemStackHelper;
 import elec332.core.util.MoonPhase;
 import elec332.core.util.OredictHelper;
-import forestry.api.apiculture.*;
-import forestry.api.core.EnumHumidity;
-import forestry.api.core.EnumTemperature;
-import forestry.api.genetics.AlleleManager;
-import forestry.api.genetics.IAllele;
 import forestry.api.genetics.IAlleleEffect;
 import forestry.apiculture.items.EnumHoneyComb;
 import magicbees.MagicBees;
@@ -27,6 +22,12 @@ import magicbees.item.types.EnumPollenType;
 import magicbees.item.types.EnumResourceType;
 import magicbees.util.EnumOreResourceType;
 import magicbees.util.IMagicBeesBranch;
+import forestry.api.apiculture.*;
+import forestry.api.apiculture.BeeManager;
+import forestry.api.core.EnumHumidity;
+import forestry.api.core.EnumTemperature;
+import forestry.api.genetics.AlleleManager;
+import forestry.api.genetics.IAllele;
 import magicbees.util.ModNames;
 import magicbees.util.Utils;
 import net.minecraft.block.state.IBlockState;
@@ -38,7 +39,7 @@ import net.minecraftforge.fml.common.Loader;
 import org.apache.commons.lang3.text.WordUtils;
 
 import javax.annotation.Nonnull;
-import java.awt.*;
+import java.awt.Color;
 import java.util.List;
 import java.util.Locale;
 
@@ -2231,7 +2232,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
     }
 
     protected static IAllele[] getForestrySpeciesTemplate(String speciesName) {
-        return BeeManager.beeRoot.getTemplate("forestry.species" + speciesName);
+        return forestry.api.apiculture.BeeManager.beeRoot.getTemplate("forestry.species" + speciesName);
     }
 
     public static IAlleleBeeSpecies getForestrySpecies(String name) {

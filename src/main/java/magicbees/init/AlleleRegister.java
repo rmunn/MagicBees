@@ -4,8 +4,11 @@ import elec332.core.compat.forestry.allele.AlleleEffectPotion;
 import elec332.core.compat.forestry.allele.AlleleEffectSpawnMob;
 import elec332.core.compat.forestry.allele.AlleleFlowerProvider;
 import elec332.core.compat.forestry.bee.FlowerProvider;
+import forestry.api.apiculture.EnumBeeChromosome;
 import forestry.api.apiculture.IAlleleBeeEffect;
+import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IAlleleFloat;
+import forestry.core.genetics.alleles.AlleleFloat;
 import magicbees.MagicBees;
 import magicbees.bees.allele.AlleleEffectCrumbling;
 import magicbees.bees.allele.AlleleEffectTransmuting;
@@ -48,6 +51,9 @@ public final class AlleleRegister {
         spawnSpider = newMobEffect("Spidery", false, "Spider").setThrottle(400).setSpawnChance(70).setMaxMobsInArea(4);
         spawnBlaze = newMobEffect("Ablaze", false, "Blaze").setThrottle(800).setSpawnChance(60).setMaxMobsInArea(2);
         spawnZombie = newMobEffect("Brainy", false, "Brainy").setAngryOnPlayers().setThrottle(800).setMaxMobsInArea(2);
+
+        speedBlinding = new AlleleFloat(MagicBees.modid, "speed", "Blinding", 2.0f, false);
+        AlleleManager.alleleRegistry.registerAllele(speedBlinding, EnumBeeChromosome.SPEED);
 
     }
 

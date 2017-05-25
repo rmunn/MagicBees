@@ -59,13 +59,13 @@ public final class BeeIntegrationInterface {
 
 	public static void getTemplateTE(BeeGenomeTemplate template){
 		BeeGenomeTemplate ret = new BeeGenomeTemplate();
-		template.setHumidityTolerance(TOLERANCE_BOTH_2);
-		template.setTemperatureTolerance(TOLERANCE_BOTH_2);
-		template.setToleratesRain(TRUE_RECESSIVE);
-		template.setSpeed(SPEED_FAST);
-		template.setFertility(FERTILITY_HIGH);
-		template.setLifeSpan(LIFESPAN_LONGER);
-		for (int i = 0; i < ret.getAlleles().length; i++) {
+		ret.setHumidityTolerance(TOLERANCE_BOTH_2);
+		ret.setTemperatureTolerance(TOLERANCE_BOTH_2);
+		ret.setToleratesRain(TRUE_RECESSIVE);
+		ret.setSpeed(SPEED_FAST);
+		ret.setFertility(FERTILITY_HIGH);
+		ret.setLifeSpan(LIFESPAN_LONGER);
+		for (int i = 1; i < ret.getAlleles().length; i++) {
 			template.getAlleles()[i] = ret.getAlleles()[i];
 		}
 	}

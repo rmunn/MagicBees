@@ -48,7 +48,7 @@ public enum EnumResourceType implements IEnumItem {
 
     @Override
     public ResourceLocation getTextureLocation() {
-        return new MagicBeesResourceLocation("items/"+name);
+        return new MagicBeesResourceLocation("items/"+name.toLowerCase());
     }
 
     @Override
