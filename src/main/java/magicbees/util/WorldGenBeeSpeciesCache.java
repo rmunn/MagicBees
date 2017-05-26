@@ -1,7 +1,9 @@
 package magicbees.util;
 
 import com.google.common.collect.Lists;
+import elec332.core.compat.forestry.ForestryAlleles;
 import forestry.api.apiculture.BeeManager;
+import forestry.api.apiculture.EnumBeeChromosome;
 import forestry.api.apiculture.IAlleleBeeSpecies;
 import forestry.api.apiculture.IBee;
 import forestry.api.genetics.IAllele;
@@ -36,6 +38,10 @@ public class WorldGenBeeSpeciesCache {
 
 		IAllele[] allelez = BeeManager.beeRoot.getTemplate(species);
 		IAllele[] alleles = Arrays.copyOf(allelez, allelez.length);
+
+		if (rainResist){
+			alleles[EnumBeeChromosome.TOLERATES_RAIN.ordinal()] = ForestryAlleles.TRUE_RECESSIVE;
+		}
 
 		return BeeManager.beeRoot.getBee(BeeManager.beeRoot.templateAsGenome(alleles));
 	}
