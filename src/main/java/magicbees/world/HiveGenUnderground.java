@@ -10,6 +10,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -35,12 +36,12 @@ public class HiveGenUnderground implements IHiveGen {
 
     @Nullable
     @Override
-    public BlockPos getPosForHive(World world, int x, int z) {
+    public BlockPos getPosForHive(@Nonnull World world, int x, int z) {
         return new BlockPos(x, minLevel + world.rand.nextInt(range), z);
     }
 
     @Override
-    public boolean isValidLocation(World world, BlockPos blockPos) {
+    public boolean isValidLocation(@Nonnull World world, @Nonnull BlockPos blockPos) {
         int i = surroundCount;
         for (EnumFacing f : EnumFacing.VALUES){
             if (isReplaceableOreGen(WorldHelper.getBlockState(world, blockPos.offset(f)), world, blockPos, replace)){
@@ -54,7 +55,7 @@ public class HiveGenUnderground implements IHiveGen {
     }
 
     @Override
-    public boolean canReplace(IBlockState iBlockState, World world, BlockPos blockPos) {
+    public boolean canReplace(@Nonnull IBlockState iBlockState, @Nonnull World world, @Nonnull BlockPos blockPos) {
         return !world.isAirBlock(blockPos) && isReplaceableOreGen(iBlockState, world, blockPos, replace);
     }
 

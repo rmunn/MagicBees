@@ -6,6 +6,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -19,7 +20,7 @@ public class HiveGenNether extends HiveGenUnderground {
 
     @Nullable
     @Override
-    public BlockPos getPosForHive(World world, int x, int z) {
+    public BlockPos getPosForHive(@Nonnull World world, int x, int z) {
         BlockPos cP = super.getPosForHive(world, x, z);
         if(cP != null && !this.isValidLocation(world, cP)) {
             int searchDirection = world.rand.nextBoolean()?4:-4;

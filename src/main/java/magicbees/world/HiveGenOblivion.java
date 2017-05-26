@@ -9,6 +9,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -18,7 +19,7 @@ public class HiveGenOblivion implements IHiveGen {
 
     @Nullable
     @Override
-    public BlockPos getPosForHive(World world, int x, int z) {
+    public BlockPos getPosForHive(@Nonnull World world, int x, int z) {
 
         int surface = world.getHeight(new BlockPos(x, 0, z)).getY();
         if (surface == 0) {
@@ -41,7 +42,7 @@ public class HiveGenOblivion implements IHiveGen {
     }
 
     @Override
-    public boolean isValidLocation(World world, BlockPos pos) {
+    public boolean isValidLocation(@Nonnull World world, @Nonnull BlockPos pos) {
 
         for (EnumFacing f : EnumFacing.VALUES){
             if (!HiveGenUnderground.isReplaceableOreGen(WorldHelper.getBlockState(world, pos.offset(f)), world, pos,Blocks.END_STONE)){
@@ -58,7 +59,7 @@ public class HiveGenOblivion implements IHiveGen {
     }
 
     @Override
-    public boolean canReplace(IBlockState blockState, World world, BlockPos pos) {
+    public boolean canReplace(@Nonnull IBlockState blockState, @Nonnull World world, @Nonnull BlockPos pos) {
         return Block.isEqualTo(blockState.getBlock(), Blocks.END_STONE);
     }
 
