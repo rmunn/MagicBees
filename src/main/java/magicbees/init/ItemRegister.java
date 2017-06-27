@@ -58,6 +58,10 @@ public final class ItemRegister {
 
         fixIronNuggetStuff();
 
+        for (EnumCombType comb : EnumCombType.values()){
+            OreDictionary.registerOre("beeComb", combItem.getStackFromType(comb));
+        }
+
     }
 
     private static void fixIronNuggetStuff(){

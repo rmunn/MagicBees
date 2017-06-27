@@ -1524,6 +1524,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setTemperature(EnumTemperature.COLD);
             speciesBuilder.setHumidity(EnumHumidity.NORMAL);
             speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.FROZEN), 0.1f);
+            addRequiredOreDictSpeciality("dustBlizz", speciesBuilder, 0.9f);
         }
 
         @Override
@@ -1551,6 +1552,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setTemperature(EnumTemperature.COLD);
             speciesBuilder.setHumidity(EnumHumidity.NORMAL);
             speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.FROZEN), 0.1f);
+            addRequiredOreDictSpeciality("dustCryotheum", speciesBuilder, 0.9f);
         }
 
         @Override
@@ -1578,6 +1580,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.FURTIVE), 0.1f);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.MOLTEN), 0.1f);
             speciesBuilder.addSpecialty(new ItemStack(Items.BLAZE_POWDER), 0.5f);
+            addRequiredOreDictSpeciality("dustSulfur", speciesBuilder, 0.9f);
         }
 
         @Override
@@ -1607,6 +1610,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.FURTIVE), 0.1f);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.MOLTEN), 0.1f);
             speciesBuilder.addSpecialty(new ItemStack(Items.BLAZE_POWDER), 0.5f);
+            addRequiredOreDictSpeciality("dustPyrotheum", speciesBuilder, 0.9f);
         }
 
         @Override
@@ -1633,6 +1637,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setTemperature(EnumTemperature.NORMAL);
             speciesBuilder.setHumidity(EnumHumidity.NORMAL);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.AIRY), 0.16f);
+            addRequiredOreDictSpeciality("dustBlitz", speciesBuilder, 0.9f);
         }
 
         @Override
@@ -1661,6 +1666,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setTemperature(EnumTemperature.NORMAL);
             speciesBuilder.setHumidity(EnumHumidity.NORMAL);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.AIRY), 0.29f);
+            addRequiredOreDictSpeciality("dustAerotheum", speciesBuilder, 0.9f);
         }
 
         @Override
@@ -1686,6 +1692,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setTemperature(EnumTemperature.HOT);
             speciesBuilder.setHumidity(EnumHumidity.ARID);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.EARTHY), 0.16f);
+            addRequiredOreDictSpeciality("dustBasalz", speciesBuilder, 0.9f);
         }
 
         @Override
@@ -1714,6 +1721,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setTemperature(EnumTemperature.HOT);
             speciesBuilder.setHumidity(EnumHumidity.ARID);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.EARTHY), 0.29f);
+            addRequiredOreDictSpeciality("dustPetrotheum", speciesBuilder, 0.9f);
         }
 
         @Override

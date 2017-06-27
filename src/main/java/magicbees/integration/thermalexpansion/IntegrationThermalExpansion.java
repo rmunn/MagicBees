@@ -23,25 +23,12 @@ public class IntegrationThermalExpansion {
 
 	@ElecModule.EventHandler
 	public void init(FMLInitializationEvent event){
-		ItemEnumBased<EnumDropType> drops = ItemRegister.dropItem;
+		ItemEnumBased<EnumDropType> drops = Preconditions.checkNotNull(ItemRegister.dropItem);
 		addCrucibleRecipe(drops.getStackFromType(EnumDropType.CARBON), FluidRegistry.getFluid("coal"));
 		addCrucibleRecipe(drops.getStackFromType(EnumDropType.DESTABILIZED), FluidRegistry.getFluid("redstone"));
 		addCrucibleRecipe(drops.getStackFromType(EnumDropType.ENDEARING), FluidRegistry.getFluid("ender"));
 		addCrucibleRecipe(drops.getStackFromType(EnumDropType.LUX), FluidRegistry.getFluid("glowstone"));
 	}
-
-	/* TODO (when these items get added back to TE
-
-			TE_BLIZZY.addSpecialty(ThermalModsHelper.dustBlizz, 0.9f);
-			TE_GELID.addSpecialty(ThermalModsHelper.dustCryotheum, 0.9f);
-			TE_DANTE.addSpecialty(ThermalModsHelper.dustSulfur, 0.9f);
-			TE_PYRO.addSpecialty(ThermalModsHelper.dustPyrotheum, 0.9f);
-			TE_SHOCKING.addSpecialty(ThermalModsHelper.dustBlitz, 0.9f);
-			TE_AMPED.addSpecialty(ThermalModsHelper.dustAerotheum, 0.9f);
-			TE_GROUNDED.addSpecialty(ThermalModsHelper.dustBasalz, 0.9f);
-			TE_ROCKING.addSpecialty(ThermalModsHelper.dustPetrotheum, 0.9f);
-
-	 */
 
 	private static void addCrucibleRecipe(ItemStack in, Fluid out){
 		addCrucibleRecipe(in, new FluidStack(Preconditions.checkNotNull(out), 50));
