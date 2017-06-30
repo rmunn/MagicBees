@@ -1,5 +1,6 @@
 package magicbees.util;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import elec332.core.compat.forestry.ForestryAlleles;
 import forestry.api.apiculture.BeeManager;
@@ -26,7 +27,7 @@ public class WorldGenBeeSpeciesCache {
 	public static IBee getRandomWorldgenSpecies(Random r, boolean rainResist) {
 		Collections.shuffle(worldgenSpeciesWeights);
 		double value = r.nextDouble() * worldgenSpeciesWeightsTotal;
-		IAlleleBeeSpecies species = EnumBeeSpecies.getForestrySpecies("Forest");
+		IAlleleBeeSpecies species = worldgenSpeciesWeights.get(0).getLeft();
 
 		for (Pair<IAlleleBeeSpecies, Double> t : worldgenSpeciesWeights) {
 			value -= t.getRight();
@@ -36,7 +37,8 @@ public class WorldGenBeeSpeciesCache {
 			}
 		}
 
-		IAllele[] allelez = BeeManager.beeRoot.getTemplate(species);
+		IAllele[] allelez = BeeManager.beeRoot.getTemplate(species.getUID());
+		Preconditions.checkNotNull(allelez);
 		IAllele[] alleles = Arrays.copyOf(allelez, allelez.length);
 
 		if (rainResist){
@@ -47,28 +49,25 @@ public class WorldGenBeeSpeciesCache {
 	}
 
 	public static void addWorldgenSpeciesWeight(IAlleleBeeSpecies species, double d) {
+		Preconditions.checkNotNull(species);
+		Preconditions.checkArgument(d > 0);
 		worldgenSpeciesWeights.add(Pair.of(species, d));
 		worldgenSpeciesWeightsTotal += d;
 	}
 
 	public static void populateSpeciesListRarity() {
-		worldgenSpeciesWeights.add(Pair.of(EnumBeeSpecies.getForestrySpecies("Forest"), 20.0D));
-		worldgenSpeciesWeights.add(Pair.of(EnumBeeSpecies.getForestrySpecies("Meadows"), 20.0D));
-		worldgenSpeciesWeights.add(Pair.of(EnumBeeSpecies.getForestrySpecies("Tropical"), 10.0D));
-		worldgenSpeciesWeights.add(Pair.of(EnumBeeSpecies.getForestrySpecies("Modest"), 16.0D));
-		worldgenSpeciesWeights.add(Pair.of(EnumBeeSpecies.getForestrySpecies("Wintry"), 10.0D));
-		worldgenSpeciesWeights.add(Pair.of(EnumBeeSpecies.getForestrySpecies("Ended"), 0.5D));
-		worldgenSpeciesWeights.add(Pair.of(EnumBeeSpecies.MYSTICAL.getSpecies(), 20.0D));
-		worldgenSpeciesWeights.add(Pair.of(EnumBeeSpecies.UNUSUAL.getSpecies(), 20.0D));
-		worldgenSpeciesWeights.add(Pair.of(EnumBeeSpecies.SORCEROUS.getSpecies(), 13.0D));
-		worldgenSpeciesWeights.add(Pair.of(EnumBeeSpecies.ATTUNED.getSpecies(), 6.0D));
-		worldgenSpeciesWeights.add(Pair.of(EnumBeeSpecies.INFERNAL.getSpecies(), 10.0D));
-		worldgenSpeciesWeights.add(Pair.of(EnumBeeSpecies.OBLIVION.getSpecies(), 1.0D));
-
-		for (Pair<IAlleleBeeSpecies, Double> t : worldgenSpeciesWeights) {
-			worldgenSpeciesWeightsTotal += t.getRight();
-		}
-
+		addWorldgenSpeciesWeight(EnumBeeSpecies.getForestrySpecies("Forest"), 20.0D);
+		addWorldgenSpeciesWeight(EnumBeeSpecies.getForestrySpecies("Meadows"), 20.0D);
+		addWorldgenSpeciesWeight(EnumBeeSpecies.getForestrySpecies("Tropical"), 10.0D);
+		addWorldgenSpeciesWeight(EnumBeeSpecies.getForestrySpecies("Modest"), 16.0D);
+		addWorldgenSpeciesWeight(EnumBeeSpecies.getForestrySpecies("Wintry"), 10.0D);
+		addWorldgenSpeciesWeight(EnumBeeSpecies.getForestrySpecies("Ended"), 0.5D);
+		addWorldgenSpeciesWeight(EnumBeeSpecies.MYSTICAL.getSpecies(), 20.0D);
+		addWorldgenSpeciesWeight(EnumBeeSpecies.UNUSUAL.getSpecies(), 20.0D);
+		addWorldgenSpeciesWeight(EnumBeeSpecies.SORCEROUS.getSpecies(), 13.0D);
+		addWorldgenSpeciesWeight(EnumBeeSpecies.ATTUNED.getSpecies(), 6.0D);
+		addWorldgenSpeciesWeight(EnumBeeSpecies.INFERNAL.getSpecies(), 10.0D);
+		addWorldgenSpeciesWeight(EnumBeeSpecies.OBLIVION.getSpecies(), 1.0D);
 	}
 
 }
