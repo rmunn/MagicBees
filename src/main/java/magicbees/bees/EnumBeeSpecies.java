@@ -192,7 +192,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.setHasEffect();
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.OCCULT), 0.25f);
-            speciesBuilder.addSpecialty(EnumBeeSpecies.getDrop(EnumDropType.ENCHANTED), 0.9f);
+            speciesBuilder.addSpecialty(EnumBeeSpecies.getDrop(EnumDropType.ENCHANTED), 0.09f);
         }
 
         @Override
@@ -249,7 +249,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.setHasEffect();
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.OTHERWORLDLY), 0.25f);
-            speciesBuilder.addSpecialty(EnumBeeSpecies.getPollen(EnumPollenType.UNUSUAL), 0.8f);
+            speciesBuilder.addSpecialty(EnumBeeSpecies.getPollen(EnumPollenType.UNUSUAL), 0.08f);
         }
 
         @Override
@@ -509,7 +509,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.setIsSecret();
-            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.FURTIVE), 0.8f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.FURTIVE), 0.08f);
             speciesBuilder.addSpecialty(new ItemStack(Items.GHAST_TEAR), 0.099f);
         }
 
@@ -577,7 +577,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.setIsSecret();
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.FURTIVE), 0.10f);
-            speciesBuilder.addProduct(new ItemStack(Items.ROTTEN_FLESH), 0.6f);
+            speciesBuilder.addProduct(new ItemStack(Items.ROTTEN_FLESH), 0.06f);
         }
 
         @Override
@@ -656,7 +656,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.FURTIVE), 0.25f);
-            speciesBuilder.addSpecialty(new ItemStack(Items.LEATHER), 0.165f);
+            speciesBuilder.addSpecialty(new ItemStack(Items.LEATHER), 0.865f);
         }
 
         @Override
@@ -675,7 +675,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.FURTIVE), 0.10f);
-            speciesBuilder.addSpecialty(new ItemStack(Items.CARROT), 0.165f);
+            speciesBuilder.addSpecialty(new ItemStack(Items.CARROT), 0.865f);
         }
 
         @Override
@@ -1047,8 +1047,8 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.PARCHED), 0.10f);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TRANSMUTED), 0.30f);
-            speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.SILKY), 0.5f);
-            speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.SIMMERING), 0.5f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.SILKY), 0.05f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.SIMMERING), 0.05f);
         }
 
         @Override
@@ -1404,7 +1404,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
-            addOreProduct(EnumOreResourceType.DIAMOND, speciesBuilder, 0.2f); //0.6
+            addOreProduct(EnumOreResourceType.DIAMOND, speciesBuilder, 0.06f);
         }
 
         @Override
@@ -1421,7 +1421,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
-            addOreProduct(EnumOreResourceType.EMERALD, speciesBuilder, 0.17f); // 0.4
+            addOreProduct(EnumOreResourceType.EMERALD, speciesBuilder, 0.04f);
         }
 
         @Override
@@ -1440,7 +1440,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
-            addOreProduct(EnumOreResourceType.APATITE, speciesBuilder, 0.2f); // 0.1
+            addOreProduct(EnumOreResourceType.APATITE, speciesBuilder, 0.05f); // 0.01
         }
 
         @Override
@@ -1478,7 +1478,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
-            addOreProduct(EnumOreResourceType.CERTUS, speciesBuilder, 0.8f);
+            addOreProduct(EnumOreResourceType.CERTUS, speciesBuilder, 0.08f);
         }
 
         @Override
@@ -1496,7 +1496,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
 
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
-            addOreProduct(EnumOreResourceType.FLUIX, speciesBuilder, 0.6f);
+            addOreProduct(EnumOreResourceType.FLUIX, speciesBuilder, 0.06f);
         }
 
         @Override
@@ -1524,7 +1524,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setTemperature(EnumTemperature.COLD);
             speciesBuilder.setHumidity(EnumHumidity.NORMAL);
             speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.FROZEN), 0.1f);
-            addRequiredOreDictSpeciality("dustBlizz", speciesBuilder, 0.9f);
+            addRequiredOreDictSpeciality("dustBlizz", speciesBuilder, 0.09f);
         }
 
         @Override
@@ -1552,7 +1552,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setTemperature(EnumTemperature.COLD);
             speciesBuilder.setHumidity(EnumHumidity.NORMAL);
             speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.FROZEN), 0.1f);
-            addRequiredOreDictSpeciality("dustCryotheum", speciesBuilder, 0.9f);
+            addRequiredOreDictSpeciality("dustCryotheum", speciesBuilder, 0.09f);
         }
 
         @Override
@@ -1579,8 +1579,8 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setHumidity(EnumHumidity.ARID);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.FURTIVE), 0.1f);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.MOLTEN), 0.1f);
-            speciesBuilder.addSpecialty(new ItemStack(Items.BLAZE_POWDER), 0.5f);
-            addRequiredOreDictSpeciality("dustSulfur", speciesBuilder, 0.9f);
+            speciesBuilder.addSpecialty(new ItemStack(Items.BLAZE_POWDER), 0.05f);
+            addRequiredOreDictSpeciality("dustSulfur", speciesBuilder, 0.09f);
         }
 
         @Override
@@ -1609,8 +1609,8 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setHumidity(EnumHumidity.ARID);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.FURTIVE), 0.1f);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.MOLTEN), 0.1f);
-            speciesBuilder.addSpecialty(new ItemStack(Items.BLAZE_POWDER), 0.5f);
-            addRequiredOreDictSpeciality("dustPyrotheum", speciesBuilder, 0.9f);
+            speciesBuilder.addSpecialty(new ItemStack(Items.BLAZE_POWDER), 0.05f);
+            addRequiredOreDictSpeciality("dustPyrotheum", speciesBuilder, 0.09f);
         }
 
         @Override
@@ -1637,7 +1637,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setTemperature(EnumTemperature.NORMAL);
             speciesBuilder.setHumidity(EnumHumidity.NORMAL);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.AIRY), 0.16f);
-            addRequiredOreDictSpeciality("dustBlitz", speciesBuilder, 0.9f);
+            addRequiredOreDictSpeciality("dustBlitz", speciesBuilder, 0.09f);
         }
 
         @Override
@@ -1666,7 +1666,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setTemperature(EnumTemperature.NORMAL);
             speciesBuilder.setHumidity(EnumHumidity.NORMAL);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.AIRY), 0.29f);
-            addRequiredOreDictSpeciality("dustAerotheum", speciesBuilder, 0.9f);
+            addRequiredOreDictSpeciality("dustAerotheum", speciesBuilder, 0.09f);
         }
 
         @Override
@@ -1692,7 +1692,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setTemperature(EnumTemperature.HOT);
             speciesBuilder.setHumidity(EnumHumidity.ARID);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.EARTHY), 0.16f);
-            addRequiredOreDictSpeciality("dustBasalz", speciesBuilder, 0.9f);
+            addRequiredOreDictSpeciality("dustBasalz", speciesBuilder, 0.09f);
         }
 
         @Override
@@ -1721,7 +1721,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setTemperature(EnumTemperature.HOT);
             speciesBuilder.setHumidity(EnumHumidity.ARID);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.EARTHY), 0.29f);
-            addRequiredOreDictSpeciality("dustPetrotheum", speciesBuilder, 0.9f);
+            addRequiredOreDictSpeciality("dustPetrotheum", speciesBuilder, 0.09f);
         }
 
         @Override
@@ -1744,8 +1744,8 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.HONEY), 0.1f);
-            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TE_CARBON), 0.1f);
-            speciesBuilder.addSpecialty(new ItemStack(Items.COAL), 0.5f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TE_CARBON), 0.05f);
+            speciesBuilder.addSpecialty(new ItemStack(Items.COAL), 0.05f);
         }
 
         @Override
@@ -1764,7 +1764,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.OCCULT), 0.1f);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TE_DESTABILIZED), 0.1f);
-            speciesBuilder.addSpecialty(new ItemStack(Items.REDSTONE), 0.5f);
+            speciesBuilder.addSpecialty(new ItemStack(Items.REDSTONE), 0.05f);
         }
 
         @Override
@@ -1784,7 +1784,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.OCCULT), 0.1f);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TE_LUX), 0.1f);
-            speciesBuilder.addSpecialty(new ItemStack(Items.GLOWSTONE_DUST), 0.5f);
+            speciesBuilder.addSpecialty(new ItemStack(Items.GLOWSTONE_DUST), 0.05f);
         }
 
         @Override
@@ -1802,8 +1802,9 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.FURTIVE), 0.1f);
-            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TE_ENDEARING), 0.1f);
-            addRequiredOreDictSpeciality("dustPlatinum", speciesBuilder, 0.9f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TE_ENDEARING), 0.05f);
+            //pearl 5%
+            addRequiredOreDictSpeciality("dustPlatinum", speciesBuilder, 0.09f);
         }
 
         @Override
@@ -1823,9 +1824,9 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.setHasEffect();
             speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.MYSTERIOUS), 0.1f);
-            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TE_ENDEARING), 0.5f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TE_ENDEARING), 0.05f);
             speciesBuilder.addSpecialty(new ItemStack(Items.ENDER_PEARL), 0.5f);
-            addRequiredOreDictSpeciality("nuggetEnderium", speciesBuilder, 0.9f);
+            addRequiredOreDictSpeciality("nuggetEnderium", speciesBuilder, 0.09f);
         }
 
         @Override
@@ -1846,7 +1847,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.addProduct(EnumBeeSpecies.getForestryComb(EnumHoneyComb.HONEY), 0.1f);
-            speciesBuilder.addSpecialty(ItemStackHelper.copyItemStack(BeeIntegrationInterface.itemRSAFluxedElectrumNugget), 0.9f);
+            speciesBuilder.addSpecialty(ItemStackHelper.copyItemStack(BeeIntegrationInterface.itemRSAFluxedElectrumNugget), 0.09f);
         }
 
         @Override
@@ -1891,8 +1892,8 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             Utils.setSecret(speciesBuilder);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.MUNDANE), 0.1f);
-            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TRANSMUTED), 0.5f);
-            BeeIntegrationInterface.addPetals(speciesBuilder, 0.1f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TRANSMUTED), 0.05f);
+            BeeIntegrationInterface.addPetals(speciesBuilder, 0.01f);
         }
 
         @Override
@@ -1914,8 +1915,8 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             Utils.setSecret(speciesBuilder);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.MUNDANE), 0.2f);
-            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TRANSMUTED), 0.5f);
-            BeeIntegrationInterface.addPetals(speciesBuilder, 0.4f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TRANSMUTED), 0.05f);
+            BeeIntegrationInterface.addPetals(speciesBuilder, 0.04f);
         }
 
         @Override
@@ -1937,7 +1938,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             Utils.setSecret(speciesBuilder);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.MUNDANE), 0.25f);
-            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TRANSMUTED), 0.5f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TRANSMUTED), 0.05f);
             BeeIntegrationInterface.addPetals(speciesBuilder, 0.16f);
         }
 
@@ -1958,16 +1959,16 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             Utils.setSecret(speciesBuilder);
-            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.SOUL), 0.5f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.SOUL), 0.05f);
             speciesBuilder.addProduct(new ItemStack(Items.DYE, 1, 9), 0.2f);
-            speciesBuilder.addProduct(new ItemStack(Blocks.WOOL, 1, 9), 0.2f);
-            speciesBuilder.addProduct(new ItemStack(Blocks.RED_FLOWER), 0.6f);
+            speciesBuilder.addProduct(new ItemStack(Blocks.WOOL, 1, 9), 0.02f);
+            speciesBuilder.addProduct(new ItemStack(Blocks.RED_FLOWER), 0.06f);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.TRANSMUTED), 0.15f);
             if (BeeIntegrationInterface.itemPastureSeed == null){
                 return;
             }
             for (int i = 0; i < BeeIntegrationInterface.seedTypes; i++) {
-                speciesBuilder.addSpecialty(new ItemStack(BeeIntegrationInterface.itemPastureSeed, 1, i), 0.4f);
+                speciesBuilder.addSpecialty(new ItemStack(BeeIntegrationInterface.itemPastureSeed, 1, i), 0.04f);
             }
         }
 
@@ -1991,7 +1992,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
         @Override
         public void setSpeciesProperties(IAlleleBeeSpeciesBuilder speciesBuilder) {
             speciesBuilder.setNocturnal();
-            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.WATERY), 0.8f);
+            speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.WATERY), 0.08f);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.SOUL), 0.15f);
         }
 
@@ -2062,7 +2063,7 @@ public enum EnumBeeSpecies implements IBeeTemplate {
             speciesBuilder.setTemperature(EnumTemperature.HOT);
             speciesBuilder.setHumidity(EnumHumidity.ARID);
             speciesBuilder.addProduct(EnumBeeSpecies.getComb(EnumCombType.EARTHY), 0.19f);
-            speciesBuilder.addSpecialty(new ItemStack(BeeIntegrationInterface.aeSkyStone.getBlock()), 0.2f);
+            speciesBuilder.addSpecialty(new ItemStack(BeeIntegrationInterface.aeSkyStone.getBlock()), 0.02f);
         }
 
         @Override
